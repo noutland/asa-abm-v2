@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 ODD Protocol | ASA Agent-Based Model v2 Documentation</title>
+  <meta name="description" content="Comprehensive documentation for the ASA Agent-Based Model v2" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 ODD Protocol | ASA Agent-Based Model v2 Documentation" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Comprehensive documentation for the ASA Agent-Based Model v2" />
+  <meta name="github-repo" content="noutland/asa-abm-v2" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 ODD Protocol | ASA Agent-Based Model v2 Documentation" />
+  
+  <meta name="twitter:description" content="Comprehensive documentation for the ASA Agent-Based Model v2" />
+  
+
+<meta name="author" content="ASA ABM Development Team" />
+
+
+<meta name="date" content="2025-07-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="user-guide.html"/>
+<link rel="next" href="api-reference.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">ASA ABM v2 Documentation</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i><b>0.1</b> Overview</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#key-features"><i class="fa fa-check"></i><b>0.2</b> Key Features</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#documentation-structure"><i class="fa fa-check"></i><b>0.3</b> Documentation Structure</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#quick-example"><i class="fa fa-check"></i><b>0.4</b> Quick Example</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#support-and-contributing"><i class="fa fa-check"></i><b>0.5</b> Support and Contributing</a></li>
+<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.6</b> License</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting Started</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="getting-started.html"><a href="getting-started.html#system-requirements"><i class="fa fa-check"></i><b>1.1</b> System Requirements</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="getting-started.html"><a href="getting-started.html#software-requirements"><i class="fa fa-check"></i><b>1.1.1</b> Software Requirements</a></li>
+<li class="chapter" data-level="1.1.2" data-path="getting-started.html"><a href="getting-started.html#hardware-recommendations"><i class="fa fa-check"></i><b>1.1.2</b> Hardware Recommendations</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="getting-started.html"><a href="getting-started.html#installation"><i class="fa fa-check"></i><b>1.2</b> Installation</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="getting-started.html"><a href="getting-started.html#step-1-clone-or-download-the-repository"><i class="fa fa-check"></i><b>1.2.1</b> Step 1: Clone or Download the Repository</a></li>
+<li class="chapter" data-level="1.2.2" data-path="getting-started.html"><a href="getting-started.html#step-2-install-required-packages"><i class="fa fa-check"></i><b>1.2.2</b> Step 2: Install Required Packages</a></li>
+<li class="chapter" data-level="1.2.3" data-path="getting-started.html"><a href="getting-started.html#step-3-verify-installation"><i class="fa fa-check"></i><b>1.2.3</b> Step 3: Verify Installation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="getting-started.html"><a href="getting-started.html#quick-start-guide"><i class="fa fa-check"></i><b>1.3</b> Quick Start Guide</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="getting-started.html"><a href="getting-started.html#basic-simulation"><i class="fa fa-check"></i><b>1.3.1</b> Basic Simulation</a></li>
+<li class="chapter" data-level="1.3.2" data-path="getting-started.html"><a href="getting-started.html#customized-simulation"><i class="fa fa-check"></i><b>1.3.2</b> Customized Simulation</a></li>
+<li class="chapter" data-level="1.3.3" data-path="getting-started.html"><a href="getting-started.html#analyzing-results"><i class="fa fa-check"></i><b>1.3.3</b> Analyzing Results</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="getting-started.html"><a href="getting-started.html#file-structure"><i class="fa fa-check"></i><b>1.4</b> File Structure</a></li>
+<li class="chapter" data-level="1.5" data-path="getting-started.html"><a href="getting-started.html#next-steps"><i class="fa fa-check"></i><b>1.5</b> Next Steps</a></li>
+<li class="chapter" data-level="1.6" data-path="getting-started.html"><a href="getting-started.html#troubleshooting"><i class="fa fa-check"></i><b>1.6</b> Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="getting-started.html"><a href="getting-started.html#common-issues"><i class="fa fa-check"></i><b>1.6.1</b> Common Issues</a></li>
+<li class="chapter" data-level="1.6.2" data-path="getting-started.html"><a href="getting-started.html#getting-help"><i class="fa fa-check"></i><b>1.6.2</b> Getting Help</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="theoretical-background.html"><a href="theoretical-background.html"><i class="fa fa-check"></i><b>2</b> Theoretical Background</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="theoretical-background.html"><a href="theoretical-background.html#the-asa-framework"><i class="fa fa-check"></i><b>2.1</b> The ASA Framework</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="theoretical-background.html"><a href="theoretical-background.html#attraction"><i class="fa fa-check"></i><b>2.1.1</b> Attraction</a></li>
+<li class="chapter" data-level="2.1.2" data-path="theoretical-background.html"><a href="theoretical-background.html#selection"><i class="fa fa-check"></i><b>2.1.2</b> Selection</a></li>
+<li class="chapter" data-level="2.1.3" data-path="theoretical-background.html"><a href="theoretical-background.html#attrition"><i class="fa fa-check"></i><b>2.1.3</b> Attrition</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="theoretical-background.html"><a href="theoretical-background.html#agent-characteristics"><i class="fa fa-check"></i><b>2.2</b> Agent Characteristics</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="theoretical-background.html"><a href="theoretical-background.html#personality-traits-big-five"><i class="fa fa-check"></i><b>2.2.1</b> Personality Traits (Big Five)</a></li>
+<li class="chapter" data-level="2.2.2" data-path="theoretical-background.html"><a href="theoretical-background.html#identity-categories"><i class="fa fa-check"></i><b>2.2.2</b> Identity Categories</a></li>
+<li class="chapter" data-level="2.2.3" data-path="theoretical-background.html"><a href="theoretical-background.html#preferences"><i class="fa fa-check"></i><b>2.2.3</b> Preferences</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="theoretical-background.html"><a href="theoretical-background.html#interaction-dynamics"><i class="fa fa-check"></i><b>2.3</b> Interaction Dynamics</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="theoretical-background.html"><a href="theoretical-background.html#interaction-valence-calculation"><i class="fa fa-check"></i><b>2.3.1</b> Interaction Valence Calculation</a></li>
+<li class="chapter" data-level="2.3.2" data-path="theoretical-background.html"><a href="theoretical-background.html#satisfaction-dynamics"><i class="fa fa-check"></i><b>2.3.2</b> Satisfaction Dynamics</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="theoretical-background.html"><a href="theoretical-background.html#organizational-metrics"><i class="fa fa-check"></i><b>2.4</b> Organizational Metrics</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="theoretical-background.html"><a href="theoretical-background.html#identity-diversity"><i class="fa fa-check"></i><b>2.4.1</b> Identity Diversity</a></li>
+<li class="chapter" data-level="2.4.2" data-path="theoretical-background.html"><a href="theoretical-background.html#organizational-personality"><i class="fa fa-check"></i><b>2.4.2</b> Organizational Personality</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="theoretical-background.html"><a href="theoretical-background.html#temporal-dynamics"><i class="fa fa-check"></i><b>2.5</b> Temporal Dynamics</a></li>
+<li class="chapter" data-level="2.6" data-path="theoretical-background.html"><a href="theoretical-background.html#emergent-phenomena"><i class="fa fa-check"></i><b>2.6</b> Emergent Phenomena</a></li>
+<li class="chapter" data-level="2.7" data-path="theoretical-background.html"><a href="theoretical-background.html#model-assumptions"><i class="fa fa-check"></i><b>2.7</b> Model Assumptions</a></li>
+<li class="chapter" data-level="2.8" data-path="theoretical-background.html"><a href="theoretical-background.html#extensions-and-variations"><i class="fa fa-check"></i><b>2.8</b> Extensions and Variations</a></li>
+<li class="chapter" data-level="2.9" data-path="theoretical-background.html"><a href="theoretical-background.html#references-and-further-reading"><i class="fa fa-check"></i><b>2.9</b> References and Further Reading</a></li>
+<li class="chapter" data-level="2.10" data-path="theoretical-background.html"><a href="theoretical-background.html#mathematical-notation-summary"><i class="fa fa-check"></i><b>2.10</b> Mathematical Notation Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture Overview</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="architecture.html"><a href="architecture.html#design-principles"><i class="fa fa-check"></i><b>3.1</b> Design Principles</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="architecture.html"><a href="architecture.html#performance-first"><i class="fa fa-check"></i><b>3.1.1</b> 1. Performance First</a></li>
+<li class="chapter" data-level="3.1.2" data-path="architecture.html"><a href="architecture.html#modularity"><i class="fa fa-check"></i><b>3.1.2</b> 2. Modularity</a></li>
+<li class="chapter" data-level="3.1.3" data-path="architecture.html"><a href="architecture.html#scalability"><i class="fa fa-check"></i><b>3.1.3</b> 3. Scalability</a></li>
+<li class="chapter" data-level="3.1.4" data-path="architecture.html"><a href="architecture.html#extensibility"><i class="fa fa-check"></i><b>3.1.4</b> 4. Extensibility</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#system-architecture"><i class="fa fa-check"></i><b>3.2</b> System Architecture</a></li>
+<li class="chapter" data-level="3.3" data-path="architecture.html"><a href="architecture.html#core-modules"><i class="fa fa-check"></i><b>3.3</b> Core Modules</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="architecture.html"><a href="architecture.html#organization.r"><i class="fa fa-check"></i><b>3.3.1</b> organization.R</a></li>
+<li class="chapter" data-level="3.3.2" data-path="architecture.html"><a href="architecture.html#agent.r"><i class="fa fa-check"></i><b>3.3.2</b> agent.R</a></li>
+<li class="chapter" data-level="3.3.3" data-path="architecture.html"><a href="architecture.html#interactions.r"><i class="fa fa-check"></i><b>3.3.3</b> interactions.R</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="architecture.html"><a href="architecture.html#simulation-modules"><i class="fa fa-check"></i><b>3.4</b> Simulation Modules</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="architecture.html"><a href="architecture.html#hiring.r"><i class="fa fa-check"></i><b>3.4.1</b> hiring.R</a></li>
+<li class="chapter" data-level="3.4.2" data-path="architecture.html"><a href="architecture.html#turnover.r"><i class="fa fa-check"></i><b>3.4.2</b> turnover.R</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="architecture.html"><a href="architecture.html#data-flow"><i class="fa fa-check"></i><b>3.5</b> Data Flow</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="architecture.html"><a href="architecture.html#initialization-phase"><i class="fa fa-check"></i><b>3.5.1</b> 1. Initialization Phase</a></li>
+<li class="chapter" data-level="3.5.2" data-path="architecture.html"><a href="architecture.html#simulation-loop"><i class="fa fa-check"></i><b>3.5.2</b> 2. Simulation Loop</a></li>
+<li class="chapter" data-level="3.5.3" data-path="architecture.html"><a href="architecture.html#output-phase"><i class="fa fa-check"></i><b>3.5.3</b> 3. Output Phase</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="architecture.html"><a href="architecture.html#performance-optimizations"><i class="fa fa-check"></i><b>3.6</b> Performance Optimizations</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="architecture.html"><a href="architecture.html#vectorization-strategy"><i class="fa fa-check"></i><b>3.6.1</b> Vectorization Strategy</a></li>
+<li class="chapter" data-level="3.6.2" data-path="architecture.html"><a href="architecture.html#memory-management"><i class="fa fa-check"></i><b>3.6.2</b> Memory Management</a></li>
+<li class="chapter" data-level="3.6.3" data-path="architecture.html"><a href="architecture.html#parallel-processing-preparation"><i class="fa fa-check"></i><b>3.6.3</b> Parallel Processing Preparation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="architecture.html"><a href="architecture.html#extension-points"><i class="fa fa-check"></i><b>3.7</b> Extension Points</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="architecture.html"><a href="architecture.html#network-integration"><i class="fa fa-check"></i><b>3.7.1</b> 1. Network Integration</a></li>
+<li class="chapter" data-level="3.7.2" data-path="architecture.html"><a href="architecture.html#hierarchical-organizations"><i class="fa fa-check"></i><b>3.7.2</b> 2. Hierarchical Organizations</a></li>
+<li class="chapter" data-level="3.7.3" data-path="architecture.html"><a href="architecture.html#custom-selection-strategies"><i class="fa fa-check"></i><b>3.7.3</b> 3. Custom Selection Strategies</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="architecture.html"><a href="architecture.html#configuration-management"><i class="fa fa-check"></i><b>3.8</b> Configuration Management</a>
+<ul>
+<li class="chapter" data-level="3.8.1" data-path="architecture.html"><a href="architecture.html#parameter-structure"><i class="fa fa-check"></i><b>3.8.1</b> Parameter Structure</a></li>
+<li class="chapter" data-level="3.8.2" data-path="architecture.html"><a href="architecture.html#validation"><i class="fa fa-check"></i><b>3.8.2</b> Validation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.9" data-path="architecture.html"><a href="architecture.html#error-handling"><i class="fa fa-check"></i><b>3.9</b> Error Handling</a>
+<ul>
+<li class="chapter" data-level="3.9.1" data-path="architecture.html"><a href="architecture.html#defensive-programming"><i class="fa fa-check"></i><b>3.9.1</b> Defensive Programming</a></li>
+<li class="chapter" data-level="3.9.2" data-path="architecture.html"><a href="architecture.html#logging-strategy"><i class="fa fa-check"></i><b>3.9.2</b> Logging Strategy</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="architecture.html"><a href="architecture.html#testing-architecture"><i class="fa fa-check"></i><b>3.10</b> Testing Architecture</a>
+<ul>
+<li class="chapter" data-level="3.10.1" data-path="architecture.html"><a href="architecture.html#unit-test-structure"><i class="fa fa-check"></i><b>3.10.1</b> Unit Test Structure</a></li>
+<li class="chapter" data-level="3.10.2" data-path="architecture.html"><a href="architecture.html#integration-tests"><i class="fa fa-check"></i><b>3.10.2</b> Integration Tests</a></li>
+</ul></li>
+<li class="chapter" data-level="3.11" data-path="architecture.html"><a href="architecture.html#future-architecture-enhancements"><i class="fa fa-check"></i><b>3.11</b> Future Architecture Enhancements</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="user-guide.html"><a href="user-guide.html"><i class="fa fa-check"></i><b>4</b> User Guide</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="user-guide.html"><a href="user-guide.html#running-your-first-simulation"><i class="fa fa-check"></i><b>4.1</b> Running Your First Simulation</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="user-guide.html"><a href="user-guide.html#basic-simulation-1"><i class="fa fa-check"></i><b>4.1.1</b> Basic Simulation</a></li>
+<li class="chapter" data-level="4.1.2" data-path="user-guide.html"><a href="user-guide.html#understanding-the-output"><i class="fa fa-check"></i><b>4.1.2</b> Understanding the Output</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="user-guide.html"><a href="user-guide.html#simulation-parameters"><i class="fa fa-check"></i><b>4.2</b> Simulation Parameters</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="user-guide.html"><a href="user-guide.html#overview-of-all-parameters"><i class="fa fa-check"></i><b>4.2.1</b> Overview of All Parameters</a></li>
+<li class="chapter" data-level="4.2.2" data-path="user-guide.html"><a href="user-guide.html#detailed-parameter-guide"><i class="fa fa-check"></i><b>4.2.2</b> Detailed Parameter Guide</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="user-guide.html"><a href="user-guide.html#common-simulation-scenarios"><i class="fa fa-check"></i><b>4.3</b> Common Simulation Scenarios</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="user-guide.html"><a href="user-guide.html#scenario-1-high-growth-startup"><i class="fa fa-check"></i><b>4.3.1</b> Scenario 1: High-Growth Startup</a></li>
+<li class="chapter" data-level="4.3.2" data-path="user-guide.html"><a href="user-guide.html#scenario-2-stable-corporation"><i class="fa fa-check"></i><b>4.3.2</b> Scenario 2: Stable Corporation</a></li>
+<li class="chapter" data-level="4.3.3" data-path="user-guide.html"><a href="user-guide.html#scenario-3-diversity-focused-organization"><i class="fa fa-check"></i><b>4.3.3</b> Scenario 3: Diversity-Focused Organization</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="user-guide.html"><a href="user-guide.html#analyzing-results-1"><i class="fa fa-check"></i><b>4.4</b> Analyzing Results</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="user-guide.html"><a href="user-guide.html#time-series-analysis"><i class="fa fa-check"></i><b>4.4.1</b> Time Series Analysis</a></li>
+<li class="chapter" data-level="4.4.2" data-path="user-guide.html"><a href="user-guide.html#identity-dynamics"><i class="fa fa-check"></i><b>4.4.2</b> Identity Dynamics</a></li>
+<li class="chapter" data-level="4.4.3" data-path="user-guide.html"><a href="user-guide.html#turnover-analysis"><i class="fa fa-check"></i><b>4.4.3</b> Turnover Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="user-guide.html"><a href="user-guide.html#saving-and-loading-results"><i class="fa fa-check"></i><b>4.5</b> Saving and Loading Results</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="user-guide.html"><a href="user-guide.html#saving-simulation-output"><i class="fa fa-check"></i><b>4.5.1</b> Saving Simulation Output</a></li>
+<li class="chapter" data-level="4.5.2" data-path="user-guide.html"><a href="user-guide.html#loading-previous-results"><i class="fa fa-check"></i><b>4.5.2</b> Loading Previous Results</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="user-guide.html"><a href="user-guide.html#batch-simulations"><i class="fa fa-check"></i><b>4.6</b> Batch Simulations</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="user-guide.html"><a href="user-guide.html#parameter-sweeps"><i class="fa fa-check"></i><b>4.6.1</b> Parameter Sweeps</a></li>
+<li class="chapter" data-level="4.6.2" data-path="user-guide.html"><a href="user-guide.html#replication-studies"><i class="fa fa-check"></i><b>4.6.2</b> Replication Studies</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="user-guide.html"><a href="user-guide.html#performance-tips"><i class="fa fa-check"></i><b>4.7</b> Performance Tips</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="user-guide.html"><a href="user-guide.html#memory-management-1"><i class="fa fa-check"></i><b>4.7.1</b> Memory Management</a></li>
+<li class="chapter" data-level="4.7.2" data-path="user-guide.html"><a href="user-guide.html#speed-optimization"><i class="fa fa-check"></i><b>4.7.2</b> Speed Optimization</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="user-guide.html"><a href="user-guide.html#troubleshooting-1"><i class="fa fa-check"></i><b>4.8</b> Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="user-guide.html"><a href="user-guide.html#common-issues-1"><i class="fa fa-check"></i><b>4.8.1</b> Common Issues</a></li>
+<li class="chapter" data-level="4.8.2" data-path="user-guide.html"><a href="user-guide.html#debugging-tools"><i class="fa fa-check"></i><b>4.8.2</b> Debugging Tools</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="odd-protocol.html"><a href="odd-protocol.html"><i class="fa fa-check"></i><b>5</b> ODD Protocol</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="odd-protocol.html"><a href="odd-protocol.html#purpose-and-patterns"><i class="fa fa-check"></i><b>5.1</b> 1. Purpose and Patterns</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="odd-protocol.html"><a href="odd-protocol.html#purpose"><i class="fa fa-check"></i><b>5.1.1</b> 1.1 Purpose</a></li>
+<li class="chapter" data-level="5.1.2" data-path="odd-protocol.html"><a href="odd-protocol.html#patterns"><i class="fa fa-check"></i><b>5.1.2</b> 1.2 Patterns</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="odd-protocol.html"><a href="odd-protocol.html#entities-state-variables-and-scales"><i class="fa fa-check"></i><b>5.2</b> 2. Entities, State Variables, and Scales</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="odd-protocol.html"><a href="odd-protocol.html#entities"><i class="fa fa-check"></i><b>5.2.1</b> 2.1 Entities</a></li>
+<li class="chapter" data-level="5.2.2" data-path="odd-protocol.html"><a href="odd-protocol.html#state-variables"><i class="fa fa-check"></i><b>5.2.2</b> 2.2 State Variables</a></li>
+<li class="chapter" data-level="5.2.3" data-path="odd-protocol.html"><a href="odd-protocol.html#scales"><i class="fa fa-check"></i><b>5.2.3</b> 2.3 Scales</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="odd-protocol.html"><a href="odd-protocol.html#process-overview-and-scheduling"><i class="fa fa-check"></i><b>5.3</b> 3. Process Overview and Scheduling</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="odd-protocol.html"><a href="odd-protocol.html#process-overview"><i class="fa fa-check"></i><b>5.3.1</b> 3.1 Process Overview</a></li>
+<li class="chapter" data-level="5.3.2" data-path="odd-protocol.html"><a href="odd-protocol.html#scheduling"><i class="fa fa-check"></i><b>5.3.2</b> 3.2 Scheduling</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="odd-protocol.html"><a href="odd-protocol.html#design-concepts"><i class="fa fa-check"></i><b>5.4</b> 4. Design Concepts</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="odd-protocol.html"><a href="odd-protocol.html#basic-principles"><i class="fa fa-check"></i><b>5.4.1</b> 4.1 Basic Principles</a></li>
+<li class="chapter" data-level="5.4.2" data-path="odd-protocol.html"><a href="odd-protocol.html#emergence"><i class="fa fa-check"></i><b>5.4.2</b> 4.2 Emergence</a></li>
+<li class="chapter" data-level="5.4.3" data-path="odd-protocol.html"><a href="odd-protocol.html#adaptation"><i class="fa fa-check"></i><b>5.4.3</b> 4.3 Adaptation</a></li>
+<li class="chapter" data-level="5.4.4" data-path="odd-protocol.html"><a href="odd-protocol.html#objectives"><i class="fa fa-check"></i><b>5.4.4</b> 4.4 Objectives</a></li>
+<li class="chapter" data-level="5.4.5" data-path="odd-protocol.html"><a href="odd-protocol.html#learning"><i class="fa fa-check"></i><b>5.4.5</b> 4.5 Learning</a></li>
+<li class="chapter" data-level="5.4.6" data-path="odd-protocol.html"><a href="odd-protocol.html#prediction"><i class="fa fa-check"></i><b>5.4.6</b> 4.6 Prediction</a></li>
+<li class="chapter" data-level="5.4.7" data-path="odd-protocol.html"><a href="odd-protocol.html#sensing"><i class="fa fa-check"></i><b>5.4.7</b> 4.7 Sensing</a></li>
+<li class="chapter" data-level="5.4.8" data-path="odd-protocol.html"><a href="odd-protocol.html#interaction"><i class="fa fa-check"></i><b>5.4.8</b> 4.8 Interaction</a></li>
+<li class="chapter" data-level="5.4.9" data-path="odd-protocol.html"><a href="odd-protocol.html#stochasticity"><i class="fa fa-check"></i><b>5.4.9</b> 4.9 Stochasticity</a></li>
+<li class="chapter" data-level="5.4.10" data-path="odd-protocol.html"><a href="odd-protocol.html#collectives"><i class="fa fa-check"></i><b>5.4.10</b> 4.10 Collectives</a></li>
+<li class="chapter" data-level="5.4.11" data-path="odd-protocol.html"><a href="odd-protocol.html#observation"><i class="fa fa-check"></i><b>5.4.11</b> 4.11 Observation</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="odd-protocol.html"><a href="odd-protocol.html#initialization"><i class="fa fa-check"></i><b>5.5</b> 5. Initialization</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="odd-protocol.html"><a href="odd-protocol.html#initial-conditions"><i class="fa fa-check"></i><b>5.5.1</b> 5.1 Initial Conditions</a></li>
+<li class="chapter" data-level="5.5.2" data-path="odd-protocol.html"><a href="odd-protocol.html#input-data"><i class="fa fa-check"></i><b>5.5.2</b> 5.2 Input Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="odd-protocol.html"><a href="odd-protocol.html#input-data-1"><i class="fa fa-check"></i><b>5.6</b> 6. Input Data</a></li>
+<li class="chapter" data-level="5.7" data-path="odd-protocol.html"><a href="odd-protocol.html#submodels"><i class="fa fa-check"></i><b>5.7</b> 7. Submodels</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="odd-protocol.html"><a href="odd-protocol.html#attraction-calculation"><i class="fa fa-check"></i><b>5.7.1</b> 7.1 Attraction Calculation</a></li>
+<li class="chapter" data-level="5.7.2" data-path="odd-protocol.html"><a href="odd-protocol.html#interaction-valence"><i class="fa fa-check"></i><b>5.7.2</b> 7.2 Interaction Valence</a></li>
+<li class="chapter" data-level="5.7.3" data-path="odd-protocol.html"><a href="odd-protocol.html#satisfaction-update"><i class="fa fa-check"></i><b>5.7.3</b> 7.3 Satisfaction Update</a></li>
+<li class="chapter" data-level="5.7.4" data-path="odd-protocol.html"><a href="odd-protocol.html#turnover-decision"><i class="fa fa-check"></i><b>5.7.4</b> 7.4 Turnover Decision</a></li>
+<li class="chapter" data-level="5.7.5" data-path="odd-protocol.html"><a href="odd-protocol.html#hiring-process"><i class="fa fa-check"></i><b>5.7.5</b> 7.5 Hiring Process</a></li>
+<li class="chapter" data-level="5.7.6" data-path="odd-protocol.html"><a href="odd-protocol.html#identity-diversity-1"><i class="fa fa-check"></i><b>5.7.6</b> 7.6 Identity Diversity</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="odd-protocol.html"><a href="odd-protocol.html#references"><i class="fa fa-check"></i><b>5.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="api-reference.html"><a href="api-reference.html"><i class="fa fa-check"></i><b>6</b> API Reference</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="api-reference.html"><a href="api-reference.html#core-modules-1"><i class="fa fa-check"></i><b>6.1</b> Core Modules</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="api-reference.html"><a href="api-reference.html#coreorganization.r"><i class="fa fa-check"></i><b>6.1.1</b> core/organization.R</a></li>
+<li class="chapter" data-level="6.1.2" data-path="api-reference.html"><a href="api-reference.html#coreagent.r"><i class="fa fa-check"></i><b>6.1.2</b> core/agent.R</a></li>
+<li class="chapter" data-level="6.1.3" data-path="api-reference.html"><a href="api-reference.html#coreinteractions.r"><i class="fa fa-check"></i><b>6.1.3</b> core/interactions.R</a></li>
+<li class="chapter" data-level="6.1.4" data-path="api-reference.html"><a href="api-reference.html#simulationhiring.r"><i class="fa fa-check"></i><b>6.1.4</b> simulation/hiring.R</a></li>
+<li class="chapter" data-level="6.1.5" data-path="api-reference.html"><a href="api-reference.html#simulationturnover.r"><i class="fa fa-check"></i><b>6.1.5</b> simulation/turnover.R</a></li>
+<li class="chapter" data-level="6.1.6" data-path="api-reference.html"><a href="api-reference.html#simulationengine.r"><i class="fa fa-check"></i><b>6.1.6</b> simulation/engine.R</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="api-reference.html"><a href="api-reference.html#error-handling-1"><i class="fa fa-check"></i><b>6.2</b> Error Handling</a></li>
+<li class="chapter" data-level="6.3" data-path="api-reference.html"><a href="api-reference.html#performance-notes"><i class="fa fa-check"></i><b>6.3</b> Performance Notes</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="examples.html"><a href="examples.html"><i class="fa fa-check"></i><b>7</b> Examples and Case Studies</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="examples.html"><a href="examples.html#basic-examples"><i class="fa fa-check"></i><b>7.1</b> Basic Examples</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="examples.html"><a href="examples.html#example-1-standard-simulation"><i class="fa fa-check"></i><b>7.1.1</b> Example 1: Standard Simulation</a></li>
+<li class="chapter" data-level="7.1.2" data-path="examples.html"><a href="examples.html#example-2-high-turnover-environment"><i class="fa fa-check"></i><b>7.1.2</b> Example 2: High-Turnover Environment</a></li>
+<li class="chapter" data-level="7.1.3" data-path="examples.html"><a href="examples.html#example-3-diversity-focused-hiring"><i class="fa fa-check"></i><b>7.1.3</b> Example 3: Diversity-Focused Hiring</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="examples.html"><a href="examples.html#advanced-examples"><i class="fa fa-check"></i><b>7.2</b> Advanced Examples</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="examples.html"><a href="examples.html#example-4-parameter-sensitivity-analysis"><i class="fa fa-check"></i><b>7.2.1</b> Example 4: Parameter Sensitivity Analysis</a></li>
+<li class="chapter" data-level="7.2.2" data-path="examples.html"><a href="examples.html#example-5-intervention-analysis"><i class="fa fa-check"></i><b>7.2.2</b> Example 5: Intervention Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="examples.html"><a href="examples.html#case-studies"><i class="fa fa-check"></i><b>7.3</b> Case Studies</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="examples.html"><a href="examples.html#case-study-1-startup-growth-dynamics"><i class="fa fa-check"></i><b>7.3.1</b> Case Study 1: Startup Growth Dynamics</a></li>
+<li class="chapter" data-level="7.3.2" data-path="examples.html"><a href="examples.html#case-study-2-merger-integration"><i class="fa fa-check"></i><b>7.3.2</b> Case Study 2: Merger Integration</a></li>
+<li class="chapter" data-level="7.3.3" data-path="examples.html"><a href="examples.html#case-study-3-remote-work-transition"><i class="fa fa-check"></i><b>7.3.3</b> Case Study 3: Remote Work Transition</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="examples.html"><a href="examples.html#best-practices-from-examples"><i class="fa fa-check"></i><b>7.4</b> Best Practices from Examples</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="examples.html"><a href="examples.html#parameter-selection"><i class="fa fa-check"></i><b>7.4.1</b> 1. Parameter Selection</a></li>
+<li class="chapter" data-level="7.4.2" data-path="examples.html"><a href="examples.html#analysis-approach"><i class="fa fa-check"></i><b>7.4.2</b> 2. Analysis Approach</a></li>
+<li class="chapter" data-level="7.4.3" data-path="examples.html"><a href="examples.html#validation-1"><i class="fa fa-check"></i><b>7.4.3</b> 3. Validation</a></li>
+<li class="chapter" data-level="7.4.4" data-path="examples.html"><a href="examples.html#interpretation"><i class="fa fa-check"></i><b>7.4.4</b> 4. Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="examples.html"><a href="examples.html#code-snippets-for-common-tasks"><i class="fa fa-check"></i><b>7.5</b> Code Snippets for Common Tasks</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="examples.html"><a href="examples.html#batch-processing"><i class="fa fa-check"></i><b>7.5.1</b> Batch Processing</a></li>
+<li class="chapter" data-level="7.5.2" data-path="examples.html"><a href="examples.html#custom-metrics"><i class="fa fa-check"></i><b>7.5.2</b> Custom Metrics</a></li>
+<li class="chapter" data-level="7.5.3" data-path="examples.html"><a href="examples.html#visualization-helpers"><i class="fa fa-check"></i><b>7.5.3</b> Visualization Helpers</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/noutland/asa-abm-v2" target="blank">GitHub</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">ASA Agent-Based Model v2 Documentation</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="odd-protocol" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> ODD Protocol<a href="odd-protocol.html#odd-protocol" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This chapter presents the ASA ABM v2 following the ODD (Overview, Design concepts, Details) protocol (Grimm et al., 2010, 2020). The ODD protocol provides a standardized way to describe agent-based models.</p>
+<div id="purpose-and-patterns" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> 1. Purpose and Patterns<a href="odd-protocol.html#purpose-and-patterns" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="purpose" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> 1.1 Purpose<a href="odd-protocol.html#purpose" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The purpose of this model is to simulate the Attraction-Selection-Attrition (ASA) processes in organizations to understand:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Primary Questions:</strong>
+<ul>
+<li>How do organizations evolve toward homogeneity through ASA processes?</li>
+<li>What role do individual preferences (homophily vs. diversity) play in organizational composition?</li>
+<li>How do different selection strategies affect long-term organizational diversity?</li>
+<li>What are the dynamics of satisfaction and turnover in evolving organizations?</li>
+</ul></li>
+<li><strong>Secondary Questions:</strong>
+<ul>
+<li>How does interaction frequency affect organizational culture formation?</li>
+<li>What is the relationship between personality diversity and organizational stability?</li>
+<li>How do hiring cycles and growth rates influence organizational evolution?</li>
+</ul></li>
+</ol>
+</div>
+<div id="patterns" class="section level3 hasAnchor" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> 1.2 Patterns<a href="odd-protocol.html#patterns" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The model aims to reproduce and explain the following patterns observed in organizational research:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Organizational Homogenization</strong>: Organizations tend to become more homogeneous over time</li>
+<li><strong>Fit-Satisfaction-Retention Spiral</strong>: Better fitting employees are more satisfied and stay longer</li>
+<li><strong>Diversity-Performance Relationship</strong>: Complex relationships between diversity and organizational outcomes</li>
+<li><strong>Turnover Cascades</strong>: Departures can trigger additional turnover through social effects</li>
+</ol>
+</div>
+</div>
+<div id="entities-state-variables-and-scales" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> 2. Entities, State Variables, and Scales<a href="odd-protocol.html#entities-state-variables-and-scales" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="entities" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> 2.1 Entities<a href="odd-protocol.html#entities" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The model contains three types of entities:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Agents (Employees and Applicants)</strong>
+<ul>
+<li>Represent individuals who work in or apply to the organization</li>
+<li>Possess personality traits, identity, and preferences</li>
+<li>Can transition from applicant to employee</li>
+</ul></li>
+<li><strong>Organization</strong>
+<ul>
+<li>Collection of agents marked as active employees</li>
+<li>Emergent properties calculated from constituent agents</li>
+</ul></li>
+<li><strong>Interactions</strong>
+<ul>
+<li>Pairwise encounters between agents</li>
+<li>Store history of social experiences</li>
+</ul></li>
+</ol>
+</div>
+<div id="state-variables" class="section level3 hasAnchor" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> 2.2 State Variables<a href="odd-protocol.html#state-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="agent-level-state-variables" class="section level4 hasAnchor" number="5.2.2.1">
+<h4><span class="header-section-number">5.2.2.1</span> Agent-level State Variables<a href="odd-protocol.html#agent-level-state-variables" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="13%" />
+<col width="32%" />
+<col width="30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Type</th>
+<th>Range/Values</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>agent_id</td>
+<td>character</td>
+<td>Unique string</td>
+<td>Unique identifier</td>
+</tr>
+<tr class="even">
+<td>identity_category</td>
+<td>character</td>
+<td>“A”-“E” (default)</td>
+<td>Categorical identity</td>
+</tr>
+<tr class="odd">
+<td>openness</td>
+<td>numeric</td>
+<td>~N(0,1)</td>
+<td>Big Five personality trait</td>
+</tr>
+<tr class="even">
+<td>conscientiousness</td>
+<td>numeric</td>
+<td>~N(0,1)</td>
+<td>Big Five personality trait</td>
+</tr>
+<tr class="odd">
+<td>extraversion</td>
+<td>numeric</td>
+<td>~N(0,1)</td>
+<td>Big Five personality trait</td>
+</tr>
+<tr class="even">
+<td>agreeableness</td>
+<td>numeric</td>
+<td>~N(0,1)</td>
+<td>Big Five personality trait</td>
+</tr>
+<tr class="odd">
+<td>emotional_stability</td>
+<td>numeric</td>
+<td>~N(0,1)</td>
+<td>Big Five personality trait</td>
+</tr>
+<tr class="even">
+<td>homophily_preference</td>
+<td>numeric</td>
+<td>~N(0,1)</td>
+<td>Preference for similarity</td>
+</tr>
+<tr class="odd">
+<td>diversity_preference</td>
+<td>numeric</td>
+<td>~N(0,1)</td>
+<td>Preference for diversity</td>
+</tr>
+<tr class="even">
+<td>attraction</td>
+<td>numeric</td>
+<td>Real</td>
+<td>Attraction to organization</td>
+</tr>
+<tr class="odd">
+<td>satisfaction</td>
+<td>numeric</td>
+<td>Real</td>
+<td>Current satisfaction level</td>
+</tr>
+<tr class="even">
+<td>tenure</td>
+<td>integer</td>
+<td>0+</td>
+<td>Time steps in organization</td>
+</tr>
+<tr class="odd">
+<td>hire_date</td>
+<td>integer</td>
+<td>0+</td>
+<td>Time step when hired</td>
+</tr>
+<tr class="even">
+<td>is_active</td>
+<td>logical</td>
+<td>TRUE/FALSE</td>
+<td>Currently employed</td>
+</tr>
+<tr class="odd">
+<td>application_time</td>
+<td>integer</td>
+<td>0+</td>
+<td>Time as applicant (applicants only)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="organization-level-variables-emergent" class="section level4 hasAnchor" number="5.2.2.2">
+<h4><span class="header-section-number">5.2.2.2</span> Organization-level Variables (Emergent)<a href="odd-protocol.html#organization-level-variables-emergent" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<table>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>size</td>
+<td>integer</td>
+<td>Number of active agents</td>
+</tr>
+<tr class="even">
+<td>identity_diversity</td>
+<td>numeric</td>
+<td>Shannon entropy of identities</td>
+</tr>
+<tr class="odd">
+<td>avg_satisfaction</td>
+<td>numeric</td>
+<td>Mean satisfaction of active agents</td>
+</tr>
+<tr class="even">
+<td>personality_means</td>
+<td>numeric vector</td>
+<td>Mean of each Big Five trait</td>
+</tr>
+<tr class="odd">
+<td>personality_sds</td>
+<td>numeric vector</td>
+<td>SD of each Big Five trait</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="global-variables" class="section level4 hasAnchor" number="5.2.2.3">
+<h4><span class="header-section-number">5.2.2.3</span> Global Variables<a href="odd-protocol.html#global-variables" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<table>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>time</td>
+<td>integer</td>
+<td>Current simulation step</td>
+</tr>
+<tr class="even">
+<td>parameters</td>
+<td>list</td>
+<td>Simulation parameters</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="scales" class="section level3 hasAnchor" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> 2.3 Scales<a href="odd-protocol.html#scales" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>Temporal Scale</strong>:
+<ul>
+<li>One time step typically represents one week</li>
+<li>Simulations typically run for 260-520 steps (1-2 years)</li>
+<li>Hiring cycles occur every 4-12 steps</li>
+</ul></li>
+<li><strong>Organizational Scale</strong>:
+<ul>
+<li>Organizations range from 10 to 10,000+ agents</li>
+<li>Typical simulations use 100-1,000 agents</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="process-overview-and-scheduling" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> 3. Process Overview and Scheduling<a href="odd-protocol.html#process-overview-and-scheduling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="process-overview" class="section level3 hasAnchor" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> 3.1 Process Overview<a href="odd-protocol.html#process-overview" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Each time step consists of the following processes in order:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Update Tenure</strong>: Increment tenure for all active agents</li>
+<li><strong>Execute Interactions</strong>: Agents interact with randomly selected partners</li>
+<li><strong>Update Satisfaction</strong>: Calculate new satisfaction based on interactions</li>
+<li><strong>Execute Turnover</strong>: Remove agents below satisfaction threshold</li>
+<li><strong>Hiring Cycle</strong> (periodic):
+<ul>
+<li>Age applicant pool</li>
+<li>Recruit new applicants</li>
+<li>Calculate applicant attraction</li>
+<li>Filter applicant pool</li>
+<li>Select and hire new employees</li>
+</ul></li>
+<li><strong>Calculate Metrics</strong>: Record organizational state</li>
+</ol>
+</div>
+<div id="scheduling" class="section level3 hasAnchor" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> 3.2 Scheduling<a href="odd-protocol.html#scheduling" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>Sequential Processing</strong>: Processes execute in the order listed above</li>
+<li><strong>Synchronous Updates</strong>: All agents update simultaneously within each process</li>
+<li><strong>Discrete Time</strong>: All events occur at discrete time steps</li>
+<li><strong>Conditional Execution</strong>: Hiring only occurs at specified intervals</li>
+</ul>
+</div>
+</div>
+<div id="design-concepts" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> 4. Design Concepts<a href="odd-protocol.html#design-concepts" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="basic-principles" class="section level3 hasAnchor" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> 4.1 Basic Principles<a href="odd-protocol.html#basic-principles" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The model implements the ASA framework through:
+- <strong>Attraction</strong>: Differential attraction based on fit
+- <strong>Selection</strong>: Preferential hiring of fitting individuals
+- <strong>Attrition</strong>: Satisfaction-based turnover</p>
+</div>
+<div id="emergence" class="section level3 hasAnchor" number="5.4.2">
+<h3><span class="header-section-number">5.4.2</span> 4.2 Emergence<a href="odd-protocol.html#emergence" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The following properties emerge from individual-level behaviors:
+- Organizational culture (personality profile)
+- Identity composition and diversity
+- Turnover patterns and rates
+- Social network properties (implicit in interactions)</p>
+</div>
+<div id="adaptation" class="section level3 hasAnchor" number="5.4.3">
+<h3><span class="header-section-number">5.4.3</span> 4.3 Adaptation<a href="odd-protocol.html#adaptation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Agents adapt through:
+- Satisfaction updates based on experiences
+- Turnover decisions based on satisfaction
+- No learning or trait changes (fixed personalities)</p>
+</div>
+<div id="objectives" class="section level3 hasAnchor" number="5.4.4">
+<h3><span class="header-section-number">5.4.4</span> 4.4 Objectives<a href="odd-protocol.html#objectives" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Agents seek to:
+- Applicants: Join organizations with high attraction
+- Employees: Maintain satisfaction above threshold
+- Organization: Hire best-fitting applicants (implicit)</p>
+</div>
+<div id="learning" class="section level3 hasAnchor" number="5.4.5">
+<h3><span class="header-section-number">5.4.5</span> 4.5 Learning<a href="odd-protocol.html#learning" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>No explicit learning in current model. Agents have fixed traits and preferences.</p>
+</div>
+<div id="prediction" class="section level3 hasAnchor" number="5.4.6">
+<h3><span class="header-section-number">5.4.6</span> 4.6 Prediction<a href="odd-protocol.html#prediction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Agents implicitly predict:
+- Applicants assess organizational fit before joining
+- Employees evaluate satisfaction trends (through threshold mechanism)</p>
+</div>
+<div id="sensing" class="section level3 hasAnchor" number="5.4.7">
+<h3><span class="header-section-number">5.4.7</span> 4.7 Sensing<a href="odd-protocol.html#sensing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Agents can sense:
+- Organizational identity composition (for attraction calculation)
+- Interaction partner characteristics (during interactions)
+- Own satisfaction level</p>
+</div>
+<div id="interaction" class="section level3 hasAnchor" number="5.4.8">
+<h3><span class="header-section-number">5.4.8</span> 4.8 Interaction<a href="odd-protocol.html#interaction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>Direct</strong>: Pairwise interactions between agents</li>
+<li><strong>Indirect</strong>: Through organizational composition effects</li>
+<li><strong>Interaction Selection</strong>: Random pairing (extensible to networks)</li>
+</ul>
+</div>
+<div id="stochasticity" class="section level3 hasAnchor" number="5.4.9">
+<h3><span class="header-section-number">5.4.9</span> 4.9 Stochasticity<a href="odd-protocol.html#stochasticity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Stochastic elements include:
+- Agent trait initialization (~N(0,1))
+- Identity assignment (uniform random)
+- Interaction partner selection (random)
+- Interaction valence noise (scaled by emotional stability)
+- Hiring decisions (when using random selection)</p>
+</div>
+<div id="collectives" class="section level3 hasAnchor" number="5.4.10">
+<h3><span class="header-section-number">5.4.10</span> 4.10 Collectives<a href="odd-protocol.html#collectives" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The organization represents a collective with emergent properties calculated from member characteristics.</p>
+</div>
+<div id="observation" class="section level3 hasAnchor" number="5.4.11">
+<h3><span class="header-section-number">5.4.11</span> 4.11 Observation<a href="odd-protocol.html#observation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The model collects:
+- Time series of organizational metrics
+- Final organization state
+- Periodic snapshots (configurable)
+- Interaction histories</p>
+</div>
+</div>
+<div id="initialization" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> 5. Initialization<a href="odd-protocol.html#initialization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="initial-conditions" class="section level3 hasAnchor" number="5.5.1">
+<h3><span class="header-section-number">5.5.1</span> 5.1 Initial Conditions<a href="odd-protocol.html#initial-conditions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Default initialization:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="odd-protocol.html#cb52-1" tabindex="-1"></a><span class="co"># Create initial organization</span></span>
+<span id="cb52-2"><a href="odd-protocol.html#cb52-2" tabindex="-1"></a>initial_size <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb52-3"><a href="odd-protocol.html#cb52-3" tabindex="-1"></a>identity_categories <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;E&quot;</span>)</span>
+<span id="cb52-4"><a href="odd-protocol.html#cb52-4" tabindex="-1"></a></span>
+<span id="cb52-5"><a href="odd-protocol.html#cb52-5" tabindex="-1"></a><span class="co"># Agents initialized with:</span></span>
+<span id="cb52-6"><a href="odd-protocol.html#cb52-6" tabindex="-1"></a><span class="sc">-</span> Random <span class="fu">identities</span> (uniform distribution)</span>
+<span id="cb52-7"><a href="odd-protocol.html#cb52-7" tabindex="-1"></a><span class="sc">-</span> Personality traits <span class="sc">~</span> <span class="fu">N</span>(<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb52-8"><a href="odd-protocol.html#cb52-8" tabindex="-1"></a><span class="sc">-</span> Preferences <span class="sc">~</span> <span class="fu">N</span>(<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb52-9"><a href="odd-protocol.html#cb52-9" tabindex="-1"></a><span class="sc">-</span> Attraction <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb52-10"><a href="odd-protocol.html#cb52-10" tabindex="-1"></a><span class="sc">-</span> Satisfaction <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb52-11"><a href="odd-protocol.html#cb52-11" tabindex="-1"></a><span class="sc">-</span> Tenure <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb52-12"><a href="odd-protocol.html#cb52-12" tabindex="-1"></a><span class="sc">-</span> All marked as active</span></code></pre></div>
+</div>
+<div id="input-data" class="section level3 hasAnchor" number="5.5.2">
+<h3><span class="header-section-number">5.5.2</span> 5.2 Input Data<a href="odd-protocol.html#input-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The model can accept:
+- Custom identity category definitions
+- Specified initial organization size
+- Parameter configurations
+- Random seed for reproducibility</p>
+</div>
+</div>
+<div id="input-data-1" class="section level2 hasAnchor" number="5.6">
+<h2><span class="header-section-number">5.6</span> 6. Input Data<a href="odd-protocol.html#input-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>No external data files required. All agent characteristics generated stochastically during initialization.</p>
+</div>
+<div id="submodels" class="section level2 hasAnchor" number="5.7">
+<h2><span class="header-section-number">5.7</span> 7. Submodels<a href="odd-protocol.html#submodels" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="attraction-calculation" class="section level3 hasAnchor" number="5.7.1">
+<h3><span class="header-section-number">5.7.1</span> 7.1 Attraction Calculation<a href="odd-protocol.html#attraction-calculation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>For Applicants:</strong></p>
+<pre><code>Attraction = (HomophilyPref × PropSameIdentity) + 
+             (DiversityPref × DiversityIndex)</code></pre>
+</div>
+<div id="interaction-valence" class="section level3 hasAnchor" number="5.7.2">
+<h3><span class="header-section-number">5.7.2</span> 7.2 Interaction Valence<a href="odd-protocol.html#interaction-valence" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>When agents i and j interact:</strong></p>
+<pre><code>Valence_ij = -|Extraversion_i - Extraversion_j| +
+             (Conscientiousness_i - Extraversion_j) +
+             Agreeableness_i +
+             IdentityBonus + 
+             ε
+             
+Where:
+- IdentityBonus = HomophilyPref_i if same identity, 
+                  DiversityPref_i if different
+- ε ~ N(0, |EmotionalStability_i|)</code></pre>
+</div>
+<div id="satisfaction-update" class="section level3 hasAnchor" number="5.7.3">
+<h3><span class="header-section-number">5.7.3</span> 7.3 Satisfaction Update<a href="odd-protocol.html#satisfaction-update" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<pre><code>Satisfaction_i = Attraction_i +
+                 mean(RecentInteractionValences) +
+                 (HomophilyPref_i × PropSameIdentity) +
+                 (DiversityPref_i × DiversityIndex) +
+                 EmotionalStability_i</code></pre>
+</div>
+<div id="turnover-decision" class="section level3 hasAnchor" number="5.7.4">
+<h3><span class="header-section-number">5.7.4</span> 7.4 Turnover Decision<a href="odd-protocol.html#turnover-decision" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Threshold Model:</strong></p>
+<pre><code>if (Satisfaction &lt; TurnoverThreshold) then Leave</code></pre>
+<p><strong>Probabilistic Model:</strong></p>
+<pre><code>P(Leave) = BaseTurnoverRate / (1 + exp(Satisfaction × Weight))</code></pre>
+</div>
+<div id="hiring-process" class="section level3 hasAnchor" number="5.7.5">
+<h3><span class="header-section-number">5.7.5</span> 7.5 Hiring Process<a href="odd-protocol.html#hiring-process" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Rank applicants by criterion (conscientiousness/fit/random)</li>
+<li>Select top N where N = CurrentSize × GrowthRate</li>
+<li>Convert selected applicants to employees</li>
+<li>Add to organization</li>
+</ol>
+</div>
+<div id="identity-diversity-1" class="section level3 hasAnchor" number="5.7.6">
+<h3><span class="header-section-number">5.7.6</span> 7.6 Identity Diversity<a href="odd-protocol.html#identity-diversity-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Shannon Entropy:</strong></p>
+<pre><code>H = -Σ(p_i × log(p_i))</code></pre>
+<p>Where p_i is the proportion of identity category i.</p>
+</div>
+</div>
+<div id="references" class="section level2 hasAnchor" number="5.8">
+<h2><span class="header-section-number">5.8</span> References<a href="odd-protocol.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p>Grimm, V., Berger, U., Bastiansen, F., Eliassen, S., Ginot, V., Giske, J., … &amp; DeAngelis, D. L. (2006). A standard protocol for describing individual-based and agent-based models. <em>Ecological Modelling</em>, 198(1-2), 115-126.</p></li>
+<li><p>Grimm, V., Berger, U., DeAngelis, D. L., Polhill, J. G., Giske, J., &amp; Railsback, S. F. (2010). The ODD protocol: A review and first update. <em>Ecological Modelling</em>, 221(23), 2760-2768.</p></li>
+<li><p>Grimm, V., Railsback, S. F., Vincenot, C. E., Berger, U., Gallagher, C., DeAngelis, D. L., … &amp; Ayllón, D. (2020). The ODD protocol for describing agent-based and other simulation models: A second update to improve clarity, replication, and structural realism. <em>Journal of Artificial Societies and Social Simulation</em>, 23(2), 7.</p></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="user-guide.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="api-reference.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false,
+    "google": false
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": null,
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["asa-abm-v2-documentation.pdf", "asa-abm-v2-documentation.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection",
+    "scroll_highlight": true
+  }
+});
+});
+</script>
+
+</body>
+
+</html>
