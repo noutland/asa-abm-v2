@@ -152,6 +152,8 @@ core-modules-1
 coreorganization.r
 create_organization
 calculate_identity_diversity
+calculate_blau_index
+get_category_proportions
 calculate_personality_averages
 calculate_personality_variance
 get_organization_size

@@ -432,97 +432,97 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="example-1-standard-simulation" class="section level3 hasAnchor" number="7.1.1">
 <h3><span class="header-section-number">7.1.1</span> Example 1: Standard Simulation<a href="examples.html#example-1-standard-simulation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A basic simulation with default parameters:</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="examples.html#cb97-1" tabindex="-1"></a><span class="co"># Load the simulation engine</span></span>
-<span id="cb97-2"><a href="examples.html#cb97-2" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;simulation/engine.R&quot;</span>)</span>
-<span id="cb97-3"><a href="examples.html#cb97-3" tabindex="-1"></a></span>
-<span id="cb97-4"><a href="examples.html#cb97-4" tabindex="-1"></a><span class="co"># Run a one-year simulation</span></span>
-<span id="cb97-5"><a href="examples.html#cb97-5" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
-<span id="cb97-6"><a href="examples.html#cb97-6" tabindex="-1"></a>  <span class="at">n_steps =</span> <span class="dv">52</span>,        <span class="co"># Weekly steps</span></span>
-<span id="cb97-7"><a href="examples.html#cb97-7" tabindex="-1"></a>  <span class="at">initial_size =</span> <span class="dv">100</span>,  <span class="co"># Starting size</span></span>
-<span id="cb97-8"><a href="examples.html#cb97-8" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">TRUE</span></span>
-<span id="cb97-9"><a href="examples.html#cb97-9" tabindex="-1"></a>)</span>
-<span id="cb97-10"><a href="examples.html#cb97-10" tabindex="-1"></a></span>
-<span id="cb97-11"><a href="examples.html#cb97-11" tabindex="-1"></a><span class="co"># View final metrics</span></span>
-<span id="cb97-12"><a href="examples.html#cb97-12" tabindex="-1"></a>final_metrics <span class="ot">&lt;-</span> <span class="fu">tail</span>(results<span class="sc">$</span>metrics, <span class="dv">1</span>)</span>
-<span id="cb97-13"><a href="examples.html#cb97-13" tabindex="-1"></a><span class="fu">print</span>(final_metrics)</span>
-<span id="cb97-14"><a href="examples.html#cb97-14" tabindex="-1"></a></span>
-<span id="cb97-15"><a href="examples.html#cb97-15" tabindex="-1"></a><span class="co"># Plot organization size over time</span></span>
-<span id="cb97-16"><a href="examples.html#cb97-16" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb97-17"><a href="examples.html#cb97-17" tabindex="-1"></a><span class="fu">ggplot</span>(results<span class="sc">$</span>metrics, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> size)) <span class="sc">+</span></span>
-<span id="cb97-18"><a href="examples.html#cb97-18" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb97-19"><a href="examples.html#cb97-19" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Organization Size Over Time&quot;</span>,</span>
-<span id="cb97-20"><a href="examples.html#cb97-20" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Week&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Number of Employees&quot;</span>) <span class="sc">+</span></span>
-<span id="cb97-21"><a href="examples.html#cb97-21" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="examples.html#cb100-1" tabindex="-1"></a><span class="co"># Load the simulation engine</span></span>
+<span id="cb100-2"><a href="examples.html#cb100-2" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;simulation/engine.R&quot;</span>)</span>
+<span id="cb100-3"><a href="examples.html#cb100-3" tabindex="-1"></a></span>
+<span id="cb100-4"><a href="examples.html#cb100-4" tabindex="-1"></a><span class="co"># Run a one-year simulation</span></span>
+<span id="cb100-5"><a href="examples.html#cb100-5" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
+<span id="cb100-6"><a href="examples.html#cb100-6" tabindex="-1"></a>  <span class="at">n_steps =</span> <span class="dv">52</span>,        <span class="co"># Weekly steps</span></span>
+<span id="cb100-7"><a href="examples.html#cb100-7" tabindex="-1"></a>  <span class="at">initial_size =</span> <span class="dv">100</span>,  <span class="co"># Starting size</span></span>
+<span id="cb100-8"><a href="examples.html#cb100-8" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">TRUE</span></span>
+<span id="cb100-9"><a href="examples.html#cb100-9" tabindex="-1"></a>)</span>
+<span id="cb100-10"><a href="examples.html#cb100-10" tabindex="-1"></a></span>
+<span id="cb100-11"><a href="examples.html#cb100-11" tabindex="-1"></a><span class="co"># View final metrics</span></span>
+<span id="cb100-12"><a href="examples.html#cb100-12" tabindex="-1"></a>final_metrics <span class="ot">&lt;-</span> <span class="fu">tail</span>(results<span class="sc">$</span>metrics, <span class="dv">1</span>)</span>
+<span id="cb100-13"><a href="examples.html#cb100-13" tabindex="-1"></a><span class="fu">print</span>(final_metrics)</span>
+<span id="cb100-14"><a href="examples.html#cb100-14" tabindex="-1"></a></span>
+<span id="cb100-15"><a href="examples.html#cb100-15" tabindex="-1"></a><span class="co"># Plot organization size over time</span></span>
+<span id="cb100-16"><a href="examples.html#cb100-16" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb100-17"><a href="examples.html#cb100-17" tabindex="-1"></a><span class="fu">ggplot</span>(results<span class="sc">$</span>metrics, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> size)) <span class="sc">+</span></span>
+<span id="cb100-18"><a href="examples.html#cb100-18" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb100-19"><a href="examples.html#cb100-19" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Organization Size Over Time&quot;</span>,</span>
+<span id="cb100-20"><a href="examples.html#cb100-20" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Week&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Number of Employees&quot;</span>) <span class="sc">+</span></span>
+<span id="cb100-21"><a href="examples.html#cb100-21" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 <div id="example-2-high-turnover-environment" class="section level3 hasAnchor" number="7.1.2">
 <h3><span class="header-section-number">7.1.2</span> Example 2: High-Turnover Environment<a href="examples.html#example-2-high-turnover-environment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Simulating an organization with challenging conditions:</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="examples.html#cb98-1" tabindex="-1"></a><span class="co"># Configure high-turnover parameters</span></span>
-<span id="cb98-2"><a href="examples.html#cb98-2" tabindex="-1"></a>high_turnover_params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb98-3"><a href="examples.html#cb98-3" tabindex="-1"></a>  <span class="at">turnover_threshold =</span> <span class="sc">-</span><span class="dv">3</span>,      <span class="co"># Low satisfaction tolerance</span></span>
-<span id="cb98-4"><a href="examples.html#cb98-4" tabindex="-1"></a>  <span class="at">growth_rate =</span> <span class="fl">0.05</span>,          <span class="co"># Aggressive hiring</span></span>
-<span id="cb98-5"><a href="examples.html#cb98-5" tabindex="-1"></a>  <span class="at">n_interactions_per_step =</span> <span class="dv">2</span>,  <span class="co"># Limited interactions</span></span>
-<span id="cb98-6"><a href="examples.html#cb98-6" tabindex="-1"></a>  <span class="at">interaction_window =</span> <span class="dv">5</span>        <span class="co"># Short memory</span></span>
-<span id="cb98-7"><a href="examples.html#cb98-7" tabindex="-1"></a>)</span>
-<span id="cb98-8"><a href="examples.html#cb98-8" tabindex="-1"></a></span>
-<span id="cb98-9"><a href="examples.html#cb98-9" tabindex="-1"></a><span class="co"># Run simulation</span></span>
-<span id="cb98-10"><a href="examples.html#cb98-10" tabindex="-1"></a>volatile_results <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
-<span id="cb98-11"><a href="examples.html#cb98-11" tabindex="-1"></a>  <span class="at">n_steps =</span> <span class="dv">260</span>,</span>
-<span id="cb98-12"><a href="examples.html#cb98-12" tabindex="-1"></a>  <span class="at">initial_size =</span> <span class="dv">50</span>,</span>
-<span id="cb98-13"><a href="examples.html#cb98-13" tabindex="-1"></a>  <span class="at">params =</span> high_turnover_params</span>
-<span id="cb98-14"><a href="examples.html#cb98-14" tabindex="-1"></a>)</span>
-<span id="cb98-15"><a href="examples.html#cb98-15" tabindex="-1"></a></span>
-<span id="cb98-16"><a href="examples.html#cb98-16" tabindex="-1"></a><span class="co"># Analyze turnover patterns</span></span>
-<span id="cb98-17"><a href="examples.html#cb98-17" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb98-18"><a href="examples.html#cb98-18" tabindex="-1"></a>turnover_analysis <span class="ot">&lt;-</span> volatile_results<span class="sc">$</span>metrics <span class="sc">%&gt;%</span></span>
-<span id="cb98-19"><a href="examples.html#cb98-19" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb98-20"><a href="examples.html#cb98-20" tabindex="-1"></a>    <span class="at">period =</span> <span class="fu">ceiling</span>(time <span class="sc">/</span> <span class="dv">13</span>),  <span class="co"># Quarterly</span></span>
-<span id="cb98-21"><a href="examples.html#cb98-21" tabindex="-1"></a>    <span class="at">size_change =</span> size <span class="sc">-</span> <span class="fu">lag</span>(size, <span class="at">default =</span> <span class="dv">50</span>)</span>
-<span id="cb98-22"><a href="examples.html#cb98-22" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb98-23"><a href="examples.html#cb98-23" tabindex="-1"></a>  <span class="fu">group_by</span>(period) <span class="sc">%&gt;%</span></span>
-<span id="cb98-24"><a href="examples.html#cb98-24" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb98-25"><a href="examples.html#cb98-25" tabindex="-1"></a>    <span class="at">avg_size =</span> <span class="fu">mean</span>(size),</span>
-<span id="cb98-26"><a href="examples.html#cb98-26" tabindex="-1"></a>    <span class="at">total_turnover =</span> <span class="fu">sum</span>(size_change[size_change <span class="sc">&lt;</span> <span class="dv">0</span>]),</span>
-<span id="cb98-27"><a href="examples.html#cb98-27" tabindex="-1"></a>    <span class="at">turnover_rate =</span> <span class="fu">abs</span>(total_turnover) <span class="sc">/</span> avg_size</span>
-<span id="cb98-28"><a href="examples.html#cb98-28" tabindex="-1"></a>  )</span>
-<span id="cb98-29"><a href="examples.html#cb98-29" tabindex="-1"></a></span>
-<span id="cb98-30"><a href="examples.html#cb98-30" tabindex="-1"></a><span class="fu">print</span>(turnover_analysis)</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="examples.html#cb101-1" tabindex="-1"></a><span class="co"># Configure high-turnover parameters</span></span>
+<span id="cb101-2"><a href="examples.html#cb101-2" tabindex="-1"></a>high_turnover_params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb101-3"><a href="examples.html#cb101-3" tabindex="-1"></a>  <span class="at">turnover_threshold =</span> <span class="sc">-</span><span class="dv">3</span>,      <span class="co"># Low satisfaction tolerance</span></span>
+<span id="cb101-4"><a href="examples.html#cb101-4" tabindex="-1"></a>  <span class="at">growth_rate =</span> <span class="fl">0.05</span>,          <span class="co"># Aggressive hiring</span></span>
+<span id="cb101-5"><a href="examples.html#cb101-5" tabindex="-1"></a>  <span class="at">n_interactions_per_step =</span> <span class="dv">2</span>,  <span class="co"># Limited interactions</span></span>
+<span id="cb101-6"><a href="examples.html#cb101-6" tabindex="-1"></a>  <span class="at">interaction_window =</span> <span class="dv">5</span>        <span class="co"># Short memory</span></span>
+<span id="cb101-7"><a href="examples.html#cb101-7" tabindex="-1"></a>)</span>
+<span id="cb101-8"><a href="examples.html#cb101-8" tabindex="-1"></a></span>
+<span id="cb101-9"><a href="examples.html#cb101-9" tabindex="-1"></a><span class="co"># Run simulation</span></span>
+<span id="cb101-10"><a href="examples.html#cb101-10" tabindex="-1"></a>volatile_results <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
+<span id="cb101-11"><a href="examples.html#cb101-11" tabindex="-1"></a>  <span class="at">n_steps =</span> <span class="dv">260</span>,</span>
+<span id="cb101-12"><a href="examples.html#cb101-12" tabindex="-1"></a>  <span class="at">initial_size =</span> <span class="dv">50</span>,</span>
+<span id="cb101-13"><a href="examples.html#cb101-13" tabindex="-1"></a>  <span class="at">params =</span> high_turnover_params</span>
+<span id="cb101-14"><a href="examples.html#cb101-14" tabindex="-1"></a>)</span>
+<span id="cb101-15"><a href="examples.html#cb101-15" tabindex="-1"></a></span>
+<span id="cb101-16"><a href="examples.html#cb101-16" tabindex="-1"></a><span class="co"># Analyze turnover patterns</span></span>
+<span id="cb101-17"><a href="examples.html#cb101-17" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb101-18"><a href="examples.html#cb101-18" tabindex="-1"></a>turnover_analysis <span class="ot">&lt;-</span> volatile_results<span class="sc">$</span>metrics <span class="sc">%&gt;%</span></span>
+<span id="cb101-19"><a href="examples.html#cb101-19" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb101-20"><a href="examples.html#cb101-20" tabindex="-1"></a>    <span class="at">period =</span> <span class="fu">ceiling</span>(time <span class="sc">/</span> <span class="dv">13</span>),  <span class="co"># Quarterly</span></span>
+<span id="cb101-21"><a href="examples.html#cb101-21" tabindex="-1"></a>    <span class="at">size_change =</span> size <span class="sc">-</span> <span class="fu">lag</span>(size, <span class="at">default =</span> <span class="dv">50</span>)</span>
+<span id="cb101-22"><a href="examples.html#cb101-22" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb101-23"><a href="examples.html#cb101-23" tabindex="-1"></a>  <span class="fu">group_by</span>(period) <span class="sc">%&gt;%</span></span>
+<span id="cb101-24"><a href="examples.html#cb101-24" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb101-25"><a href="examples.html#cb101-25" tabindex="-1"></a>    <span class="at">avg_size =</span> <span class="fu">mean</span>(size),</span>
+<span id="cb101-26"><a href="examples.html#cb101-26" tabindex="-1"></a>    <span class="at">total_turnover =</span> <span class="fu">sum</span>(size_change[size_change <span class="sc">&lt;</span> <span class="dv">0</span>]),</span>
+<span id="cb101-27"><a href="examples.html#cb101-27" tabindex="-1"></a>    <span class="at">turnover_rate =</span> <span class="fu">abs</span>(total_turnover) <span class="sc">/</span> avg_size</span>
+<span id="cb101-28"><a href="examples.html#cb101-28" tabindex="-1"></a>  )</span>
+<span id="cb101-29"><a href="examples.html#cb101-29" tabindex="-1"></a></span>
+<span id="cb101-30"><a href="examples.html#cb101-30" tabindex="-1"></a><span class="fu">print</span>(turnover_analysis)</span></code></pre></div>
 </div>
 <div id="example-3-diversity-focused-hiring" class="section level3 hasAnchor" number="7.1.3">
 <h3><span class="header-section-number">7.1.3</span> Example 3: Diversity-Focused Hiring<a href="examples.html#example-3-diversity-focused-hiring" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Testing different selection strategies:</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="examples.html#cb99-1" tabindex="-1"></a><span class="co"># Compare selection strategies</span></span>
-<span id="cb99-2"><a href="examples.html#cb99-2" tabindex="-1"></a>strategies <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;conscientiousness&quot;</span>, <span class="st">&quot;fit&quot;</span>, <span class="st">&quot;random&quot;</span>)</span>
-<span id="cb99-3"><a href="examples.html#cb99-3" tabindex="-1"></a>strategy_results <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb99-4"><a href="examples.html#cb99-4" tabindex="-1"></a></span>
-<span id="cb99-5"><a href="examples.html#cb99-5" tabindex="-1"></a><span class="cf">for</span> (strategy <span class="cf">in</span> strategies) {</span>
-<span id="cb99-6"><a href="examples.html#cb99-6" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">123</span>)  <span class="co"># For comparability</span></span>
-<span id="cb99-7"><a href="examples.html#cb99-7" tabindex="-1"></a>  </span>
-<span id="cb99-8"><a href="examples.html#cb99-8" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
-<span id="cb99-9"><a href="examples.html#cb99-9" tabindex="-1"></a>    <span class="at">n_steps =</span> <span class="dv">156</span>,  <span class="co"># 3 years</span></span>
-<span id="cb99-10"><a href="examples.html#cb99-10" tabindex="-1"></a>    <span class="at">initial_size =</span> <span class="dv">100</span>,</span>
-<span id="cb99-11"><a href="examples.html#cb99-11" tabindex="-1"></a>    <span class="at">params =</span> <span class="fu">list</span>(</span>
-<span id="cb99-12"><a href="examples.html#cb99-12" tabindex="-1"></a>      <span class="at">selection_criteria =</span> strategy,</span>
-<span id="cb99-13"><a href="examples.html#cb99-13" tabindex="-1"></a>      <span class="at">growth_rate =</span> <span class="fl">0.02</span></span>
-<span id="cb99-14"><a href="examples.html#cb99-14" tabindex="-1"></a>    ),</span>
-<span id="cb99-15"><a href="examples.html#cb99-15" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
-<span id="cb99-16"><a href="examples.html#cb99-16" tabindex="-1"></a>  )</span>
-<span id="cb99-17"><a href="examples.html#cb99-17" tabindex="-1"></a>  </span>
-<span id="cb99-18"><a href="examples.html#cb99-18" tabindex="-1"></a>  strategy_results[[strategy]] <span class="ot">&lt;-</span> results<span class="sc">$</span>metrics <span class="sc">%&gt;%</span></span>
-<span id="cb99-19"><a href="examples.html#cb99-19" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">strategy =</span> strategy)</span>
-<span id="cb99-20"><a href="examples.html#cb99-20" tabindex="-1"></a>}</span>
-<span id="cb99-21"><a href="examples.html#cb99-21" tabindex="-1"></a></span>
-<span id="cb99-22"><a href="examples.html#cb99-22" tabindex="-1"></a><span class="co"># Combine and plot</span></span>
-<span id="cb99-23"><a href="examples.html#cb99-23" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb99-24"><a href="examples.html#cb99-24" tabindex="-1"></a>combined_results <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(strategy_results)</span>
-<span id="cb99-25"><a href="examples.html#cb99-25" tabindex="-1"></a></span>
-<span id="cb99-26"><a href="examples.html#cb99-26" tabindex="-1"></a><span class="fu">ggplot</span>(combined_results, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> identity_diversity, </span>
-<span id="cb99-27"><a href="examples.html#cb99-27" tabindex="-1"></a>                             <span class="at">color =</span> strategy)) <span class="sc">+</span></span>
-<span id="cb99-28"><a href="examples.html#cb99-28" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb99-29"><a href="examples.html#cb99-29" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Identity Diversity by Selection Strategy&quot;</span>,</span>
-<span id="cb99-30"><a href="examples.html#cb99-30" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Shannon Diversity Index&quot;</span>) <span class="sc">+</span></span>
-<span id="cb99-31"><a href="examples.html#cb99-31" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb99-32"><a href="examples.html#cb99-32" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set1&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="examples.html#cb102-1" tabindex="-1"></a><span class="co"># Compare selection strategies</span></span>
+<span id="cb102-2"><a href="examples.html#cb102-2" tabindex="-1"></a>strategies <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;conscientiousness&quot;</span>, <span class="st">&quot;fit&quot;</span>, <span class="st">&quot;random&quot;</span>)</span>
+<span id="cb102-3"><a href="examples.html#cb102-3" tabindex="-1"></a>strategy_results <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb102-4"><a href="examples.html#cb102-4" tabindex="-1"></a></span>
+<span id="cb102-5"><a href="examples.html#cb102-5" tabindex="-1"></a><span class="cf">for</span> (strategy <span class="cf">in</span> strategies) {</span>
+<span id="cb102-6"><a href="examples.html#cb102-6" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">123</span>)  <span class="co"># For comparability</span></span>
+<span id="cb102-7"><a href="examples.html#cb102-7" tabindex="-1"></a>  </span>
+<span id="cb102-8"><a href="examples.html#cb102-8" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
+<span id="cb102-9"><a href="examples.html#cb102-9" tabindex="-1"></a>    <span class="at">n_steps =</span> <span class="dv">156</span>,  <span class="co"># 3 years</span></span>
+<span id="cb102-10"><a href="examples.html#cb102-10" tabindex="-1"></a>    <span class="at">initial_size =</span> <span class="dv">100</span>,</span>
+<span id="cb102-11"><a href="examples.html#cb102-11" tabindex="-1"></a>    <span class="at">params =</span> <span class="fu">list</span>(</span>
+<span id="cb102-12"><a href="examples.html#cb102-12" tabindex="-1"></a>      <span class="at">selection_criteria =</span> strategy,</span>
+<span id="cb102-13"><a href="examples.html#cb102-13" tabindex="-1"></a>      <span class="at">growth_rate =</span> <span class="fl">0.02</span></span>
+<span id="cb102-14"><a href="examples.html#cb102-14" tabindex="-1"></a>    ),</span>
+<span id="cb102-15"><a href="examples.html#cb102-15" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb102-16"><a href="examples.html#cb102-16" tabindex="-1"></a>  )</span>
+<span id="cb102-17"><a href="examples.html#cb102-17" tabindex="-1"></a>  </span>
+<span id="cb102-18"><a href="examples.html#cb102-18" tabindex="-1"></a>  strategy_results[[strategy]] <span class="ot">&lt;-</span> results<span class="sc">$</span>metrics <span class="sc">%&gt;%</span></span>
+<span id="cb102-19"><a href="examples.html#cb102-19" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">strategy =</span> strategy)</span>
+<span id="cb102-20"><a href="examples.html#cb102-20" tabindex="-1"></a>}</span>
+<span id="cb102-21"><a href="examples.html#cb102-21" tabindex="-1"></a></span>
+<span id="cb102-22"><a href="examples.html#cb102-22" tabindex="-1"></a><span class="co"># Combine and plot</span></span>
+<span id="cb102-23"><a href="examples.html#cb102-23" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb102-24"><a href="examples.html#cb102-24" tabindex="-1"></a>combined_results <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(strategy_results)</span>
+<span id="cb102-25"><a href="examples.html#cb102-25" tabindex="-1"></a></span>
+<span id="cb102-26"><a href="examples.html#cb102-26" tabindex="-1"></a><span class="fu">ggplot</span>(combined_results, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> identity_diversity, </span>
+<span id="cb102-27"><a href="examples.html#cb102-27" tabindex="-1"></a>                             <span class="at">color =</span> strategy)) <span class="sc">+</span></span>
+<span id="cb102-28"><a href="examples.html#cb102-28" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb102-29"><a href="examples.html#cb102-29" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Identity Diversity by Selection Strategy&quot;</span>,</span>
+<span id="cb102-30"><a href="examples.html#cb102-30" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Shannon Diversity Index&quot;</span>) <span class="sc">+</span></span>
+<span id="cb102-31"><a href="examples.html#cb102-31" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb102-32"><a href="examples.html#cb102-32" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set1&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="advanced-examples" class="section level2 hasAnchor" number="7.2">
@@ -530,100 +530,100 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="example-4-parameter-sensitivity-analysis" class="section level3 hasAnchor" number="7.2.1">
 <h3><span class="header-section-number">7.2.1</span> Example 4: Parameter Sensitivity Analysis<a href="examples.html#example-4-parameter-sensitivity-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Testing how different parameters affect outcomes:</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="examples.html#cb100-1" tabindex="-1"></a><span class="co"># Define parameter grid</span></span>
-<span id="cb100-2"><a href="examples.html#cb100-2" tabindex="-1"></a>param_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb100-3"><a href="examples.html#cb100-3" tabindex="-1"></a>  <span class="at">growth_rate =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.02</span>, <span class="fl">0.05</span>),</span>
-<span id="cb100-4"><a href="examples.html#cb100-4" tabindex="-1"></a>  <span class="at">turnover_threshold =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="sc">-</span><span class="dv">5</span>, <span class="sc">-</span><span class="dv">2</span>),</span>
-<span id="cb100-5"><a href="examples.html#cb100-5" tabindex="-1"></a>  <span class="at">n_interactions =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>)</span>
-<span id="cb100-6"><a href="examples.html#cb100-6" tabindex="-1"></a>)</span>
-<span id="cb100-7"><a href="examples.html#cb100-7" tabindex="-1"></a></span>
-<span id="cb100-8"><a href="examples.html#cb100-8" tabindex="-1"></a><span class="co"># Run simulations</span></span>
-<span id="cb100-9"><a href="examples.html#cb100-9" tabindex="-1"></a>sensitivity_results <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb100-10"><a href="examples.html#cb100-10" tabindex="-1"></a></span>
-<span id="cb100-11"><a href="examples.html#cb100-11" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(param_grid)) {</span>
-<span id="cb100-12"><a href="examples.html#cb100-12" tabindex="-1"></a>  params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb100-13"><a href="examples.html#cb100-13" tabindex="-1"></a>    <span class="at">growth_rate =</span> param_grid<span class="sc">$</span>growth_rate[i],</span>
-<span id="cb100-14"><a href="examples.html#cb100-14" tabindex="-1"></a>    <span class="at">turnover_threshold =</span> param_grid<span class="sc">$</span>turnover_threshold[i],</span>
-<span id="cb100-15"><a href="examples.html#cb100-15" tabindex="-1"></a>    <span class="at">n_interactions_per_step =</span> param_grid<span class="sc">$</span>n_interactions[i]</span>
-<span id="cb100-16"><a href="examples.html#cb100-16" tabindex="-1"></a>  )</span>
-<span id="cb100-17"><a href="examples.html#cb100-17" tabindex="-1"></a>  </span>
-<span id="cb100-18"><a href="examples.html#cb100-18" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
-<span id="cb100-19"><a href="examples.html#cb100-19" tabindex="-1"></a>    <span class="at">n_steps =</span> <span class="dv">104</span>,  <span class="co"># 2 years</span></span>
-<span id="cb100-20"><a href="examples.html#cb100-20" tabindex="-1"></a>    <span class="at">initial_size =</span> <span class="dv">100</span>,</span>
-<span id="cb100-21"><a href="examples.html#cb100-21" tabindex="-1"></a>    <span class="at">params =</span> params,</span>
-<span id="cb100-22"><a href="examples.html#cb100-22" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
-<span id="cb100-23"><a href="examples.html#cb100-23" tabindex="-1"></a>  )</span>
-<span id="cb100-24"><a href="examples.html#cb100-24" tabindex="-1"></a>  </span>
-<span id="cb100-25"><a href="examples.html#cb100-25" tabindex="-1"></a>  <span class="co"># Extract key metrics</span></span>
-<span id="cb100-26"><a href="examples.html#cb100-26" tabindex="-1"></a>  final_state <span class="ot">&lt;-</span> <span class="fu">tail</span>(results<span class="sc">$</span>metrics, <span class="dv">1</span>)</span>
-<span id="cb100-27"><a href="examples.html#cb100-27" tabindex="-1"></a>  sensitivity_results[[i]] <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb100-28"><a href="examples.html#cb100-28" tabindex="-1"></a>    param_grid[i,],</span>
-<span id="cb100-29"><a href="examples.html#cb100-29" tabindex="-1"></a>    <span class="at">final_size =</span> final_state<span class="sc">$</span>size,</span>
-<span id="cb100-30"><a href="examples.html#cb100-30" tabindex="-1"></a>    <span class="at">final_satisfaction =</span> final_state<span class="sc">$</span>avg_satisfaction,</span>
-<span id="cb100-31"><a href="examples.html#cb100-31" tabindex="-1"></a>    <span class="at">final_diversity =</span> final_state<span class="sc">$</span>identity_diversity</span>
-<span id="cb100-32"><a href="examples.html#cb100-32" tabindex="-1"></a>  )</span>
-<span id="cb100-33"><a href="examples.html#cb100-33" tabindex="-1"></a>}</span>
-<span id="cb100-34"><a href="examples.html#cb100-34" tabindex="-1"></a></span>
-<span id="cb100-35"><a href="examples.html#cb100-35" tabindex="-1"></a><span class="co"># Analyze results</span></span>
-<span id="cb100-36"><a href="examples.html#cb100-36" tabindex="-1"></a>sensitivity_df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(sensitivity_results)</span>
-<span id="cb100-37"><a href="examples.html#cb100-37" tabindex="-1"></a></span>
-<span id="cb100-38"><a href="examples.html#cb100-38" tabindex="-1"></a><span class="co"># Create heatmap</span></span>
-<span id="cb100-39"><a href="examples.html#cb100-39" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
-<span id="cb100-40"><a href="examples.html#cb100-40" tabindex="-1"></a>size_matrix <span class="ot">&lt;-</span> <span class="fu">dcast</span>(sensitivity_df, </span>
-<span id="cb100-41"><a href="examples.html#cb100-41" tabindex="-1"></a>                     growth_rate <span class="sc">~</span> turnover_threshold, </span>
-<span id="cb100-42"><a href="examples.html#cb100-42" tabindex="-1"></a>                     <span class="at">value.var =</span> <span class="st">&quot;final_size&quot;</span>,</span>
-<span id="cb100-43"><a href="examples.html#cb100-43" tabindex="-1"></a>                     <span class="at">fun.aggregate =</span> mean)</span>
-<span id="cb100-44"><a href="examples.html#cb100-44" tabindex="-1"></a></span>
-<span id="cb100-45"><a href="examples.html#cb100-45" tabindex="-1"></a><span class="co"># Plot heatmap</span></span>
-<span id="cb100-46"><a href="examples.html#cb100-46" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">melt</span>(size_matrix), <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(turnover_threshold), </span>
-<span id="cb100-47"><a href="examples.html#cb100-47" tabindex="-1"></a>                               <span class="at">y =</span> <span class="fu">factor</span>(growth_rate), </span>
-<span id="cb100-48"><a href="examples.html#cb100-48" tabindex="-1"></a>                               <span class="at">fill =</span> value)) <span class="sc">+</span></span>
-<span id="cb100-49"><a href="examples.html#cb100-49" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
-<span id="cb100-50"><a href="examples.html#cb100-50" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(value))) <span class="sc">+</span></span>
-<span id="cb100-51"><a href="examples.html#cb100-51" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">&quot;red&quot;</span>, <span class="at">mid =</span> <span class="st">&quot;white&quot;</span>, <span class="at">high =</span> <span class="st">&quot;green&quot;</span>, </span>
-<span id="cb100-52"><a href="examples.html#cb100-52" tabindex="-1"></a>                       <span class="at">midpoint =</span> <span class="dv">100</span>) <span class="sc">+</span></span>
-<span id="cb100-53"><a href="examples.html#cb100-53" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Final Organization Size by Parameters&quot;</span>,</span>
-<span id="cb100-54"><a href="examples.html#cb100-54" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Turnover Threshold&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Growth Rate&quot;</span>) <span class="sc">+</span></span>
-<span id="cb100-55"><a href="examples.html#cb100-55" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="examples.html#cb103-1" tabindex="-1"></a><span class="co"># Define parameter grid</span></span>
+<span id="cb103-2"><a href="examples.html#cb103-2" tabindex="-1"></a>param_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb103-3"><a href="examples.html#cb103-3" tabindex="-1"></a>  <span class="at">growth_rate =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.02</span>, <span class="fl">0.05</span>),</span>
+<span id="cb103-4"><a href="examples.html#cb103-4" tabindex="-1"></a>  <span class="at">turnover_threshold =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="sc">-</span><span class="dv">5</span>, <span class="sc">-</span><span class="dv">2</span>),</span>
+<span id="cb103-5"><a href="examples.html#cb103-5" tabindex="-1"></a>  <span class="at">n_interactions =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>)</span>
+<span id="cb103-6"><a href="examples.html#cb103-6" tabindex="-1"></a>)</span>
+<span id="cb103-7"><a href="examples.html#cb103-7" tabindex="-1"></a></span>
+<span id="cb103-8"><a href="examples.html#cb103-8" tabindex="-1"></a><span class="co"># Run simulations</span></span>
+<span id="cb103-9"><a href="examples.html#cb103-9" tabindex="-1"></a>sensitivity_results <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb103-10"><a href="examples.html#cb103-10" tabindex="-1"></a></span>
+<span id="cb103-11"><a href="examples.html#cb103-11" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(param_grid)) {</span>
+<span id="cb103-12"><a href="examples.html#cb103-12" tabindex="-1"></a>  params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb103-13"><a href="examples.html#cb103-13" tabindex="-1"></a>    <span class="at">growth_rate =</span> param_grid<span class="sc">$</span>growth_rate[i],</span>
+<span id="cb103-14"><a href="examples.html#cb103-14" tabindex="-1"></a>    <span class="at">turnover_threshold =</span> param_grid<span class="sc">$</span>turnover_threshold[i],</span>
+<span id="cb103-15"><a href="examples.html#cb103-15" tabindex="-1"></a>    <span class="at">n_interactions_per_step =</span> param_grid<span class="sc">$</span>n_interactions[i]</span>
+<span id="cb103-16"><a href="examples.html#cb103-16" tabindex="-1"></a>  )</span>
+<span id="cb103-17"><a href="examples.html#cb103-17" tabindex="-1"></a>  </span>
+<span id="cb103-18"><a href="examples.html#cb103-18" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
+<span id="cb103-19"><a href="examples.html#cb103-19" tabindex="-1"></a>    <span class="at">n_steps =</span> <span class="dv">104</span>,  <span class="co"># 2 years</span></span>
+<span id="cb103-20"><a href="examples.html#cb103-20" tabindex="-1"></a>    <span class="at">initial_size =</span> <span class="dv">100</span>,</span>
+<span id="cb103-21"><a href="examples.html#cb103-21" tabindex="-1"></a>    <span class="at">params =</span> params,</span>
+<span id="cb103-22"><a href="examples.html#cb103-22" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb103-23"><a href="examples.html#cb103-23" tabindex="-1"></a>  )</span>
+<span id="cb103-24"><a href="examples.html#cb103-24" tabindex="-1"></a>  </span>
+<span id="cb103-25"><a href="examples.html#cb103-25" tabindex="-1"></a>  <span class="co"># Extract key metrics</span></span>
+<span id="cb103-26"><a href="examples.html#cb103-26" tabindex="-1"></a>  final_state <span class="ot">&lt;-</span> <span class="fu">tail</span>(results<span class="sc">$</span>metrics, <span class="dv">1</span>)</span>
+<span id="cb103-27"><a href="examples.html#cb103-27" tabindex="-1"></a>  sensitivity_results[[i]] <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb103-28"><a href="examples.html#cb103-28" tabindex="-1"></a>    param_grid[i,],</span>
+<span id="cb103-29"><a href="examples.html#cb103-29" tabindex="-1"></a>    <span class="at">final_size =</span> final_state<span class="sc">$</span>size,</span>
+<span id="cb103-30"><a href="examples.html#cb103-30" tabindex="-1"></a>    <span class="at">final_satisfaction =</span> final_state<span class="sc">$</span>avg_satisfaction,</span>
+<span id="cb103-31"><a href="examples.html#cb103-31" tabindex="-1"></a>    <span class="at">final_diversity =</span> final_state<span class="sc">$</span>identity_diversity</span>
+<span id="cb103-32"><a href="examples.html#cb103-32" tabindex="-1"></a>  )</span>
+<span id="cb103-33"><a href="examples.html#cb103-33" tabindex="-1"></a>}</span>
+<span id="cb103-34"><a href="examples.html#cb103-34" tabindex="-1"></a></span>
+<span id="cb103-35"><a href="examples.html#cb103-35" tabindex="-1"></a><span class="co"># Analyze results</span></span>
+<span id="cb103-36"><a href="examples.html#cb103-36" tabindex="-1"></a>sensitivity_df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(sensitivity_results)</span>
+<span id="cb103-37"><a href="examples.html#cb103-37" tabindex="-1"></a></span>
+<span id="cb103-38"><a href="examples.html#cb103-38" tabindex="-1"></a><span class="co"># Create heatmap</span></span>
+<span id="cb103-39"><a href="examples.html#cb103-39" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb103-40"><a href="examples.html#cb103-40" tabindex="-1"></a>size_matrix <span class="ot">&lt;-</span> <span class="fu">dcast</span>(sensitivity_df, </span>
+<span id="cb103-41"><a href="examples.html#cb103-41" tabindex="-1"></a>                     growth_rate <span class="sc">~</span> turnover_threshold, </span>
+<span id="cb103-42"><a href="examples.html#cb103-42" tabindex="-1"></a>                     <span class="at">value.var =</span> <span class="st">&quot;final_size&quot;</span>,</span>
+<span id="cb103-43"><a href="examples.html#cb103-43" tabindex="-1"></a>                     <span class="at">fun.aggregate =</span> mean)</span>
+<span id="cb103-44"><a href="examples.html#cb103-44" tabindex="-1"></a></span>
+<span id="cb103-45"><a href="examples.html#cb103-45" tabindex="-1"></a><span class="co"># Plot heatmap</span></span>
+<span id="cb103-46"><a href="examples.html#cb103-46" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">melt</span>(size_matrix), <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(turnover_threshold), </span>
+<span id="cb103-47"><a href="examples.html#cb103-47" tabindex="-1"></a>                               <span class="at">y =</span> <span class="fu">factor</span>(growth_rate), </span>
+<span id="cb103-48"><a href="examples.html#cb103-48" tabindex="-1"></a>                               <span class="at">fill =</span> value)) <span class="sc">+</span></span>
+<span id="cb103-49"><a href="examples.html#cb103-49" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb103-50"><a href="examples.html#cb103-50" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(value))) <span class="sc">+</span></span>
+<span id="cb103-51"><a href="examples.html#cb103-51" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">&quot;red&quot;</span>, <span class="at">mid =</span> <span class="st">&quot;white&quot;</span>, <span class="at">high =</span> <span class="st">&quot;green&quot;</span>, </span>
+<span id="cb103-52"><a href="examples.html#cb103-52" tabindex="-1"></a>                       <span class="at">midpoint =</span> <span class="dv">100</span>) <span class="sc">+</span></span>
+<span id="cb103-53"><a href="examples.html#cb103-53" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Final Organization Size by Parameters&quot;</span>,</span>
+<span id="cb103-54"><a href="examples.html#cb103-54" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Turnover Threshold&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Growth Rate&quot;</span>) <span class="sc">+</span></span>
+<span id="cb103-55"><a href="examples.html#cb103-55" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 <div id="example-5-intervention-analysis" class="section level3 hasAnchor" number="7.2.2">
 <h3><span class="header-section-number">7.2.2</span> Example 5: Intervention Analysis<a href="examples.html#example-5-intervention-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Testing organizational interventions:</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="examples.html#cb101-1" tabindex="-1"></a><span class="co"># Baseline simulation</span></span>
-<span id="cb101-2"><a href="examples.html#cb101-2" tabindex="-1"></a>baseline <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
-<span id="cb101-3"><a href="examples.html#cb101-3" tabindex="-1"></a>  <span class="at">n_steps =</span> <span class="dv">104</span>,</span>
-<span id="cb101-4"><a href="examples.html#cb101-4" tabindex="-1"></a>  <span class="at">initial_size =</span> <span class="dv">100</span>,</span>
-<span id="cb101-5"><a href="examples.html#cb101-5" tabindex="-1"></a>  <span class="at">params =</span> <span class="fu">list</span>(<span class="at">tag =</span> <span class="st">&quot;baseline&quot;</span>),</span>
-<span id="cb101-6"><a href="examples.html#cb101-6" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
-<span id="cb101-7"><a href="examples.html#cb101-7" tabindex="-1"></a>)</span>
-<span id="cb101-8"><a href="examples.html#cb101-8" tabindex="-1"></a></span>
-<span id="cb101-9"><a href="examples.html#cb101-9" tabindex="-1"></a><span class="co"># Intervention: Improve interaction quality</span></span>
-<span id="cb101-10"><a href="examples.html#cb101-10" tabindex="-1"></a>intervention <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
-<span id="cb101-11"><a href="examples.html#cb101-11" tabindex="-1"></a>  <span class="at">n_steps =</span> <span class="dv">104</span>,</span>
-<span id="cb101-12"><a href="examples.html#cb101-12" tabindex="-1"></a>  <span class="at">initial_size =</span> <span class="dv">100</span>,</span>
-<span id="cb101-13"><a href="examples.html#cb101-13" tabindex="-1"></a>  <span class="at">params =</span> <span class="fu">list</span>(</span>
-<span id="cb101-14"><a href="examples.html#cb101-14" tabindex="-1"></a>    <span class="at">n_interactions_per_step =</span> <span class="dv">15</span>,  <span class="co"># Triple interactions</span></span>
-<span id="cb101-15"><a href="examples.html#cb101-15" tabindex="-1"></a>    <span class="at">interaction_window =</span> <span class="dv">20</span>,       <span class="co"># Longer memory</span></span>
-<span id="cb101-16"><a href="examples.html#cb101-16" tabindex="-1"></a>    <span class="at">tag =</span> <span class="st">&quot;intervention&quot;</span></span>
-<span id="cb101-17"><a href="examples.html#cb101-17" tabindex="-1"></a>  ),</span>
-<span id="cb101-18"><a href="examples.html#cb101-18" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
-<span id="cb101-19"><a href="examples.html#cb101-19" tabindex="-1"></a>)</span>
-<span id="cb101-20"><a href="examples.html#cb101-20" tabindex="-1"></a></span>
-<span id="cb101-21"><a href="examples.html#cb101-21" tabindex="-1"></a><span class="co"># Compare results</span></span>
-<span id="cb101-22"><a href="examples.html#cb101-22" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb101-23"><a href="examples.html#cb101-23" tabindex="-1"></a>  baseline<span class="sc">$</span>metrics <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">scenario =</span> <span class="st">&quot;Baseline&quot;</span>),</span>
-<span id="cb101-24"><a href="examples.html#cb101-24" tabindex="-1"></a>  intervention<span class="sc">$</span>metrics <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">scenario =</span> <span class="st">&quot;Intervention&quot;</span>)</span>
-<span id="cb101-25"><a href="examples.html#cb101-25" tabindex="-1"></a>)</span>
-<span id="cb101-26"><a href="examples.html#cb101-26" tabindex="-1"></a></span>
-<span id="cb101-27"><a href="examples.html#cb101-27" tabindex="-1"></a><span class="co"># Plot satisfaction trajectories</span></span>
-<span id="cb101-28"><a href="examples.html#cb101-28" tabindex="-1"></a><span class="fu">ggplot</span>(comparison, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> avg_satisfaction, </span>
-<span id="cb101-29"><a href="examples.html#cb101-29" tabindex="-1"></a>                       <span class="at">color =</span> scenario)) <span class="sc">+</span></span>
-<span id="cb101-30"><a href="examples.html#cb101-30" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
-<span id="cb101-31"><a href="examples.html#cb101-31" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Impact of Increased Interactions on Satisfaction&quot;</span>,</span>
-<span id="cb101-32"><a href="examples.html#cb101-32" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Average Satisfaction&quot;</span>) <span class="sc">+</span></span>
-<span id="cb101-33"><a href="examples.html#cb101-33" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb101-34"><a href="examples.html#cb101-34" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Baseline&quot;</span> <span class="ot">=</span> <span class="st">&quot;gray50&quot;</span>, </span>
-<span id="cb101-35"><a href="examples.html#cb101-35" tabindex="-1"></a>                               <span class="st">&quot;Intervention&quot;</span> <span class="ot">=</span> <span class="st">&quot;darkgreen&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="examples.html#cb104-1" tabindex="-1"></a><span class="co"># Baseline simulation</span></span>
+<span id="cb104-2"><a href="examples.html#cb104-2" tabindex="-1"></a>baseline <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
+<span id="cb104-3"><a href="examples.html#cb104-3" tabindex="-1"></a>  <span class="at">n_steps =</span> <span class="dv">104</span>,</span>
+<span id="cb104-4"><a href="examples.html#cb104-4" tabindex="-1"></a>  <span class="at">initial_size =</span> <span class="dv">100</span>,</span>
+<span id="cb104-5"><a href="examples.html#cb104-5" tabindex="-1"></a>  <span class="at">params =</span> <span class="fu">list</span>(<span class="at">tag =</span> <span class="st">&quot;baseline&quot;</span>),</span>
+<span id="cb104-6"><a href="examples.html#cb104-6" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb104-7"><a href="examples.html#cb104-7" tabindex="-1"></a>)</span>
+<span id="cb104-8"><a href="examples.html#cb104-8" tabindex="-1"></a></span>
+<span id="cb104-9"><a href="examples.html#cb104-9" tabindex="-1"></a><span class="co"># Intervention: Improve interaction quality</span></span>
+<span id="cb104-10"><a href="examples.html#cb104-10" tabindex="-1"></a>intervention <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
+<span id="cb104-11"><a href="examples.html#cb104-11" tabindex="-1"></a>  <span class="at">n_steps =</span> <span class="dv">104</span>,</span>
+<span id="cb104-12"><a href="examples.html#cb104-12" tabindex="-1"></a>  <span class="at">initial_size =</span> <span class="dv">100</span>,</span>
+<span id="cb104-13"><a href="examples.html#cb104-13" tabindex="-1"></a>  <span class="at">params =</span> <span class="fu">list</span>(</span>
+<span id="cb104-14"><a href="examples.html#cb104-14" tabindex="-1"></a>    <span class="at">n_interactions_per_step =</span> <span class="dv">15</span>,  <span class="co"># Triple interactions</span></span>
+<span id="cb104-15"><a href="examples.html#cb104-15" tabindex="-1"></a>    <span class="at">interaction_window =</span> <span class="dv">20</span>,       <span class="co"># Longer memory</span></span>
+<span id="cb104-16"><a href="examples.html#cb104-16" tabindex="-1"></a>    <span class="at">tag =</span> <span class="st">&quot;intervention&quot;</span></span>
+<span id="cb104-17"><a href="examples.html#cb104-17" tabindex="-1"></a>  ),</span>
+<span id="cb104-18"><a href="examples.html#cb104-18" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb104-19"><a href="examples.html#cb104-19" tabindex="-1"></a>)</span>
+<span id="cb104-20"><a href="examples.html#cb104-20" tabindex="-1"></a></span>
+<span id="cb104-21"><a href="examples.html#cb104-21" tabindex="-1"></a><span class="co"># Compare results</span></span>
+<span id="cb104-22"><a href="examples.html#cb104-22" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb104-23"><a href="examples.html#cb104-23" tabindex="-1"></a>  baseline<span class="sc">$</span>metrics <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">scenario =</span> <span class="st">&quot;Baseline&quot;</span>),</span>
+<span id="cb104-24"><a href="examples.html#cb104-24" tabindex="-1"></a>  intervention<span class="sc">$</span>metrics <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">scenario =</span> <span class="st">&quot;Intervention&quot;</span>)</span>
+<span id="cb104-25"><a href="examples.html#cb104-25" tabindex="-1"></a>)</span>
+<span id="cb104-26"><a href="examples.html#cb104-26" tabindex="-1"></a></span>
+<span id="cb104-27"><a href="examples.html#cb104-27" tabindex="-1"></a><span class="co"># Plot satisfaction trajectories</span></span>
+<span id="cb104-28"><a href="examples.html#cb104-28" tabindex="-1"></a><span class="fu">ggplot</span>(comparison, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> avg_satisfaction, </span>
+<span id="cb104-29"><a href="examples.html#cb104-29" tabindex="-1"></a>                       <span class="at">color =</span> scenario)) <span class="sc">+</span></span>
+<span id="cb104-30"><a href="examples.html#cb104-30" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb104-31"><a href="examples.html#cb104-31" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Impact of Increased Interactions on Satisfaction&quot;</span>,</span>
+<span id="cb104-32"><a href="examples.html#cb104-32" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Average Satisfaction&quot;</span>) <span class="sc">+</span></span>
+<span id="cb104-33"><a href="examples.html#cb104-33" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb104-34"><a href="examples.html#cb104-34" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Baseline&quot;</span> <span class="ot">=</span> <span class="st">&quot;gray50&quot;</span>, </span>
+<span id="cb104-35"><a href="examples.html#cb104-35" tabindex="-1"></a>                               <span class="st">&quot;Intervention&quot;</span> <span class="ot">=</span> <span class="st">&quot;darkgreen&quot;</span>))</span></code></pre></div>
 </div>
 </div>
 <div id="case-studies" class="section level2 hasAnchor" number="7.3">
@@ -631,215 +631,215 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="case-study-1-startup-growth-dynamics" class="section level3 hasAnchor" number="7.3.1">
 <h3><span class="header-section-number">7.3.1</span> Case Study 1: Startup Growth Dynamics<a href="examples.html#case-study-1-startup-growth-dynamics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Modeling a rapidly growing startup:</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="examples.html#cb102-1" tabindex="-1"></a><span class="co"># Startup parameters</span></span>
-<span id="cb102-2"><a href="examples.html#cb102-2" tabindex="-1"></a>startup_params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb102-3"><a href="examples.html#cb102-3" tabindex="-1"></a>  <span class="co"># Aggressive growth</span></span>
-<span id="cb102-4"><a href="examples.html#cb102-4" tabindex="-1"></a>  <span class="at">growth_rate =</span> <span class="fl">0.10</span>,</span>
-<span id="cb102-5"><a href="examples.html#cb102-5" tabindex="-1"></a>  <span class="at">hiring_frequency =</span> <span class="dv">2</span>,</span>
-<span id="cb102-6"><a href="examples.html#cb102-6" tabindex="-1"></a>  <span class="at">n_new_applicants =</span> <span class="dv">200</span>,</span>
-<span id="cb102-7"><a href="examples.html#cb102-7" tabindex="-1"></a>  </span>
-<span id="cb102-8"><a href="examples.html#cb102-8" tabindex="-1"></a>  <span class="co"># Culture-focused selection</span></span>
-<span id="cb102-9"><a href="examples.html#cb102-9" tabindex="-1"></a>  <span class="at">selection_criteria =</span> <span class="st">&quot;fit&quot;</span>,</span>
-<span id="cb102-10"><a href="examples.html#cb102-10" tabindex="-1"></a>  </span>
-<span id="cb102-11"><a href="examples.html#cb102-11" tabindex="-1"></a>  <span class="co"># High interaction environment</span></span>
-<span id="cb102-12"><a href="examples.html#cb102-12" tabindex="-1"></a>  <span class="at">n_interactions_per_step =</span> <span class="dv">20</span>,</span>
-<span id="cb102-13"><a href="examples.html#cb102-13" tabindex="-1"></a>  <span class="at">interaction_window =</span> <span class="dv">20</span>,</span>
-<span id="cb102-14"><a href="examples.html#cb102-14" tabindex="-1"></a>  </span>
-<span id="cb102-15"><a href="examples.html#cb102-15" tabindex="-1"></a>  <span class="co"># Moderate turnover tolerance</span></span>
-<span id="cb102-16"><a href="examples.html#cb102-16" tabindex="-1"></a>  <span class="at">turnover_threshold =</span> <span class="sc">-</span><span class="dv">5</span></span>
-<span id="cb102-17"><a href="examples.html#cb102-17" tabindex="-1"></a>)</span>
-<span id="cb102-18"><a href="examples.html#cb102-18" tabindex="-1"></a></span>
-<span id="cb102-19"><a href="examples.html#cb102-19" tabindex="-1"></a><span class="co"># Run 2-year simulation</span></span>
-<span id="cb102-20"><a href="examples.html#cb102-20" tabindex="-1"></a>startup_sim <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
-<span id="cb102-21"><a href="examples.html#cb102-21" tabindex="-1"></a>  <span class="at">n_steps =</span> <span class="dv">104</span>,</span>
-<span id="cb102-22"><a href="examples.html#cb102-22" tabindex="-1"></a>  <span class="at">initial_size =</span> <span class="dv">10</span>,  <span class="co"># Small founding team</span></span>
-<span id="cb102-23"><a href="examples.html#cb102-23" tabindex="-1"></a>  <span class="at">params =</span> startup_params</span>
-<span id="cb102-24"><a href="examples.html#cb102-24" tabindex="-1"></a>)</span>
-<span id="cb102-25"><a href="examples.html#cb102-25" tabindex="-1"></a></span>
-<span id="cb102-26"><a href="examples.html#cb102-26" tabindex="-1"></a><span class="co"># Analyze growth phases</span></span>
-<span id="cb102-27"><a href="examples.html#cb102-27" tabindex="-1"></a>growth_analysis <span class="ot">&lt;-</span> startup_sim<span class="sc">$</span>metrics <span class="sc">%&gt;%</span></span>
-<span id="cb102-28"><a href="examples.html#cb102-28" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb102-29"><a href="examples.html#cb102-29" tabindex="-1"></a>    <span class="at">phase =</span> <span class="fu">case_when</span>(</span>
-<span id="cb102-30"><a href="examples.html#cb102-30" tabindex="-1"></a>      time <span class="sc">&lt;=</span> <span class="dv">26</span> <span class="sc">~</span> <span class="st">&quot;Founding&quot;</span>,</span>
-<span id="cb102-31"><a href="examples.html#cb102-31" tabindex="-1"></a>      time <span class="sc">&lt;=</span> <span class="dv">52</span> <span class="sc">~</span> <span class="st">&quot;Early Growth&quot;</span>,</span>
-<span id="cb102-32"><a href="examples.html#cb102-32" tabindex="-1"></a>      time <span class="sc">&lt;=</span> <span class="dv">78</span> <span class="sc">~</span> <span class="st">&quot;Scaling&quot;</span>,</span>
-<span id="cb102-33"><a href="examples.html#cb102-33" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Maturing&quot;</span></span>
-<span id="cb102-34"><a href="examples.html#cb102-34" tabindex="-1"></a>    )</span>
-<span id="cb102-35"><a href="examples.html#cb102-35" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb102-36"><a href="examples.html#cb102-36" tabindex="-1"></a>  <span class="fu">group_by</span>(phase) <span class="sc">%&gt;%</span></span>
-<span id="cb102-37"><a href="examples.html#cb102-37" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb102-38"><a href="examples.html#cb102-38" tabindex="-1"></a>    <span class="at">start_size =</span> <span class="fu">first</span>(size),</span>
-<span id="cb102-39"><a href="examples.html#cb102-39" tabindex="-1"></a>    <span class="at">end_size =</span> <span class="fu">last</span>(size),</span>
-<span id="cb102-40"><a href="examples.html#cb102-40" tabindex="-1"></a>    <span class="at">growth_rate =</span> (end_size <span class="sc">-</span> start_size) <span class="sc">/</span> start_size,</span>
-<span id="cb102-41"><a href="examples.html#cb102-41" tabindex="-1"></a>    <span class="at">avg_satisfaction =</span> <span class="fu">mean</span>(avg_satisfaction),</span>
-<span id="cb102-42"><a href="examples.html#cb102-42" tabindex="-1"></a>    <span class="at">avg_diversity =</span> <span class="fu">mean</span>(identity_diversity)</span>
-<span id="cb102-43"><a href="examples.html#cb102-43" tabindex="-1"></a>  )</span>
-<span id="cb102-44"><a href="examples.html#cb102-44" tabindex="-1"></a></span>
-<span id="cb102-45"><a href="examples.html#cb102-45" tabindex="-1"></a><span class="fu">print</span>(growth_analysis)</span>
-<span id="cb102-46"><a href="examples.html#cb102-46" tabindex="-1"></a></span>
-<span id="cb102-47"><a href="examples.html#cb102-47" tabindex="-1"></a><span class="co"># Visualize growth trajectory</span></span>
-<span id="cb102-48"><a href="examples.html#cb102-48" tabindex="-1"></a><span class="fu">ggplot</span>(startup_sim<span class="sc">$</span>metrics, <span class="fu">aes</span>(<span class="at">x =</span> time)) <span class="sc">+</span></span>
-<span id="cb102-49"><a href="examples.html#cb102-49" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> size), <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb102-50"><a href="examples.html#cb102-50" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> avg_satisfaction <span class="sc">*</span> <span class="dv">100</span>), </span>
-<span id="cb102-51"><a href="examples.html#cb102-51" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">&quot;green&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
-<span id="cb102-52"><a href="examples.html#cb102-52" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb102-53"><a href="examples.html#cb102-53" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;Organization Size&quot;</span>,</span>
-<span id="cb102-54"><a href="examples.html#cb102-54" tabindex="-1"></a>    <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span>.<span class="sc">/</span><span class="dv">100</span>, <span class="at">name =</span> <span class="st">&quot;Avg Satisfaction&quot;</span>)</span>
-<span id="cb102-55"><a href="examples.html#cb102-55" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb102-56"><a href="examples.html#cb102-56" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Startup Growth and Satisfaction&quot;</span>,</span>
-<span id="cb102-57"><a href="examples.html#cb102-57" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Week&quot;</span>) <span class="sc">+</span></span>
-<span id="cb102-58"><a href="examples.html#cb102-58" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="examples.html#cb105-1" tabindex="-1"></a><span class="co"># Startup parameters</span></span>
+<span id="cb105-2"><a href="examples.html#cb105-2" tabindex="-1"></a>startup_params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb105-3"><a href="examples.html#cb105-3" tabindex="-1"></a>  <span class="co"># Aggressive growth</span></span>
+<span id="cb105-4"><a href="examples.html#cb105-4" tabindex="-1"></a>  <span class="at">growth_rate =</span> <span class="fl">0.10</span>,</span>
+<span id="cb105-5"><a href="examples.html#cb105-5" tabindex="-1"></a>  <span class="at">hiring_frequency =</span> <span class="dv">2</span>,</span>
+<span id="cb105-6"><a href="examples.html#cb105-6" tabindex="-1"></a>  <span class="at">n_new_applicants =</span> <span class="dv">200</span>,</span>
+<span id="cb105-7"><a href="examples.html#cb105-7" tabindex="-1"></a>  </span>
+<span id="cb105-8"><a href="examples.html#cb105-8" tabindex="-1"></a>  <span class="co"># Culture-focused selection</span></span>
+<span id="cb105-9"><a href="examples.html#cb105-9" tabindex="-1"></a>  <span class="at">selection_criteria =</span> <span class="st">&quot;fit&quot;</span>,</span>
+<span id="cb105-10"><a href="examples.html#cb105-10" tabindex="-1"></a>  </span>
+<span id="cb105-11"><a href="examples.html#cb105-11" tabindex="-1"></a>  <span class="co"># High interaction environment</span></span>
+<span id="cb105-12"><a href="examples.html#cb105-12" tabindex="-1"></a>  <span class="at">n_interactions_per_step =</span> <span class="dv">20</span>,</span>
+<span id="cb105-13"><a href="examples.html#cb105-13" tabindex="-1"></a>  <span class="at">interaction_window =</span> <span class="dv">20</span>,</span>
+<span id="cb105-14"><a href="examples.html#cb105-14" tabindex="-1"></a>  </span>
+<span id="cb105-15"><a href="examples.html#cb105-15" tabindex="-1"></a>  <span class="co"># Moderate turnover tolerance</span></span>
+<span id="cb105-16"><a href="examples.html#cb105-16" tabindex="-1"></a>  <span class="at">turnover_threshold =</span> <span class="sc">-</span><span class="dv">5</span></span>
+<span id="cb105-17"><a href="examples.html#cb105-17" tabindex="-1"></a>)</span>
+<span id="cb105-18"><a href="examples.html#cb105-18" tabindex="-1"></a></span>
+<span id="cb105-19"><a href="examples.html#cb105-19" tabindex="-1"></a><span class="co"># Run 2-year simulation</span></span>
+<span id="cb105-20"><a href="examples.html#cb105-20" tabindex="-1"></a>startup_sim <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
+<span id="cb105-21"><a href="examples.html#cb105-21" tabindex="-1"></a>  <span class="at">n_steps =</span> <span class="dv">104</span>,</span>
+<span id="cb105-22"><a href="examples.html#cb105-22" tabindex="-1"></a>  <span class="at">initial_size =</span> <span class="dv">10</span>,  <span class="co"># Small founding team</span></span>
+<span id="cb105-23"><a href="examples.html#cb105-23" tabindex="-1"></a>  <span class="at">params =</span> startup_params</span>
+<span id="cb105-24"><a href="examples.html#cb105-24" tabindex="-1"></a>)</span>
+<span id="cb105-25"><a href="examples.html#cb105-25" tabindex="-1"></a></span>
+<span id="cb105-26"><a href="examples.html#cb105-26" tabindex="-1"></a><span class="co"># Analyze growth phases</span></span>
+<span id="cb105-27"><a href="examples.html#cb105-27" tabindex="-1"></a>growth_analysis <span class="ot">&lt;-</span> startup_sim<span class="sc">$</span>metrics <span class="sc">%&gt;%</span></span>
+<span id="cb105-28"><a href="examples.html#cb105-28" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb105-29"><a href="examples.html#cb105-29" tabindex="-1"></a>    <span class="at">phase =</span> <span class="fu">case_when</span>(</span>
+<span id="cb105-30"><a href="examples.html#cb105-30" tabindex="-1"></a>      time <span class="sc">&lt;=</span> <span class="dv">26</span> <span class="sc">~</span> <span class="st">&quot;Founding&quot;</span>,</span>
+<span id="cb105-31"><a href="examples.html#cb105-31" tabindex="-1"></a>      time <span class="sc">&lt;=</span> <span class="dv">52</span> <span class="sc">~</span> <span class="st">&quot;Early Growth&quot;</span>,</span>
+<span id="cb105-32"><a href="examples.html#cb105-32" tabindex="-1"></a>      time <span class="sc">&lt;=</span> <span class="dv">78</span> <span class="sc">~</span> <span class="st">&quot;Scaling&quot;</span>,</span>
+<span id="cb105-33"><a href="examples.html#cb105-33" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Maturing&quot;</span></span>
+<span id="cb105-34"><a href="examples.html#cb105-34" tabindex="-1"></a>    )</span>
+<span id="cb105-35"><a href="examples.html#cb105-35" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb105-36"><a href="examples.html#cb105-36" tabindex="-1"></a>  <span class="fu">group_by</span>(phase) <span class="sc">%&gt;%</span></span>
+<span id="cb105-37"><a href="examples.html#cb105-37" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb105-38"><a href="examples.html#cb105-38" tabindex="-1"></a>    <span class="at">start_size =</span> <span class="fu">first</span>(size),</span>
+<span id="cb105-39"><a href="examples.html#cb105-39" tabindex="-1"></a>    <span class="at">end_size =</span> <span class="fu">last</span>(size),</span>
+<span id="cb105-40"><a href="examples.html#cb105-40" tabindex="-1"></a>    <span class="at">growth_rate =</span> (end_size <span class="sc">-</span> start_size) <span class="sc">/</span> start_size,</span>
+<span id="cb105-41"><a href="examples.html#cb105-41" tabindex="-1"></a>    <span class="at">avg_satisfaction =</span> <span class="fu">mean</span>(avg_satisfaction),</span>
+<span id="cb105-42"><a href="examples.html#cb105-42" tabindex="-1"></a>    <span class="at">avg_diversity =</span> <span class="fu">mean</span>(identity_diversity)</span>
+<span id="cb105-43"><a href="examples.html#cb105-43" tabindex="-1"></a>  )</span>
+<span id="cb105-44"><a href="examples.html#cb105-44" tabindex="-1"></a></span>
+<span id="cb105-45"><a href="examples.html#cb105-45" tabindex="-1"></a><span class="fu">print</span>(growth_analysis)</span>
+<span id="cb105-46"><a href="examples.html#cb105-46" tabindex="-1"></a></span>
+<span id="cb105-47"><a href="examples.html#cb105-47" tabindex="-1"></a><span class="co"># Visualize growth trajectory</span></span>
+<span id="cb105-48"><a href="examples.html#cb105-48" tabindex="-1"></a><span class="fu">ggplot</span>(startup_sim<span class="sc">$</span>metrics, <span class="fu">aes</span>(<span class="at">x =</span> time)) <span class="sc">+</span></span>
+<span id="cb105-49"><a href="examples.html#cb105-49" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> size), <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb105-50"><a href="examples.html#cb105-50" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> avg_satisfaction <span class="sc">*</span> <span class="dv">100</span>), </span>
+<span id="cb105-51"><a href="examples.html#cb105-51" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">&quot;green&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb105-52"><a href="examples.html#cb105-52" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb105-53"><a href="examples.html#cb105-53" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;Organization Size&quot;</span>,</span>
+<span id="cb105-54"><a href="examples.html#cb105-54" tabindex="-1"></a>    <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span>.<span class="sc">/</span><span class="dv">100</span>, <span class="at">name =</span> <span class="st">&quot;Avg Satisfaction&quot;</span>)</span>
+<span id="cb105-55"><a href="examples.html#cb105-55" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb105-56"><a href="examples.html#cb105-56" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Startup Growth and Satisfaction&quot;</span>,</span>
+<span id="cb105-57"><a href="examples.html#cb105-57" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Week&quot;</span>) <span class="sc">+</span></span>
+<span id="cb105-58"><a href="examples.html#cb105-58" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 <div id="case-study-2-merger-integration" class="section level3 hasAnchor" number="7.3.2">
 <h3><span class="header-section-number">7.3.2</span> Case Study 2: Merger Integration<a href="examples.html#case-study-2-merger-integration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Simulating the integration of two organizational cultures:</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="examples.html#cb103-1" tabindex="-1"></a><span class="co"># Create two distinct organizations</span></span>
-<span id="cb103-2"><a href="examples.html#cb103-2" tabindex="-1"></a>org_a <span class="ot">&lt;-</span> <span class="fu">create_organization</span>(</span>
-<span id="cb103-3"><a href="examples.html#cb103-3" tabindex="-1"></a>  <span class="at">n_agents =</span> <span class="dv">80</span>,</span>
-<span id="cb103-4"><a href="examples.html#cb103-4" tabindex="-1"></a>  <span class="at">identity_categories =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;B&quot;</span>)  <span class="co"># A-dominant</span></span>
-<span id="cb103-5"><a href="examples.html#cb103-5" tabindex="-1"></a>)</span>
-<span id="cb103-6"><a href="examples.html#cb103-6" tabindex="-1"></a></span>
-<span id="cb103-7"><a href="examples.html#cb103-7" tabindex="-1"></a>org_b <span class="ot">&lt;-</span> <span class="fu">create_organization</span>(</span>
-<span id="cb103-8"><a href="examples.html#cb103-8" tabindex="-1"></a>  <span class="at">n_agents =</span> <span class="dv">60</span>,</span>
-<span id="cb103-9"><a href="examples.html#cb103-9" tabindex="-1"></a>  <span class="at">identity_categories =</span> <span class="fu">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;E&quot;</span>)  <span class="co"># Different culture</span></span>
-<span id="cb103-10"><a href="examples.html#cb103-10" tabindex="-1"></a>)</span>
-<span id="cb103-11"><a href="examples.html#cb103-11" tabindex="-1"></a></span>
-<span id="cb103-12"><a href="examples.html#cb103-12" tabindex="-1"></a><span class="co"># Merge organizations</span></span>
-<span id="cb103-13"><a href="examples.html#cb103-13" tabindex="-1"></a>merged_org <span class="ot">&lt;-</span> <span class="fu">rbind</span>(org_a, org_b)</span>
-<span id="cb103-14"><a href="examples.html#cb103-14" tabindex="-1"></a>merged_org<span class="sc">$</span>agent_id <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;merged_&quot;</span>, <span class="fu">seq_len</span>(<span class="fu">nrow</span>(merged_org)))</span>
-<span id="cb103-15"><a href="examples.html#cb103-15" tabindex="-1"></a></span>
-<span id="cb103-16"><a href="examples.html#cb103-16" tabindex="-1"></a><span class="co"># Run post-merger simulation</span></span>
-<span id="cb103-17"><a href="examples.html#cb103-17" tabindex="-1"></a>merger_params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb103-18"><a href="examples.html#cb103-18" tabindex="-1"></a>  <span class="at">growth_rate =</span> <span class="dv">0</span>,  <span class="co"># No hiring during integration</span></span>
-<span id="cb103-19"><a href="examples.html#cb103-19" tabindex="-1"></a>  <span class="at">n_interactions_per_step =</span> <span class="dv">15</span>,  <span class="co"># Encourage mixing</span></span>
-<span id="cb103-20"><a href="examples.html#cb103-20" tabindex="-1"></a>  <span class="at">turnover_threshold =</span> <span class="sc">-</span><span class="dv">8</span>  <span class="co"># Some tolerance for dissatisfaction</span></span>
-<span id="cb103-21"><a href="examples.html#cb103-21" tabindex="-1"></a>)</span>
-<span id="cb103-22"><a href="examples.html#cb103-22" tabindex="-1"></a></span>
-<span id="cb103-23"><a href="examples.html#cb103-23" tabindex="-1"></a><span class="co"># Initialize properly</span></span>
-<span id="cb103-24"><a href="examples.html#cb103-24" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;simulation/engine.R&quot;</span>)</span>
-<span id="cb103-25"><a href="examples.html#cb103-25" tabindex="-1"></a>merger_sim <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb103-26"><a href="examples.html#cb103-26" tabindex="-1"></a>  <span class="at">final_organization =</span> merged_org,</span>
-<span id="cb103-27"><a href="examples.html#cb103-27" tabindex="-1"></a>  <span class="at">metrics =</span> <span class="fu">data.table</span>(),</span>
-<span id="cb103-28"><a href="examples.html#cb103-28" tabindex="-1"></a>  <span class="at">parameters =</span> merger_params</span>
-<span id="cb103-29"><a href="examples.html#cb103-29" tabindex="-1"></a>)</span>
-<span id="cb103-30"><a href="examples.html#cb103-30" tabindex="-1"></a></span>
-<span id="cb103-31"><a href="examples.html#cb103-31" tabindex="-1"></a><span class="co"># Track cultural integration</span></span>
-<span id="cb103-32"><a href="examples.html#cb103-32" tabindex="-1"></a>integration_metrics <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
-<span id="cb103-33"><a href="examples.html#cb103-33" tabindex="-1"></a></span>
-<span id="cb103-34"><a href="examples.html#cb103-34" tabindex="-1"></a><span class="cf">for</span> (month <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>) {</span>
-<span id="cb103-35"><a href="examples.html#cb103-35" tabindex="-1"></a>  <span class="co"># Run one month</span></span>
-<span id="cb103-36"><a href="examples.html#cb103-36" tabindex="-1"></a>  month_results <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
-<span id="cb103-37"><a href="examples.html#cb103-37" tabindex="-1"></a>    <span class="at">n_steps =</span> <span class="dv">4</span>,</span>
-<span id="cb103-38"><a href="examples.html#cb103-38" tabindex="-1"></a>    <span class="at">initial_size =</span> <span class="fu">nrow</span>(merged_org),</span>
-<span id="cb103-39"><a href="examples.html#cb103-39" tabindex="-1"></a>    <span class="at">params =</span> merger_params,</span>
-<span id="cb103-40"><a href="examples.html#cb103-40" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
-<span id="cb103-41"><a href="examples.html#cb103-41" tabindex="-1"></a>  )</span>
-<span id="cb103-42"><a href="examples.html#cb103-42" tabindex="-1"></a>  </span>
-<span id="cb103-43"><a href="examples.html#cb103-43" tabindex="-1"></a>  <span class="co"># Calculate integration index</span></span>
-<span id="cb103-44"><a href="examples.html#cb103-44" tabindex="-1"></a>  interactions <span class="ot">&lt;-</span> <span class="fu">initialize_interactions</span>(month_results<span class="sc">$</span>final_organization)</span>
-<span id="cb103-45"><a href="examples.html#cb103-45" tabindex="-1"></a>  </span>
-<span id="cb103-46"><a href="examples.html#cb103-46" tabindex="-1"></a>  <span class="co"># Store metrics</span></span>
-<span id="cb103-47"><a href="examples.html#cb103-47" tabindex="-1"></a>  integration_metrics <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
-<span id="cb103-48"><a href="examples.html#cb103-48" tabindex="-1"></a>    integration_metrics,</span>
-<span id="cb103-49"><a href="examples.html#cb103-49" tabindex="-1"></a>    <span class="fu">data.frame</span>(</span>
-<span id="cb103-50"><a href="examples.html#cb103-50" tabindex="-1"></a>      <span class="at">month =</span> month,</span>
-<span id="cb103-51"><a href="examples.html#cb103-51" tabindex="-1"></a>      <span class="at">size =</span> <span class="fu">get_organization_size</span>(month_results<span class="sc">$</span>final_organization),</span>
-<span id="cb103-52"><a href="examples.html#cb103-52" tabindex="-1"></a>      <span class="at">diversity =</span> <span class="fu">calculate_identity_diversity</span>(month_results<span class="sc">$</span>final_organization),</span>
-<span id="cb103-53"><a href="examples.html#cb103-53" tabindex="-1"></a>      <span class="at">satisfaction =</span> <span class="fu">calculate_average_satisfaction</span>(month_results<span class="sc">$</span>final_organization)</span>
-<span id="cb103-54"><a href="examples.html#cb103-54" tabindex="-1"></a>    )</span>
-<span id="cb103-55"><a href="examples.html#cb103-55" tabindex="-1"></a>  )</span>
-<span id="cb103-56"><a href="examples.html#cb103-56" tabindex="-1"></a>  </span>
-<span id="cb103-57"><a href="examples.html#cb103-57" tabindex="-1"></a>  <span class="co"># Update for next iteration</span></span>
-<span id="cb103-58"><a href="examples.html#cb103-58" tabindex="-1"></a>  merged_org <span class="ot">&lt;-</span> month_results<span class="sc">$</span>final_organization</span>
-<span id="cb103-59"><a href="examples.html#cb103-59" tabindex="-1"></a>}</span>
-<span id="cb103-60"><a href="examples.html#cb103-60" tabindex="-1"></a></span>
-<span id="cb103-61"><a href="examples.html#cb103-61" tabindex="-1"></a><span class="co"># Plot integration progress</span></span>
-<span id="cb103-62"><a href="examples.html#cb103-62" tabindex="-1"></a><span class="fu">ggplot</span>(integration_metrics, <span class="fu">aes</span>(<span class="at">x =</span> month)) <span class="sc">+</span></span>
-<span id="cb103-63"><a href="examples.html#cb103-63" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> satisfaction), <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb103-64"><a href="examples.html#cb103-64" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> diversity), <span class="at">color =</span> <span class="st">&quot;green&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb103-65"><a href="examples.html#cb103-65" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> satisfaction), <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
-<span id="cb103-66"><a href="examples.html#cb103-66" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> diversity), <span class="at">color =</span> <span class="st">&quot;green&quot;</span>) <span class="sc">+</span></span>
-<span id="cb103-67"><a href="examples.html#cb103-67" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Post-Merger Integration Metrics&quot;</span>,</span>
-<span id="cb103-68"><a href="examples.html#cb103-68" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Months Post-Merger&quot;</span>,</span>
-<span id="cb103-69"><a href="examples.html#cb103-69" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Metric Value&quot;</span>) <span class="sc">+</span></span>
-<span id="cb103-70"><a href="examples.html#cb103-70" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="examples.html#cb106-1" tabindex="-1"></a><span class="co"># Create two distinct organizations</span></span>
+<span id="cb106-2"><a href="examples.html#cb106-2" tabindex="-1"></a>org_a <span class="ot">&lt;-</span> <span class="fu">create_organization</span>(</span>
+<span id="cb106-3"><a href="examples.html#cb106-3" tabindex="-1"></a>  <span class="at">n_agents =</span> <span class="dv">80</span>,</span>
+<span id="cb106-4"><a href="examples.html#cb106-4" tabindex="-1"></a>  <span class="at">identity_categories =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;B&quot;</span>)  <span class="co"># A-dominant</span></span>
+<span id="cb106-5"><a href="examples.html#cb106-5" tabindex="-1"></a>)</span>
+<span id="cb106-6"><a href="examples.html#cb106-6" tabindex="-1"></a></span>
+<span id="cb106-7"><a href="examples.html#cb106-7" tabindex="-1"></a>org_b <span class="ot">&lt;-</span> <span class="fu">create_organization</span>(</span>
+<span id="cb106-8"><a href="examples.html#cb106-8" tabindex="-1"></a>  <span class="at">n_agents =</span> <span class="dv">60</span>,</span>
+<span id="cb106-9"><a href="examples.html#cb106-9" tabindex="-1"></a>  <span class="at">identity_categories =</span> <span class="fu">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;E&quot;</span>)  <span class="co"># Different culture</span></span>
+<span id="cb106-10"><a href="examples.html#cb106-10" tabindex="-1"></a>)</span>
+<span id="cb106-11"><a href="examples.html#cb106-11" tabindex="-1"></a></span>
+<span id="cb106-12"><a href="examples.html#cb106-12" tabindex="-1"></a><span class="co"># Merge organizations</span></span>
+<span id="cb106-13"><a href="examples.html#cb106-13" tabindex="-1"></a>merged_org <span class="ot">&lt;-</span> <span class="fu">rbind</span>(org_a, org_b)</span>
+<span id="cb106-14"><a href="examples.html#cb106-14" tabindex="-1"></a>merged_org<span class="sc">$</span>agent_id <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;merged_&quot;</span>, <span class="fu">seq_len</span>(<span class="fu">nrow</span>(merged_org)))</span>
+<span id="cb106-15"><a href="examples.html#cb106-15" tabindex="-1"></a></span>
+<span id="cb106-16"><a href="examples.html#cb106-16" tabindex="-1"></a><span class="co"># Run post-merger simulation</span></span>
+<span id="cb106-17"><a href="examples.html#cb106-17" tabindex="-1"></a>merger_params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb106-18"><a href="examples.html#cb106-18" tabindex="-1"></a>  <span class="at">growth_rate =</span> <span class="dv">0</span>,  <span class="co"># No hiring during integration</span></span>
+<span id="cb106-19"><a href="examples.html#cb106-19" tabindex="-1"></a>  <span class="at">n_interactions_per_step =</span> <span class="dv">15</span>,  <span class="co"># Encourage mixing</span></span>
+<span id="cb106-20"><a href="examples.html#cb106-20" tabindex="-1"></a>  <span class="at">turnover_threshold =</span> <span class="sc">-</span><span class="dv">8</span>  <span class="co"># Some tolerance for dissatisfaction</span></span>
+<span id="cb106-21"><a href="examples.html#cb106-21" tabindex="-1"></a>)</span>
+<span id="cb106-22"><a href="examples.html#cb106-22" tabindex="-1"></a></span>
+<span id="cb106-23"><a href="examples.html#cb106-23" tabindex="-1"></a><span class="co"># Initialize properly</span></span>
+<span id="cb106-24"><a href="examples.html#cb106-24" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;simulation/engine.R&quot;</span>)</span>
+<span id="cb106-25"><a href="examples.html#cb106-25" tabindex="-1"></a>merger_sim <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb106-26"><a href="examples.html#cb106-26" tabindex="-1"></a>  <span class="at">final_organization =</span> merged_org,</span>
+<span id="cb106-27"><a href="examples.html#cb106-27" tabindex="-1"></a>  <span class="at">metrics =</span> <span class="fu">data.table</span>(),</span>
+<span id="cb106-28"><a href="examples.html#cb106-28" tabindex="-1"></a>  <span class="at">parameters =</span> merger_params</span>
+<span id="cb106-29"><a href="examples.html#cb106-29" tabindex="-1"></a>)</span>
+<span id="cb106-30"><a href="examples.html#cb106-30" tabindex="-1"></a></span>
+<span id="cb106-31"><a href="examples.html#cb106-31" tabindex="-1"></a><span class="co"># Track cultural integration</span></span>
+<span id="cb106-32"><a href="examples.html#cb106-32" tabindex="-1"></a>integration_metrics <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb106-33"><a href="examples.html#cb106-33" tabindex="-1"></a></span>
+<span id="cb106-34"><a href="examples.html#cb106-34" tabindex="-1"></a><span class="cf">for</span> (month <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>) {</span>
+<span id="cb106-35"><a href="examples.html#cb106-35" tabindex="-1"></a>  <span class="co"># Run one month</span></span>
+<span id="cb106-36"><a href="examples.html#cb106-36" tabindex="-1"></a>  month_results <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
+<span id="cb106-37"><a href="examples.html#cb106-37" tabindex="-1"></a>    <span class="at">n_steps =</span> <span class="dv">4</span>,</span>
+<span id="cb106-38"><a href="examples.html#cb106-38" tabindex="-1"></a>    <span class="at">initial_size =</span> <span class="fu">nrow</span>(merged_org),</span>
+<span id="cb106-39"><a href="examples.html#cb106-39" tabindex="-1"></a>    <span class="at">params =</span> merger_params,</span>
+<span id="cb106-40"><a href="examples.html#cb106-40" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb106-41"><a href="examples.html#cb106-41" tabindex="-1"></a>  )</span>
+<span id="cb106-42"><a href="examples.html#cb106-42" tabindex="-1"></a>  </span>
+<span id="cb106-43"><a href="examples.html#cb106-43" tabindex="-1"></a>  <span class="co"># Calculate integration index</span></span>
+<span id="cb106-44"><a href="examples.html#cb106-44" tabindex="-1"></a>  interactions <span class="ot">&lt;-</span> <span class="fu">initialize_interactions</span>(month_results<span class="sc">$</span>final_organization)</span>
+<span id="cb106-45"><a href="examples.html#cb106-45" tabindex="-1"></a>  </span>
+<span id="cb106-46"><a href="examples.html#cb106-46" tabindex="-1"></a>  <span class="co"># Store metrics</span></span>
+<span id="cb106-47"><a href="examples.html#cb106-47" tabindex="-1"></a>  integration_metrics <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb106-48"><a href="examples.html#cb106-48" tabindex="-1"></a>    integration_metrics,</span>
+<span id="cb106-49"><a href="examples.html#cb106-49" tabindex="-1"></a>    <span class="fu">data.frame</span>(</span>
+<span id="cb106-50"><a href="examples.html#cb106-50" tabindex="-1"></a>      <span class="at">month =</span> month,</span>
+<span id="cb106-51"><a href="examples.html#cb106-51" tabindex="-1"></a>      <span class="at">size =</span> <span class="fu">get_organization_size</span>(month_results<span class="sc">$</span>final_organization),</span>
+<span id="cb106-52"><a href="examples.html#cb106-52" tabindex="-1"></a>      <span class="at">diversity =</span> <span class="fu">calculate_identity_diversity</span>(month_results<span class="sc">$</span>final_organization),</span>
+<span id="cb106-53"><a href="examples.html#cb106-53" tabindex="-1"></a>      <span class="at">satisfaction =</span> <span class="fu">calculate_average_satisfaction</span>(month_results<span class="sc">$</span>final_organization)</span>
+<span id="cb106-54"><a href="examples.html#cb106-54" tabindex="-1"></a>    )</span>
+<span id="cb106-55"><a href="examples.html#cb106-55" tabindex="-1"></a>  )</span>
+<span id="cb106-56"><a href="examples.html#cb106-56" tabindex="-1"></a>  </span>
+<span id="cb106-57"><a href="examples.html#cb106-57" tabindex="-1"></a>  <span class="co"># Update for next iteration</span></span>
+<span id="cb106-58"><a href="examples.html#cb106-58" tabindex="-1"></a>  merged_org <span class="ot">&lt;-</span> month_results<span class="sc">$</span>final_organization</span>
+<span id="cb106-59"><a href="examples.html#cb106-59" tabindex="-1"></a>}</span>
+<span id="cb106-60"><a href="examples.html#cb106-60" tabindex="-1"></a></span>
+<span id="cb106-61"><a href="examples.html#cb106-61" tabindex="-1"></a><span class="co"># Plot integration progress</span></span>
+<span id="cb106-62"><a href="examples.html#cb106-62" tabindex="-1"></a><span class="fu">ggplot</span>(integration_metrics, <span class="fu">aes</span>(<span class="at">x =</span> month)) <span class="sc">+</span></span>
+<span id="cb106-63"><a href="examples.html#cb106-63" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> satisfaction), <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb106-64"><a href="examples.html#cb106-64" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> diversity), <span class="at">color =</span> <span class="st">&quot;green&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb106-65"><a href="examples.html#cb106-65" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> satisfaction), <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb106-66"><a href="examples.html#cb106-66" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> diversity), <span class="at">color =</span> <span class="st">&quot;green&quot;</span>) <span class="sc">+</span></span>
+<span id="cb106-67"><a href="examples.html#cb106-67" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Post-Merger Integration Metrics&quot;</span>,</span>
+<span id="cb106-68"><a href="examples.html#cb106-68" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Months Post-Merger&quot;</span>,</span>
+<span id="cb106-69"><a href="examples.html#cb106-69" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Metric Value&quot;</span>) <span class="sc">+</span></span>
+<span id="cb106-70"><a href="examples.html#cb106-70" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 <div id="case-study-3-remote-work-transition" class="section level3 hasAnchor" number="7.3.3">
 <h3><span class="header-section-number">7.3.3</span> Case Study 3: Remote Work Transition<a href="examples.html#case-study-3-remote-work-transition" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Modeling the impact of remote work on organizational dynamics:</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="examples.html#cb104-1" tabindex="-1"></a><span class="co"># Pre-remote baseline</span></span>
-<span id="cb104-2"><a href="examples.html#cb104-2" tabindex="-1"></a>pre_remote <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
-<span id="cb104-3"><a href="examples.html#cb104-3" tabindex="-1"></a>  <span class="at">n_steps =</span> <span class="dv">52</span>,</span>
-<span id="cb104-4"><a href="examples.html#cb104-4" tabindex="-1"></a>  <span class="at">initial_size =</span> <span class="dv">200</span>,</span>
-<span id="cb104-5"><a href="examples.html#cb104-5" tabindex="-1"></a>  <span class="at">params =</span> <span class="fu">list</span>(</span>
-<span id="cb104-6"><a href="examples.html#cb104-6" tabindex="-1"></a>    <span class="at">n_interactions_per_step =</span> <span class="dv">10</span>,</span>
-<span id="cb104-7"><a href="examples.html#cb104-7" tabindex="-1"></a>    <span class="at">interaction_window =</span> <span class="dv">10</span></span>
-<span id="cb104-8"><a href="examples.html#cb104-8" tabindex="-1"></a>  ),</span>
-<span id="cb104-9"><a href="examples.html#cb104-9" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
-<span id="cb104-10"><a href="examples.html#cb104-10" tabindex="-1"></a>)</span>
-<span id="cb104-11"><a href="examples.html#cb104-11" tabindex="-1"></a></span>
-<span id="cb104-12"><a href="examples.html#cb104-12" tabindex="-1"></a><span class="co"># Remote work scenario (reduced interactions)</span></span>
-<span id="cb104-13"><a href="examples.html#cb104-13" tabindex="-1"></a>remote_params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb104-14"><a href="examples.html#cb104-14" tabindex="-1"></a>  <span class="at">n_interactions_per_step =</span> <span class="dv">3</span>,  <span class="co"># Fewer spontaneous interactions</span></span>
-<span id="cb104-15"><a href="examples.html#cb104-15" tabindex="-1"></a>  <span class="at">interaction_window =</span> <span class="dv">15</span>,      <span class="co"># But longer-lasting connections</span></span>
-<span id="cb104-16"><a href="examples.html#cb104-16" tabindex="-1"></a>  <span class="at">turnover_threshold =</span> <span class="sc">-</span><span class="dv">7</span>,      <span class="co"># Slightly more tolerance</span></span>
-<span id="cb104-17"><a href="examples.html#cb104-17" tabindex="-1"></a>  <span class="at">growth_rate =</span> <span class="fl">0.005</span>          <span class="co"># Slower growth</span></span>
-<span id="cb104-18"><a href="examples.html#cb104-18" tabindex="-1"></a>)</span>
-<span id="cb104-19"><a href="examples.html#cb104-19" tabindex="-1"></a></span>
-<span id="cb104-20"><a href="examples.html#cb104-20" tabindex="-1"></a>remote_sim <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
-<span id="cb104-21"><a href="examples.html#cb104-21" tabindex="-1"></a>  <span class="at">n_steps =</span> <span class="dv">52</span>,</span>
-<span id="cb104-22"><a href="examples.html#cb104-22" tabindex="-1"></a>  <span class="at">initial_size =</span> <span class="dv">200</span>,</span>
-<span id="cb104-23"><a href="examples.html#cb104-23" tabindex="-1"></a>  <span class="at">params =</span> remote_params,</span>
-<span id="cb104-24"><a href="examples.html#cb104-24" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
-<span id="cb104-25"><a href="examples.html#cb104-25" tabindex="-1"></a>)</span>
-<span id="cb104-26"><a href="examples.html#cb104-26" tabindex="-1"></a></span>
-<span id="cb104-27"><a href="examples.html#cb104-27" tabindex="-1"></a><span class="co"># Hybrid scenario</span></span>
-<span id="cb104-28"><a href="examples.html#cb104-28" tabindex="-1"></a>hybrid_params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb104-29"><a href="examples.html#cb104-29" tabindex="-1"></a>  <span class="at">n_interactions_per_step =</span> <span class="dv">6</span>,  <span class="co"># Moderate interactions</span></span>
-<span id="cb104-30"><a href="examples.html#cb104-30" tabindex="-1"></a>  <span class="at">interaction_window =</span> <span class="dv">12</span>,</span>
-<span id="cb104-31"><a href="examples.html#cb104-31" tabindex="-1"></a>  <span class="at">turnover_threshold =</span> <span class="sc">-</span><span class="dv">8</span>,</span>
-<span id="cb104-32"><a href="examples.html#cb104-32" tabindex="-1"></a>  <span class="at">growth_rate =</span> <span class="fl">0.015</span></span>
-<span id="cb104-33"><a href="examples.html#cb104-33" tabindex="-1"></a>)</span>
-<span id="cb104-34"><a href="examples.html#cb104-34" tabindex="-1"></a></span>
-<span id="cb104-35"><a href="examples.html#cb104-35" tabindex="-1"></a>hybrid_sim <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
-<span id="cb104-36"><a href="examples.html#cb104-36" tabindex="-1"></a>  <span class="at">n_steps =</span> <span class="dv">52</span>,</span>
-<span id="cb104-37"><a href="examples.html#cb104-37" tabindex="-1"></a>  <span class="at">initial_size =</span> <span class="dv">200</span>,</span>
-<span id="cb104-38"><a href="examples.html#cb104-38" tabindex="-1"></a>  <span class="at">params =</span> hybrid_params,</span>
-<span id="cb104-39"><a href="examples.html#cb104-39" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
-<span id="cb104-40"><a href="examples.html#cb104-40" tabindex="-1"></a>)</span>
-<span id="cb104-41"><a href="examples.html#cb104-41" tabindex="-1"></a></span>
-<span id="cb104-42"><a href="examples.html#cb104-42" tabindex="-1"></a><span class="co"># Compare scenarios</span></span>
-<span id="cb104-43"><a href="examples.html#cb104-43" tabindex="-1"></a>scenarios <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb104-44"><a href="examples.html#cb104-44" tabindex="-1"></a>  pre_remote<span class="sc">$</span>metrics <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">scenario =</span> <span class="st">&quot;Office&quot;</span>),</span>
-<span id="cb104-45"><a href="examples.html#cb104-45" tabindex="-1"></a>  remote_sim<span class="sc">$</span>metrics <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">scenario =</span> <span class="st">&quot;Remote&quot;</span>),</span>
-<span id="cb104-46"><a href="examples.html#cb104-46" tabindex="-1"></a>  hybrid_sim<span class="sc">$</span>metrics <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">scenario =</span> <span class="st">&quot;Hybrid&quot;</span>)</span>
-<span id="cb104-47"><a href="examples.html#cb104-47" tabindex="-1"></a>)</span>
-<span id="cb104-48"><a href="examples.html#cb104-48" tabindex="-1"></a></span>
-<span id="cb104-49"><a href="examples.html#cb104-49" tabindex="-1"></a><span class="co"># Multi-panel comparison</span></span>
-<span id="cb104-50"><a href="examples.html#cb104-50" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
-<span id="cb104-51"><a href="examples.html#cb104-51" tabindex="-1"></a></span>
-<span id="cb104-52"><a href="examples.html#cb104-52" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(scenarios, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> avg_satisfaction, </span>
-<span id="cb104-53"><a href="examples.html#cb104-53" tabindex="-1"></a>                            <span class="at">color =</span> scenario)) <span class="sc">+</span></span>
-<span id="cb104-54"><a href="examples.html#cb104-54" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb104-55"><a href="examples.html#cb104-55" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Satisfaction&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Average&quot;</span>) <span class="sc">+</span></span>
-<span id="cb104-56"><a href="examples.html#cb104-56" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb104-57"><a href="examples.html#cb104-57" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span>
-<span id="cb104-58"><a href="examples.html#cb104-58" tabindex="-1"></a></span>
-<span id="cb104-59"><a href="examples.html#cb104-59" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(scenarios, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> identity_diversity, </span>
-<span id="cb104-60"><a href="examples.html#cb104-60" tabindex="-1"></a>                            <span class="at">color =</span> scenario)) <span class="sc">+</span></span>
-<span id="cb104-61"><a href="examples.html#cb104-61" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb104-62"><a href="examples.html#cb104-62" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Diversity&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Shannon Index&quot;</span>) <span class="sc">+</span></span>
-<span id="cb104-63"><a href="examples.html#cb104-63" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb104-64"><a href="examples.html#cb104-64" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span>
-<span id="cb104-65"><a href="examples.html#cb104-65" tabindex="-1"></a></span>
-<span id="cb104-66"><a href="examples.html#cb104-66" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(scenarios, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> size, </span>
-<span id="cb104-67"><a href="examples.html#cb104-67" tabindex="-1"></a>                            <span class="at">color =</span> scenario)) <span class="sc">+</span></span>
-<span id="cb104-68"><a href="examples.html#cb104-68" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb104-69"><a href="examples.html#cb104-69" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Organization Size&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Employees&quot;</span>) <span class="sc">+</span></span>
-<span id="cb104-70"><a href="examples.html#cb104-70" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb104-71"><a href="examples.html#cb104-71" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span>
-<span id="cb104-72"><a href="examples.html#cb104-72" tabindex="-1"></a></span>
-<span id="cb104-73"><a href="examples.html#cb104-73" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, p3, <span class="at">ncol =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="examples.html#cb107-1" tabindex="-1"></a><span class="co"># Pre-remote baseline</span></span>
+<span id="cb107-2"><a href="examples.html#cb107-2" tabindex="-1"></a>pre_remote <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
+<span id="cb107-3"><a href="examples.html#cb107-3" tabindex="-1"></a>  <span class="at">n_steps =</span> <span class="dv">52</span>,</span>
+<span id="cb107-4"><a href="examples.html#cb107-4" tabindex="-1"></a>  <span class="at">initial_size =</span> <span class="dv">200</span>,</span>
+<span id="cb107-5"><a href="examples.html#cb107-5" tabindex="-1"></a>  <span class="at">params =</span> <span class="fu">list</span>(</span>
+<span id="cb107-6"><a href="examples.html#cb107-6" tabindex="-1"></a>    <span class="at">n_interactions_per_step =</span> <span class="dv">10</span>,</span>
+<span id="cb107-7"><a href="examples.html#cb107-7" tabindex="-1"></a>    <span class="at">interaction_window =</span> <span class="dv">10</span></span>
+<span id="cb107-8"><a href="examples.html#cb107-8" tabindex="-1"></a>  ),</span>
+<span id="cb107-9"><a href="examples.html#cb107-9" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb107-10"><a href="examples.html#cb107-10" tabindex="-1"></a>)</span>
+<span id="cb107-11"><a href="examples.html#cb107-11" tabindex="-1"></a></span>
+<span id="cb107-12"><a href="examples.html#cb107-12" tabindex="-1"></a><span class="co"># Remote work scenario (reduced interactions)</span></span>
+<span id="cb107-13"><a href="examples.html#cb107-13" tabindex="-1"></a>remote_params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb107-14"><a href="examples.html#cb107-14" tabindex="-1"></a>  <span class="at">n_interactions_per_step =</span> <span class="dv">3</span>,  <span class="co"># Fewer spontaneous interactions</span></span>
+<span id="cb107-15"><a href="examples.html#cb107-15" tabindex="-1"></a>  <span class="at">interaction_window =</span> <span class="dv">15</span>,      <span class="co"># But longer-lasting connections</span></span>
+<span id="cb107-16"><a href="examples.html#cb107-16" tabindex="-1"></a>  <span class="at">turnover_threshold =</span> <span class="sc">-</span><span class="dv">7</span>,      <span class="co"># Slightly more tolerance</span></span>
+<span id="cb107-17"><a href="examples.html#cb107-17" tabindex="-1"></a>  <span class="at">growth_rate =</span> <span class="fl">0.005</span>          <span class="co"># Slower growth</span></span>
+<span id="cb107-18"><a href="examples.html#cb107-18" tabindex="-1"></a>)</span>
+<span id="cb107-19"><a href="examples.html#cb107-19" tabindex="-1"></a></span>
+<span id="cb107-20"><a href="examples.html#cb107-20" tabindex="-1"></a>remote_sim <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
+<span id="cb107-21"><a href="examples.html#cb107-21" tabindex="-1"></a>  <span class="at">n_steps =</span> <span class="dv">52</span>,</span>
+<span id="cb107-22"><a href="examples.html#cb107-22" tabindex="-1"></a>  <span class="at">initial_size =</span> <span class="dv">200</span>,</span>
+<span id="cb107-23"><a href="examples.html#cb107-23" tabindex="-1"></a>  <span class="at">params =</span> remote_params,</span>
+<span id="cb107-24"><a href="examples.html#cb107-24" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb107-25"><a href="examples.html#cb107-25" tabindex="-1"></a>)</span>
+<span id="cb107-26"><a href="examples.html#cb107-26" tabindex="-1"></a></span>
+<span id="cb107-27"><a href="examples.html#cb107-27" tabindex="-1"></a><span class="co"># Hybrid scenario</span></span>
+<span id="cb107-28"><a href="examples.html#cb107-28" tabindex="-1"></a>hybrid_params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb107-29"><a href="examples.html#cb107-29" tabindex="-1"></a>  <span class="at">n_interactions_per_step =</span> <span class="dv">6</span>,  <span class="co"># Moderate interactions</span></span>
+<span id="cb107-30"><a href="examples.html#cb107-30" tabindex="-1"></a>  <span class="at">interaction_window =</span> <span class="dv">12</span>,</span>
+<span id="cb107-31"><a href="examples.html#cb107-31" tabindex="-1"></a>  <span class="at">turnover_threshold =</span> <span class="sc">-</span><span class="dv">8</span>,</span>
+<span id="cb107-32"><a href="examples.html#cb107-32" tabindex="-1"></a>  <span class="at">growth_rate =</span> <span class="fl">0.015</span></span>
+<span id="cb107-33"><a href="examples.html#cb107-33" tabindex="-1"></a>)</span>
+<span id="cb107-34"><a href="examples.html#cb107-34" tabindex="-1"></a></span>
+<span id="cb107-35"><a href="examples.html#cb107-35" tabindex="-1"></a>hybrid_sim <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
+<span id="cb107-36"><a href="examples.html#cb107-36" tabindex="-1"></a>  <span class="at">n_steps =</span> <span class="dv">52</span>,</span>
+<span id="cb107-37"><a href="examples.html#cb107-37" tabindex="-1"></a>  <span class="at">initial_size =</span> <span class="dv">200</span>,</span>
+<span id="cb107-38"><a href="examples.html#cb107-38" tabindex="-1"></a>  <span class="at">params =</span> hybrid_params,</span>
+<span id="cb107-39"><a href="examples.html#cb107-39" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb107-40"><a href="examples.html#cb107-40" tabindex="-1"></a>)</span>
+<span id="cb107-41"><a href="examples.html#cb107-41" tabindex="-1"></a></span>
+<span id="cb107-42"><a href="examples.html#cb107-42" tabindex="-1"></a><span class="co"># Compare scenarios</span></span>
+<span id="cb107-43"><a href="examples.html#cb107-43" tabindex="-1"></a>scenarios <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb107-44"><a href="examples.html#cb107-44" tabindex="-1"></a>  pre_remote<span class="sc">$</span>metrics <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">scenario =</span> <span class="st">&quot;Office&quot;</span>),</span>
+<span id="cb107-45"><a href="examples.html#cb107-45" tabindex="-1"></a>  remote_sim<span class="sc">$</span>metrics <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">scenario =</span> <span class="st">&quot;Remote&quot;</span>),</span>
+<span id="cb107-46"><a href="examples.html#cb107-46" tabindex="-1"></a>  hybrid_sim<span class="sc">$</span>metrics <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">scenario =</span> <span class="st">&quot;Hybrid&quot;</span>)</span>
+<span id="cb107-47"><a href="examples.html#cb107-47" tabindex="-1"></a>)</span>
+<span id="cb107-48"><a href="examples.html#cb107-48" tabindex="-1"></a></span>
+<span id="cb107-49"><a href="examples.html#cb107-49" tabindex="-1"></a><span class="co"># Multi-panel comparison</span></span>
+<span id="cb107-50"><a href="examples.html#cb107-50" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb107-51"><a href="examples.html#cb107-51" tabindex="-1"></a></span>
+<span id="cb107-52"><a href="examples.html#cb107-52" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(scenarios, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> avg_satisfaction, </span>
+<span id="cb107-53"><a href="examples.html#cb107-53" tabindex="-1"></a>                            <span class="at">color =</span> scenario)) <span class="sc">+</span></span>
+<span id="cb107-54"><a href="examples.html#cb107-54" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb107-55"><a href="examples.html#cb107-55" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Satisfaction&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Average&quot;</span>) <span class="sc">+</span></span>
+<span id="cb107-56"><a href="examples.html#cb107-56" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb107-57"><a href="examples.html#cb107-57" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span>
+<span id="cb107-58"><a href="examples.html#cb107-58" tabindex="-1"></a></span>
+<span id="cb107-59"><a href="examples.html#cb107-59" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(scenarios, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> identity_diversity, </span>
+<span id="cb107-60"><a href="examples.html#cb107-60" tabindex="-1"></a>                            <span class="at">color =</span> scenario)) <span class="sc">+</span></span>
+<span id="cb107-61"><a href="examples.html#cb107-61" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb107-62"><a href="examples.html#cb107-62" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Diversity&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Shannon Index&quot;</span>) <span class="sc">+</span></span>
+<span id="cb107-63"><a href="examples.html#cb107-63" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb107-64"><a href="examples.html#cb107-64" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span>
+<span id="cb107-65"><a href="examples.html#cb107-65" tabindex="-1"></a></span>
+<span id="cb107-66"><a href="examples.html#cb107-66" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(scenarios, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> size, </span>
+<span id="cb107-67"><a href="examples.html#cb107-67" tabindex="-1"></a>                            <span class="at">color =</span> scenario)) <span class="sc">+</span></span>
+<span id="cb107-68"><a href="examples.html#cb107-68" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb107-69"><a href="examples.html#cb107-69" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Organization Size&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Employees&quot;</span>) <span class="sc">+</span></span>
+<span id="cb107-70"><a href="examples.html#cb107-70" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb107-71"><a href="examples.html#cb107-71" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span>
+<span id="cb107-72"><a href="examples.html#cb107-72" tabindex="-1"></a></span>
+<span id="cb107-73"><a href="examples.html#cb107-73" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, p3, <span class="at">ncol =</span> <span class="dv">3</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="best-practices-from-examples" class="section level2 hasAnchor" number="7.4">
@@ -884,68 +884,68 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">7.5</span> Code Snippets for Common Tasks<a href="examples.html#code-snippets-for-common-tasks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="batch-processing" class="section level3 hasAnchor" number="7.5.1">
 <h3><span class="header-section-number">7.5.1</span> Batch Processing<a href="examples.html#batch-processing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="examples.html#cb105-1" tabindex="-1"></a><span class="co"># Run multiple replications</span></span>
-<span id="cb105-2"><a href="examples.html#cb105-2" tabindex="-1"></a>run_replications <span class="ot">&lt;-</span> <span class="cf">function</span>(n_reps, params) {</span>
-<span id="cb105-3"><a href="examples.html#cb105-3" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb105-4"><a href="examples.html#cb105-4" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_reps) {</span>
-<span id="cb105-5"><a href="examples.html#cb105-5" tabindex="-1"></a>    <span class="fu">set.seed</span>(i)</span>
-<span id="cb105-6"><a href="examples.html#cb105-6" tabindex="-1"></a>    results[[i]] <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(<span class="at">params =</span> params)</span>
-<span id="cb105-7"><a href="examples.html#cb105-7" tabindex="-1"></a>  }</span>
-<span id="cb105-8"><a href="examples.html#cb105-8" tabindex="-1"></a>  <span class="fu">return</span>(results)</span>
-<span id="cb105-9"><a href="examples.html#cb105-9" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="examples.html#cb108-1" tabindex="-1"></a><span class="co"># Run multiple replications</span></span>
+<span id="cb108-2"><a href="examples.html#cb108-2" tabindex="-1"></a>run_replications <span class="ot">&lt;-</span> <span class="cf">function</span>(n_reps, params) {</span>
+<span id="cb108-3"><a href="examples.html#cb108-3" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb108-4"><a href="examples.html#cb108-4" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_reps) {</span>
+<span id="cb108-5"><a href="examples.html#cb108-5" tabindex="-1"></a>    <span class="fu">set.seed</span>(i)</span>
+<span id="cb108-6"><a href="examples.html#cb108-6" tabindex="-1"></a>    results[[i]] <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(<span class="at">params =</span> params)</span>
+<span id="cb108-7"><a href="examples.html#cb108-7" tabindex="-1"></a>  }</span>
+<span id="cb108-8"><a href="examples.html#cb108-8" tabindex="-1"></a>  <span class="fu">return</span>(results)</span>
+<span id="cb108-9"><a href="examples.html#cb108-9" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div id="custom-metrics" class="section level3 hasAnchor" number="7.5.2">
 <h3><span class="header-section-number">7.5.2</span> Custom Metrics<a href="examples.html#custom-metrics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="examples.html#cb106-1" tabindex="-1"></a><span class="co"># Add custom metric calculation</span></span>
-<span id="cb106-2"><a href="examples.html#cb106-2" tabindex="-1"></a>calculate_custom_metric <span class="ot">&lt;-</span> <span class="cf">function</span>(org) {</span>
-<span id="cb106-3"><a href="examples.html#cb106-3" tabindex="-1"></a>  <span class="co"># Example: Personality homogeneity</span></span>
-<span id="cb106-4"><a href="examples.html#cb106-4" tabindex="-1"></a>  personality_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;openness&quot;</span>, <span class="st">&quot;conscientiousness&quot;</span>, </span>
-<span id="cb106-5"><a href="examples.html#cb106-5" tabindex="-1"></a>                       <span class="st">&quot;extraversion&quot;</span>, <span class="st">&quot;agreeableness&quot;</span>, </span>
-<span id="cb106-6"><a href="examples.html#cb106-6" tabindex="-1"></a>                       <span class="st">&quot;emotional_stability&quot;</span>)</span>
-<span id="cb106-7"><a href="examples.html#cb106-7" tabindex="-1"></a>  </span>
-<span id="cb106-8"><a href="examples.html#cb106-8" tabindex="-1"></a>  homogeneity <span class="ot">&lt;-</span> org[is_active <span class="sc">==</span> <span class="cn">TRUE</span>, </span>
-<span id="cb106-9"><a href="examples.html#cb106-9" tabindex="-1"></a>                     <span class="fu">lapply</span>(.SD, <span class="cf">function</span>(x) <span class="dv">1</span><span class="sc">/</span><span class="fu">sd</span>(x)), </span>
-<span id="cb106-10"><a href="examples.html#cb106-10" tabindex="-1"></a>                     .SDcols <span class="ot">=</span> personality_vars]</span>
-<span id="cb106-11"><a href="examples.html#cb106-11" tabindex="-1"></a>  </span>
-<span id="cb106-12"><a href="examples.html#cb106-12" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">mean</span>(<span class="fu">as.numeric</span>(homogeneity)))</span>
-<span id="cb106-13"><a href="examples.html#cb106-13" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="examples.html#cb109-1" tabindex="-1"></a><span class="co"># Add custom metric calculation</span></span>
+<span id="cb109-2"><a href="examples.html#cb109-2" tabindex="-1"></a>calculate_custom_metric <span class="ot">&lt;-</span> <span class="cf">function</span>(org) {</span>
+<span id="cb109-3"><a href="examples.html#cb109-3" tabindex="-1"></a>  <span class="co"># Example: Personality homogeneity</span></span>
+<span id="cb109-4"><a href="examples.html#cb109-4" tabindex="-1"></a>  personality_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;openness&quot;</span>, <span class="st">&quot;conscientiousness&quot;</span>, </span>
+<span id="cb109-5"><a href="examples.html#cb109-5" tabindex="-1"></a>                       <span class="st">&quot;extraversion&quot;</span>, <span class="st">&quot;agreeableness&quot;</span>, </span>
+<span id="cb109-6"><a href="examples.html#cb109-6" tabindex="-1"></a>                       <span class="st">&quot;emotional_stability&quot;</span>)</span>
+<span id="cb109-7"><a href="examples.html#cb109-7" tabindex="-1"></a>  </span>
+<span id="cb109-8"><a href="examples.html#cb109-8" tabindex="-1"></a>  homogeneity <span class="ot">&lt;-</span> org[is_active <span class="sc">==</span> <span class="cn">TRUE</span>, </span>
+<span id="cb109-9"><a href="examples.html#cb109-9" tabindex="-1"></a>                     <span class="fu">lapply</span>(.SD, <span class="cf">function</span>(x) <span class="dv">1</span><span class="sc">/</span><span class="fu">sd</span>(x)), </span>
+<span id="cb109-10"><a href="examples.html#cb109-10" tabindex="-1"></a>                     .SDcols <span class="ot">=</span> personality_vars]</span>
+<span id="cb109-11"><a href="examples.html#cb109-11" tabindex="-1"></a>  </span>
+<span id="cb109-12"><a href="examples.html#cb109-12" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">mean</span>(<span class="fu">as.numeric</span>(homogeneity)))</span>
+<span id="cb109-13"><a href="examples.html#cb109-13" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div id="visualization-helpers" class="section level3 hasAnchor" number="7.5.3">
 <h3><span class="header-section-number">7.5.3</span> Visualization Helpers<a href="examples.html#visualization-helpers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="examples.html#cb107-1" tabindex="-1"></a><span class="co"># Create standard plot theme</span></span>
-<span id="cb107-2"><a href="examples.html#cb107-2" tabindex="-1"></a>theme_asa <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb107-3"><a href="examples.html#cb107-3" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb107-4"><a href="examples.html#cb107-4" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb107-5"><a href="examples.html#cb107-5" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb107-6"><a href="examples.html#cb107-6" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
-<span id="cb107-7"><a href="examples.html#cb107-7" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb107-8"><a href="examples.html#cb107-8" tabindex="-1"></a>    )</span>
-<span id="cb107-9"><a href="examples.html#cb107-9" tabindex="-1"></a>}</span>
-<span id="cb107-10"><a href="examples.html#cb107-10" tabindex="-1"></a></span>
-<span id="cb107-11"><a href="examples.html#cb107-11" tabindex="-1"></a><span class="co"># Time series with confidence bands</span></span>
-<span id="cb107-12"><a href="examples.html#cb107-12" tabindex="-1"></a>plot_with_ci <span class="ot">&lt;-</span> <span class="cf">function</span>(results_list, metric) {</span>
-<span id="cb107-13"><a href="examples.html#cb107-13" tabindex="-1"></a>  <span class="co"># Calculate mean and CI across replications</span></span>
-<span id="cb107-14"><a href="examples.html#cb107-14" tabindex="-1"></a>  combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">lapply</span>(<span class="fu">seq_along</span>(results_list), </span>
-<span id="cb107-15"><a href="examples.html#cb107-15" tabindex="-1"></a>                              <span class="cf">function</span>(i) {</span>
-<span id="cb107-16"><a href="examples.html#cb107-16" tabindex="-1"></a>    results_list[[i]]<span class="sc">$</span>metrics <span class="sc">%&gt;%</span> </span>
-<span id="cb107-17"><a href="examples.html#cb107-17" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">rep =</span> i)</span>
-<span id="cb107-18"><a href="examples.html#cb107-18" tabindex="-1"></a>  }))</span>
-<span id="cb107-19"><a href="examples.html#cb107-19" tabindex="-1"></a>  </span>
-<span id="cb107-20"><a href="examples.html#cb107-20" tabindex="-1"></a>  summary_stats <span class="ot">&lt;-</span> combined <span class="sc">%&gt;%</span></span>
-<span id="cb107-21"><a href="examples.html#cb107-21" tabindex="-1"></a>    <span class="fu">group_by</span>(time) <span class="sc">%&gt;%</span></span>
-<span id="cb107-22"><a href="examples.html#cb107-22" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
-<span id="cb107-23"><a href="examples.html#cb107-23" tabindex="-1"></a>      <span class="at">mean_val =</span> <span class="fu">mean</span>(<span class="fu">get</span>(metric)),</span>
-<span id="cb107-24"><a href="examples.html#cb107-24" tabindex="-1"></a>      <span class="at">lower_ci =</span> <span class="fu">quantile</span>(<span class="fu">get</span>(metric), <span class="fl">0.025</span>),</span>
-<span id="cb107-25"><a href="examples.html#cb107-25" tabindex="-1"></a>      <span class="at">upper_ci =</span> <span class="fu">quantile</span>(<span class="fu">get</span>(metric), <span class="fl">0.975</span>)</span>
-<span id="cb107-26"><a href="examples.html#cb107-26" tabindex="-1"></a>    )</span>
-<span id="cb107-27"><a href="examples.html#cb107-27" tabindex="-1"></a>  </span>
-<span id="cb107-28"><a href="examples.html#cb107-28" tabindex="-1"></a>  <span class="fu">ggplot</span>(summary_stats, <span class="fu">aes</span>(<span class="at">x =</span> time)) <span class="sc">+</span></span>
-<span id="cb107-29"><a href="examples.html#cb107-29" tabindex="-1"></a>    <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower_ci, <span class="at">ymax =</span> upper_ci), </span>
-<span id="cb107-30"><a href="examples.html#cb107-30" tabindex="-1"></a>                <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb107-31"><a href="examples.html#cb107-31" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> mean_val), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb107-32"><a href="examples.html#cb107-32" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">y =</span> metric) <span class="sc">+</span></span>
-<span id="cb107-33"><a href="examples.html#cb107-33" tabindex="-1"></a>    <span class="fu">theme_asa</span>()</span>
-<span id="cb107-34"><a href="examples.html#cb107-34" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="examples.html#cb110-1" tabindex="-1"></a><span class="co"># Create standard plot theme</span></span>
+<span id="cb110-2"><a href="examples.html#cb110-2" tabindex="-1"></a>theme_asa <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb110-3"><a href="examples.html#cb110-3" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb110-4"><a href="examples.html#cb110-4" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb110-5"><a href="examples.html#cb110-5" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb110-6"><a href="examples.html#cb110-6" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb110-7"><a href="examples.html#cb110-7" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb110-8"><a href="examples.html#cb110-8" tabindex="-1"></a>    )</span>
+<span id="cb110-9"><a href="examples.html#cb110-9" tabindex="-1"></a>}</span>
+<span id="cb110-10"><a href="examples.html#cb110-10" tabindex="-1"></a></span>
+<span id="cb110-11"><a href="examples.html#cb110-11" tabindex="-1"></a><span class="co"># Time series with confidence bands</span></span>
+<span id="cb110-12"><a href="examples.html#cb110-12" tabindex="-1"></a>plot_with_ci <span class="ot">&lt;-</span> <span class="cf">function</span>(results_list, metric) {</span>
+<span id="cb110-13"><a href="examples.html#cb110-13" tabindex="-1"></a>  <span class="co"># Calculate mean and CI across replications</span></span>
+<span id="cb110-14"><a href="examples.html#cb110-14" tabindex="-1"></a>  combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">lapply</span>(<span class="fu">seq_along</span>(results_list), </span>
+<span id="cb110-15"><a href="examples.html#cb110-15" tabindex="-1"></a>                              <span class="cf">function</span>(i) {</span>
+<span id="cb110-16"><a href="examples.html#cb110-16" tabindex="-1"></a>    results_list[[i]]<span class="sc">$</span>metrics <span class="sc">%&gt;%</span> </span>
+<span id="cb110-17"><a href="examples.html#cb110-17" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">rep =</span> i)</span>
+<span id="cb110-18"><a href="examples.html#cb110-18" tabindex="-1"></a>  }))</span>
+<span id="cb110-19"><a href="examples.html#cb110-19" tabindex="-1"></a>  </span>
+<span id="cb110-20"><a href="examples.html#cb110-20" tabindex="-1"></a>  summary_stats <span class="ot">&lt;-</span> combined <span class="sc">%&gt;%</span></span>
+<span id="cb110-21"><a href="examples.html#cb110-21" tabindex="-1"></a>    <span class="fu">group_by</span>(time) <span class="sc">%&gt;%</span></span>
+<span id="cb110-22"><a href="examples.html#cb110-22" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
+<span id="cb110-23"><a href="examples.html#cb110-23" tabindex="-1"></a>      <span class="at">mean_val =</span> <span class="fu">mean</span>(<span class="fu">get</span>(metric)),</span>
+<span id="cb110-24"><a href="examples.html#cb110-24" tabindex="-1"></a>      <span class="at">lower_ci =</span> <span class="fu">quantile</span>(<span class="fu">get</span>(metric), <span class="fl">0.025</span>),</span>
+<span id="cb110-25"><a href="examples.html#cb110-25" tabindex="-1"></a>      <span class="at">upper_ci =</span> <span class="fu">quantile</span>(<span class="fu">get</span>(metric), <span class="fl">0.975</span>)</span>
+<span id="cb110-26"><a href="examples.html#cb110-26" tabindex="-1"></a>    )</span>
+<span id="cb110-27"><a href="examples.html#cb110-27" tabindex="-1"></a>  </span>
+<span id="cb110-28"><a href="examples.html#cb110-28" tabindex="-1"></a>  <span class="fu">ggplot</span>(summary_stats, <span class="fu">aes</span>(<span class="at">x =</span> time)) <span class="sc">+</span></span>
+<span id="cb110-29"><a href="examples.html#cb110-29" tabindex="-1"></a>    <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower_ci, <span class="at">ymax =</span> upper_ci), </span>
+<span id="cb110-30"><a href="examples.html#cb110-30" tabindex="-1"></a>                <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb110-31"><a href="examples.html#cb110-31" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> mean_val), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb110-32"><a href="examples.html#cb110-32" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">y =</span> metric) <span class="sc">+</span></span>
+<span id="cb110-33"><a href="examples.html#cb110-33" tabindex="-1"></a>    <span class="fu">theme_asa</span>()</span>
+<span id="cb110-34"><a href="examples.html#cb110-34" tabindex="-1"></a>}</span></code></pre></div>
 
 </div>
 </div>
