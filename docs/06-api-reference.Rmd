@@ -57,6 +57,47 @@ calculate_identity_diversity(org)
 - `org`: Organization data.table
 
 **Value**
+Returns numeric Shannon entropy value (0 = homogeneous, higher = more diverse)
+
+#### calculate_blau_index()
+
+Calculate Blau's Index of heterogeneity for identity categories (I-O psychology standard).
+
+**Usage**
+```r
+calculate_blau_index(org)
+```
+
+**Arguments**
+- `org`: Organization data.table
+
+**Value**
+Returns numeric Blau's Index (0 = homogeneous, 1 = maximum diversity). Represents the probability that two randomly selected members are from different categories.
+
+#### get_category_proportions()
+
+Get proportions of each identity category.
+
+**Usage**
+```r
+get_category_proportions(org)
+```
+
+**Arguments**
+- `org`: Organization data.table
+
+**Value**
+Returns named vector with proportions for each category (A-E)
+
+**Usage**
+```r
+calculate_identity_diversity(org)
+```
+
+**Arguments**
+- `org`: Organization data.table
+
+**Value**
 
 Numeric Shannon entropy value (0 = homogeneous, higher = more diverse)
 
@@ -195,12 +236,13 @@ Calculate attraction scores for applicants.
 
 **Usage**
 ```r
-calculate_applicant_attraction(applicants, org)
+calculate_applicant_attraction(applicants, org, diversity_metric = "blau")
 ```
 
 **Arguments**
 - `applicants`: Applicant pool data.table
 - `org`: Organization data.table
+- `diversity_metric`: Character string specifying which diversity metric to use ("blau" or "shannon", default: "blau")
 
 **Value**
 
@@ -209,7 +251,7 @@ Updated applicants data.table with attraction scores based on identity fit and d
 **Examples**
 ```r
 # Calculate attraction
-applicants <- calculate_applicant_attraction(applicants, org)
+applicants <- calculate_applicant_attraction(applicants, org, diversity_metric = "blau")
 
 # View top attracted applicants
 top_applicants <- applicants[order(-attraction)][1:10]
@@ -324,13 +366,14 @@ Update all agent satisfaction scores efficiently.
 
 **Usage**
 ```r
-update_satisfaction_vectorized(org, interactions, window_size = 10)
+update_satisfaction_vectorized(org, interactions, window_size = 10, diversity_metric = "blau")
 ```
 
 **Arguments**
 - `org`: Organization data.table
 - `interactions`: Interaction history
 - `window_size`: Recent time steps to consider
+- `diversity_metric`: Character string specifying which diversity metric to use ("blau" or "shannon", default: "blau")
 
 **Value**
 
@@ -608,7 +651,8 @@ params = list(
   base_turnover_rate = 0.05,
   n_new_applicants = 50,
   applicant_attraction_threshold = -0.5,
-  max_application_time = 12
+  max_application_time = 12,
+  diversity_metric = "blau"  # "blau" or "shannon"
 )
 ```
 

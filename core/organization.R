@@ -71,6 +71,51 @@ calculate_identity_diversity <- function(org) {
   return(shannon_index)
 }
 
+#' Calculate Blau's Index of heterogeneity for identity categories
+#' 
+#' @param org Organization data.table
+#' @return Numeric diversity index (0 = homogeneous, 1 = maximum diversity)
+#' @export
+calculate_blau_index <- function(org) {
+  assert_data_table(org)
+  assert_subset("identity_category", names(org))
+  
+  # Get proportions of each identity category
+  props <- org[is_active == TRUE, .N, by = identity_category][, prop := N / sum(N)]$prop
+  
+  # Calculate Blau's Index: 1 - sum(p^2)
+  # Represents probability that two randomly selected members are from different categories
+  blau_index <- 1 - sum(props^2)
+  
+  return(blau_index)
+}
+
+#' Get proportions of each identity category
+#' 
+#' @param org Organization data.table
+#' @return Named vector with proportions for each category
+#' @export
+get_category_proportions <- function(org) {
+  assert_data_table(org)
+  assert_subset("identity_category", names(org))
+  
+  # Get counts and proportions
+  category_counts <- org[is_active == TRUE, .N, by = identity_category]
+  
+  # Create a complete set of categories (A-E) with zeros for missing ones
+  all_categories <- data.table(identity_category = c("A", "B", "C", "D", "E"))
+  category_props <- merge(all_categories, category_counts, 
+                         by = "identity_category", all.x = TRUE)
+  category_props[is.na(N), N := 0]
+  category_props[, prop := N / sum(N)]
+  
+  # Convert to named vector
+  props <- category_props$prop
+  names(props) <- category_props$identity_category
+  
+  return(props)
+}
+
 #' Calculate organization-level personality averages
 #' 
 #' @param org Organization data.table

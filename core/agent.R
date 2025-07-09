@@ -49,23 +49,54 @@ create_applicant_pool <- function(n_applicants = 50,
   return(applicants)
 }
 
+#' Create an empty applicant pool with correct structure
+#' 
+#' @param identity_categories Vector of possible identity categories
+#' @return Empty data.table with applicant structure
+#' @export
+create_empty_applicant_pool <- function(identity_categories = c("A", "B", "C", "D", "E")) {
+  # Create empty data.table with all required columns
+  empty_pool <- data.table(
+    agent_id = character(),
+    identity_category = character(),
+    openness = numeric(),
+    conscientiousness = numeric(),
+    extraversion = numeric(),
+    agreeableness = numeric(),
+    emotional_stability = numeric(),
+    diversity_preference = numeric(),
+    homophily_preference = numeric(),
+    attraction = numeric(),
+    application_time = integer()
+  )
+  
+  setkey(empty_pool, agent_id)
+  return(empty_pool)
+}
+
 #' Calculate attraction for applicants based on organization composition
 #' 
 #' @param applicants data.table of applicants
 #' @param org Organization data.table
+#' @param diversity_metric Character string specifying which diversity metric to use ("blau" or "shannon")
 #' @return Updated applicants data.table with attraction scores
 #' @export
-calculate_applicant_attraction <- function(applicants, org) {
+calculate_applicant_attraction <- function(applicants, org, diversity_metric = "blau") {
   assert_data_table(applicants)
   assert_data_table(org)
+  assert_choice(diversity_metric, c("blau", "shannon"))
   
   # Calculate organization identity proportions
   id_props <- org[is_active == TRUE, .N, by = identity_category]
   id_props[, prop := N / sum(N)]
   setkey(id_props, identity_category)
   
-  # Calculate identity diversity metric
-  diversity_index <- calculate_identity_diversity(org)
+  # Calculate identity diversity metric based on chosen method
+  diversity_index <- if (diversity_metric == "blau") {
+    calculate_blau_index(org)
+  } else {
+    calculate_identity_diversity(org)  # Shannon entropy
+  }
   
   # Merge proportions with applicants
   applicants_with_props <- id_props[applicants, on = "identity_category"]

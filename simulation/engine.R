@@ -43,7 +43,8 @@ run_asa_simulation <- function(n_steps = 260,
     base_turnover_rate = 0.05,
     n_new_applicants = 50,
     applicant_attraction_threshold = -0.5,
-    max_application_time = 12
+    max_application_time = 12,
+    diversity_metric = "blau"  # "blau" or "shannon"
   )
   
   # Merge with user parameters
@@ -55,7 +56,7 @@ run_asa_simulation <- function(n_steps = 260,
   
   # Initialize tracking structures
   interactions <- initialize_interactions(org)
-  applicant_pool <- create_applicant_pool(0)  # Empty initial pool
+  applicant_pool <- create_empty_applicant_pool(params$identity_categories)  # Empty initial pool
   
   # Results storage
   org_history <- vector("list", n_steps)
@@ -76,7 +77,8 @@ run_asa_simulation <- function(n_steps = 260,
     
     # 3. Update satisfaction based on interactions
     org <- update_satisfaction_vectorized(
-      org, interactions, params$interaction_window
+      org, interactions, params$interaction_window,
+      diversity_metric = params$diversity_metric
     )
     
     # 4. Execute turnover
@@ -96,7 +98,8 @@ run_asa_simulation <- function(n_steps = 260,
       applicant_pool <- recruit_applicants(applicant_pool, params$n_new_applicants)
       
       # Calculate attraction
-      applicant_pool <- calculate_applicant_attraction(applicant_pool, org)
+      applicant_pool <- calculate_applicant_attraction(applicant_pool, org, 
+                                                       diversity_metric = params$diversity_metric)
       
       # Filter based on attraction
       applicant_pool <- filter_applicant_pool(applicant_pool, params$applicant_attraction_threshold)
@@ -149,7 +152,9 @@ calculate_step_metrics <- function(org, time_step) {
   
   # Basic metrics
   size <- get_organization_size(org)
-  diversity <- calculate_identity_diversity(org)
+  shannon_diversity <- calculate_identity_diversity(org)
+  blau_index <- calculate_blau_index(org)
+  category_props <- get_category_proportions(org)
   avg_satisfaction <- calculate_average_satisfaction(org)
   
   # Personality metrics
@@ -169,7 +174,13 @@ calculate_step_metrics <- function(org, time_step) {
   metrics <- data.table(
     time = time_step,
     size = size,
-    identity_diversity = diversity,
+    shannon_diversity = shannon_diversity,
+    blau_index = blau_index,
+    prop_A = category_props["A"],
+    prop_B = category_props["B"],
+    prop_C = category_props["C"],
+    prop_D = category_props["D"],
+    prop_E = category_props["E"],
     avg_satisfaction = avg_satisfaction,
     avg_tenure = avg_tenure,
     

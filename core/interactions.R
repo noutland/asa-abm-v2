@@ -78,18 +78,19 @@ execute_interactions_vectorized <- function(org, interactions, time_step, n_inte
   new_interactions <- merge(new_interactions,
                            active_agents[, .(agent_id,
                                            partner_extra = extraversion,
+                                           partner_consc = conscientiousness,
                                            partner_identity = identity_category)],
                            by.x = "partner_agent", by.y = "agent_id")
   
   # Calculate interaction valence (vectorized)
   new_interactions[, valence := 
     abs(focal_extra - partner_extra) * -1 +  # Extraversion difference (negative)
-    (focal_consc - partner_extra) +           # Conscientiousness advantage
+    (focal_consc - partner_consc) +          # Conscientiousness advantage
     focal_agree +                             # Agreeableness benefit
     ifelse(focal_identity == partner_identity, 
            focal_homo,                        # Same identity: homophily preference
            focal_div) +                       # Different identity: diversity preference
-    rnorm(.N, mean = 0, sd = abs(focal_emostab))  # Random component scaled by emotional stability
+    rnorm(.N, mean = 0, sd = exp(-focal_emostab))  # Random component: low ES = high variance, high ES = low variance
   ]
   
   # Keep only essential columns
@@ -106,12 +107,14 @@ execute_interactions_vectorized <- function(org, interactions, time_step, n_inte
 #' @param org Organization data.table
 #' @param interactions Interaction history table
 #' @param window_size Number of recent time steps to consider
+#' @param diversity_metric Character string specifying which diversity metric to use ("blau" or "shannon")
 #' @return Updated organization with satisfaction scores
 #' @export
-update_satisfaction_vectorized <- function(org, interactions, window_size = 10) {
+update_satisfaction_vectorized <- function(org, interactions, window_size = 10, diversity_metric = "blau") {
   assert_data_table(org)
   assert_data_table(interactions)
   assert_count(window_size, positive = TRUE)
+  assert_choice(diversity_metric, c("blau", "shannon"))
   
   # Get recent interactions
   max_time <- max(interactions$time_step, 0)
@@ -126,7 +129,11 @@ update_satisfaction_vectorized <- function(org, interactions, window_size = 10) 
   # Calculate identity-based satisfaction component
   id_props <- org[is_active == TRUE, .N, by = identity_category]
   id_props[, prop := N / sum(N)]
-  diversity_index <- calculate_identity_diversity(org)
+  diversity_index <- if (diversity_metric == "blau") {
+    calculate_blau_index(org)
+  } else {
+    calculate_identity_diversity(org)  # Shannon entropy
+  }
   
   # Merge and calculate total satisfaction
   org <- merge(org, interaction_satisfaction, 
