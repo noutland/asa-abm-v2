@@ -8,6 +8,11 @@ on:
       - '.github/workflows/deploy-docs.yml'
   workflow_dispatch:
 
+permissions:
+  contents: write  # Allow writing to repository (needed for gh-pages branch)
+  pages: write    # Allow GitHub Pages deployment
+  id-token: write # Allow OIDC token for deployment
+
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
