@@ -1,0 +1,14 @@
+Package: asaabmv2docs
+Title: ASA ABM v2 Documentation
+Version: 0.1.0
+Authors@R: person("ASA ABM", "Development Team", email = "team@example.com", role = c("aut", "cre"))
+Description: Documentation for the ASA Agent-Based Model v2
+License: MIT
+Encoding: UTF-8
+Imports:
+    bookdown,
+    knitr,
+    rmarkdown
+Suggests:
+    ggplot2,
+    data.table

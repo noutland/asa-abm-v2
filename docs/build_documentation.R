@@ -1,10 +1,8 @@
 # build_documentation.R
 # Script to build the ASA ABM v2 documentation
 
-# Install required packages if not already installed
-required_packages <- c("bookdown", "knitr", "rmarkdown", "ggplot2", "data.table")
-new_packages <- required_packages[!(required_packages %in% installed.packages()[,"Package"])]
-if(length(new_packages)) install.packages(new_packages)
+# Required packages are now installed via GitHub Actions workflow
+# This ensures consistency and caching for faster builds
 
 # Load bookdown
 library(bookdown)
