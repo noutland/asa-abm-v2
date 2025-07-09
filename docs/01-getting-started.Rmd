@@ -1,0 +1,181 @@
+# Getting Started {#getting-started}
+
+This chapter will help you get up and running with the ASA ABM v2 simulation framework.
+
+## System Requirements
+
+### Software Requirements
+
+- **R** version 4.0.0 or higher
+- **RStudio** (recommended for development)
+- Required R packages:
+  - `data.table` (>= 1.14.0)
+  - `checkmate` (for input validation)
+  - `ggplot2` (for visualization)
+  - `knitr` and `rmarkdown` (for documentation)
+
+### Hardware Recommendations
+
+- **RAM**: Minimum 4GB, 8GB+ recommended for large simulations
+- **CPU**: Multi-core processor for parallel processing capabilities
+- **Storage**: 1GB free space for simulation outputs
+
+## Installation
+
+### Step 1: Clone or Download the Repository
+
+```bash
+# Clone from GitHub (if available)
+git clone https://github.com/your-repo/asa-abm-v2.git
+
+# Or download and extract the ZIP file
+```
+
+### Step 2: Install Required Packages
+
+```r
+# Install required packages
+install.packages(c("data.table", "checkmate", "ggplot2", 
+                   "knitr", "rmarkdown", "bookdown"))
+
+# For PDF documentation generation (optional)
+install.packages("tinytex")
+tinytex::install_tinytex()
+```
+
+### Step 3: Verify Installation
+
+```r
+# Set working directory to the project folder
+setwd("path/to/asa_abm_v2")
+
+# Source the simulation engine
+source("simulation/engine.R")
+
+# Run a test simulation
+test_results <- run_asa_simulation(n_steps = 10, initial_size = 10)
+print(test_results$metrics)
+```
+
+## Quick Start Guide
+
+### Basic Simulation
+
+Here's the simplest way to run a simulation:
+
+```r
+# Load the simulation engine
+source("simulation/engine.R")
+
+# Run simulation with default parameters
+results <- run_asa_simulation(
+  n_steps = 260,      # One year (weekly steps)
+  initial_size = 100  # Starting organization size
+)
+
+# View summary statistics
+summary(results$metrics)
+```
+
+### Customized Simulation
+
+To run a simulation with custom parameters:
+
+```r
+# Define custom parameters
+my_params <- list(
+  growth_rate = 0.05,              # 5% growth per hiring cycle
+  hiring_frequency = 4,            # Hire every 4 weeks
+  selection_criteria = "fit",      # Select based on org fit
+  turnover_threshold = -5          # Leave if satisfaction < -5
+)
+
+# Run simulation
+results <- run_asa_simulation(
+  n_steps = 520,
+  initial_size = 50,
+  params = my_params,
+  verbose = TRUE
+)
+```
+
+### Analyzing Results
+
+The simulation returns a list containing:
+
+```r
+# Access different components
+results$final_organization  # Final state of all agents
+results$metrics            # Time series of organizational metrics
+results$parameters         # Parameters used in simulation
+
+# Basic analysis
+library(ggplot2)
+
+# Plot organization size over time
+ggplot(results$metrics, aes(x = time, y = size)) +
+  geom_line() +
+  labs(title = "Organization Growth",
+       x = "Time Step", 
+       y = "Number of Employees")
+```
+
+## File Structure
+
+Understanding the project structure:
+
+```
+asa_abm_v2/
+├── core/                 # Core modules
+│   ├── organization.R    # Organization functions
+│   ├── agent.R          # Agent/applicant functions
+│   └── interactions.R   # Interaction mechanisms
+├── simulation/          # Simulation components
+│   ├── engine.R         # Main simulation loop
+│   ├── hiring.R         # Recruitment logic
+│   └── turnover.R       # Attrition logic
+├── analysis/            # Analysis tools
+├── tests/               # Unit tests
+├── docs/                # Documentation
+├── data/                # Sample data and outputs
+└── run_simulation.R     # Example script
+```
+
+## Next Steps
+
+Now that you have the simulation running:
+
+1. Read Chapter \@ref(theoretical-background) to understand the ASA framework
+2. Explore Chapter \@ref(user-guide) for detailed parameter explanations
+3. Check Chapter \@ref(examples) for common simulation scenarios
+4. See Chapter \@ref(api-reference) for function documentation
+
+## Troubleshooting
+
+### Common Issues
+
+**Issue**: "could not find function" error
+```r
+# Solution: Ensure you've sourced the engine
+source("simulation/engine.R")
+```
+
+**Issue**: Package not found
+```r
+# Solution: Install missing packages
+install.packages("package_name")
+```
+
+**Issue**: Memory errors with large simulations
+```r
+# Solution: Reduce simulation size or increase R memory limit
+memory.limit(size = 8000)  # Windows
+# Or use: options(java.parameters = "-Xmx8g")  # 8GB
+```
+
+### Getting Help
+
+- Check the [FAQ](#faq) section
+- Review the [API Reference](#api-reference)
+- Submit issues on GitHub
+- Contact the development team

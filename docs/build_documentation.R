@@ -1,0 +1,41 @@
+# build_documentation.R
+# Script to build the ASA ABM v2 documentation
+
+# Install required packages if not already installed
+required_packages <- c("bookdown", "knitr", "rmarkdown", "ggplot2", "data.table")
+new_packages <- required_packages[!(required_packages %in% installed.packages()[,"Package"])]
+if(length(new_packages)) install.packages(new_packages)
+
+# Load bookdown
+library(bookdown)
+
+# Set working directory to docs folder
+if (!grepl("docs$", getwd())) {
+  setwd("docs")
+}
+
+# Clean previous builds
+if (dir.exists("_book")) {
+  unlink("_book", recursive = TRUE)
+}
+if (dir.exists("../documentation")) {
+  unlink("../documentation", recursive = TRUE)
+}
+
+# Build the book
+bookdown::render_book(
+  input = ".",
+  output_format = "all",  # Builds all formats
+  clean = TRUE,
+  envir = parent.frame(),
+  quiet = FALSE,
+  encoding = "UTF-8"
+)
+
+# Alternative: Build specific formats
+# bookdown::render_book("index.Rmd", "bookdown::gitbook")
+# bookdown::render_book("index.Rmd", "bookdown::pdf_book")
+
+cat("\nDocumentation build complete!\n")
+cat("Output location: ../documentation/\n")
+cat("\nTo view HTML version, open: ../documentation/index.html\n")

@@ -1,0 +1,94 @@
+---
+title: "ASA Agent-Based Model v2 Documentation"
+subtitle: "A High-Performance Simulation Framework for Organizational Dynamics"
+author: "ASA ABM Development Team"
+date: "`r Sys.Date()`"
+output:
+  bookdown::gitbook:
+    config:
+      toc:
+        collapse: subsection
+        scroll_highlight: true
+      search: true
+      sharing:
+        facebook: false
+        twitter: false
+        google: false
+        linkedin: false
+        weibo: false
+        instapaper: false
+        vk: false
+        all: false
+  bookdown::pdf_book:
+    keep_tex: false
+    latex_engine: xelatex
+    citation_package: natbib
+    toc_depth: 3
+documentclass: book
+bibliography: [references.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: your-github-repo/asa-abm-v2
+description: "Comprehensive documentation for the ASA Agent-Based Model v2"
+---
+
+# Welcome {-}
+
+This documentation provides a comprehensive guide to the **ASA Agent-Based Model v2**, a high-performance simulation framework for studying Attraction-Selection-Attrition (ASA) dynamics in organizations.
+
+## Overview
+
+The ASA ABM v2 is designed to simulate how organizations evolve over time through the interplay of:
+
+- **Attraction**: How individuals are drawn to organizations based on fit
+- **Selection**: How organizations choose new members
+- **Attrition**: How and why members leave organizations
+
+## Key Features
+
+- **High Performance**: Built on `data.table` for efficient large-scale simulations
+- **Modular Architecture**: Easy to extend and customize
+- **Comprehensive Metrics**: Track organizational dynamics over time
+- **Flexible Parameters**: Highly configurable simulation scenarios
+- **Future-Ready**: Designed for network and hierarchical extensions
+
+## Documentation Structure
+
+This documentation is organized into the following sections:
+
+1. **Getting Started**: Installation and quick start guide
+2. **Theoretical Background**: Understanding the ASA framework
+3. **Architecture Overview**: System design and components
+4. **User Guide**: Running simulations and configuring parameters
+5. **API Reference**: Detailed function documentation
+6. **Examples**: Practical simulation scenarios
+7. **Developer Guide**: Extending the framework
+8. **Appendices**: Additional resources and references
+
+## Quick Example
+
+```r
+# Load the simulation engine
+source("simulation/engine.R")
+
+# Run a basic simulation
+results <- run_asa_simulation(
+  n_steps = 260,
+  initial_size = 100,
+  params = list(growth_rate = 0.02),
+  verbose = TRUE
+)
+
+# Analyze results
+summary(results$metrics)
+```
+
+## Support and Contributing
+
+- **Issues**: Report bugs or request features on our GitHub repository
+- **Contributing**: We welcome contributions! See our contributing guide
+- **Contact**: Reach out to the development team
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.

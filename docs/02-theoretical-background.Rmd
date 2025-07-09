@@ -1,0 +1,165 @@
+# Theoretical Background {#theoretical-background}
+
+This chapter provides the theoretical foundation for the Attraction-Selection-Attrition (ASA) framework and its implementation in this agent-based model.
+
+## The ASA Framework
+
+The Attraction-Selection-Attrition (ASA) framework, developed by Benjamin Schneider (1987), explains how organizations naturally evolve toward homogeneity through three interrelated processes:
+
+### Attraction
+
+Individuals are differentially attracted to organizations based on perceived fit between their personal characteristics and organizational attributes.
+
+**In our model:**
+- Agents calculate attraction based on:
+  - Identity similarity (homophily preference)
+  - Organizational diversity (diversity preference)
+  - Personality alignment
+
+### Selection
+
+Organizations preferentially select individuals who fit their criteria and culture.
+
+**In our model:**
+- Selection can be based on:
+  - Conscientiousness scores
+  - Overall fit metrics
+  - Random selection (baseline)
+
+### Attrition
+
+Individuals who don't fit well with the organization are more likely to leave.
+
+**In our model:**
+- Turnover occurs through:
+  - Satisfaction thresholds
+  - Probabilistic turnover based on satisfaction
+  - Tenure effects
+
+## Agent Characteristics
+
+### Personality Traits (Big Five)
+
+Each agent possesses five personality dimensions based on the Five-Factor Model:
+
+1. **Openness**: Creativity, curiosity, and openness to new experiences
+2. **Conscientiousness**: Organization, dependability, and work ethic
+3. **Extraversion**: Sociability, assertiveness, and energy
+4. **Agreeableness**: Cooperation, trust, and helpfulness
+5. **Emotional Stability**: Calmness, resilience, and emotional control
+
+These traits are normally distributed (mean = 0, sd = 1) in the population.
+
+### Identity Categories
+
+Agents belong to discrete identity categories (default: A, B, C, D, E) representing:
+- Functional backgrounds
+- Professional identities
+- Cultural groups
+- Or any categorical distinction relevant to the simulation
+
+### Preferences
+
+Two key preferences drive agent behavior:
+
+1. **Homophily Preference**: Attraction to similar others
+2. **Diversity Preference**: Attraction to organizational variety
+
+## Interaction Dynamics
+
+### Interaction Valence Calculation
+
+When agents interact, the quality (valence) of the interaction is determined by:
+
+```
+Valence = -|ΔExtraversion| + (Conscientiousnessfocal - Extraversionpartner) 
+          + Agreeablenessfocal + IdentityBonus + ε
+```
+
+Where:
+- `ΔExtraversion`: Difference in extraversion (similarity is beneficial)
+- `IdentityBonus`: Homophily preference if same identity, diversity preference if different
+- `ε`: Random component scaled by emotional stability
+
+### Satisfaction Dynamics
+
+Agent satisfaction integrates multiple components:
+
+```
+Satisfaction = BaseAttraction + InteractionHistory + IdentityFit 
+               + DiversityComponent + PersonalityStability
+```
+
+## Organizational Metrics
+
+### Identity Diversity
+
+We use Shannon entropy to measure identity diversity:
+
+```
+H = -Σ(pi × log(pi))
+```
+
+Where pi is the proportion of identity category i.
+
+### Organizational Personality
+
+The organization's personality profile is characterized by:
+- Mean levels of each Big Five trait
+- Standard deviations indicating personality diversity
+
+## Temporal Dynamics
+
+The model operates in discrete time steps, typically representing:
+- Days, weeks, or months
+- Configurable based on research needs
+
+Key temporal processes:
+- **Hiring cycles**: Periodic recruitment and selection
+- **Interaction accumulation**: Building relationship history
+- **Tenure effects**: Time-dependent behaviors
+
+## Emergent Phenomena
+
+The ASA model produces several emergent patterns:
+
+1. **Homogenization**: Organizations become more similar over time
+2. **Culture crystallization**: Dominant characteristics become reinforced
+3. **Fit spirals**: Good fit → satisfaction → retention → stronger culture
+4. **Diversity cycles**: Tension between homophily and diversity preferences
+
+## Model Assumptions
+
+Key assumptions in our implementation:
+
+1. **Perfect information**: Applicants can assess organizational fit
+2. **Stable preferences**: Agent preferences don't change
+3. **Random interactions**: Agents interact randomly (can be modified)
+4. **Linear satisfaction**: Components combine additively
+
+## Extensions and Variations
+
+The framework supports several extensions:
+
+1. **Network structures**: Replace random with network-based interactions
+2. **Multiple organizations**: Inter-organizational mobility
+3. **Dynamic environments**: Changing selection criteria
+4. **Team structures**: Nested organizational units
+
+## References and Further Reading
+
+- Schneider, B. (1987). The people make the place. *Personnel Psychology*, 40(3), 437-453.
+- Schneider, B., Goldstein, H. W., & Smith, D. B. (1995). The ASA framework: An update. *Personnel Psychology*, 48(4), 747-773.
+- Harrison, D. A., Price, K. H., & Bell, M. P. (1998). Beyond relational demography: Time and the effects of surface-and deep-level diversity on work group cohesion. *Academy of Management Journal*, 41(1), 96-107.
+
+## Mathematical Notation Summary
+
+| Symbol | Description |
+|--------|-------------|
+| N | Organization size |
+| I | Identity categories |
+| π | Personality traits vector |
+| σ | Satisfaction score |
+| τ | Turnover threshold |
+| t | Time step |
+| H | Diversity index |

@@ -1,0 +1,534 @@
+# Examples and Case Studies {#examples}
+
+This chapter provides practical examples and case studies demonstrating various uses of the ASA ABM v2.
+
+## Basic Examples
+
+### Example 1: Standard Simulation
+
+A basic simulation with default parameters:
+
+```r
+# Load the simulation engine
+source("simulation/engine.R")
+
+# Run a one-year simulation
+results <- run_asa_simulation(
+  n_steps = 52,        # Weekly steps
+  initial_size = 100,  # Starting size
+  verbose = TRUE
+)
+
+# View final metrics
+final_metrics <- tail(results$metrics, 1)
+print(final_metrics)
+
+# Plot organization size over time
+library(ggplot2)
+ggplot(results$metrics, aes(x = time, y = size)) +
+  geom_line(color = "darkblue", size = 1) +
+  labs(title = "Organization Size Over Time",
+       x = "Week", y = "Number of Employees") +
+  theme_minimal()
+```
+
+### Example 2: High-Turnover Environment
+
+Simulating an organization with challenging conditions:
+
+```r
+# Configure high-turnover parameters
+high_turnover_params <- list(
+  turnover_threshold = -3,      # Low satisfaction tolerance
+  growth_rate = 0.05,          # Aggressive hiring
+  n_interactions_per_step = 2,  # Limited interactions
+  interaction_window = 5        # Short memory
+)
+
+# Run simulation
+volatile_results <- run_asa_simulation(
+  n_steps = 260,
+  initial_size = 50,
+  params = high_turnover_params
+)
+
+# Analyze turnover patterns
+library(dplyr)
+turnover_analysis <- volatile_results$metrics %>%
+  mutate(
+    period = ceiling(time / 13),  # Quarterly
+    size_change = size - lag(size, default = 50)
+  ) %>%
+  group_by(period) %>%
+  summarise(
+    avg_size = mean(size),
+    total_turnover = sum(size_change[size_change < 0]),
+    turnover_rate = abs(total_turnover) / avg_size
+  )
+
+print(turnover_analysis)
+```
+
+### Example 3: Diversity-Focused Hiring
+
+Testing different selection strategies:
+
+```r
+# Compare selection strategies
+strategies <- c("conscientiousness", "fit", "random")
+strategy_results <- list()
+
+for (strategy in strategies) {
+  set.seed(123)  # For comparability
+  
+  results <- run_asa_simulation(
+    n_steps = 156,  # 3 years
+    initial_size = 100,
+    params = list(
+      selection_criteria = strategy,
+      growth_rate = 0.02
+    ),
+    verbose = FALSE
+  )
+  
+  strategy_results[[strategy]] <- results$metrics %>%
+    mutate(strategy = strategy)
+}
+
+# Combine and plot
+library(tidyr)
+combined_results <- bind_rows(strategy_results)
+
+ggplot(combined_results, aes(x = time, y = identity_diversity, 
+                             color = strategy)) +
+  geom_line(size = 1) +
+  labs(title = "Identity Diversity by Selection Strategy",
+       x = "Time", y = "Shannon Diversity Index") +
+  theme_minimal() +
+  scale_color_brewer(palette = "Set1")
+```
+
+## Advanced Examples
+
+### Example 4: Parameter Sensitivity Analysis
+
+Testing how different parameters affect outcomes:
+
+```r
+# Define parameter grid
+param_grid <- expand.grid(
+  growth_rate = c(0.01, 0.02, 0.05),
+  turnover_threshold = c(-10, -5, -2),
+  n_interactions = c(5, 10, 20)
+)
+
+# Run simulations
+sensitivity_results <- list()
+
+for (i in 1:nrow(param_grid)) {
+  params <- list(
+    growth_rate = param_grid$growth_rate[i],
+    turnover_threshold = param_grid$turnover_threshold[i],
+    n_interactions_per_step = param_grid$n_interactions[i]
+  )
+  
+  results <- run_asa_simulation(
+    n_steps = 104,  # 2 years
+    initial_size = 100,
+    params = params,
+    verbose = FALSE
+  )
+  
+  # Extract key metrics
+  final_state <- tail(results$metrics, 1)
+  sensitivity_results[[i]] <- data.frame(
+    param_grid[i,],
+    final_size = final_state$size,
+    final_satisfaction = final_state$avg_satisfaction,
+    final_diversity = final_state$identity_diversity
+  )
+}
+
+# Analyze results
+sensitivity_df <- bind_rows(sensitivity_results)
+
+# Create heatmap
+library(reshape2)
+size_matrix <- dcast(sensitivity_df, 
+                     growth_rate ~ turnover_threshold, 
+                     value.var = "final_size",
+                     fun.aggregate = mean)
+
+# Plot heatmap
+ggplot(melt(size_matrix), aes(x = factor(turnover_threshold), 
+                               y = factor(growth_rate), 
+                               fill = value)) +
+  geom_tile() +
+  geom_text(aes(label = round(value))) +
+  scale_fill_gradient2(low = "red", mid = "white", high = "green", 
+                       midpoint = 100) +
+  labs(title = "Final Organization Size by Parameters",
+       x = "Turnover Threshold", y = "Growth Rate") +
+  theme_minimal()
+```
+
+### Example 5: Intervention Analysis
+
+Testing organizational interventions:
+
+```r
+# Baseline simulation
+baseline <- run_asa_simulation(
+  n_steps = 104,
+  initial_size = 100,
+  params = list(tag = "baseline"),
+  verbose = FALSE
+)
+
+# Intervention: Improve interaction quality
+intervention <- run_asa_simulation(
+  n_steps = 104,
+  initial_size = 100,
+  params = list(
+    n_interactions_per_step = 15,  # Triple interactions
+    interaction_window = 20,       # Longer memory
+    tag = "intervention"
+  ),
+  verbose = FALSE
+)
+
+# Compare results
+comparison <- bind_rows(
+  baseline$metrics %>% mutate(scenario = "Baseline"),
+  intervention$metrics %>% mutate(scenario = "Intervention")
+)
+
+# Plot satisfaction trajectories
+ggplot(comparison, aes(x = time, y = avg_satisfaction, 
+                       color = scenario)) +
+  geom_line(size = 1.2) +
+  labs(title = "Impact of Increased Interactions on Satisfaction",
+       x = "Time", y = "Average Satisfaction") +
+  theme_minimal() +
+  scale_color_manual(values = c("Baseline" = "gray50", 
+                               "Intervention" = "darkgreen"))
+```
+
+## Case Studies
+
+### Case Study 1: Startup Growth Dynamics
+
+Modeling a rapidly growing startup:
+
+```r
+# Startup parameters
+startup_params <- list(
+  # Aggressive growth
+  growth_rate = 0.10,
+  hiring_frequency = 2,
+  n_new_applicants = 200,
+  
+  # Culture-focused selection
+  selection_criteria = "fit",
+  
+  # High interaction environment
+  n_interactions_per_step = 20,
+  interaction_window = 20,
+  
+  # Moderate turnover tolerance
+  turnover_threshold = -5
+)
+
+# Run 2-year simulation
+startup_sim <- run_asa_simulation(
+  n_steps = 104,
+  initial_size = 10,  # Small founding team
+  params = startup_params
+)
+
+# Analyze growth phases
+growth_analysis <- startup_sim$metrics %>%
+  mutate(
+    phase = case_when(
+      time <= 26 ~ "Founding",
+      time <= 52 ~ "Early Growth",
+      time <= 78 ~ "Scaling",
+      TRUE ~ "Maturing"
+    )
+  ) %>%
+  group_by(phase) %>%
+  summarise(
+    start_size = first(size),
+    end_size = last(size),
+    growth_rate = (end_size - start_size) / start_size,
+    avg_satisfaction = mean(avg_satisfaction),
+    avg_diversity = mean(identity_diversity)
+  )
+
+print(growth_analysis)
+
+# Visualize growth trajectory
+ggplot(startup_sim$metrics, aes(x = time)) +
+  geom_line(aes(y = size), color = "blue", size = 1) +
+  geom_line(aes(y = avg_satisfaction * 100), 
+            color = "green", size = 1, linetype = "dashed") +
+  scale_y_continuous(
+    name = "Organization Size",
+    sec.axis = sec_axis(~./100, name = "Avg Satisfaction")
+  ) +
+  labs(title = "Startup Growth and Satisfaction",
+       x = "Week") +
+  theme_minimal()
+```
+
+### Case Study 2: Merger Integration
+
+Simulating the integration of two organizational cultures:
+
+```r
+# Create two distinct organizations
+org_a <- create_organization(
+  n_agents = 80,
+  identity_categories = c("A", "A", "A", "B", "B")  # A-dominant
+)
+
+org_b <- create_organization(
+  n_agents = 60,
+  identity_categories = c("C", "C", "D", "D", "E")  # Different culture
+)
+
+# Merge organizations
+merged_org <- rbind(org_a, org_b)
+merged_org$agent_id <- paste0("merged_", seq_len(nrow(merged_org)))
+
+# Run post-merger simulation
+merger_params <- list(
+  growth_rate = 0,  # No hiring during integration
+  n_interactions_per_step = 15,  # Encourage mixing
+  turnover_threshold = -8  # Some tolerance for dissatisfaction
+)
+
+# Initialize properly
+source("simulation/engine.R")
+merger_sim <- list(
+  final_organization = merged_org,
+  metrics = data.table(),
+  parameters = merger_params
+)
+
+# Track cultural integration
+integration_metrics <- data.frame()
+
+for (month in 1:12) {
+  # Run one month
+  month_results <- run_asa_simulation(
+    n_steps = 4,
+    initial_size = nrow(merged_org),
+    params = merger_params,
+    verbose = FALSE
+  )
+  
+  # Calculate integration index
+  interactions <- initialize_interactions(month_results$final_organization)
+  
+  # Store metrics
+  integration_metrics <- rbind(
+    integration_metrics,
+    data.frame(
+      month = month,
+      size = get_organization_size(month_results$final_organization),
+      diversity = calculate_identity_diversity(month_results$final_organization),
+      satisfaction = calculate_average_satisfaction(month_results$final_organization)
+    )
+  )
+  
+  # Update for next iteration
+  merged_org <- month_results$final_organization
+}
+
+# Plot integration progress
+ggplot(integration_metrics, aes(x = month)) +
+  geom_line(aes(y = satisfaction), color = "blue", size = 1) +
+  geom_line(aes(y = diversity), color = "green", size = 1) +
+  geom_point(aes(y = satisfaction), color = "blue") +
+  geom_point(aes(y = diversity), color = "green") +
+  labs(title = "Post-Merger Integration Metrics",
+       x = "Months Post-Merger",
+       y = "Metric Value") +
+  theme_minimal()
+```
+
+### Case Study 3: Remote Work Transition
+
+Modeling the impact of remote work on organizational dynamics:
+
+```r
+# Pre-remote baseline
+pre_remote <- run_asa_simulation(
+  n_steps = 52,
+  initial_size = 200,
+  params = list(
+    n_interactions_per_step = 10,
+    interaction_window = 10
+  ),
+  verbose = FALSE
+)
+
+# Remote work scenario (reduced interactions)
+remote_params <- list(
+  n_interactions_per_step = 3,  # Fewer spontaneous interactions
+  interaction_window = 15,      # But longer-lasting connections
+  turnover_threshold = -7,      # Slightly more tolerance
+  growth_rate = 0.005          # Slower growth
+)
+
+remote_sim <- run_asa_simulation(
+  n_steps = 52,
+  initial_size = 200,
+  params = remote_params,
+  verbose = FALSE
+)
+
+# Hybrid scenario
+hybrid_params <- list(
+  n_interactions_per_step = 6,  # Moderate interactions
+  interaction_window = 12,
+  turnover_threshold = -8,
+  growth_rate = 0.015
+)
+
+hybrid_sim <- run_asa_simulation(
+  n_steps = 52,
+  initial_size = 200,
+  params = hybrid_params,
+  verbose = FALSE
+)
+
+# Compare scenarios
+scenarios <- bind_rows(
+  pre_remote$metrics %>% mutate(scenario = "Office"),
+  remote_sim$metrics %>% mutate(scenario = "Remote"),
+  hybrid_sim$metrics %>% mutate(scenario = "Hybrid")
+)
+
+# Multi-panel comparison
+library(gridExtra)
+
+p1 <- ggplot(scenarios, aes(x = time, y = avg_satisfaction, 
+                            color = scenario)) +
+  geom_line(size = 1) +
+  labs(title = "Satisfaction", y = "Average") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+p2 <- ggplot(scenarios, aes(x = time, y = identity_diversity, 
+                            color = scenario)) +
+  geom_line(size = 1) +
+  labs(title = "Diversity", y = "Shannon Index") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+p3 <- ggplot(scenarios, aes(x = time, y = size, 
+                            color = scenario)) +
+  geom_line(size = 1) +
+  labs(title = "Organization Size", y = "Employees") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+grid.arrange(p1, p2, p3, ncol = 3)
+```
+
+## Best Practices from Examples
+
+### 1. Parameter Selection
+- Start with default values and adjust gradually
+- Consider realistic ranges for your context
+- Document parameter choices and rationale
+
+### 2. Analysis Approach
+- Always visualize time series data
+- Compare multiple scenarios
+- Calculate summary statistics for key periods
+- Consider both individual and aggregate metrics
+
+### 3. Validation
+- Run multiple replications with different seeds
+- Check for sensitivity to initial conditions
+- Validate against known organizational patterns
+- Test extreme parameter values
+
+### 4. Interpretation
+- Remember agent-based models show possibilities, not predictions
+- Focus on patterns and dynamics rather than exact values
+- Consider emergent behaviors not explicitly programmed
+- Use results to generate hypotheses for further testing
+
+## Code Snippets for Common Tasks
+
+### Batch Processing
+```r
+# Run multiple replications
+run_replications <- function(n_reps, params) {
+  results <- list()
+  for (i in 1:n_reps) {
+    set.seed(i)
+    results[[i]] <- run_asa_simulation(params = params)
+  }
+  return(results)
+}
+```
+
+### Custom Metrics
+```r
+# Add custom metric calculation
+calculate_custom_metric <- function(org) {
+  # Example: Personality homogeneity
+  personality_vars <- c("openness", "conscientiousness", 
+                       "extraversion", "agreeableness", 
+                       "emotional_stability")
+  
+  homogeneity <- org[is_active == TRUE, 
+                     lapply(.SD, function(x) 1/sd(x)), 
+                     .SDcols = personality_vars]
+  
+  return(mean(as.numeric(homogeneity)))
+}
+```
+
+### Visualization Helpers
+```r
+# Create standard plot theme
+theme_asa <- function() {
+  theme_minimal() +
+    theme(
+      plot.title = element_text(face = "bold"),
+      legend.position = "bottom",
+      panel.grid.minor = element_blank()
+    )
+}
+
+# Time series with confidence bands
+plot_with_ci <- function(results_list, metric) {
+  # Calculate mean and CI across replications
+  combined <- bind_rows(lapply(seq_along(results_list), 
+                              function(i) {
+    results_list[[i]]$metrics %>% 
+      mutate(rep = i)
+  }))
+  
+  summary_stats <- combined %>%
+    group_by(time) %>%
+    summarise(
+      mean_val = mean(get(metric)),
+      lower_ci = quantile(get(metric), 0.025),
+      upper_ci = quantile(get(metric), 0.975)
+    )
+  
+  ggplot(summary_stats, aes(x = time)) +
+    geom_ribbon(aes(ymin = lower_ci, ymax = upper_ci), 
+                alpha = 0.3) +
+    geom_line(aes(y = mean_val), size = 1) +
+    labs(y = metric) +
+    theme_asa()
+}
+```

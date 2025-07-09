@@ -1,0 +1,27 @@
+bookdown::gitbook:
+  css: style.css
+  config:
+    toc:
+      before: |
+        <li><a href="./">ASA ABM v2 Documentation</a></li>
+      after: |
+        <li><a href="https://github.com/your-repo/asa-abm-v2" target="blank">GitHub</a></li>
+    download: ["pdf", "epub"]
+    edit: null
+    sharing:
+      facebook: false
+      github: true
+      twitter: false
+      linkedin: false
+      weibo: false
+      instapaper: false
+      vk: false
+      whatsapp: false
+      all: false
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  citation_package: natbib
+  keep_tex: no
+bookdown::epub_book: default

@@ -1,0 +1,301 @@
+# ODD Protocol {#odd-protocol}
+
+This chapter presents the ASA ABM v2 following the ODD (Overview, Design concepts, Details) protocol (Grimm et al., 2010, 2020). The ODD protocol provides a standardized way to describe agent-based models.
+
+## 1. Purpose and Patterns
+
+### 1.1 Purpose
+
+The purpose of this model is to simulate the Attraction-Selection-Attrition (ASA) processes in organizations to understand:
+
+1. **Primary Questions:**
+   - How do organizations evolve toward homogeneity through ASA processes?
+   - What role do individual preferences (homophily vs. diversity) play in organizational composition?
+   - How do different selection strategies affect long-term organizational diversity?
+   - What are the dynamics of satisfaction and turnover in evolving organizations?
+
+2. **Secondary Questions:**
+   - How does interaction frequency affect organizational culture formation?
+   - What is the relationship between personality diversity and organizational stability?
+   - How do hiring cycles and growth rates influence organizational evolution?
+
+### 1.2 Patterns
+
+The model aims to reproduce and explain the following patterns observed in organizational research:
+
+1. **Organizational Homogenization**: Organizations tend to become more homogeneous over time
+2. **Fit-Satisfaction-Retention Spiral**: Better fitting employees are more satisfied and stay longer
+3. **Diversity-Performance Relationship**: Complex relationships between diversity and organizational outcomes
+4. **Turnover Cascades**: Departures can trigger additional turnover through social effects
+
+## 2. Entities, State Variables, and Scales
+
+### 2.1 Entities
+
+The model contains three types of entities:
+
+1. **Agents (Employees and Applicants)**
+   - Represent individuals who work in or apply to the organization
+   - Possess personality traits, identity, and preferences
+   - Can transition from applicant to employee
+
+2. **Organization**
+   - Collection of agents marked as active employees
+   - Emergent properties calculated from constituent agents
+
+3. **Interactions**
+   - Pairwise encounters between agents
+   - Store history of social experiences
+
+### 2.2 State Variables
+
+#### Agent-level State Variables
+
+| Variable | Type | Range/Values | Description |
+|----------|------|--------------|-------------|
+| agent_id | character | Unique string | Unique identifier |
+| identity_category | character | "A"-"E" (default) | Categorical identity |
+| openness | numeric | ~N(0,1) | Big Five personality trait |
+| conscientiousness | numeric | ~N(0,1) | Big Five personality trait |
+| extraversion | numeric | ~N(0,1) | Big Five personality trait |
+| agreeableness | numeric | ~N(0,1) | Big Five personality trait |
+| emotional_stability | numeric | ~N(0,1) | Big Five personality trait |
+| homophily_preference | numeric | ~N(0,1) | Preference for similarity |
+| diversity_preference | numeric | ~N(0,1) | Preference for diversity |
+| attraction | numeric | Real | Attraction to organization |
+| satisfaction | numeric | Real | Current satisfaction level |
+| tenure | integer | 0+ | Time steps in organization |
+| hire_date | integer | 0+ | Time step when hired |
+| is_active | logical | TRUE/FALSE | Currently employed |
+| application_time | integer | 0+ | Time as applicant (applicants only) |
+
+#### Organization-level Variables (Emergent)
+
+| Variable | Type | Description |
+|----------|------|-------------|
+| size | integer | Number of active agents |
+| identity_diversity | numeric | Shannon entropy of identities |
+| avg_satisfaction | numeric | Mean satisfaction of active agents |
+| personality_means | numeric vector | Mean of each Big Five trait |
+| personality_sds | numeric vector | SD of each Big Five trait |
+
+#### Global Variables
+
+| Variable | Type | Description |
+|----------|------|-------------|
+| time | integer | Current simulation step |
+| parameters | list | Simulation parameters |
+
+### 2.3 Scales
+
+- **Temporal Scale**: 
+  - One time step typically represents one week
+  - Simulations typically run for 260-520 steps (1-2 years)
+  - Hiring cycles occur every 4-12 steps
+
+- **Organizational Scale**:
+  - Organizations range from 10 to 10,000+ agents
+  - Typical simulations use 100-1,000 agents
+
+## 3. Process Overview and Scheduling
+
+### 3.1 Process Overview
+
+Each time step consists of the following processes in order:
+
+1. **Update Tenure**: Increment tenure for all active agents
+2. **Execute Interactions**: Agents interact with randomly selected partners
+3. **Update Satisfaction**: Calculate new satisfaction based on interactions
+4. **Execute Turnover**: Remove agents below satisfaction threshold
+5. **Hiring Cycle** (periodic):
+   - Age applicant pool
+   - Recruit new applicants
+   - Calculate applicant attraction
+   - Filter applicant pool
+   - Select and hire new employees
+6. **Calculate Metrics**: Record organizational state
+
+### 3.2 Scheduling
+
+- **Sequential Processing**: Processes execute in the order listed above
+- **Synchronous Updates**: All agents update simultaneously within each process
+- **Discrete Time**: All events occur at discrete time steps
+- **Conditional Execution**: Hiring only occurs at specified intervals
+
+## 4. Design Concepts
+
+### 4.1 Basic Principles
+
+The model implements the ASA framework through:
+- **Attraction**: Differential attraction based on fit
+- **Selection**: Preferential hiring of fitting individuals
+- **Attrition**: Satisfaction-based turnover
+
+### 4.2 Emergence
+
+The following properties emerge from individual-level behaviors:
+- Organizational culture (personality profile)
+- Identity composition and diversity
+- Turnover patterns and rates
+- Social network properties (implicit in interactions)
+
+### 4.3 Adaptation
+
+Agents adapt through:
+- Satisfaction updates based on experiences
+- Turnover decisions based on satisfaction
+- No learning or trait changes (fixed personalities)
+
+### 4.4 Objectives
+
+Agents seek to:
+- Applicants: Join organizations with high attraction
+- Employees: Maintain satisfaction above threshold
+- Organization: Hire best-fitting applicants (implicit)
+
+### 4.5 Learning
+
+No explicit learning in current model. Agents have fixed traits and preferences.
+
+### 4.6 Prediction
+
+Agents implicitly predict:
+- Applicants assess organizational fit before joining
+- Employees evaluate satisfaction trends (through threshold mechanism)
+
+### 4.7 Sensing
+
+Agents can sense:
+- Organizational identity composition (for attraction calculation)
+- Interaction partner characteristics (during interactions)
+- Own satisfaction level
+
+### 4.8 Interaction
+
+- **Direct**: Pairwise interactions between agents
+- **Indirect**: Through organizational composition effects
+- **Interaction Selection**: Random pairing (extensible to networks)
+
+### 4.9 Stochasticity
+
+Stochastic elements include:
+- Agent trait initialization (~N(0,1))
+- Identity assignment (uniform random)
+- Interaction partner selection (random)
+- Interaction valence noise (scaled by emotional stability)
+- Hiring decisions (when using random selection)
+
+### 4.10 Collectives
+
+The organization represents a collective with emergent properties calculated from member characteristics.
+
+### 4.11 Observation
+
+The model collects:
+- Time series of organizational metrics
+- Final organization state
+- Periodic snapshots (configurable)
+- Interaction histories
+
+## 5. Initialization
+
+### 5.1 Initial Conditions
+
+Default initialization:
+```r
+# Create initial organization
+initial_size = 100
+identity_categories = c("A", "B", "C", "D", "E")
+
+# Agents initialized with:
+- Random identities (uniform distribution)
+- Personality traits ~ N(0,1)
+- Preferences ~ N(0,1)
+- Attraction = 0
+- Satisfaction = 0
+- Tenure = 0
+- All marked as active
+```
+
+### 5.2 Input Data
+
+The model can accept:
+- Custom identity category definitions
+- Specified initial organization size
+- Parameter configurations
+- Random seed for reproducibility
+
+## 6. Input Data
+
+No external data files required. All agent characteristics generated stochastically during initialization.
+
+## 7. Submodels
+
+### 7.1 Attraction Calculation
+
+**For Applicants:**
+```
+Attraction = (HomophilyPref × PropSameIdentity) + 
+             (DiversityPref × DiversityIndex)
+```
+
+### 7.2 Interaction Valence
+
+**When agents i and j interact:**
+```
+Valence_ij = -|Extraversion_i - Extraversion_j| +
+             (Conscientiousness_i - Extraversion_j) +
+             Agreeableness_i +
+             IdentityBonus + 
+             ε
+             
+Where:
+- IdentityBonus = HomophilyPref_i if same identity, 
+                  DiversityPref_i if different
+- ε ~ N(0, |EmotionalStability_i|)
+```
+
+### 7.3 Satisfaction Update
+
+```
+Satisfaction_i = Attraction_i +
+                 mean(RecentInteractionValences) +
+                 (HomophilyPref_i × PropSameIdentity) +
+                 (DiversityPref_i × DiversityIndex) +
+                 EmotionalStability_i
+```
+
+### 7.4 Turnover Decision
+
+**Threshold Model:**
+```
+if (Satisfaction < TurnoverThreshold) then Leave
+```
+
+**Probabilistic Model:**
+```
+P(Leave) = BaseTurnoverRate / (1 + exp(Satisfaction × Weight))
+```
+
+### 7.5 Hiring Process
+
+1. Rank applicants by criterion (conscientiousness/fit/random)
+2. Select top N where N = CurrentSize × GrowthRate
+3. Convert selected applicants to employees
+4. Add to organization
+
+### 7.6 Identity Diversity
+
+**Shannon Entropy:**
+```
+H = -Σ(p_i × log(p_i))
+```
+Where p_i is the proportion of identity category i.
+
+## References
+
+- Grimm, V., Berger, U., Bastiansen, F., Eliassen, S., Ginot, V., Giske, J., ... & DeAngelis, D. L. (2006). A standard protocol for describing individual-based and agent-based models. *Ecological Modelling*, 198(1-2), 115-126.
+
+- Grimm, V., Berger, U., DeAngelis, D. L., Polhill, J. G., Giske, J., & Railsback, S. F. (2010). The ODD protocol: A review and first update. *Ecological Modelling*, 221(23), 2760-2768.
+
+- Grimm, V., Railsback, S. F., Vincenot, C. E., Berger, U., Gallagher, C., DeAngelis, D. L., ... & Ayllón, D. (2020). The ODD protocol for describing agent-based and other simulation models: A second update to improve clarity, replication, and structural realism. *Journal of Artificial Societies and Social Simulation*, 23(2), 7.

@@ -1,0 +1,16 @@
+book_filename: "asa-abm-v2-documentation"
+language:
+  ui:
+    chapter_name: "Chapter "
+delete_merged_file: true
+output_dir: "../documentation"
+rmd_files: [
+  "index.Rmd",
+  "01-getting-started.Rmd",
+  "02-theoretical-background.Rmd", 
+  "03-architecture.Rmd",
+  "04-user-guide.Rmd",
+  "05-ODD-protocol.Rmd",
+  "06-api-reference.Rmd",
+  "07-examples.Rmd"
+]

@@ -1,0 +1,367 @@
+# User Guide {#user-guide}
+
+This chapter provides detailed guidance on running simulations, configuring parameters, and interpreting results.
+
+## Running Your First Simulation
+
+### Basic Simulation
+
+The simplest way to run a simulation uses all default parameters:
+
+```r
+# Load the simulation engine
+source("simulation/engine.R")
+
+# Run with defaults
+results <- run_asa_simulation()
+```
+
+### Understanding the Output
+
+The simulation returns a list with four components:
+
+```r
+results$final_organization  # Final state data.table
+results$metrics            # Time series metrics
+results$parameters         # Parameters used
+results$organization_snapshots  # Periodic snapshots
+```
+
+## Simulation Parameters
+
+### Overview of All Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `identity_categories` | character vector | c("A","B","C","D","E") | Possible identity categories |
+| `growth_rate` | numeric | 0.01 | Proportion to hire each cycle |
+| `hiring_frequency` | integer | 12 | Steps between hiring cycles |
+| `selection_criteria` | character | "conscientiousness" | How to select hires |
+| `n_interactions_per_step` | integer | 5 | Interactions per agent per step |
+| `interaction_window` | integer | 10 | Steps to consider for satisfaction |
+| `turnover_threshold` | numeric | -10 | Satisfaction threshold for leaving |
+| `turnover_type` | character | "threshold" | Type of turnover model |
+| `base_turnover_rate` | numeric | 0.05 | Base probability of leaving |
+| `n_new_applicants` | integer | 50 | New applicants per hiring cycle |
+| `applicant_attraction_threshold` | numeric | -0.5 | Min attraction to stay in pool |
+| `max_application_time` | integer | 12 | Steps before application expires |
+
+### Detailed Parameter Guide
+
+#### Identity Categories
+Controls the types of identities agents can have:
+```r
+# Default categories
+params <- list(identity_categories = c("A", "B", "C", "D", "E"))
+
+# Custom categories (e.g., departments)
+params <- list(identity_categories = c("Engineering", "Sales", 
+                                      "Marketing", "Operations"))
+```
+
+#### Growth and Hiring
+Configure organizational growth:
+```r
+params <- list(
+  growth_rate = 0.02,        # 2% growth per cycle
+  hiring_frequency = 4,      # Hire every 4 steps
+  n_new_applicants = 100,    # Large applicant pool
+  selection_criteria = "fit" # Select based on fit
+)
+```
+
+Selection criteria options:
+- `"conscientiousness"`: Highest conscientiousness scores
+- `"fit"`: Best person-organization fit
+- `"random"`: Random selection (baseline)
+
+#### Interaction Settings
+Control how agents interact:
+```r
+params <- list(
+  n_interactions_per_step = 10,  # More interactions
+  interaction_window = 20        # Longer memory
+)
+```
+
+#### Turnover Configuration
+Two turnover models available:
+
+**Threshold Model:**
+```r
+params <- list(
+  turnover_type = "threshold",
+  turnover_threshold = -5  # Leave if satisfaction < -5
+)
+```
+
+**Probabilistic Model:**
+```r
+params <- list(
+  turnover_type = "probabilistic",
+  base_turnover_rate = 0.10  # 10% base turnover
+)
+```
+
+## Common Simulation Scenarios
+
+### Scenario 1: High-Growth Startup
+```r
+startup_params <- list(
+  growth_rate = 0.10,           # 10% growth per month
+  hiring_frequency = 4,         # Weekly hiring
+  selection_criteria = "fit",   # Culture fit important
+  turnover_threshold = -3,      # Low tolerance for dissatisfaction
+  n_new_applicants = 200        # Large applicant pool
+)
+
+results <- run_asa_simulation(
+  n_steps = 260,
+  initial_size = 20,
+  params = startup_params
+)
+```
+
+### Scenario 2: Stable Corporation
+```r
+corp_params <- list(
+  growth_rate = 0.005,          # 0.5% growth per quarter
+  hiring_frequency = 12,        # Monthly hiring
+  selection_criteria = "conscientiousness",
+  turnover_type = "probabilistic",
+  base_turnover_rate = 0.02    # 2% monthly turnover
+)
+
+results <- run_asa_simulation(
+  n_steps = 520,
+  initial_size = 500,
+  params = corp_params
+)
+```
+
+### Scenario 3: Diversity-Focused Organization
+```r
+diversity_params <- list(
+  growth_rate = 0.02,
+  selection_criteria = "random",  # Reduce selection bias
+  n_interactions_per_step = 20,   # Increase mixing
+  interaction_window = 30         # Longer relationship building
+)
+
+# Also modify agent preferences
+# (Requires custom initialization - see Developer Guide)
+```
+
+## Analyzing Results
+
+### Time Series Analysis
+```r
+library(ggplot2)
+library(dplyr)
+
+# Calculate moving averages
+results$metrics %>%
+  mutate(
+    ma_satisfaction = zoo::rollmean(avg_satisfaction, 10, fill = NA),
+    ma_size = zoo::rollmean(size, 10, fill = NA)
+  ) %>%
+  ggplot(aes(x = time)) +
+  geom_line(aes(y = avg_satisfaction), alpha = 0.3) +
+  geom_line(aes(y = ma_satisfaction), color = "blue", size = 1)
+```
+
+### Identity Dynamics
+```r
+# Extract identity proportions over time
+identity_props <- results$organization_snapshots %>%
+  lapply(function(snapshot) {
+    snapshot[is_active == TRUE, .N, by = identity_category] %>%
+      mutate(prop = N / sum(N), 
+             time = snapshot$time[1])
+  }) %>%
+  bind_rows()
+
+# Plot identity evolution
+ggplot(identity_props, aes(x = time, y = prop, color = identity_category)) +
+  geom_line(size = 1) +
+  labs(title = "Identity Category Evolution",
+       y = "Proportion")
+```
+
+### Turnover Analysis
+```r
+# Calculate turnover rates
+turnover_analysis <- results$metrics %>%
+  mutate(
+    period = floor(time / 12),  # Monthly periods
+    employees_start = lag(size, default = 100)
+  ) %>%
+  group_by(period) %>%
+  summarise(
+    turnover_count = sum(employees_start - size + lag(size - employees_start)),
+    avg_size = mean(size),
+    turnover_rate = turnover_count / avg_size
+  )
+```
+
+## Saving and Loading Results
+
+### Saving Simulation Output
+```r
+# Save with automatic file naming
+save_simulation_results(results, "my_simulation")
+
+# Creates:
+# - my_simulation_metrics.csv
+# - my_simulation_params.rds
+# - my_simulation_final_org.csv
+# - my_simulation_snapshots.rds (if requested)
+```
+
+### Loading Previous Results
+```r
+# Load saved results
+metrics <- fread("my_simulation_metrics.csv")
+params <- readRDS("my_simulation_params.rds")
+final_org <- fread("my_simulation_final_org.csv")
+
+# Recreate results object
+results <- list(
+  metrics = metrics,
+  parameters = params,
+  final_organization = final_org
+)
+```
+
+## Batch Simulations
+
+### Parameter Sweeps
+```r
+# Define parameter grid
+param_grid <- expand.grid(
+  growth_rate = c(0.01, 0.02, 0.05),
+  turnover_threshold = c(-10, -5, -2),
+  selection_criteria = c("conscientiousness", "fit", "random")
+)
+
+# Run simulations
+all_results <- list()
+for(i in 1:nrow(param_grid)) {
+  params <- as.list(param_grid[i,])
+  
+  results <- run_asa_simulation(
+    n_steps = 260,
+    initial_size = 100,
+    params = params,
+    verbose = FALSE
+  )
+  
+  all_results[[i]] <- results$metrics %>%
+    mutate(
+      growth_rate = params$growth_rate,
+      turnover_threshold = params$turnover_threshold,
+      selection_criteria = params$selection_criteria,
+      run_id = i
+    )
+}
+
+# Combine results
+combined_results <- bind_rows(all_results)
+```
+
+### Replication Studies
+```r
+# Run multiple replications
+n_replications <- 10
+replications <- list()
+
+for(rep in 1:n_replications) {
+  set.seed(rep)  # Different random seed
+  
+  results <- run_asa_simulation(
+    n_steps = 260,
+    initial_size = 100,
+    params = my_params
+  )
+  
+  replications[[rep]] <- results$metrics %>%
+    mutate(replication = rep)
+}
+
+# Analyze variance across replications
+bind_rows(replications) %>%
+  group_by(time) %>%
+  summarise(
+    mean_size = mean(size),
+    sd_size = sd(size),
+    mean_satisfaction = mean(avg_satisfaction),
+    sd_satisfaction = sd(avg_satisfaction)
+  )
+```
+
+## Performance Tips
+
+### Memory Management
+```r
+# For large simulations, reduce snapshot frequency
+results <- run_asa_simulation(
+  n_steps = 1000,
+  initial_size = 5000,
+  params = list(
+    snapshot_frequency = 50  # Only save every 50 steps
+  )
+)
+
+# Clear memory between runs
+rm(results)
+gc()
+```
+
+### Speed Optimization
+```r
+# Reduce interaction frequency for faster runs
+fast_params <- list(
+  n_interactions_per_step = 2,  # Fewer interactions
+  interaction_window = 5        # Shorter memory
+)
+
+# Profile simulation performance
+library(profvis)
+profvis({
+  results <- run_asa_simulation(n_steps = 100)
+})
+```
+
+## Troubleshooting
+
+### Common Issues
+
+**No hiring occurring:**
+- Check `growth_rate` > 0
+- Verify `hiring_frequency` aligns with `n_steps`
+- Ensure applicant pool is not empty
+
+**Rapid organization collapse:**
+- Increase `turnover_threshold` (less negative)
+- Reduce `base_turnover_rate`
+- Check satisfaction calculations
+
+**Unrealistic homogenization:**
+- Increase `n_interactions_per_step`
+- Use `selection_criteria = "random"`
+- Verify diversity preferences
+
+### Debugging Tools
+```r
+# Enable detailed logging
+debug_results <- run_asa_simulation(
+  n_steps = 20,
+  initial_size = 10,
+  verbose = TRUE,
+  params = list(debug = TRUE)
+)
+
+# Inspect specific time points
+time_10 <- results$organization_snapshots[[1]]
+summary(time_10)
+```

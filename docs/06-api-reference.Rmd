@@ -1,0 +1,695 @@
+# API Reference {#api-reference}
+
+This chapter provides detailed documentation for all functions in the ASA ABM v2. Functions are organized by module with complete specifications.
+
+## Core Modules
+
+### core/organization.R
+
+Functions for creating and managing organizations.
+
+#### create_organization()
+
+Create an organization data.table with agents.
+
+**Usage**
+```r
+create_organization(n_agents = 100, 
+                   identity_categories = c("A", "B", "C", "D", "E"))
+```
+
+**Arguments**
+- `n_agents`: Number of agents to create (default: 100)
+- `identity_categories`: Vector of possible identity categories
+
+**Value**
+
+Returns a data.table with columns:
+- `agent_id`: Unique identifier
+- `identity_category`: Agent's identity group
+- `openness`, `conscientiousness`, `extraversion`, `agreeableness`, `emotional_stability`: Big Five traits
+- `homophily_preference`, `diversity_preference`: Agent preferences
+- `attraction`, `satisfaction`: State variables
+- `tenure`, `hire_date`, `is_active`: Employment tracking
+
+**Examples**
+```r
+# Create default organization
+org <- create_organization()
+
+# Create with custom identities
+org <- create_organization(
+  n_agents = 250,
+  identity_categories = c("Tech", "Sales", "Ops")
+)
+```
+
+#### calculate_identity_diversity()
+
+Calculate Shannon entropy for identity diversity.
+
+**Usage**
+```r
+calculate_identity_diversity(org)
+```
+
+**Arguments**
+- `org`: Organization data.table
+
+**Value**
+
+Numeric Shannon entropy value (0 = homogeneous, higher = more diverse)
+
+**Examples**
+```r
+diversity <- calculate_identity_diversity(org)
+print(paste("Diversity index:", round(diversity, 3)))
+```
+
+#### calculate_personality_averages()
+
+Get mean personality traits for active employees.
+
+**Usage**
+```r
+calculate_personality_averages(org)
+```
+
+**Arguments**
+- `org`: Organization data.table
+
+**Value**
+
+Numeric vector of trait means in order: openness, conscientiousness, extraversion, agreeableness, emotional_stability
+
+#### calculate_personality_variance()
+
+Get standard deviations of personality traits.
+
+**Usage**
+```r
+calculate_personality_variance(org)
+```
+
+**Arguments**
+- `org`: Organization data.table
+
+**Value**
+
+Numeric vector of trait SDs
+
+#### get_organization_size()
+
+Count active employees.
+
+**Usage**
+```r
+get_organization_size(org)
+```
+
+**Arguments**
+- `org`: Organization data.table
+
+**Value**
+
+Integer count of employees where `is_active == TRUE`
+
+#### calculate_average_satisfaction()
+
+Compute mean satisfaction of active employees.
+
+**Usage**
+```r
+calculate_average_satisfaction(org)
+```
+
+**Arguments**
+- `org`: Organization data.table
+
+**Value**
+
+Numeric mean satisfaction score
+
+#### get_organization_summary()
+
+Generate comprehensive organizational metrics.
+
+**Usage**
+```r
+get_organization_summary(org)
+```
+
+**Arguments**
+- `org`: Organization data.table
+
+**Value**
+
+List containing:
+- `size`: Active employee count
+- `identity_diversity`: Shannon entropy
+- `avg_satisfaction`: Mean satisfaction
+- `avg_tenure`: Mean tenure
+- `personality_means`: Vector of trait means
+- `personality_sds`: Vector of trait SDs
+- `turnover_rate`: Proportion inactive
+
+---
+
+### core/agent.R
+
+Functions for managing applicant pools.
+
+#### create_applicant_pool()
+
+Generate pool of potential applicants.
+
+**Usage**
+```r
+create_applicant_pool(n_applicants = 50,
+                     identity_categories = c("A", "B", "C", "D", "E"))
+```
+
+**Arguments**
+- `n_applicants`: Number of applicants to generate
+- `identity_categories`: Possible identity categories
+
+**Value**
+
+data.table with applicant information including unique IDs and application_time field
+
+**Examples**
+```r
+# Create standard pool
+applicants <- create_applicant_pool()
+
+# Large pool with custom categories
+applicants <- create_applicant_pool(
+  n_applicants = 200,
+  identity_categories = c("Eng", "Prod", "Sales")
+)
+```
+
+#### calculate_applicant_attraction()
+
+Calculate attraction scores for applicants.
+
+**Usage**
+```r
+calculate_applicant_attraction(applicants, org)
+```
+
+**Arguments**
+- `applicants`: Applicant pool data.table
+- `org`: Organization data.table
+
+**Value**
+
+Updated applicants data.table with attraction scores based on identity fit and diversity
+
+**Examples**
+```r
+# Calculate attraction
+applicants <- calculate_applicant_attraction(applicants, org)
+
+# View top attracted applicants
+top_applicants <- applicants[order(-attraction)][1:10]
+```
+
+#### filter_applicant_pool()
+
+Remove applicants below attraction threshold.
+
+**Usage**
+```r
+filter_applicant_pool(applicants, min_attraction = -0.5)
+```
+
+**Arguments**
+- `applicants`: Applicant pool data.table
+- `min_attraction`: Minimum attraction score to remain
+
+**Value**
+
+Filtered applicants data.table
+
+#### age_applicant_pool()
+
+Increment application time and remove stale applications.
+
+**Usage**
+```r
+age_applicant_pool(applicants, max_application_time = 12)
+```
+
+**Arguments**
+- `applicants`: Applicant pool data.table
+- `max_application_time`: Maximum time before removal
+
+**Value**
+
+Updated applicants with incremented time and stale applications removed
+
+#### applicants_to_employees()
+
+Convert selected applicants to employee records.
+
+**Usage**
+```r
+applicants_to_employees(selected_applicants, hire_time = 0)
+```
+
+**Arguments**
+- `selected_applicants`: Applicants to hire
+- `hire_time`: Current simulation time
+
+**Value**
+
+data.table of new employees with employee-specific fields added
+
+---
+
+### core/interactions.R
+
+Functions for agent interactions and satisfaction.
+
+#### initialize_interactions()
+
+Create empty interactions tracking table.
+
+**Usage**
+```r
+initialize_interactions(org)
+```
+
+**Arguments**
+- `org`: Organization data.table
+
+**Value**
+
+Empty data.table with columns: focal_agent, partner_agent, time_step, valence
+
+#### execute_interactions_vectorized()
+
+Perform one round of interactions using vectorized operations.
+
+**Usage**
+```r
+execute_interactions_vectorized(org, interactions, time_step, 
+                               n_interactions = 1)
+```
+
+**Arguments**
+- `org`: Organization data.table
+- `interactions`: Interaction history table
+- `time_step`: Current simulation time
+- `n_interactions`: Interactions per agent
+
+**Value**
+
+Updated interactions table with new interaction records
+
+**Details**
+
+Interaction valence calculated as:
+```
+valence = -|ΔExtraversion| + (Consc_focal - Extra_partner) + 
+          Agree_focal + IdentityBonus + ε
+```
+
+Where IdentityBonus depends on homophily/diversity preferences and identity match.
+
+#### update_satisfaction_vectorized()
+
+Update all agent satisfaction scores efficiently.
+
+**Usage**
+```r
+update_satisfaction_vectorized(org, interactions, window_size = 10)
+```
+
+**Arguments**
+- `org`: Organization data.table
+- `interactions`: Interaction history
+- `window_size`: Recent time steps to consider
+
+**Value**
+
+Updated organization with new satisfaction scores
+
+#### get_interaction_summary()
+
+Summarize recent interaction patterns.
+
+**Usage**
+```r
+get_interaction_summary(interactions, last_n_steps = 10)
+```
+
+**Arguments**
+- `interactions`: Interaction history table
+- `last_n_steps`: Number of recent steps to analyze
+
+**Value**
+
+List with summary statistics:
+- `total_interactions`: Count
+- `avg_valence`: Mean interaction quality
+- `sd_valence`: Valence standard deviation
+- `n_unique_pairs`: Unique interaction pairs
+
+---
+
+### simulation/hiring.R
+
+Functions for recruitment and selection.
+
+#### execute_hiring()
+
+Main hiring process function.
+
+**Usage**
+```r
+execute_hiring(org, applicant_pool, growth_rate = 0.1,
+              selection_criteria = "conscientiousness", 
+              current_time = 0)
+```
+
+**Arguments**
+- `org`: Organization data.table
+- `applicant_pool`: Available applicants
+- `growth_rate`: Proportion of current size to hire
+- `selection_criteria`: "conscientiousness", "fit", or "random"
+- `current_time`: Current simulation time
+
+**Value**
+
+List containing:
+- `organization`: Updated with new hires
+- `applicant_pool`: Remaining applicants
+
+**Examples**
+```r
+# Hire based on conscientiousness
+result <- execute_hiring(org, applicants, growth_rate = 0.02)
+org <- result$organization
+applicants <- result$applicant_pool
+
+# Hire based on fit
+result <- execute_hiring(
+  org, applicants, 
+  selection_criteria = "fit"
+)
+```
+
+#### recruit_applicants()
+
+Generate new applicants or add to existing pool.
+
+**Usage**
+```r
+recruit_applicants(existing_pool = NULL, n_new_applicants = 50,
+                  identity_categories = c("A","B","C","D","E"))
+```
+
+**Arguments**
+- `existing_pool`: Current applicant pool (optional)
+- `n_new_applicants`: Number to generate
+- `identity_categories`: Possible identities
+
+**Value**
+
+Updated applicant pool data.table
+
+#### calculate_fit_metrics()
+
+Calculate person-organization fit scores.
+
+**Usage**
+```r
+calculate_fit_metrics(org, applicants)
+```
+
+**Arguments**
+- `org`: Organization data.table
+- `applicants`: Applicant pool
+
+**Value**
+
+Applicants with added fit metrics:
+- `personality_fit`: Based on trait distance
+- `preference_fit`: Based on preference alignment
+- `overall_fit`: Combined fit score
+
+#### get_hiring_stats()
+
+Generate hiring statistics.
+
+**Usage**
+```r
+get_hiring_stats(org, time_window = 12)
+```
+
+**Arguments**
+- `org`: Organization data.table
+- `time_window`: Recent period to analyze
+
+**Value**
+
+List of hiring metrics including recent hires, hiring rate, and demographics
+
+---
+
+### simulation/turnover.R
+
+Functions for managing attrition.
+
+#### execute_turnover()
+
+Remove employees below satisfaction threshold.
+
+**Usage**
+```r
+execute_turnover(org, turnover_threshold = -10, current_time = 0)
+```
+
+**Arguments**
+- `org`: Organization data.table
+- `turnover_threshold`: Satisfaction threshold
+- `current_time`: Current simulation time
+
+**Value**
+
+Updated organization with low-satisfaction employees marked inactive
+
+#### calculate_turnover_probability()
+
+Compute probabilistic turnover likelihood.
+
+**Usage**
+```r
+calculate_turnover_probability(org, base_turnover_rate = 0.05,
+                              satisfaction_weight = 0.1)
+```
+
+**Arguments**
+- `org`: Organization data.table
+- `base_turnover_rate`: Baseline probability
+- `satisfaction_weight`: Impact of satisfaction
+
+**Value**
+
+Organization with added `turnover_prob` column
+
+#### execute_probabilistic_turnover()
+
+Execute turnover based on probabilities.
+
+**Usage**
+```r
+execute_probabilistic_turnover(org, current_time = 0)
+```
+
+**Arguments**
+- `org`: Organization with turnover probabilities
+- `current_time`: Current simulation time
+
+**Value**
+
+Updated organization after probabilistic departures
+
+#### update_tenure()
+
+Increment tenure for active employees.
+
+**Usage**
+```r
+update_tenure(org, time_increment = 1)
+```
+
+**Arguments**
+- `org`: Organization data.table
+- `time_increment`: Time units to add
+
+**Value**
+
+Organization with updated tenure values
+
+#### get_turnover_stats()
+
+Calculate comprehensive turnover metrics.
+
+**Usage**
+```r
+get_turnover_stats(org, time_window = 12)
+```
+
+**Arguments**
+- `org`: Organization data.table
+- `time_window`: Period to analyze
+
+**Value**
+
+List containing:
+- Turnover counts and rates
+- Average tenure comparisons
+- Satisfaction analysis
+- Identity-specific turnover
+
+#### identify_flight_risks()
+
+Flag employees likely to leave.
+
+**Usage**
+```r
+identify_flight_risks(org, risk_threshold = 0.25)
+```
+
+**Arguments**
+- `org`: Organization data.table
+- `risk_threshold`: Satisfaction percentile threshold
+
+**Value**
+
+data.table of at-risk employees sorted by satisfaction
+
+---
+
+### simulation/engine.R
+
+Main simulation control functions.
+
+#### run_asa_simulation()
+
+Execute complete ASA simulation.
+
+**Usage**
+```r
+run_asa_simulation(n_steps = 260, initial_size = 100,
+                  params = list(), verbose = TRUE)
+```
+
+**Arguments**
+- `n_steps`: Number of time steps
+- `initial_size`: Starting organization size
+- `params`: Simulation parameters (see details)
+- `verbose`: Print progress messages
+
+**Parameters List**
+```r
+params = list(
+  identity_categories = c("A","B","C","D","E"),
+  growth_rate = 0.01,
+  hiring_frequency = 12,
+  selection_criteria = "conscientiousness",
+  n_interactions_per_step = 5,
+  interaction_window = 10,
+  turnover_threshold = -10,
+  turnover_type = "threshold",
+  base_turnover_rate = 0.05,
+  n_new_applicants = 50,
+  applicant_attraction_threshold = -0.5,
+  max_application_time = 12
+)
+```
+
+**Value**
+
+List containing:
+- `final_organization`: End state
+- `metrics`: Time series data.table
+- `parameters`: Used parameters
+- `organization_snapshots`: Periodic saves
+
+**Examples**
+```r
+# Basic simulation
+results <- run_asa_simulation()
+
+# Custom parameters
+results <- run_asa_simulation(
+  n_steps = 520,
+  initial_size = 200,
+  params = list(
+    growth_rate = 0.02,
+    turnover_type = "probabilistic"
+  )
+)
+```
+
+#### calculate_step_metrics()
+
+Compute metrics for single time step.
+
+**Usage**
+```r
+calculate_step_metrics(org, time_step)
+```
+
+**Arguments**
+- `org`: Organization data.table
+- `time_step`: Current time
+
+**Value**
+
+data.table row with comprehensive metrics
+
+#### save_simulation_results()
+
+Save simulation outputs to files.
+
+**Usage**
+```r
+save_simulation_results(results, filename = "simulation_results",
+                       save_snapshots = FALSE)
+```
+
+**Arguments**
+- `results`: Simulation results list
+- `filename`: Base filename
+- `save_snapshots`: Whether to save snapshots
+
+**Details**
+
+Creates files:
+- `{filename}_metrics.csv`
+- `{filename}_params.rds`
+- `{filename}_final_org.csv`
+- `{filename}_snapshots.rds` (optional)
+
+## Error Handling
+
+All functions validate inputs using `checkmate`:
+
+```r
+# Example validation
+assert_count(n_agents, positive = TRUE)
+assert_character(identity_categories, min.len = 1)
+assert_data_table(org)
+```
+
+## Performance Notes
+
+- Use vectorized functions for large organizations
+- Snapshots are memory-intensive; save selectively
+- Set `verbose = FALSE` for batch simulations
+- Use `data.table` syntax for custom analyses

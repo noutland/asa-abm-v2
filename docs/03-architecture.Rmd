@@ -1,0 +1,311 @@
+# Architecture Overview {#architecture}
+
+This chapter describes the technical architecture of the ASA ABM v2 system, its design principles, and component interactions.
+
+## Design Principles
+
+### 1. Performance First
+- Built on `data.table` for maximum performance in R
+- Vectorized operations wherever possible
+- Efficient memory management
+
+### 2. Modularity
+- Clear separation of concerns
+- Independent, testable components
+- Easy to extend or replace modules
+
+### 3. Scalability
+- Handles organizations from 10 to 10,000+ agents
+- Configurable detail levels
+- Memory-conscious data structures
+
+### 4. Extensibility
+- Prepared for network structures
+- Ready for hierarchical organizations
+- Plugin architecture for new features
+
+## System Architecture
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    User Interface                        │
+│              (R Scripts, Shiny Apps, etc.)              │
+└─────────────────────┬───────────────────────────────────┘
+                      │
+┌─────────────────────▼───────────────────────────────────┐
+│                 Simulation Engine                        │
+│                 (simulation/engine.R)                    │
+├─────────────────────────────────────────────────────────┤
+│  • Orchestrates simulation flow                         │
+│  • Manages time steps                                   │
+│  • Collects metrics                                     │
+│  • Handles I/O                                          │
+└─────────┬───────────────────────────────┬───────────────┘
+          │                               │
+┌─────────▼──────────┐          ┌────────▼───────────┐
+│   Core Modules     │          │ Simulation Modules │
+├────────────────────┤          ├────────────────────┤
+│ • organization.R   │          │ • hiring.R         │
+│ • agent.R         │          │ • turnover.R       │
+│ • interactions.R  │          │ • (future modules) │
+└────────────────────┘          └────────────────────┘
+```
+
+## Core Modules
+
+### organization.R
+Manages the organization data structure and organizational-level operations.
+
+**Key Functions:**
+- `create_organization()`: Initialize organization with agents
+- `calculate_identity_diversity()`: Compute diversity metrics
+- `get_organization_summary()`: Extract summary statistics
+
+**Data Structure:**
+```r
+Organization <- data.table(
+  agent_id            # Unique identifier
+  identity_category   # Categorical identity
+  openness           # Big Five traits...
+  conscientiousness
+  extraversion
+  agreeableness
+  emotional_stability
+  diversity_preference    # Preferences
+  homophily_preference
+  attraction         # State variables
+  satisfaction
+  tenure
+  hire_date         # Metadata
+  is_active
+)
+```
+
+### agent.R
+Handles individual agents and applicant pools.
+
+**Key Functions:**
+- `create_applicant_pool()`: Generate potential hires
+- `calculate_applicant_attraction()`: Compute org attraction
+- `applicants_to_employees()`: Convert hired applicants
+
+**Applicant Structure:**
+```r
+Applicant <- data.table(
+  agent_id
+  identity_category
+  [personality traits]
+  [preferences]
+  attraction
+  application_time
+)
+```
+
+### interactions.R
+Manages agent interactions and satisfaction updates.
+
+**Key Functions:**
+- `execute_interactions_vectorized()`: Parallel interaction processing
+- `update_satisfaction_vectorized()`: Batch satisfaction updates
+- `get_interaction_summary()`: Interaction statistics
+
+**Interaction Structure:**
+```r
+Interactions <- data.table(
+  focal_agent
+  partner_agent
+  time_step
+  valence
+)
+```
+
+## Simulation Modules
+
+### hiring.R
+Implements recruitment and selection processes.
+
+**Key Functions:**
+- `execute_hiring()`: Main hiring process
+- `recruit_applicants()`: Generate new applicants
+- `calculate_fit_metrics()`: Assess person-organization fit
+
+### turnover.R
+Manages attrition and retention.
+
+**Key Functions:**
+- `execute_turnover()`: Process departures
+- `calculate_turnover_probability()`: Probabilistic turnover
+- `identify_flight_risks()`: Flag at-risk employees
+
+## Data Flow
+
+### 1. Initialization Phase
+```
+create_organization() → Initial agents
+     ↓
+initialize_interactions() → Empty interaction table
+     ↓
+create_applicant_pool() → Initial applicant pool
+```
+
+### 2. Simulation Loop
+```
+For each time step:
+  ├─ update_tenure()
+  ├─ execute_interactions_vectorized()
+  ├─ update_satisfaction_vectorized()
+  ├─ execute_turnover()
+  ├─ [If hiring cycle]:
+  │   ├─ recruit_applicants()
+  │   ├─ calculate_applicant_attraction()
+  │   └─ execute_hiring()
+  └─ calculate_step_metrics()
+```
+
+### 3. Output Phase
+```
+Collect results → Save metrics
+                → Save snapshots
+                → Generate reports
+```
+
+## Performance Optimizations
+
+### Vectorization Strategy
+Instead of row-by-row operations:
+```r
+# Bad (slow)
+for(i in 1:nrow(org)) {
+  org[i, satisfaction := calculate_satisfaction(org[i,])]
+}
+
+# Good (fast)
+org[, satisfaction := base_attraction + 
+                     interaction_component + 
+                     identity_fit]
+```
+
+### Memory Management
+- Use `data.table` reference semantics
+- Selective snapshot storage
+- Efficient key indexing
+
+### Parallel Processing Preparation
+Architecture supports future parallelization:
+- Independent agent calculations
+- Batch processing design
+- Minimal shared state
+
+## Extension Points
+
+### 1. Network Integration
+```r
+# Future: interactions.R
+execute_network_interactions <- function(org, network, ...) {
+  # Use network structure instead of random pairing
+}
+```
+
+### 2. Hierarchical Organizations
+```r
+# Future: organization.R
+create_hierarchical_organization <- function(n_agents, 
+                                           n_divisions,
+                                           hierarchy_levels, ...) {
+  # Create nested structure
+}
+```
+
+### 3. Custom Selection Strategies
+```r
+# In hiring.R
+selection_strategies <- list(
+  conscientiousness = function(x) order(-x$conscientiousness),
+  fit = function(x) order(-x$overall_fit),
+  diversity = function(x) custom_diversity_selection(x),
+  # Add new strategies here
+)
+```
+
+## Configuration Management
+
+### Parameter Structure
+```r
+params <- list(
+  # Organization
+  identity_categories = c("A", "B", "C", "D", "E"),
+  
+  # Hiring
+  growth_rate = 0.01,
+  hiring_frequency = 12,
+  selection_criteria = "conscientiousness",
+  
+  # Interactions
+  n_interactions_per_step = 5,
+  interaction_window = 10,
+  
+  # Turnover
+  turnover_type = "threshold",
+  turnover_threshold = -10,
+  
+  # ... additional parameters
+)
+```
+
+### Validation
+All inputs validated using `checkmate`:
+```r
+assert_count(n_agents, positive = TRUE)
+assert_character(identity_categories, min.len = 1)
+assert_number(growth_rate, lower = 0, upper = 1)
+```
+
+## Error Handling
+
+### Defensive Programming
+```r
+# Example from hiring.R
+if (nrow(applicant_pool) == 0) {
+  return(list(organization = org, 
+              applicant_pool = applicant_pool))
+}
+```
+
+### Logging Strategy
+```r
+if (verbose) {
+  message(sprintf("Time %d: Hired %d new employees", 
+                  current_time, n_hired))
+}
+```
+
+## Testing Architecture
+
+### Unit Test Structure
+```
+tests/
+├── test_organization.R
+├── test_agent.R
+├── test_interactions.R
+├── test_hiring.R
+└── test_turnover.R
+```
+
+### Integration Tests
+```r
+# Test full simulation pipeline
+test_that("simulation runs without errors", {
+  results <- run_asa_simulation(n_steps = 10, 
+                               initial_size = 10)
+  expect_s3_class(results$metrics, "data.table")
+  expect_gt(nrow(results$metrics), 0)
+})
+```
+
+## Future Architecture Enhancements
+
+1. **Event System**: Publish-subscribe for simulation events
+2. **Plugin Architecture**: Dynamic module loading
+3. **Distributed Simulation**: Multi-machine support
+4. **Real-time Visualization**: Live simulation monitoring
+5. **Database Backend**: For very large simulations
