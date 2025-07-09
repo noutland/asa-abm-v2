@@ -28,7 +28,7 @@ documentclass: book
 bibliography: [references.bib]
 biblio-style: apalike
 link-citations: yes
-github-repo: your-github-repo/asa-abm-v2
+github-repo: noutland/asa-abm-v2
 description: "Comprehensive documentation for the ASA Agent-Based Model v2"
 ---
 
