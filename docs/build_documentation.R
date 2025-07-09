@@ -22,10 +22,10 @@ if (dir.exists("../documentation")) {
   unlink("../documentation", recursive = TRUE)
 }
 
-# Build the book
+# Build the book (HTML only for GitHub Pages)
 bookdown::render_book(
   input = ".",
-  output_format = "all",  # Builds all formats
+  output_format = "bookdown::gitbook",  # HTML format only
   clean = TRUE,
   envir = parent.frame(),
   quiet = FALSE,

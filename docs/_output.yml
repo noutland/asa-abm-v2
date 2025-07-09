@@ -5,7 +5,7 @@ bookdown::gitbook:
       before: |
         <li><a href="./">ASA ABM v2 Documentation</a></li>
       after: |
-        <li><a href="https://github.com/your-repo/asa-abm-v2" target="blank">GitHub</a></li>
+        <li><a href="https://github.com/noutland/asa-abm-v2" target="blank">GitHub</a></li>
     download: ["pdf", "epub"]
     edit: null
     sharing:
