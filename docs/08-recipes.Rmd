@@ -7,14 +7,16 @@ knitr::opts_chunk$set(
   warning = FALSE,
   fig.width = 10,
   fig.height = 6,
-  cache = TRUE
+  cache = TRUE,
+  eval = FALSE  # Don't evaluate code chunks by default
 )
 
-library(data.table)
-library(ggplot2)
-library(dplyr)
-library(tidyr)
-library(checkmate)
+# Libraries would be loaded in actual use
+# library(data.table)
+# library(ggplot2)
+# library(dplyr)
+# library(tidyr)
+# library(checkmate)
 ```
 
 ## Introduction: The Cookbook Approach
@@ -37,7 +39,7 @@ Each recipe follows a consistent structure:
 5. **Visualization**: How to effectively display results
 6. **Insights**: What can we learn about real organizations?
 
-```{r recipe-setup}
+```{r recipe-setup, eval=FALSE}
 # Source simulation engine
 source("../simulation/engine.R")
 
