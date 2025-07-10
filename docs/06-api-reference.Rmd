@@ -40,7 +40,7 @@ org <- create_organization()
 # Create with custom identities
 org <- create_organization(
   n_agents = 250,
-  identity_categories = c("Tech", "Sales", "Ops")
+  identity_categories = c("A", "B", "C")
 )
 ```
 
@@ -226,7 +226,7 @@ applicants <- create_applicant_pool()
 # Large pool with custom categories
 applicants <- create_applicant_pool(
   n_applicants = 200,
-  identity_categories = c("Eng", "Prod", "Sales")
+  identity_categories = c("A", "B", "C")
 )
 ```
 

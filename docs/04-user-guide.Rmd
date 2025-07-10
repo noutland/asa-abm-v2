@@ -51,10 +51,11 @@ results$organization_snapshots  # Periodic snapshots
 #### Identity Categories
 Controls the types of identities agents can have:
 ```r
-# Default categories
+# Default categories (alphabetical labels)
 params <- list(identity_categories = c("A", "B", "C", "D", "E"))
 
-# Custom categories (e.g., departments)
+# Custom categories example (e.g., departments) - this is a customization
+# Note: The default system uses alphabetical labels (A-E)
 params <- list(identity_categories = c("Engineering", "Sales", 
                                       "Marketing", "Operations"))
 ```
