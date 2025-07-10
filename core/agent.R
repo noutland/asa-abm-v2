@@ -1,5 +1,6 @@
 # agent.R - Agent (Person/Employee) definitions and methods
 # Part of ASA ABM v2
+#emmawashere
 
 library(data.table)
 library(checkmate)
