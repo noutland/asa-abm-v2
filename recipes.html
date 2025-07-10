@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 8 Model Recipe Book | ASA Agent-Based Model v2 Documentation</title>
+  <meta name="description" content="Comprehensive documentation for the ASA Agent-Based Model v2" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 8 Model Recipe Book | ASA Agent-Based Model v2 Documentation" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Comprehensive documentation for the ASA Agent-Based Model v2" />
+  <meta name="github-repo" content="noutland/asa-abm-v2" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 8 Model Recipe Book | ASA Agent-Based Model v2 Documentation" />
+  
+  <meta name="twitter:description" content="Comprehensive documentation for the ASA Agent-Based Model v2" />
+  
+
+<meta name="author" content="ASA ABM Development Team" />
+
+
+<meta name="date" content="2025-07-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="examples.html"/>
+<link rel="next" href="contributors-guide.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">ASA ABM v2 Documentation</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i><b>0.1</b> Overview</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#key-features"><i class="fa fa-check"></i><b>0.2</b> Key Features</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#documentation-structure"><i class="fa fa-check"></i><b>0.3</b> Documentation Structure</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#quick-example"><i class="fa fa-check"></i><b>0.4</b> Quick Example</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#support-and-contributing"><i class="fa fa-check"></i><b>0.5</b> Support and Contributing</a></li>
+<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.6</b> License</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting Started</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="getting-started.html"><a href="getting-started.html#system-requirements"><i class="fa fa-check"></i><b>1.1</b> System Requirements</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="getting-started.html"><a href="getting-started.html#software-requirements"><i class="fa fa-check"></i><b>1.1.1</b> Software Requirements</a></li>
+<li class="chapter" data-level="1.1.2" data-path="getting-started.html"><a href="getting-started.html#hardware-recommendations"><i class="fa fa-check"></i><b>1.1.2</b> Hardware Recommendations</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="getting-started.html"><a href="getting-started.html#installation"><i class="fa fa-check"></i><b>1.2</b> Installation</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="getting-started.html"><a href="getting-started.html#step-1-clone-or-download-the-repository"><i class="fa fa-check"></i><b>1.2.1</b> Step 1: Clone or Download the Repository</a></li>
+<li class="chapter" data-level="1.2.2" data-path="getting-started.html"><a href="getting-started.html#step-2-install-required-packages"><i class="fa fa-check"></i><b>1.2.2</b> Step 2: Install Required Packages</a></li>
+<li class="chapter" data-level="1.2.3" data-path="getting-started.html"><a href="getting-started.html#step-3-verify-installation"><i class="fa fa-check"></i><b>1.2.3</b> Step 3: Verify Installation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="getting-started.html"><a href="getting-started.html#quick-start-guide"><i class="fa fa-check"></i><b>1.3</b> Quick Start Guide</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="getting-started.html"><a href="getting-started.html#basic-simulation"><i class="fa fa-check"></i><b>1.3.1</b> Basic Simulation</a></li>
+<li class="chapter" data-level="1.3.2" data-path="getting-started.html"><a href="getting-started.html#customized-simulation"><i class="fa fa-check"></i><b>1.3.2</b> Customized Simulation</a></li>
+<li class="chapter" data-level="1.3.3" data-path="getting-started.html"><a href="getting-started.html#analyzing-results"><i class="fa fa-check"></i><b>1.3.3</b> Analyzing Results</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="getting-started.html"><a href="getting-started.html#file-structure"><i class="fa fa-check"></i><b>1.4</b> File Structure</a></li>
+<li class="chapter" data-level="1.5" data-path="getting-started.html"><a href="getting-started.html#next-steps"><i class="fa fa-check"></i><b>1.5</b> Next Steps</a></li>
+<li class="chapter" data-level="1.6" data-path="getting-started.html"><a href="getting-started.html#troubleshooting"><i class="fa fa-check"></i><b>1.6</b> Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="getting-started.html"><a href="getting-started.html#common-issues"><i class="fa fa-check"></i><b>1.6.1</b> Common Issues</a></li>
+<li class="chapter" data-level="1.6.2" data-path="getting-started.html"><a href="getting-started.html#getting-help"><i class="fa fa-check"></i><b>1.6.2</b> Getting Help</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="theoretical-background.html"><a href="theoretical-background.html"><i class="fa fa-check"></i><b>2</b> Theoretical Background</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="theoretical-background.html"><a href="theoretical-background.html#the-asa-framework"><i class="fa fa-check"></i><b>2.1</b> The ASA Framework</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="theoretical-background.html"><a href="theoretical-background.html#attraction"><i class="fa fa-check"></i><b>2.1.1</b> Attraction</a></li>
+<li class="chapter" data-level="2.1.2" data-path="theoretical-background.html"><a href="theoretical-background.html#selection"><i class="fa fa-check"></i><b>2.1.2</b> Selection</a></li>
+<li class="chapter" data-level="2.1.3" data-path="theoretical-background.html"><a href="theoretical-background.html#attrition"><i class="fa fa-check"></i><b>2.1.3</b> Attrition</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="theoretical-background.html"><a href="theoretical-background.html#agent-characteristics"><i class="fa fa-check"></i><b>2.2</b> Agent Characteristics</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="theoretical-background.html"><a href="theoretical-background.html#personality-traits-big-five"><i class="fa fa-check"></i><b>2.2.1</b> Personality Traits (Big Five)</a></li>
+<li class="chapter" data-level="2.2.2" data-path="theoretical-background.html"><a href="theoretical-background.html#identity-categories"><i class="fa fa-check"></i><b>2.2.2</b> Identity Categories</a></li>
+<li class="chapter" data-level="2.2.3" data-path="theoretical-background.html"><a href="theoretical-background.html#preferences"><i class="fa fa-check"></i><b>2.2.3</b> Preferences</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="theoretical-background.html"><a href="theoretical-background.html#interaction-dynamics"><i class="fa fa-check"></i><b>2.3</b> Interaction Dynamics</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="theoretical-background.html"><a href="theoretical-background.html#interaction-valence-calculation"><i class="fa fa-check"></i><b>2.3.1</b> Interaction Valence Calculation</a></li>
+<li class="chapter" data-level="2.3.2" data-path="theoretical-background.html"><a href="theoretical-background.html#satisfaction-dynamics"><i class="fa fa-check"></i><b>2.3.2</b> Satisfaction Dynamics</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="theoretical-background.html"><a href="theoretical-background.html#organizational-metrics"><i class="fa fa-check"></i><b>2.4</b> Organizational Metrics</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="theoretical-background.html"><a href="theoretical-background.html#identity-diversity"><i class="fa fa-check"></i><b>2.4.1</b> Identity Diversity</a></li>
+<li class="chapter" data-level="2.4.2" data-path="theoretical-background.html"><a href="theoretical-background.html#organizational-personality"><i class="fa fa-check"></i><b>2.4.2</b> Organizational Personality</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="theoretical-background.html"><a href="theoretical-background.html#temporal-dynamics"><i class="fa fa-check"></i><b>2.5</b> Temporal Dynamics</a></li>
+<li class="chapter" data-level="2.6" data-path="theoretical-background.html"><a href="theoretical-background.html#emergent-phenomena"><i class="fa fa-check"></i><b>2.6</b> Emergent Phenomena</a></li>
+<li class="chapter" data-level="2.7" data-path="theoretical-background.html"><a href="theoretical-background.html#model-assumptions"><i class="fa fa-check"></i><b>2.7</b> Model Assumptions</a></li>
+<li class="chapter" data-level="2.8" data-path="theoretical-background.html"><a href="theoretical-background.html#extensions-and-variations"><i class="fa fa-check"></i><b>2.8</b> Extensions and Variations</a></li>
+<li class="chapter" data-level="2.9" data-path="theoretical-background.html"><a href="theoretical-background.html#references-and-further-reading"><i class="fa fa-check"></i><b>2.9</b> References and Further Reading</a></li>
+<li class="chapter" data-level="2.10" data-path="theoretical-background.html"><a href="theoretical-background.html#mathematical-notation-summary"><i class="fa fa-check"></i><b>2.10</b> Mathematical Notation Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture Overview</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="architecture.html"><a href="architecture.html#design-principles"><i class="fa fa-check"></i><b>3.1</b> Design Principles</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="architecture.html"><a href="architecture.html#performance-first"><i class="fa fa-check"></i><b>3.1.1</b> 1. Performance First</a></li>
+<li class="chapter" data-level="3.1.2" data-path="architecture.html"><a href="architecture.html#modularity"><i class="fa fa-check"></i><b>3.1.2</b> 2. Modularity</a></li>
+<li class="chapter" data-level="3.1.3" data-path="architecture.html"><a href="architecture.html#scalability"><i class="fa fa-check"></i><b>3.1.3</b> 3. Scalability</a></li>
+<li class="chapter" data-level="3.1.4" data-path="architecture.html"><a href="architecture.html#extensibility"><i class="fa fa-check"></i><b>3.1.4</b> 4. Extensibility</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#system-architecture"><i class="fa fa-check"></i><b>3.2</b> System Architecture</a></li>
+<li class="chapter" data-level="3.3" data-path="architecture.html"><a href="architecture.html#core-modules"><i class="fa fa-check"></i><b>3.3</b> Core Modules</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="architecture.html"><a href="architecture.html#organization.r"><i class="fa fa-check"></i><b>3.3.1</b> organization.R</a></li>
+<li class="chapter" data-level="3.3.2" data-path="architecture.html"><a href="architecture.html#agent.r"><i class="fa fa-check"></i><b>3.3.2</b> agent.R</a></li>
+<li class="chapter" data-level="3.3.3" data-path="architecture.html"><a href="architecture.html#interactions.r"><i class="fa fa-check"></i><b>3.3.3</b> interactions.R</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="architecture.html"><a href="architecture.html#simulation-modules"><i class="fa fa-check"></i><b>3.4</b> Simulation Modules</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="architecture.html"><a href="architecture.html#hiring.r"><i class="fa fa-check"></i><b>3.4.1</b> hiring.R</a></li>
+<li class="chapter" data-level="3.4.2" data-path="architecture.html"><a href="architecture.html#turnover.r"><i class="fa fa-check"></i><b>3.4.2</b> turnover.R</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="architecture.html"><a href="architecture.html#data-flow"><i class="fa fa-check"></i><b>3.5</b> Data Flow</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="architecture.html"><a href="architecture.html#initialization-phase"><i class="fa fa-check"></i><b>3.5.1</b> 1. Initialization Phase</a></li>
+<li class="chapter" data-level="3.5.2" data-path="architecture.html"><a href="architecture.html#simulation-loop"><i class="fa fa-check"></i><b>3.5.2</b> 2. Simulation Loop</a></li>
+<li class="chapter" data-level="3.5.3" data-path="architecture.html"><a href="architecture.html#output-phase"><i class="fa fa-check"></i><b>3.5.3</b> 3. Output Phase</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="architecture.html"><a href="architecture.html#performance-optimizations"><i class="fa fa-check"></i><b>3.6</b> Performance Optimizations</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="architecture.html"><a href="architecture.html#vectorization-strategy"><i class="fa fa-check"></i><b>3.6.1</b> Vectorization Strategy</a></li>
+<li class="chapter" data-level="3.6.2" data-path="architecture.html"><a href="architecture.html#memory-management"><i class="fa fa-check"></i><b>3.6.2</b> Memory Management</a></li>
+<li class="chapter" data-level="3.6.3" data-path="architecture.html"><a href="architecture.html#parallel-processing-preparation"><i class="fa fa-check"></i><b>3.6.3</b> Parallel Processing Preparation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="architecture.html"><a href="architecture.html#extension-points"><i class="fa fa-check"></i><b>3.7</b> Extension Points</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="architecture.html"><a href="architecture.html#network-integration"><i class="fa fa-check"></i><b>3.7.1</b> 1. Network Integration</a></li>
+<li class="chapter" data-level="3.7.2" data-path="architecture.html"><a href="architecture.html#hierarchical-organizations"><i class="fa fa-check"></i><b>3.7.2</b> 2. Hierarchical Organizations</a></li>
+<li class="chapter" data-level="3.7.3" data-path="architecture.html"><a href="architecture.html#custom-selection-strategies"><i class="fa fa-check"></i><b>3.7.3</b> 3. Custom Selection Strategies</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="architecture.html"><a href="architecture.html#configuration-management"><i class="fa fa-check"></i><b>3.8</b> Configuration Management</a>
+<ul>
+<li class="chapter" data-level="3.8.1" data-path="architecture.html"><a href="architecture.html#parameter-structure"><i class="fa fa-check"></i><b>3.8.1</b> Parameter Structure</a></li>
+<li class="chapter" data-level="3.8.2" data-path="architecture.html"><a href="architecture.html#validation"><i class="fa fa-check"></i><b>3.8.2</b> Validation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.9" data-path="architecture.html"><a href="architecture.html#error-handling"><i class="fa fa-check"></i><b>3.9</b> Error Handling</a>
+<ul>
+<li class="chapter" data-level="3.9.1" data-path="architecture.html"><a href="architecture.html#defensive-programming"><i class="fa fa-check"></i><b>3.9.1</b> Defensive Programming</a></li>
+<li class="chapter" data-level="3.9.2" data-path="architecture.html"><a href="architecture.html#logging-strategy"><i class="fa fa-check"></i><b>3.9.2</b> Logging Strategy</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="architecture.html"><a href="architecture.html#testing-architecture"><i class="fa fa-check"></i><b>3.10</b> Testing Architecture</a>
+<ul>
+<li class="chapter" data-level="3.10.1" data-path="architecture.html"><a href="architecture.html#unit-test-structure"><i class="fa fa-check"></i><b>3.10.1</b> Unit Test Structure</a></li>
+<li class="chapter" data-level="3.10.2" data-path="architecture.html"><a href="architecture.html#integration-tests"><i class="fa fa-check"></i><b>3.10.2</b> Integration Tests</a></li>
+</ul></li>
+<li class="chapter" data-level="3.11" data-path="architecture.html"><a href="architecture.html#architecture-decision-log"><i class="fa fa-check"></i><b>3.11</b> Architecture Decision Log</a>
+<ul>
+<li class="chapter" data-level="3.11.1" data-path="architecture.html"><a href="architecture.html#adr-001-why-data.table"><i class="fa fa-check"></i><b>3.11.1</b> ADR-001: Why data.table?</a></li>
+<li class="chapter" data-level="3.11.2" data-path="architecture.html"><a href="architecture.html#adr-002-functional-vs-object-oriented-design"><i class="fa fa-check"></i><b>3.11.2</b> ADR-002: Functional vs Object-Oriented Design</a></li>
+<li class="chapter" data-level="3.11.3" data-path="architecture.html"><a href="architecture.html#adr-003-simulation-state-management"><i class="fa fa-check"></i><b>3.11.3</b> ADR-003: Simulation State Management</a></li>
+<li class="chapter" data-level="3.11.4" data-path="architecture.html"><a href="architecture.html#adr-004-vectorization-strategy"><i class="fa fa-check"></i><b>3.11.4</b> ADR-004: Vectorization Strategy</a></li>
+<li class="chapter" data-level="3.11.5" data-path="architecture.html"><a href="architecture.html#adr-005-module-boundaries"><i class="fa fa-check"></i><b>3.11.5</b> ADR-005: Module Boundaries</a></li>
+<li class="chapter" data-level="3.11.6" data-path="architecture.html"><a href="architecture.html#adr-006-metric-calculation-timing"><i class="fa fa-check"></i><b>3.11.6</b> ADR-006: Metric Calculation Timing</a></li>
+<li class="chapter" data-level="3.11.7" data-path="architecture.html"><a href="architecture.html#adr-007-parameter-validation"><i class="fa fa-check"></i><b>3.11.7</b> ADR-007: Parameter Validation</a></li>
+<li class="chapter" data-level="3.11.8" data-path="architecture.html"><a href="architecture.html#adr-008-random-number-generation"><i class="fa fa-check"></i><b>3.11.8</b> ADR-008: Random Number Generation</a></li>
+<li class="chapter" data-level="3.11.9" data-path="architecture.html"><a href="architecture.html#adr-009-identity-categories"><i class="fa fa-check"></i><b>3.11.9</b> ADR-009: Identity Categories</a></li>
+<li class="chapter" data-level="3.11.10" data-path="architecture.html"><a href="architecture.html#adr-010-extension-mechanism"><i class="fa fa-check"></i><b>3.11.10</b> ADR-010: Extension Mechanism</a></li>
+</ul></li>
+<li class="chapter" data-level="3.12" data-path="architecture.html"><a href="architecture.html#design-philosophy-summary"><i class="fa fa-check"></i><b>3.12</b> Design Philosophy Summary</a></li>
+<li class="chapter" data-level="3.13" data-path="architecture.html"><a href="architecture.html#future-architecture-enhancements"><i class="fa fa-check"></i><b>3.13</b> Future Architecture Enhancements</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="user-guide.html"><a href="user-guide.html"><i class="fa fa-check"></i><b>4</b> User Guide</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="user-guide.html"><a href="user-guide.html#running-your-first-simulation"><i class="fa fa-check"></i><b>4.1</b> Running Your First Simulation</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="user-guide.html"><a href="user-guide.html#basic-simulation-1"><i class="fa fa-check"></i><b>4.1.1</b> Basic Simulation</a></li>
+<li class="chapter" data-level="4.1.2" data-path="user-guide.html"><a href="user-guide.html#understanding-the-output"><i class="fa fa-check"></i><b>4.1.2</b> Understanding the Output</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="user-guide.html"><a href="user-guide.html#simulation-parameters"><i class="fa fa-check"></i><b>4.2</b> Simulation Parameters</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="user-guide.html"><a href="user-guide.html#overview-of-all-parameters"><i class="fa fa-check"></i><b>4.2.1</b> Overview of All Parameters</a></li>
+<li class="chapter" data-level="4.2.2" data-path="user-guide.html"><a href="user-guide.html#detailed-parameter-guide"><i class="fa fa-check"></i><b>4.2.2</b> Detailed Parameter Guide</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="user-guide.html"><a href="user-guide.html#common-simulation-scenarios"><i class="fa fa-check"></i><b>4.3</b> Common Simulation Scenarios</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="user-guide.html"><a href="user-guide.html#scenario-1-high-growth-startup"><i class="fa fa-check"></i><b>4.3.1</b> Scenario 1: High-Growth Startup</a></li>
+<li class="chapter" data-level="4.3.2" data-path="user-guide.html"><a href="user-guide.html#scenario-2-stable-corporation"><i class="fa fa-check"></i><b>4.3.2</b> Scenario 2: Stable Corporation</a></li>
+<li class="chapter" data-level="4.3.3" data-path="user-guide.html"><a href="user-guide.html#scenario-3-diversity-focused-organization"><i class="fa fa-check"></i><b>4.3.3</b> Scenario 3: Diversity-Focused Organization</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="user-guide.html"><a href="user-guide.html#analyzing-results-1"><i class="fa fa-check"></i><b>4.4</b> Analyzing Results</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="user-guide.html"><a href="user-guide.html#time-series-analysis"><i class="fa fa-check"></i><b>4.4.1</b> Time Series Analysis</a></li>
+<li class="chapter" data-level="4.4.2" data-path="user-guide.html"><a href="user-guide.html#identity-dynamics"><i class="fa fa-check"></i><b>4.4.2</b> Identity Dynamics</a></li>
+<li class="chapter" data-level="4.4.3" data-path="user-guide.html"><a href="user-guide.html#turnover-analysis"><i class="fa fa-check"></i><b>4.4.3</b> Turnover Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="user-guide.html"><a href="user-guide.html#saving-and-loading-results"><i class="fa fa-check"></i><b>4.5</b> Saving and Loading Results</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="user-guide.html"><a href="user-guide.html#saving-simulation-output"><i class="fa fa-check"></i><b>4.5.1</b> Saving Simulation Output</a></li>
+<li class="chapter" data-level="4.5.2" data-path="user-guide.html"><a href="user-guide.html#loading-previous-results"><i class="fa fa-check"></i><b>4.5.2</b> Loading Previous Results</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="user-guide.html"><a href="user-guide.html#batch-simulations"><i class="fa fa-check"></i><b>4.6</b> Batch Simulations</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="user-guide.html"><a href="user-guide.html#parameter-sweeps"><i class="fa fa-check"></i><b>4.6.1</b> Parameter Sweeps</a></li>
+<li class="chapter" data-level="4.6.2" data-path="user-guide.html"><a href="user-guide.html#replication-studies"><i class="fa fa-check"></i><b>4.6.2</b> Replication Studies</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="user-guide.html"><a href="user-guide.html#performance-tips"><i class="fa fa-check"></i><b>4.7</b> Performance Tips</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="user-guide.html"><a href="user-guide.html#memory-management-1"><i class="fa fa-check"></i><b>4.7.1</b> Memory Management</a></li>
+<li class="chapter" data-level="4.7.2" data-path="user-guide.html"><a href="user-guide.html#speed-optimization"><i class="fa fa-check"></i><b>4.7.2</b> Speed Optimization</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="user-guide.html"><a href="user-guide.html#troubleshooting-1"><i class="fa fa-check"></i><b>4.8</b> Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="user-guide.html"><a href="user-guide.html#common-issues-1"><i class="fa fa-check"></i><b>4.8.1</b> Common Issues</a></li>
+<li class="chapter" data-level="4.8.2" data-path="user-guide.html"><a href="user-guide.html#debugging-tools"><i class="fa fa-check"></i><b>4.8.2</b> Debugging Tools</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="user-guide.html"><a href="user-guide.html#metrics-deep-dive"><i class="fa fa-check"></i><b>4.9</b> Metrics Deep Dive</a>
+<ul>
+<li class="chapter" data-level="4.9.1" data-path="user-guide.html"><a href="user-guide.html#overview-of-metrics"><i class="fa fa-check"></i><b>4.9.1</b> Overview of Metrics</a></li>
+<li class="chapter" data-level="4.9.2" data-path="user-guide.html"><a href="user-guide.html#identity-and-diversity-metrics"><i class="fa fa-check"></i><b>4.9.2</b> Identity and Diversity Metrics</a></li>
+<li class="chapter" data-level="4.9.3" data-path="user-guide.html"><a href="user-guide.html#personality-trait-metrics"><i class="fa fa-check"></i><b>4.9.3</b> Personality Trait Metrics</a></li>
+<li class="chapter" data-level="4.9.4" data-path="user-guide.html"><a href="user-guide.html#satisfaction-metrics"><i class="fa fa-check"></i><b>4.9.4</b> Satisfaction Metrics</a></li>
+<li class="chapter" data-level="4.9.5" data-path="user-guide.html"><a href="user-guide.html#interpreting-metric-interactions"><i class="fa fa-check"></i><b>4.9.5</b> Interpreting Metric Interactions</a></li>
+<li class="chapter" data-level="4.9.6" data-path="user-guide.html"><a href="user-guide.html#advanced-metric-analysis"><i class="fa fa-check"></i><b>4.9.6</b> Advanced Metric Analysis</a></li>
+<li class="chapter" data-level="4.9.7" data-path="user-guide.html"><a href="user-guide.html#visualization-best-practices"><i class="fa fa-check"></i><b>4.9.7</b> Visualization Best Practices</a></li>
+<li class="chapter" data-level="4.9.8" data-path="user-guide.html"><a href="user-guide.html#common-misinterpretations-to-avoid"><i class="fa fa-check"></i><b>4.9.8</b> Common Misinterpretations to Avoid</a></li>
+<li class="chapter" data-level="4.9.9" data-path="user-guide.html"><a href="user-guide.html#using-metrics-for-model-validation"><i class="fa fa-check"></i><b>4.9.9</b> Using Metrics for Model Validation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="odd-protocol.html"><a href="odd-protocol.html"><i class="fa fa-check"></i><b>5</b> ODD Protocol</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="odd-protocol.html"><a href="odd-protocol.html#purpose-and-patterns"><i class="fa fa-check"></i><b>5.1</b> 1. Purpose and Patterns</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="odd-protocol.html"><a href="odd-protocol.html#purpose"><i class="fa fa-check"></i><b>5.1.1</b> 1.1 Purpose</a></li>
+<li class="chapter" data-level="5.1.2" data-path="odd-protocol.html"><a href="odd-protocol.html#patterns"><i class="fa fa-check"></i><b>5.1.2</b> 1.2 Patterns</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="odd-protocol.html"><a href="odd-protocol.html#entities-state-variables-and-scales"><i class="fa fa-check"></i><b>5.2</b> 2. Entities, State Variables, and Scales</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="odd-protocol.html"><a href="odd-protocol.html#entities"><i class="fa fa-check"></i><b>5.2.1</b> 2.1 Entities</a></li>
+<li class="chapter" data-level="5.2.2" data-path="odd-protocol.html"><a href="odd-protocol.html#state-variables"><i class="fa fa-check"></i><b>5.2.2</b> 2.2 State Variables</a></li>
+<li class="chapter" data-level="5.2.3" data-path="odd-protocol.html"><a href="odd-protocol.html#scales"><i class="fa fa-check"></i><b>5.2.3</b> 2.3 Scales</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="odd-protocol.html"><a href="odd-protocol.html#process-overview-and-scheduling"><i class="fa fa-check"></i><b>5.3</b> 3. Process Overview and Scheduling</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="odd-protocol.html"><a href="odd-protocol.html#process-overview"><i class="fa fa-check"></i><b>5.3.1</b> 3.1 Process Overview</a></li>
+<li class="chapter" data-level="5.3.2" data-path="odd-protocol.html"><a href="odd-protocol.html#scheduling"><i class="fa fa-check"></i><b>5.3.2</b> 3.2 Scheduling</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="odd-protocol.html"><a href="odd-protocol.html#design-concepts"><i class="fa fa-check"></i><b>5.4</b> 4. Design Concepts</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="odd-protocol.html"><a href="odd-protocol.html#basic-principles"><i class="fa fa-check"></i><b>5.4.1</b> 4.1 Basic Principles</a></li>
+<li class="chapter" data-level="5.4.2" data-path="odd-protocol.html"><a href="odd-protocol.html#emergence"><i class="fa fa-check"></i><b>5.4.2</b> 4.2 Emergence</a></li>
+<li class="chapter" data-level="5.4.3" data-path="odd-protocol.html"><a href="odd-protocol.html#adaptation"><i class="fa fa-check"></i><b>5.4.3</b> 4.3 Adaptation</a></li>
+<li class="chapter" data-level="5.4.4" data-path="odd-protocol.html"><a href="odd-protocol.html#objectives"><i class="fa fa-check"></i><b>5.4.4</b> 4.4 Objectives</a></li>
+<li class="chapter" data-level="5.4.5" data-path="odd-protocol.html"><a href="odd-protocol.html#learning"><i class="fa fa-check"></i><b>5.4.5</b> 4.5 Learning</a></li>
+<li class="chapter" data-level="5.4.6" data-path="odd-protocol.html"><a href="odd-protocol.html#prediction"><i class="fa fa-check"></i><b>5.4.6</b> 4.6 Prediction</a></li>
+<li class="chapter" data-level="5.4.7" data-path="odd-protocol.html"><a href="odd-protocol.html#sensing"><i class="fa fa-check"></i><b>5.4.7</b> 4.7 Sensing</a></li>
+<li class="chapter" data-level="5.4.8" data-path="odd-protocol.html"><a href="odd-protocol.html#interaction"><i class="fa fa-check"></i><b>5.4.8</b> 4.8 Interaction</a></li>
+<li class="chapter" data-level="5.4.9" data-path="odd-protocol.html"><a href="odd-protocol.html#stochasticity"><i class="fa fa-check"></i><b>5.4.9</b> 4.9 Stochasticity</a></li>
+<li class="chapter" data-level="5.4.10" data-path="odd-protocol.html"><a href="odd-protocol.html#collectives"><i class="fa fa-check"></i><b>5.4.10</b> 4.10 Collectives</a></li>
+<li class="chapter" data-level="5.4.11" data-path="odd-protocol.html"><a href="odd-protocol.html#observation"><i class="fa fa-check"></i><b>5.4.11</b> 4.11 Observation</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="odd-protocol.html"><a href="odd-protocol.html#initialization"><i class="fa fa-check"></i><b>5.5</b> 5. Initialization</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="odd-protocol.html"><a href="odd-protocol.html#initial-conditions"><i class="fa fa-check"></i><b>5.5.1</b> 5.1 Initial Conditions</a></li>
+<li class="chapter" data-level="5.5.2" data-path="odd-protocol.html"><a href="odd-protocol.html#input-data"><i class="fa fa-check"></i><b>5.5.2</b> 5.2 Input Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="odd-protocol.html"><a href="odd-protocol.html#input-data-1"><i class="fa fa-check"></i><b>5.6</b> 6. Input Data</a></li>
+<li class="chapter" data-level="5.7" data-path="odd-protocol.html"><a href="odd-protocol.html#submodels"><i class="fa fa-check"></i><b>5.7</b> 7. Submodels</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="odd-protocol.html"><a href="odd-protocol.html#attraction-calculation"><i class="fa fa-check"></i><b>5.7.1</b> 7.1 Attraction Calculation</a></li>
+<li class="chapter" data-level="5.7.2" data-path="odd-protocol.html"><a href="odd-protocol.html#interaction-valence"><i class="fa fa-check"></i><b>5.7.2</b> 7.2 Interaction Valence</a></li>
+<li class="chapter" data-level="5.7.3" data-path="odd-protocol.html"><a href="odd-protocol.html#satisfaction-update"><i class="fa fa-check"></i><b>5.7.3</b> 7.3 Satisfaction Update</a></li>
+<li class="chapter" data-level="5.7.4" data-path="odd-protocol.html"><a href="odd-protocol.html#turnover-decision"><i class="fa fa-check"></i><b>5.7.4</b> 7.4 Turnover Decision</a></li>
+<li class="chapter" data-level="5.7.5" data-path="odd-protocol.html"><a href="odd-protocol.html#hiring-process"><i class="fa fa-check"></i><b>5.7.5</b> 7.5 Hiring Process</a></li>
+<li class="chapter" data-level="5.7.6" data-path="odd-protocol.html"><a href="odd-protocol.html#identity-diversity-1"><i class="fa fa-check"></i><b>5.7.6</b> 7.6 Identity Diversity</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="odd-protocol.html"><a href="odd-protocol.html#references"><i class="fa fa-check"></i><b>5.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="api-reference.html"><a href="api-reference.html"><i class="fa fa-check"></i><b>6</b> API Reference</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="api-reference.html"><a href="api-reference.html#core-modules-1"><i class="fa fa-check"></i><b>6.1</b> Core Modules</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="api-reference.html"><a href="api-reference.html#coreorganization.r"><i class="fa fa-check"></i><b>6.1.1</b> core/organization.R</a></li>
+<li class="chapter" data-level="6.1.2" data-path="api-reference.html"><a href="api-reference.html#coreagent.r"><i class="fa fa-check"></i><b>6.1.2</b> core/agent.R</a></li>
+<li class="chapter" data-level="6.1.3" data-path="api-reference.html"><a href="api-reference.html#coreinteractions.r"><i class="fa fa-check"></i><b>6.1.3</b> core/interactions.R</a></li>
+<li class="chapter" data-level="6.1.4" data-path="api-reference.html"><a href="api-reference.html#simulationhiring.r"><i class="fa fa-check"></i><b>6.1.4</b> simulation/hiring.R</a></li>
+<li class="chapter" data-level="6.1.5" data-path="api-reference.html"><a href="api-reference.html#simulationturnover.r"><i class="fa fa-check"></i><b>6.1.5</b> simulation/turnover.R</a></li>
+<li class="chapter" data-level="6.1.6" data-path="api-reference.html"><a href="api-reference.html#simulationengine.r"><i class="fa fa-check"></i><b>6.1.6</b> simulation/engine.R</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="api-reference.html"><a href="api-reference.html#error-handling-1"><i class="fa fa-check"></i><b>6.2</b> Error Handling</a></li>
+<li class="chapter" data-level="6.3" data-path="api-reference.html"><a href="api-reference.html#performance-notes"><i class="fa fa-check"></i><b>6.3</b> Performance Notes</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="examples.html"><a href="examples.html"><i class="fa fa-check"></i><b>7</b> Examples and Case Studies</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="examples.html"><a href="examples.html#basic-examples"><i class="fa fa-check"></i><b>7.1</b> Basic Examples</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="examples.html"><a href="examples.html#example-1-standard-simulation"><i class="fa fa-check"></i><b>7.1.1</b> Example 1: Standard Simulation</a></li>
+<li class="chapter" data-level="7.1.2" data-path="examples.html"><a href="examples.html#example-2-high-turnover-environment"><i class="fa fa-check"></i><b>7.1.2</b> Example 2: High-Turnover Environment</a></li>
+<li class="chapter" data-level="7.1.3" data-path="examples.html"><a href="examples.html#example-3-diversity-focused-hiring"><i class="fa fa-check"></i><b>7.1.3</b> Example 3: Diversity-Focused Hiring</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="examples.html"><a href="examples.html#advanced-examples"><i class="fa fa-check"></i><b>7.2</b> Advanced Examples</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="examples.html"><a href="examples.html#example-4-parameter-sensitivity-analysis"><i class="fa fa-check"></i><b>7.2.1</b> Example 4: Parameter Sensitivity Analysis</a></li>
+<li class="chapter" data-level="7.2.2" data-path="examples.html"><a href="examples.html#example-5-intervention-analysis"><i class="fa fa-check"></i><b>7.2.2</b> Example 5: Intervention Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="examples.html"><a href="examples.html#case-studies"><i class="fa fa-check"></i><b>7.3</b> Case Studies</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="examples.html"><a href="examples.html#case-study-1-startup-growth-dynamics"><i class="fa fa-check"></i><b>7.3.1</b> Case Study 1: Startup Growth Dynamics</a></li>
+<li class="chapter" data-level="7.3.2" data-path="examples.html"><a href="examples.html#case-study-2-merger-integration"><i class="fa fa-check"></i><b>7.3.2</b> Case Study 2: Merger Integration</a></li>
+<li class="chapter" data-level="7.3.3" data-path="examples.html"><a href="examples.html#case-study-3-remote-work-transition"><i class="fa fa-check"></i><b>7.3.3</b> Case Study 3: Remote Work Transition</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="examples.html"><a href="examples.html#best-practices-from-examples"><i class="fa fa-check"></i><b>7.4</b> Best Practices from Examples</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="examples.html"><a href="examples.html#parameter-selection"><i class="fa fa-check"></i><b>7.4.1</b> 1. Parameter Selection</a></li>
+<li class="chapter" data-level="7.4.2" data-path="examples.html"><a href="examples.html#analysis-approach"><i class="fa fa-check"></i><b>7.4.2</b> 2. Analysis Approach</a></li>
+<li class="chapter" data-level="7.4.3" data-path="examples.html"><a href="examples.html#validation-1"><i class="fa fa-check"></i><b>7.4.3</b> 3. Validation</a></li>
+<li class="chapter" data-level="7.4.4" data-path="examples.html"><a href="examples.html#interpretation"><i class="fa fa-check"></i><b>7.4.4</b> 4. Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="examples.html"><a href="examples.html#code-snippets-for-common-tasks"><i class="fa fa-check"></i><b>7.5</b> Code Snippets for Common Tasks</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="examples.html"><a href="examples.html#batch-processing"><i class="fa fa-check"></i><b>7.5.1</b> Batch Processing</a></li>
+<li class="chapter" data-level="7.5.2" data-path="examples.html"><a href="examples.html#custom-metrics"><i class="fa fa-check"></i><b>7.5.2</b> Custom Metrics</a></li>
+<li class="chapter" data-level="7.5.3" data-path="examples.html"><a href="examples.html#visualization-helpers"><i class="fa fa-check"></i><b>7.5.3</b> Visualization Helpers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="recipes.html"><a href="recipes.html"><i class="fa fa-check"></i><b>8</b> Model Recipe Book</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="recipes.html"><a href="recipes.html#introduction-the-cookbook-approach"><i class="fa fa-check"></i><b>8.1</b> Introduction: The Cookbook Approach</a></li>
+<li class="chapter" data-level="8.2" data-path="recipes.html"><a href="recipes.html#recipe-1-creating-a-homogeneous-organization"><i class="fa fa-check"></i><b>8.2</b> Recipe 1: Creating a Homogeneous Organization</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="recipes.html"><a href="recipes.html#key-parameters"><i class="fa fa-check"></i><b>8.2.1</b> Key Parameters</a></li>
+<li class="chapter" data-level="8.2.2" data-path="recipes.html"><a href="recipes.html#implementation"><i class="fa fa-check"></i><b>8.2.2</b> Implementation</a></li>
+<li class="chapter" data-level="8.2.3" data-path="recipes.html"><a href="recipes.html#visualization"><i class="fa fa-check"></i><b>8.2.3</b> Visualization</a></li>
+<li class="chapter" data-level="8.2.4" data-path="recipes.html"><a href="recipes.html#expected-outcomes-and-insights"><i class="fa fa-check"></i><b>8.2.4</b> Expected Outcomes and Insights</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="recipes.html"><a href="recipes.html#recipe-2-the-diversity-paradox"><i class="fa fa-check"></i><b>8.3</b> Recipe 2: The Diversity Paradox</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="recipes.html"><a href="recipes.html#key-parameters-1"><i class="fa fa-check"></i><b>8.3.1</b> Key Parameters</a></li>
+<li class="chapter" data-level="8.3.2" data-path="recipes.html"><a href="recipes.html#implementation-1"><i class="fa fa-check"></i><b>8.3.2</b> Implementation</a></li>
+<li class="chapter" data-level="8.3.3" data-path="recipes.html"><a href="recipes.html#visualization-1"><i class="fa fa-check"></i><b>8.3.3</b> Visualization</a></li>
+<li class="chapter" data-level="8.3.4" data-path="recipes.html"><a href="recipes.html#expected-outcomes-and-insights-1"><i class="fa fa-check"></i><b>8.3.4</b> Expected Outcomes and Insights</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="recipes.html"><a href="recipes.html#recipe-3-rapid-growth-startup-dynamics"><i class="fa fa-check"></i><b>8.4</b> Recipe 3: Rapid Growth Startup Dynamics</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="recipes.html"><a href="recipes.html#key-parameters-2"><i class="fa fa-check"></i><b>8.4.1</b> Key Parameters</a></li>
+<li class="chapter" data-level="8.4.2" data-path="recipes.html"><a href="recipes.html#implementation-2"><i class="fa fa-check"></i><b>8.4.2</b> Implementation</a></li>
+<li class="chapter" data-level="8.4.3" data-path="recipes.html"><a href="recipes.html#visualization-2"><i class="fa fa-check"></i><b>8.4.3</b> Visualization</a></li>
+<li class="chapter" data-level="8.4.4" data-path="recipes.html"><a href="recipes.html#expected-outcomes-and-insights-2"><i class="fa fa-check"></i><b>8.4.4</b> Expected Outcomes and Insights</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="recipes.html"><a href="recipes.html#recipe-4-parameter-sensitivity-analysis"><i class="fa fa-check"></i><b>8.5</b> Recipe 4: Parameter Sensitivity Analysis</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="recipes.html"><a href="recipes.html#key-parameters-3"><i class="fa fa-check"></i><b>8.5.1</b> Key Parameters</a></li>
+<li class="chapter" data-level="8.5.2" data-path="recipes.html"><a href="recipes.html#implementation-3"><i class="fa fa-check"></i><b>8.5.2</b> Implementation</a></li>
+<li class="chapter" data-level="8.5.3" data-path="recipes.html"><a href="recipes.html#visualization-3"><i class="fa fa-check"></i><b>8.5.3</b> Visualization</a></li>
+<li class="chapter" data-level="8.5.4" data-path="recipes.html"><a href="recipes.html#expected-outcomes-and-insights-3"><i class="fa fa-check"></i><b>8.5.4</b> Expected Outcomes and Insights</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="recipes.html"><a href="recipes.html#recipe-5-long-term-organizational-evolution"><i class="fa fa-check"></i><b>8.6</b> Recipe 5: Long-term Organizational Evolution</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="recipes.html"><a href="recipes.html#key-parameters-4"><i class="fa fa-check"></i><b>8.6.1</b> Key Parameters</a></li>
+<li class="chapter" data-level="8.6.2" data-path="recipes.html"><a href="recipes.html#implementation-4"><i class="fa fa-check"></i><b>8.6.2</b> Implementation</a></li>
+<li class="chapter" data-level="8.6.3" data-path="recipes.html"><a href="recipes.html#visualization-4"><i class="fa fa-check"></i><b>8.6.3</b> Visualization</a></li>
+<li class="chapter" data-level="8.6.4" data-path="recipes.html"><a href="recipes.html#expected-outcomes-and-insights-4"><i class="fa fa-check"></i><b>8.6.4</b> Expected Outcomes and Insights</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="recipes.html"><a href="recipes.html#best-practices-from-recipes"><i class="fa fa-check"></i><b>8.7</b> Best Practices from Recipes</a>
+<ul>
+<li class="chapter" data-level="8.7.1" data-path="recipes.html"><a href="recipes.html#parameter-selection-1"><i class="fa fa-check"></i><b>8.7.1</b> 1. Parameter Selection</a></li>
+<li class="chapter" data-level="8.7.2" data-path="recipes.html"><a href="recipes.html#analysis-approach-1"><i class="fa fa-check"></i><b>8.7.2</b> 2. Analysis Approach</a></li>
+<li class="chapter" data-level="8.7.3" data-path="recipes.html"><a href="recipes.html#validation-2"><i class="fa fa-check"></i><b>8.7.3</b> 3. Validation</a></li>
+<li class="chapter" data-level="8.7.4" data-path="recipes.html"><a href="recipes.html#interpretation-1"><i class="fa fa-check"></i><b>8.7.4</b> 4. Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="8.8" data-path="recipes.html"><a href="recipes.html#code-snippets-for-common-tasks-1"><i class="fa fa-check"></i><b>8.8</b> Code Snippets for Common Tasks</a>
+<ul>
+<li class="chapter" data-level="8.8.1" data-path="recipes.html"><a href="recipes.html#running-multiple-replications"><i class="fa fa-check"></i><b>8.8.1</b> Running Multiple Replications</a></li>
+<li class="chapter" data-level="8.8.2" data-path="recipes.html"><a href="recipes.html#custom-visualization-functions"><i class="fa fa-check"></i><b>8.8.2</b> Custom Visualization Functions</a></li>
+<li class="chapter" data-level="8.8.3" data-path="recipes.html"><a href="recipes.html#advanced-analysis-functions"><i class="fa fa-check"></i><b>8.8.3</b> Advanced Analysis Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="8.9" data-path="recipes.html"><a href="recipes.html#conclusion"><i class="fa fa-check"></i><b>8.9</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="contributors-guide.html"><a href="contributors-guide.html"><i class="fa fa-check"></i><b>9</b> Contributor’s Walkthrough</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="contributors-guide.html"><a href="contributors-guide.html#getting-started-dev"><i class="fa fa-check"></i><b>9.1</b> Getting Started as a Contributor</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="contributors-guide.html"><a href="contributors-guide.html#setting-up-the-development-environment"><i class="fa fa-check"></i><b>9.1.1</b> Setting up the Development Environment</a></li>
+<li class="chapter" data-level="9.1.2" data-path="contributors-guide.html"><a href="contributors-guide.html#understanding-the-codebase-structure"><i class="fa fa-check"></i><b>9.1.2</b> Understanding the Codebase Structure</a></li>
+<li class="chapter" data-level="9.1.3" data-path="contributors-guide.html"><a href="contributors-guide.html#running-tests-and-examples"><i class="fa fa-check"></i><b>9.1.3</b> Running Tests and Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="contributors-guide.html"><a href="contributors-guide.html#feature-tutorial"><i class="fa fa-check"></i><b>9.2</b> Step-by-Step Feature Tutorial: Adding a New Personality Trait</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="contributors-guide.html"><a href="contributors-guide.html#step-1-update-agent-definition"><i class="fa fa-check"></i><b>9.2.1</b> Step 1: Update Agent Definition</a></li>
+<li class="chapter" data-level="9.2.2" data-path="contributors-guide.html"><a href="contributors-guide.html#step-2-update-organization-initialization"><i class="fa fa-check"></i><b>9.2.2</b> Step 2: Update Organization Initialization</a></li>
+<li class="chapter" data-level="9.2.3" data-path="contributors-guide.html"><a href="contributors-guide.html#step-3-incorporate-into-interactions"><i class="fa fa-check"></i><b>9.2.3</b> Step 3: Incorporate into Interactions</a></li>
+<li class="chapter" data-level="9.2.4" data-path="contributors-guide.html"><a href="contributors-guide.html#step-4-update-selection-criteria"><i class="fa fa-check"></i><b>9.2.4</b> Step 4: Update Selection Criteria</a></li>
+<li class="chapter" data-level="9.2.5" data-path="contributors-guide.html"><a href="contributors-guide.html#step-5-add-performance-impact"><i class="fa fa-check"></i><b>9.2.5</b> Step 5: Add Performance Impact</a></li>
+<li class="chapter" data-level="9.2.6" data-path="contributors-guide.html"><a href="contributors-guide.html#step-6-add-tests"><i class="fa fa-check"></i><b>9.2.6</b> Step 6: Add Tests</a></li>
+<li class="chapter" data-level="9.2.7" data-path="contributors-guide.html"><a href="contributors-guide.html#step-7-update-documentation"><i class="fa fa-check"></i><b>9.2.7</b> Step 7: Update Documentation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="contributors-guide.html"><a href="contributors-guide.html#code-flow"><i class="fa fa-check"></i><b>9.3</b> Code Flow Walkthrough</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="contributors-guide.html"><a href="contributors-guide.html#simulation-step-trace"><i class="fa fa-check"></i><b>9.3.1</b> Simulation Step Trace</a></li>
+<li class="chapter" data-level="9.3.2" data-path="contributors-guide.html"><a href="contributors-guide.html#data-flow-diagram"><i class="fa fa-check"></i><b>9.3.2</b> Data Flow Diagram</a></li>
+<li class="chapter" data-level="9.3.3" data-path="contributors-guide.html"><a href="contributors-guide.html#key-functions-and-responsibilities"><i class="fa fa-check"></i><b>9.3.3</b> Key Functions and Responsibilities</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="contributors-guide.html"><a href="contributors-guide.html#testing-philosophy"><i class="fa fa-check"></i><b>9.4</b> Testing Philosophy</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="contributors-guide.html"><a href="contributors-guide.html#types-of-tests"><i class="fa fa-check"></i><b>9.4.1</b> Types of Tests</a></li>
+<li class="chapter" data-level="9.4.2" data-path="contributors-guide.html"><a href="contributors-guide.html#writing-good-tests"><i class="fa fa-check"></i><b>9.4.2</b> Writing Good Tests</a></li>
+<li class="chapter" data-level="9.4.3" data-path="contributors-guide.html"><a href="contributors-guide.html#test-coverage-expectations"><i class="fa fa-check"></i><b>9.4.3</b> Test Coverage Expectations</a></li>
+<li class="chapter" data-level="9.4.4" data-path="contributors-guide.html"><a href="contributors-guide.html#running-the-test-suite"><i class="fa fa-check"></i><b>9.4.4</b> Running the Test Suite</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="contributors-guide.html"><a href="contributors-guide.html#best-practices"><i class="fa fa-check"></i><b>9.5</b> Development Best Practices</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="contributors-guide.html"><a href="contributors-guide.html#r-coding-standards"><i class="fa fa-check"></i><b>9.5.1</b> R Coding Standards</a></li>
+<li class="chapter" data-level="9.5.2" data-path="contributors-guide.html"><a href="contributors-guide.html#using-data.table-effectively"><i class="fa fa-check"></i><b>9.5.2</b> Using data.table Effectively</a></li>
+<li class="chapter" data-level="9.5.3" data-path="contributors-guide.html"><a href="contributors-guide.html#performance-considerations"><i class="fa fa-check"></i><b>9.5.3</b> Performance Considerations</a></li>
+<li class="chapter" data-level="9.5.4" data-path="contributors-guide.html"><a href="contributors-guide.html#documentation-standards"><i class="fa fa-check"></i><b>9.5.4</b> Documentation Standards</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="contributors-guide.html"><a href="contributors-guide.html#git-workflow"><i class="fa fa-check"></i><b>9.6</b> Git Workflow</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="contributors-guide.html"><a href="contributors-guide.html#branching-strategy"><i class="fa fa-check"></i><b>9.6.1</b> Branching Strategy</a></li>
+<li class="chapter" data-level="9.6.2" data-path="contributors-guide.html"><a href="contributors-guide.html#branch-naming-conventions"><i class="fa fa-check"></i><b>9.6.2</b> Branch Naming Conventions</a></li>
+<li class="chapter" data-level="9.6.3" data-path="contributors-guide.html"><a href="contributors-guide.html#commit-message-conventions"><i class="fa fa-check"></i><b>9.6.3</b> Commit Message Conventions</a></li>
+<li class="chapter" data-level="9.6.4" data-path="contributors-guide.html"><a href="contributors-guide.html#pull-request-process"><i class="fa fa-check"></i><b>9.6.4</b> Pull Request Process</a></li>
+<li class="chapter" data-level="9.6.5" data-path="contributors-guide.html"><a href="contributors-guide.html#code-review-guidelines"><i class="fa fa-check"></i><b>9.6.5</b> Code Review Guidelines</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="contributors-guide.html"><a href="contributors-guide.html#common-tasks"><i class="fa fa-check"></i><b>9.7</b> Common Development Tasks</a>
+<ul>
+<li class="chapter" data-level="9.7.1" data-path="contributors-guide.html"><a href="contributors-guide.html#adding-new-parameters"><i class="fa fa-check"></i><b>9.7.1</b> Adding New Parameters</a></li>
+<li class="chapter" data-level="9.7.2" data-path="contributors-guide.html"><a href="contributors-guide.html#creating-new-metrics"><i class="fa fa-check"></i><b>9.7.2</b> Creating New Metrics</a></li>
+<li class="chapter" data-level="9.7.3" data-path="contributors-guide.html"><a href="contributors-guide.html#implementing-new-selection-strategies"><i class="fa fa-check"></i><b>9.7.3</b> Implementing New Selection Strategies</a></li>
+<li class="chapter" data-level="9.7.4" data-path="contributors-guide.html"><a href="contributors-guide.html#adding-visualization-functions"><i class="fa fa-check"></i><b>9.7.4</b> Adding Visualization Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="9.8" data-path="contributors-guide.html"><a href="contributors-guide.html#debugging-tips"><i class="fa fa-check"></i><b>9.8</b> Debugging Tips</a>
+<ul>
+<li class="chapter" data-level="9.8.1" data-path="contributors-guide.html"><a href="contributors-guide.html#common-errors-and-solutions"><i class="fa fa-check"></i><b>9.8.1</b> Common Errors and Solutions</a></li>
+<li class="chapter" data-level="9.8.2" data-path="contributors-guide.html"><a href="contributors-guide.html#debugging-techniques-for-r"><i class="fa fa-check"></i><b>9.8.2</b> Debugging Techniques for R</a></li>
+<li class="chapter" data-level="9.8.3" data-path="contributors-guide.html"><a href="contributors-guide.html#performance-profiling"><i class="fa fa-check"></i><b>9.8.3</b> Performance Profiling</a></li>
+<li class="chapter" data-level="9.8.4" data-path="contributors-guide.html"><a href="contributors-guide.html#using-verbose-mode-effectively"><i class="fa fa-check"></i><b>9.8.4</b> Using Verbose Mode Effectively</a></li>
+</ul></li>
+<li class="chapter" data-level="9.9" data-path="contributors-guide.html"><a href="contributors-guide.html#summary"><i class="fa fa-check"></i><b>9.9</b> Summary</a></li>
+<li class="chapter" data-level="9.10" data-path="contributors-guide.html"><a href="contributors-guide.html#additional-resources"><i class="fa fa-check"></i><b>9.10</b> Additional Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="quick-ref.html"><a href="quick-ref.html"><i class="fa fa-check"></i><b>10</b> ASA ABM v2 Quick Reference</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="quick-ref.html"><a href="quick-ref.html#quick-start"><i class="fa fa-check"></i><b>10.1</b> Quick Start</a></li>
+<li class="chapter" data-level="10.2" data-path="quick-ref.html"><a href="quick-ref.html#parameter-reference"><i class="fa fa-check"></i><b>10.2</b> Parameter Reference</a></li>
+<li class="chapter" data-level="10.3" data-path="quick-ref.html"><a href="quick-ref.html#key-functions"><i class="fa fa-check"></i><b>10.3</b> Key Functions</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="quick-ref.html"><a href="quick-ref.html#core-functions"><i class="fa fa-check"></i><b>10.3.1</b> Core Functions</a></li>
+<li class="chapter" data-level="10.3.2" data-path="quick-ref.html"><a href="quick-ref.html#analysis-functions"><i class="fa fa-check"></i><b>10.3.2</b> Analysis Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="quick-ref.html"><a href="quick-ref.html#data-structures"><i class="fa fa-check"></i><b>10.4</b> Data Structures</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="quick-ref.html"><a href="quick-ref.html#organization-table"><i class="fa fa-check"></i><b>10.4.1</b> Organization Table</a></li>
+<li class="chapter" data-level="10.4.2" data-path="quick-ref.html"><a href="quick-ref.html#metrics-output"><i class="fa fa-check"></i><b>10.4.2</b> Metrics Output</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="quick-ref.html"><a href="quick-ref.html#common-code-patterns"><i class="fa fa-check"></i><b>10.5</b> Common Code Patterns</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="quick-ref.html"><a href="quick-ref.html#running-multiple-scenarios"><i class="fa fa-check"></i><b>10.5.1</b> Running Multiple Scenarios</a></li>
+<li class="chapter" data-level="10.5.2" data-path="quick-ref.html"><a href="quick-ref.html#batch-analysis"><i class="fa fa-check"></i><b>10.5.2</b> Batch Analysis</a></li>
+<li class="chapter" data-level="10.5.3" data-path="quick-ref.html"><a href="quick-ref.html#custom-metrics-1"><i class="fa fa-check"></i><b>10.5.3</b> Custom Metrics</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="quick-ref.html"><a href="quick-ref.html#visualization-recipes"><i class="fa fa-check"></i><b>10.6</b> Visualization Recipes</a>
+<ul>
+<li class="chapter" data-level="10.6.1" data-path="quick-ref.html"><a href="quick-ref.html#time-series-with-phases"><i class="fa fa-check"></i><b>10.6.1</b> Time Series with Phases</a></li>
+<li class="chapter" data-level="10.6.2" data-path="quick-ref.html"><a href="quick-ref.html#multi-metric-dashboard-1"><i class="fa fa-check"></i><b>10.6.2</b> Multi-Metric Dashboard</a></li>
+<li class="chapter" data-level="10.6.3" data-path="quick-ref.html"><a href="quick-ref.html#distribution-comparison"><i class="fa fa-check"></i><b>10.6.3</b> Distribution Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="quick-ref.html"><a href="quick-ref.html#performance-tips-1"><i class="fa fa-check"></i><b>10.7</b> Performance Tips</a></li>
+<li class="chapter" data-level="10.8" data-path="quick-ref.html"><a href="quick-ref.html#debugging-commands"><i class="fa fa-check"></i><b>10.8</b> Debugging Commands</a>
+<ul>
+<li class="chapter" data-level="10.8.1" data-path="quick-ref.html"><a href="quick-ref.html#basic-debugging"><i class="fa fa-check"></i><b>10.8.1</b> Basic Debugging</a></li>
+<li class="chapter" data-level="10.8.2" data-path="quick-ref.html"><a href="quick-ref.html#data-validation"><i class="fa fa-check"></i><b>10.8.2</b> Data Validation</a></li>
+<li class="chapter" data-level="10.8.3" data-path="quick-ref.html"><a href="quick-ref.html#performance-profiling-1"><i class="fa fa-check"></i><b>10.8.3</b> Performance Profiling</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/noutland/asa-abm-v2" target="blank">GitHub</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">ASA Agent-Based Model v2 Documentation</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="recipes" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Model Recipe Book<a href="recipes.html#recipes" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introduction-the-cookbook-approach" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Introduction: The Cookbook Approach<a href="recipes.html#introduction-the-cookbook-approach" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This chapter provides ready-to-use “recipes” for common organizational research scenarios using the ASA ABM v2. Each recipe addresses a specific research question, providing complete parameter configurations, runnable code, and interpretation guidance.</p>
+<p>Think of these recipes as starting points for your own research. You can:</p>
+<ul>
+<li>Use them directly to replicate common scenarios</li>
+<li>Modify parameters to explore variations</li>
+<li>Combine elements from multiple recipes</li>
+<li>Extract visualization and analysis techniques</li>
+</ul>
+<p>Each recipe follows a consistent structure:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Research Question</strong>: What organizational phenomenon are we investigating?</li>
+<li><strong>Key Parameters</strong>: Which model parameters drive this scenario?</li>
+<li><strong>Implementation</strong>: Complete, runnable R code</li>
+<li><strong>Expected Outcomes</strong>: What patterns should emerge?</li>
+<li><strong>Visualization</strong>: How to effectively display results</li>
+<li><strong>Insights</strong>: What can we learn about real organizations?</li>
+</ol>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="recipes.html#cb128-1" tabindex="-1"></a><span class="co"># Source simulation engine</span></span>
+<span id="cb128-2"><a href="recipes.html#cb128-2" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;../simulation/engine.R&quot;</span>)</span>
+<span id="cb128-3"><a href="recipes.html#cb128-3" tabindex="-1"></a></span>
+<span id="cb128-4"><a href="recipes.html#cb128-4" tabindex="-1"></a><span class="co"># Common visualization theme</span></span>
+<span id="cb128-5"><a href="recipes.html#cb128-5" tabindex="-1"></a>theme_asa <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb128-6"><a href="recipes.html#cb128-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb128-7"><a href="recipes.html#cb128-7" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb128-8"><a href="recipes.html#cb128-8" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb128-9"><a href="recipes.html#cb128-9" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb128-10"><a href="recipes.html#cb128-10" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb128-11"><a href="recipes.html#cb128-11" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb128-12"><a href="recipes.html#cb128-12" tabindex="-1"></a>    )</span>
+<span id="cb128-13"><a href="recipes.html#cb128-13" tabindex="-1"></a>}</span>
+<span id="cb128-14"><a href="recipes.html#cb128-14" tabindex="-1"></a></span>
+<span id="cb128-15"><a href="recipes.html#cb128-15" tabindex="-1"></a><span class="co"># Helper function for parameter tables</span></span>
+<span id="cb128-16"><a href="recipes.html#cb128-16" tabindex="-1"></a>show_params <span class="ot">&lt;-</span> <span class="cf">function</span>(params, <span class="at">highlight =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb128-17"><a href="recipes.html#cb128-17" tabindex="-1"></a>  param_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb128-18"><a href="recipes.html#cb128-18" tabindex="-1"></a>    <span class="at">Parameter =</span> <span class="fu">names</span>(params),</span>
+<span id="cb128-19"><a href="recipes.html#cb128-19" tabindex="-1"></a>    <span class="at">Value =</span> <span class="fu">as.character</span>(<span class="fu">unlist</span>(params)),</span>
+<span id="cb128-20"><a href="recipes.html#cb128-20" tabindex="-1"></a>    <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb128-21"><a href="recipes.html#cb128-21" tabindex="-1"></a>  )</span>
+<span id="cb128-22"><a href="recipes.html#cb128-22" tabindex="-1"></a>  </span>
+<span id="cb128-23"><a href="recipes.html#cb128-23" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(highlight)) {</span>
+<span id="cb128-24"><a href="recipes.html#cb128-24" tabindex="-1"></a>    param_df<span class="sc">$</span>Key <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(param_df<span class="sc">$</span>Parameter <span class="sc">%in%</span> highlight, <span class="st">&quot;★&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb128-25"><a href="recipes.html#cb128-25" tabindex="-1"></a>  }</span>
+<span id="cb128-26"><a href="recipes.html#cb128-26" tabindex="-1"></a>  </span>
+<span id="cb128-27"><a href="recipes.html#cb128-27" tabindex="-1"></a>  <span class="fu">print</span>(param_df)</span>
+<span id="cb128-28"><a href="recipes.html#cb128-28" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="recipe-1-creating-a-homogeneous-organization" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Recipe 1: Creating a Homogeneous Organization<a href="recipes.html#recipe-1-creating-a-homogeneous-organization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Research Question</strong>: How do strong selection criteria and social influence create organizational monocultures?</p>
+<p><strong>Scenario</strong>: An organization with strong cultural fit requirements gradually becomes increasingly homogeneous, potentially limiting innovation and adaptability.</p>
+<div id="key-parameters" class="section level3 hasAnchor" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Key Parameters<a href="recipes.html#key-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="recipes.html#cb129-1" tabindex="-1"></a>homogeneous_params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb129-2"><a href="recipes.html#cb129-2" tabindex="-1"></a>  <span class="co"># Strong selection for conscientiousness</span></span>
+<span id="cb129-3"><a href="recipes.html#cb129-3" tabindex="-1"></a>  <span class="at">selection_criteria =</span> <span class="st">&quot;conscientiousness&quot;</span>,</span>
+<span id="cb129-4"><a href="recipes.html#cb129-4" tabindex="-1"></a>  </span>
+<span id="cb129-5"><a href="recipes.html#cb129-5" tabindex="-1"></a>  <span class="co"># High homophily preferences</span></span>
+<span id="cb129-6"><a href="recipes.html#cb129-6" tabindex="-1"></a>  <span class="at">homophily_preference =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fl">0.8</span>, <span class="at">sd =</span> <span class="fl">0.1</span>),</span>
+<span id="cb129-7"><a href="recipes.html#cb129-7" tabindex="-1"></a>  <span class="at">diversity_preference =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fl">0.2</span>, <span class="at">sd =</span> <span class="fl">0.1</span>),</span>
+<span id="cb129-8"><a href="recipes.html#cb129-8" tabindex="-1"></a>  </span>
+<span id="cb129-9"><a href="recipes.html#cb129-9" tabindex="-1"></a>  <span class="co"># Frequent interactions reinforce similarity</span></span>
+<span id="cb129-10"><a href="recipes.html#cb129-10" tabindex="-1"></a>  <span class="at">n_interactions_per_step =</span> <span class="dv">10</span>,</span>
+<span id="cb129-11"><a href="recipes.html#cb129-11" tabindex="-1"></a>  <span class="at">interaction_window =</span> <span class="dv">20</span>,</span>
+<span id="cb129-12"><a href="recipes.html#cb129-12" tabindex="-1"></a>  </span>
+<span id="cb129-13"><a href="recipes.html#cb129-13" tabindex="-1"></a>  <span class="co"># Low turnover threshold keeps similar people</span></span>
+<span id="cb129-14"><a href="recipes.html#cb129-14" tabindex="-1"></a>  <span class="at">turnover_threshold =</span> <span class="sc">-</span><span class="dv">15</span>,</span>
+<span id="cb129-15"><a href="recipes.html#cb129-15" tabindex="-1"></a>  </span>
+<span id="cb129-16"><a href="recipes.html#cb129-16" tabindex="-1"></a>  <span class="co"># Standard growth</span></span>
+<span id="cb129-17"><a href="recipes.html#cb129-17" tabindex="-1"></a>  <span class="at">growth_rate =</span> <span class="fl">0.01</span>,</span>
+<span id="cb129-18"><a href="recipes.html#cb129-18" tabindex="-1"></a>  <span class="at">hiring_frequency =</span> <span class="dv">12</span></span>
+<span id="cb129-19"><a href="recipes.html#cb129-19" tabindex="-1"></a>)</span>
+<span id="cb129-20"><a href="recipes.html#cb129-20" tabindex="-1"></a></span>
+<span id="cb129-21"><a href="recipes.html#cb129-21" tabindex="-1"></a><span class="fu">show_params</span>(homogeneous_params, </span>
+<span id="cb129-22"><a href="recipes.html#cb129-22" tabindex="-1"></a>           <span class="at">highlight =</span> <span class="fu">c</span>(<span class="st">&quot;selection_criteria&quot;</span>, <span class="st">&quot;homophily_preference&quot;</span>, </span>
+<span id="cb129-23"><a href="recipes.html#cb129-23" tabindex="-1"></a>                        <span class="st">&quot;n_interactions_per_step&quot;</span>))</span></code></pre></div>
+</div>
+<div id="implementation" class="section level3 hasAnchor" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> Implementation<a href="recipes.html#implementation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="recipes.html#cb130-1" tabindex="-1"></a><span class="co"># Run the homogeneous organization simulation</span></span>
+<span id="cb130-2"><a href="recipes.html#cb130-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb130-3"><a href="recipes.html#cb130-3" tabindex="-1"></a>homo_results <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
+<span id="cb130-4"><a href="recipes.html#cb130-4" tabindex="-1"></a>  <span class="at">n_steps =</span> <span class="dv">260</span>,</span>
+<span id="cb130-5"><a href="recipes.html#cb130-5" tabindex="-1"></a>  <span class="at">initial_size =</span> <span class="dv">100</span>,</span>
+<span id="cb130-6"><a href="recipes.html#cb130-6" tabindex="-1"></a>  <span class="at">params =</span> homogeneous_params,</span>
+<span id="cb130-7"><a href="recipes.html#cb130-7" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb130-8"><a href="recipes.html#cb130-8" tabindex="-1"></a>)</span>
+<span id="cb130-9"><a href="recipes.html#cb130-9" tabindex="-1"></a></span>
+<span id="cb130-10"><a href="recipes.html#cb130-10" tabindex="-1"></a><span class="co"># Extract metrics</span></span>
+<span id="cb130-11"><a href="recipes.html#cb130-11" tabindex="-1"></a>homo_metrics <span class="ot">&lt;-</span> homo_results<span class="sc">$</span>metrics</span>
+<span id="cb130-12"><a href="recipes.html#cb130-12" tabindex="-1"></a></span>
+<span id="cb130-13"><a href="recipes.html#cb130-13" tabindex="-1"></a><span class="co"># Calculate convergence point (when diversity drops below threshold)</span></span>
+<span id="cb130-14"><a href="recipes.html#cb130-14" tabindex="-1"></a>diversity_threshold <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb130-15"><a href="recipes.html#cb130-15" tabindex="-1"></a>convergence_step <span class="ot">&lt;-</span> homo_metrics[blau_index <span class="sc">&lt;</span> diversity_threshold, <span class="fu">min</span>(time_step)]</span>
+<span id="cb130-16"><a href="recipes.html#cb130-16" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Diversity dropped below&quot;</span>, diversity_threshold, <span class="st">&quot;at step:&quot;</span>, convergence_step, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</div>
+<div id="visualization" class="section level3 hasAnchor" number="8.2.3">
+<h3><span class="header-section-number">8.2.3</span> Visualization<a href="recipes.html#visualization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="recipes.html#cb131-1" tabindex="-1"></a><span class="co"># Create multi-panel visualization</span></span>
+<span id="cb131-2"><a href="recipes.html#cb131-2" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb131-3"><a href="recipes.html#cb131-3" tabindex="-1"></a></span>
+<span id="cb131-4"><a href="recipes.html#cb131-4" tabindex="-1"></a><span class="co"># Panel 1: Diversity decline</span></span>
+<span id="cb131-5"><a href="recipes.html#cb131-5" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(homo_metrics, <span class="fu">aes</span>(<span class="at">x =</span> time_step)) <span class="sc">+</span></span>
+<span id="cb131-6"><a href="recipes.html#cb131-6" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> blau_index), <span class="at">color =</span> <span class="st">&quot;darkred&quot;</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb131-7"><a href="recipes.html#cb131-7" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> diversity_threshold, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb131-8"><a href="recipes.html#cb131-8" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> convergence_step, <span class="at">linetype =</span> <span class="st">&quot;dotted&quot;</span>) <span class="sc">+</span></span>
+<span id="cb131-9"><a href="recipes.html#cb131-9" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x =</span> convergence_step <span class="sc">+</span> <span class="dv">10</span>, <span class="at">y =</span> <span class="fl">0.6</span>, </span>
+<span id="cb131-10"><a href="recipes.html#cb131-10" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">&quot;Convergence&quot;</span>, <span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb131-11"><a href="recipes.html#cb131-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Identity Diversity Decline&quot;</span>,</span>
+<span id="cb131-12"><a href="recipes.html#cb131-12" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Blau&#39;s Index&quot;</span>,</span>
+<span id="cb131-13"><a href="recipes.html#cb131-13" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Time Step&quot;</span>) <span class="sc">+</span></span>
+<span id="cb131-14"><a href="recipes.html#cb131-14" tabindex="-1"></a>  <span class="fu">theme_asa</span>()</span>
+<span id="cb131-15"><a href="recipes.html#cb131-15" tabindex="-1"></a></span>
+<span id="cb131-16"><a href="recipes.html#cb131-16" tabindex="-1"></a><span class="co"># Panel 2: Personality convergence</span></span>
+<span id="cb131-17"><a href="recipes.html#cb131-17" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(homo_metrics, <span class="fu">aes</span>(<span class="at">x =</span> time_step)) <span class="sc">+</span></span>
+<span id="cb131-18"><a href="recipes.html#cb131-18" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> sd_conscientiousness), <span class="at">color =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb131-19"><a href="recipes.html#cb131-19" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> sd_openness), <span class="at">color =</span> <span class="st">&quot;darkgreen&quot;</span>, <span class="at">size =</span> <span class="fl">1.2</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb131-20"><a href="recipes.html#cb131-20" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Personality Homogenization&quot;</span>,</span>
+<span id="cb131-21"><a href="recipes.html#cb131-21" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Standard Deviation&quot;</span>,</span>
+<span id="cb131-22"><a href="recipes.html#cb131-22" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Time Step&quot;</span>) <span class="sc">+</span></span>
+<span id="cb131-23"><a href="recipes.html#cb131-23" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="dv">200</span>, <span class="at">y =</span> homo_metrics[time_step <span class="sc">==</span> <span class="dv">200</span>, sd_conscientiousness] <span class="sc">+</span> <span class="fl">0.02</span>,</span>
+<span id="cb131-24"><a href="recipes.html#cb131-24" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">&quot;Conscientiousness&quot;</span>, <span class="at">color =</span> <span class="st">&quot;darkblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb131-25"><a href="recipes.html#cb131-25" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="dv">200</span>, <span class="at">y =</span> homo_metrics[time_step <span class="sc">==</span> <span class="dv">200</span>, sd_openness] <span class="sc">+</span> <span class="fl">0.02</span>,</span>
+<span id="cb131-26"><a href="recipes.html#cb131-26" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">&quot;Openness&quot;</span>, <span class="at">color =</span> <span class="st">&quot;darkgreen&quot;</span>) <span class="sc">+</span></span>
+<span id="cb131-27"><a href="recipes.html#cb131-27" tabindex="-1"></a>  <span class="fu">theme_asa</span>()</span>
+<span id="cb131-28"><a href="recipes.html#cb131-28" tabindex="-1"></a></span>
+<span id="cb131-29"><a href="recipes.html#cb131-29" tabindex="-1"></a><span class="co"># Panel 3: Satisfaction trajectory</span></span>
+<span id="cb131-30"><a href="recipes.html#cb131-30" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(homo_metrics, <span class="fu">aes</span>(<span class="at">x =</span> time_step)) <span class="sc">+</span></span>
+<span id="cb131-31"><a href="recipes.html#cb131-31" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> avg_satisfaction), <span class="at">color =</span> <span class="st">&quot;darkgreen&quot;</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb131-32"><a href="recipes.html#cb131-32" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> avg_satisfaction <span class="sc">-</span> sd_satisfaction, </span>
+<span id="cb131-33"><a href="recipes.html#cb131-33" tabindex="-1"></a>                  <span class="at">ymax =</span> avg_satisfaction <span class="sc">+</span> sd_satisfaction),</span>
+<span id="cb131-34"><a href="recipes.html#cb131-34" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">fill =</span> <span class="st">&quot;green&quot;</span>) <span class="sc">+</span></span>
+<span id="cb131-35"><a href="recipes.html#cb131-35" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Agent Satisfaction&quot;</span>,</span>
+<span id="cb131-36"><a href="recipes.html#cb131-36" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Average Satisfaction&quot;</span>,</span>
+<span id="cb131-37"><a href="recipes.html#cb131-37" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Time Step&quot;</span>) <span class="sc">+</span></span>
+<span id="cb131-38"><a href="recipes.html#cb131-38" tabindex="-1"></a>  <span class="fu">theme_asa</span>()</span>
+<span id="cb131-39"><a href="recipes.html#cb131-39" tabindex="-1"></a></span>
+<span id="cb131-40"><a href="recipes.html#cb131-40" tabindex="-1"></a><span class="co"># Panel 4: Organization size</span></span>
+<span id="cb131-41"><a href="recipes.html#cb131-41" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(homo_metrics, <span class="fu">aes</span>(<span class="at">x =</span> time_step)) <span class="sc">+</span></span>
+<span id="cb131-42"><a href="recipes.html#cb131-42" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> organization_size), <span class="at">color =</span> <span class="st">&quot;purple&quot;</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb131-43"><a href="recipes.html#cb131-43" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Organization Growth&quot;</span>,</span>
+<span id="cb131-44"><a href="recipes.html#cb131-44" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Number of Employees&quot;</span>,</span>
+<span id="cb131-45"><a href="recipes.html#cb131-45" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Time Step&quot;</span>) <span class="sc">+</span></span>
+<span id="cb131-46"><a href="recipes.html#cb131-46" tabindex="-1"></a>  <span class="fu">theme_asa</span>()</span>
+<span id="cb131-47"><a href="recipes.html#cb131-47" tabindex="-1"></a></span>
+<span id="cb131-48"><a href="recipes.html#cb131-48" tabindex="-1"></a><span class="co"># Combine plots</span></span>
+<span id="cb131-49"><a href="recipes.html#cb131-49" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, p3, p4, <span class="at">ncol =</span> <span class="dv">2</span>,</span>
+<span id="cb131-50"><a href="recipes.html#cb131-50" tabindex="-1"></a>             <span class="at">top =</span> <span class="st">&quot;Recipe 1: Evolution of a Homogeneous Organization&quot;</span>)</span></code></pre></div>
+</div>
+<div id="expected-outcomes-and-insights" class="section level3 hasAnchor" number="8.2.4">
+<h3><span class="header-section-number">8.2.4</span> Expected Outcomes and Insights<a href="recipes.html#expected-outcomes-and-insights" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Rapid Diversity Loss</strong>: Blau’s Index drops below 0.5 within 50-100 steps</li>
+<li><strong>Personality Convergence</strong>: Standard deviation of selected trait (conscientiousness) approaches zero</li>
+<li><strong>High Satisfaction</strong>: Homophily leads to high average satisfaction (&gt;5)</li>
+<li><strong>Stable Growth</strong>: Low turnover enables steady organizational growth</li>
+</ol>
+<p><strong>Organizational Insight</strong>: While homogeneous cultures can be efficient and harmonious, they risk groupthink and reduced innovation capacity. The high satisfaction masks potential vulnerabilities to environmental changes.</p>
+</div>
+</div>
+<div id="recipe-2-the-diversity-paradox" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Recipe 2: The Diversity Paradox<a href="recipes.html#recipe-2-the-diversity-paradox" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Research Question</strong>: Why do diversity initiatives sometimes fail despite good intentions?</p>
+<p><strong>Scenario</strong>: An organization attempts to increase diversity through hiring but struggles with retention due to unchanged cultural dynamics.</p>
+<div id="key-parameters-1" class="section level3 hasAnchor" number="8.3.1">
+<h3><span class="header-section-number">8.3.1</span> Key Parameters<a href="recipes.html#key-parameters-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="recipes.html#cb132-1" tabindex="-1"></a>diversity_paradox_params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb132-2"><a href="recipes.html#cb132-2" tabindex="-1"></a>  <span class="co"># No selection on personality traits</span></span>
+<span id="cb132-3"><a href="recipes.html#cb132-3" tabindex="-1"></a>  <span class="at">selection_criteria =</span> <span class="st">&quot;random&quot;</span>,</span>
+<span id="cb132-4"><a href="recipes.html#cb132-4" tabindex="-1"></a>  </span>
+<span id="cb132-5"><a href="recipes.html#cb132-5" tabindex="-1"></a>  <span class="co"># But strong internal homophily</span></span>
+<span id="cb132-6"><a href="recipes.html#cb132-6" tabindex="-1"></a>  <span class="at">homophily_preference =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fl">0.9</span>, <span class="at">sd =</span> <span class="fl">0.05</span>),</span>
+<span id="cb132-7"><a href="recipes.html#cb132-7" tabindex="-1"></a>  <span class="at">diversity_preference =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fl">0.1</span>, <span class="at">sd =</span> <span class="fl">0.05</span>),</span>
+<span id="cb132-8"><a href="recipes.html#cb132-8" tabindex="-1"></a>  </span>
+<span id="cb132-9"><a href="recipes.html#cb132-9" tabindex="-1"></a>  <span class="co"># Lower satisfaction threshold triggers more turnover</span></span>
+<span id="cb132-10"><a href="recipes.html#cb132-10" tabindex="-1"></a>  <span class="at">turnover_threshold =</span> <span class="sc">-</span><span class="dv">5</span>,</span>
+<span id="cb132-11"><a href="recipes.html#cb132-11" tabindex="-1"></a>  </span>
+<span id="cb132-12"><a href="recipes.html#cb132-12" tabindex="-1"></a>  <span class="co"># Aggressive growth to bring in diversity</span></span>
+<span id="cb132-13"><a href="recipes.html#cb132-13" tabindex="-1"></a>  <span class="at">growth_rate =</span> <span class="fl">0.05</span>,</span>
+<span id="cb132-14"><a href="recipes.html#cb132-14" tabindex="-1"></a>  <span class="at">hiring_frequency =</span> <span class="dv">4</span>,</span>
+<span id="cb132-15"><a href="recipes.html#cb132-15" tabindex="-1"></a>  </span>
+<span id="cb132-16"><a href="recipes.html#cb132-16" tabindex="-1"></a>  <span class="co"># High interaction frequency amplifies cultural pressure</span></span>
+<span id="cb132-17"><a href="recipes.html#cb132-17" tabindex="-1"></a>  <span class="at">n_interactions_per_step =</span> <span class="dv">15</span>,</span>
+<span id="cb132-18"><a href="recipes.html#cb132-18" tabindex="-1"></a>  <span class="at">interaction_window =</span> <span class="dv">10</span></span>
+<span id="cb132-19"><a href="recipes.html#cb132-19" tabindex="-1"></a>)</span>
+<span id="cb132-20"><a href="recipes.html#cb132-20" tabindex="-1"></a></span>
+<span id="cb132-21"><a href="recipes.html#cb132-21" tabindex="-1"></a><span class="fu">show_params</span>(diversity_paradox_params,</span>
+<span id="cb132-22"><a href="recipes.html#cb132-22" tabindex="-1"></a>           <span class="at">highlight =</span> <span class="fu">c</span>(<span class="st">&quot;selection_criteria&quot;</span>, <span class="st">&quot;homophily_preference&quot;</span>, </span>
+<span id="cb132-23"><a href="recipes.html#cb132-23" tabindex="-1"></a>                        <span class="st">&quot;turnover_threshold&quot;</span>))</span></code></pre></div>
+</div>
+<div id="implementation-1" class="section level3 hasAnchor" number="8.3.2">
+<h3><span class="header-section-number">8.3.2</span> Implementation<a href="recipes.html#implementation-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="recipes.html#cb133-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb133-2"><a href="recipes.html#cb133-2" tabindex="-1"></a>paradox_results <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
+<span id="cb133-3"><a href="recipes.html#cb133-3" tabindex="-1"></a>  <span class="at">n_steps =</span> <span class="dv">260</span>,</span>
+<span id="cb133-4"><a href="recipes.html#cb133-4" tabindex="-1"></a>  <span class="at">initial_size =</span> <span class="dv">100</span>,</span>
+<span id="cb133-5"><a href="recipes.html#cb133-5" tabindex="-1"></a>  <span class="at">params =</span> diversity_paradox_params,</span>
+<span id="cb133-6"><a href="recipes.html#cb133-6" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb133-7"><a href="recipes.html#cb133-7" tabindex="-1"></a>)</span>
+<span id="cb133-8"><a href="recipes.html#cb133-8" tabindex="-1"></a></span>
+<span id="cb133-9"><a href="recipes.html#cb133-9" tabindex="-1"></a><span class="co"># Analyze hiring vs retention</span></span>
+<span id="cb133-10"><a href="recipes.html#cb133-10" tabindex="-1"></a>paradox_org <span class="ot">&lt;-</span> paradox_results<span class="sc">$</span>final_organization</span>
+<span id="cb133-11"><a href="recipes.html#cb133-11" tabindex="-1"></a>paradox_metrics <span class="ot">&lt;-</span> paradox_results<span class="sc">$</span>metrics</span>
+<span id="cb133-12"><a href="recipes.html#cb133-12" tabindex="-1"></a></span>
+<span id="cb133-13"><a href="recipes.html#cb133-13" tabindex="-1"></a><span class="co"># Calculate hire diversity vs organization diversity</span></span>
+<span id="cb133-14"><a href="recipes.html#cb133-14" tabindex="-1"></a>hire_diversity <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">nrow</span>(paradox_metrics))</span>
+<span id="cb133-15"><a href="recipes.html#cb133-15" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(paradox_metrics)) {</span>
+<span id="cb133-16"><a href="recipes.html#cb133-16" tabindex="-1"></a>  new_hires <span class="ot">&lt;-</span> paradox_org[hire_date <span class="sc">==</span> i <span class="sc">&amp;</span> is_active <span class="sc">==</span> <span class="cn">TRUE</span>]</span>
+<span id="cb133-17"><a href="recipes.html#cb133-17" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">nrow</span>(new_hires) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb133-18"><a href="recipes.html#cb133-18" tabindex="-1"></a>    hire_diversity[i] <span class="ot">&lt;-</span> <span class="fu">calculate_blau_index</span>(new_hires<span class="sc">$</span>identity_category)</span>
+<span id="cb133-19"><a href="recipes.html#cb133-19" tabindex="-1"></a>  }</span>
+<span id="cb133-20"><a href="recipes.html#cb133-20" tabindex="-1"></a>}</span>
+<span id="cb133-21"><a href="recipes.html#cb133-21" tabindex="-1"></a></span>
+<span id="cb133-22"><a href="recipes.html#cb133-22" tabindex="-1"></a>paradox_metrics<span class="sc">$</span>hire_diversity <span class="ot">&lt;-</span> hire_diversity</span></code></pre></div>
+</div>
+<div id="visualization-1" class="section level3 hasAnchor" number="8.3.3">
+<h3><span class="header-section-number">8.3.3</span> Visualization<a href="recipes.html#visualization-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="recipes.html#cb134-1" tabindex="-1"></a><span class="co"># Panel 1: Hiring diversity vs organizational diversity</span></span>
+<span id="cb134-2"><a href="recipes.html#cb134-2" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(paradox_metrics[hire_diversity <span class="sc">&gt;</span> <span class="dv">0</span>], <span class="fu">aes</span>(<span class="at">x =</span> time_step)) <span class="sc">+</span></span>
+<span id="cb134-3"><a href="recipes.html#cb134-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> hire_diversity), <span class="at">color =</span> <span class="st">&quot;orange&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb134-4"><a href="recipes.html#cb134-4" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> blau_index), <span class="at">color =</span> <span class="st">&quot;purple&quot;</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb134-5"><a href="recipes.html#cb134-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;The Diversity Paradox&quot;</span>,</span>
+<span id="cb134-6"><a href="recipes.html#cb134-6" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;High diverse hiring (orange points) doesn&#39;t translate to organizational diversity (purple line)&quot;</span>,</span>
+<span id="cb134-7"><a href="recipes.html#cb134-7" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Diversity (Blau&#39;s Index)&quot;</span>,</span>
+<span id="cb134-8"><a href="recipes.html#cb134-8" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Time Step&quot;</span>) <span class="sc">+</span></span>
+<span id="cb134-9"><a href="recipes.html#cb134-9" tabindex="-1"></a>  <span class="fu">theme_asa</span>()</span>
+<span id="cb134-10"><a href="recipes.html#cb134-10" tabindex="-1"></a></span>
+<span id="cb134-11"><a href="recipes.html#cb134-11" tabindex="-1"></a><span class="co"># Panel 2: Turnover by identity category</span></span>
+<span id="cb134-12"><a href="recipes.html#cb134-12" tabindex="-1"></a>turnover_summary <span class="ot">&lt;-</span> paradox_org[is_active <span class="sc">==</span> <span class="cn">FALSE</span>, .N, by <span class="ot">=</span> identity_category]</span>
+<span id="cb134-13"><a href="recipes.html#cb134-13" tabindex="-1"></a>total_by_category <span class="ot">&lt;-</span> paradox_org[, .N, by <span class="ot">=</span> identity_category]</span>
+<span id="cb134-14"><a href="recipes.html#cb134-14" tabindex="-1"></a>turnover_summary <span class="ot">&lt;-</span> <span class="fu">merge</span>(turnover_summary, total_by_category, <span class="at">by =</span> <span class="st">&quot;identity_category&quot;</span>)</span>
+<span id="cb134-15"><a href="recipes.html#cb134-15" tabindex="-1"></a>turnover_summary[, turnover_rate <span class="sc">:=</span> N.x <span class="sc">/</span> N.y]</span>
+<span id="cb134-16"><a href="recipes.html#cb134-16" tabindex="-1"></a></span>
+<span id="cb134-17"><a href="recipes.html#cb134-17" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(turnover_summary, <span class="fu">aes</span>(<span class="at">x =</span> identity_category, <span class="at">y =</span> turnover_rate)) <span class="sc">+</span></span>
+<span id="cb134-18"><a href="recipes.html#cb134-18" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span></span>
+<span id="cb134-19"><a href="recipes.html#cb134-19" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Differential Turnover by Identity Category&quot;</span>,</span>
+<span id="cb134-20"><a href="recipes.html#cb134-20" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Turnover Rate&quot;</span>,</span>
+<span id="cb134-21"><a href="recipes.html#cb134-21" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Identity Category&quot;</span>) <span class="sc">+</span></span>
+<span id="cb134-22"><a href="recipes.html#cb134-22" tabindex="-1"></a>  <span class="fu">theme_asa</span>()</span>
+<span id="cb134-23"><a href="recipes.html#cb134-23" tabindex="-1"></a></span>
+<span id="cb134-24"><a href="recipes.html#cb134-24" tabindex="-1"></a><span class="co"># Panel 3: Satisfaction distribution</span></span>
+<span id="cb134-25"><a href="recipes.html#cb134-25" tabindex="-1"></a>final_state <span class="ot">&lt;-</span> paradox_org[is_active <span class="sc">==</span> <span class="cn">TRUE</span>]</span>
+<span id="cb134-26"><a href="recipes.html#cb134-26" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(final_state, <span class="fu">aes</span>(<span class="at">x =</span> satisfaction, <span class="at">fill =</span> identity_category)) <span class="sc">+</span></span>
+<span id="cb134-27"><a href="recipes.html#cb134-27" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">position =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb134-28"><a href="recipes.html#cb134-28" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> identity_category) <span class="sc">+</span></span>
+<span id="cb134-29"><a href="recipes.html#cb134-29" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Satisfaction Distribution by Identity Category&quot;</span>,</span>
+<span id="cb134-30"><a href="recipes.html#cb134-30" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Satisfaction Score&quot;</span>,</span>
+<span id="cb134-31"><a href="recipes.html#cb134-31" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Count&quot;</span>) <span class="sc">+</span></span>
+<span id="cb134-32"><a href="recipes.html#cb134-32" tabindex="-1"></a>  <span class="fu">theme_asa</span>() <span class="sc">+</span></span>
+<span id="cb134-33"><a href="recipes.html#cb134-33" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span>
+<span id="cb134-34"><a href="recipes.html#cb134-34" tabindex="-1"></a></span>
+<span id="cb134-35"><a href="recipes.html#cb134-35" tabindex="-1"></a><span class="co"># Panel 4: Tenure analysis</span></span>
+<span id="cb134-36"><a href="recipes.html#cb134-36" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(final_state, <span class="fu">aes</span>(<span class="at">x =</span> identity_category, <span class="at">y =</span> tenure)) <span class="sc">+</span></span>
+<span id="cb134-37"><a href="recipes.html#cb134-37" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> identity_category)) <span class="sc">+</span></span>
+<span id="cb134-38"><a href="recipes.html#cb134-38" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Tenure Distribution by Identity Category&quot;</span>,</span>
+<span id="cb134-39"><a href="recipes.html#cb134-39" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Tenure (weeks)&quot;</span>,</span>
+<span id="cb134-40"><a href="recipes.html#cb134-40" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Identity Category&quot;</span>) <span class="sc">+</span></span>
+<span id="cb134-41"><a href="recipes.html#cb134-41" tabindex="-1"></a>  <span class="fu">theme_asa</span>() <span class="sc">+</span></span>
+<span id="cb134-42"><a href="recipes.html#cb134-42" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span>
+<span id="cb134-43"><a href="recipes.html#cb134-43" tabindex="-1"></a></span>
+<span id="cb134-44"><a href="recipes.html#cb134-44" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, p3, p4, <span class="at">ncol =</span> <span class="dv">2</span>,</span>
+<span id="cb134-45"><a href="recipes.html#cb134-45" tabindex="-1"></a>             <span class="at">top =</span> <span class="st">&quot;Recipe 2: The Diversity Paradox - Hiring Without Inclusion&quot;</span>)</span></code></pre></div>
+</div>
+<div id="expected-outcomes-and-insights-1" class="section level3 hasAnchor" number="8.3.4">
+<h3><span class="header-section-number">8.3.4</span> Expected Outcomes and Insights<a href="recipes.html#expected-outcomes-and-insights-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Hiring-Retention Gap</strong>: 60-80% diversity in new hires, but organizational diversity remains low</li>
+<li><strong>Differential Turnover</strong>: Minority categories show 2-3x higher turnover rates</li>
+<li><strong>Satisfaction Inequality</strong>: Clear satisfaction gaps between dominant and minority groups</li>
+<li><strong>Short Tenure</strong>: Diverse hires leave quickly, often within 20-30 time steps</li>
+</ol>
+<p><strong>Organizational Insight</strong>: Diversity initiatives focused solely on hiring without addressing cultural dynamics and inclusion often fail. Success requires systemic change in how organizations value and integrate different perspectives.</p>
+</div>
+</div>
+<div id="recipe-3-rapid-growth-startup-dynamics" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> Recipe 3: Rapid Growth Startup Dynamics<a href="recipes.html#recipe-3-rapid-growth-startup-dynamics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Research Question</strong>: How does rapid scaling affect organizational culture and cohesion?</p>
+<p><strong>Scenario</strong>: A startup experiencing hockey-stick growth must balance maintaining culture with rapid hiring.</p>
+<div id="key-parameters-2" class="section level3 hasAnchor" number="8.4.1">
+<h3><span class="header-section-number">8.4.1</span> Key Parameters<a href="recipes.html#key-parameters-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="recipes.html#cb135-1" tabindex="-1"></a>startup_params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb135-2"><a href="recipes.html#cb135-2" tabindex="-1"></a>  <span class="co"># Aggressive growth phases</span></span>
+<span id="cb135-3"><a href="recipes.html#cb135-3" tabindex="-1"></a>  <span class="at">growth_rate =</span> <span class="fl">0.10</span>,  <span class="co"># 10% per hiring cycle</span></span>
+<span id="cb135-4"><a href="recipes.html#cb135-4" tabindex="-1"></a>  <span class="at">hiring_frequency =</span> <span class="dv">2</span>,  <span class="co"># Hire every 2 weeks</span></span>
+<span id="cb135-5"><a href="recipes.html#cb135-5" tabindex="-1"></a>  </span>
+<span id="cb135-6"><a href="recipes.html#cb135-6" tabindex="-1"></a>  <span class="co"># Initially strong culture</span></span>
+<span id="cb135-7"><a href="recipes.html#cb135-7" tabindex="-1"></a>  <span class="at">selection_criteria =</span> <span class="st">&quot;fit&quot;</span>,</span>
+<span id="cb135-8"><a href="recipes.html#cb135-8" tabindex="-1"></a>  </span>
+<span id="cb135-9"><a href="recipes.html#cb135-9" tabindex="-1"></a>  <span class="co"># But weakening influence as size grows</span></span>
+<span id="cb135-10"><a href="recipes.html#cb135-10" tabindex="-1"></a>  <span class="at">n_interactions_per_step =</span> <span class="dv">5</span>,  <span class="co"># Can&#39;t maintain connections</span></span>
+<span id="cb135-11"><a href="recipes.html#cb135-11" tabindex="-1"></a>  <span class="at">interaction_window =</span> <span class="dv">5</span>,  <span class="co"># Shorter organizational memory</span></span>
+<span id="cb135-12"><a href="recipes.html#cb135-12" tabindex="-1"></a>  </span>
+<span id="cb135-13"><a href="recipes.html#cb135-13" tabindex="-1"></a>  <span class="co"># Higher turnover during growth</span></span>
+<span id="cb135-14"><a href="recipes.html#cb135-14" tabindex="-1"></a>  <span class="at">turnover_threshold =</span> <span class="sc">-</span><span class="dv">7</span>,</span>
+<span id="cb135-15"><a href="recipes.html#cb135-15" tabindex="-1"></a>  </span>
+<span id="cb135-16"><a href="recipes.html#cb135-16" tabindex="-1"></a>  <span class="co"># Start with strong homophily</span></span>
+<span id="cb135-17"><a href="recipes.html#cb135-17" tabindex="-1"></a>  <span class="at">homophily_preference =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fl">0.7</span>, <span class="at">sd =</span> <span class="fl">0.1</span>),</span>
+<span id="cb135-18"><a href="recipes.html#cb135-18" tabindex="-1"></a>  <span class="at">diversity_preference =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fl">0.3</span>, <span class="at">sd =</span> <span class="fl">0.1</span>)</span>
+<span id="cb135-19"><a href="recipes.html#cb135-19" tabindex="-1"></a>)</span>
+<span id="cb135-20"><a href="recipes.html#cb135-20" tabindex="-1"></a></span>
+<span id="cb135-21"><a href="recipes.html#cb135-21" tabindex="-1"></a><span class="fu">show_params</span>(startup_params,</span>
+<span id="cb135-22"><a href="recipes.html#cb135-22" tabindex="-1"></a>           <span class="at">highlight =</span> <span class="fu">c</span>(<span class="st">&quot;growth_rate&quot;</span>, <span class="st">&quot;hiring_frequency&quot;</span>, <span class="st">&quot;interaction_window&quot;</span>))</span></code></pre></div>
+</div>
+<div id="implementation-2" class="section level3 hasAnchor" number="8.4.2">
+<h3><span class="header-section-number">8.4.2</span> Implementation<a href="recipes.html#implementation-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="recipes.html#cb136-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">456</span>)</span>
+<span id="cb136-2"><a href="recipes.html#cb136-2" tabindex="-1"></a>startup_results <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
+<span id="cb136-3"><a href="recipes.html#cb136-3" tabindex="-1"></a>  <span class="at">n_steps =</span> <span class="dv">156</span>,  <span class="co"># 3 years</span></span>
+<span id="cb136-4"><a href="recipes.html#cb136-4" tabindex="-1"></a>  <span class="at">initial_size =</span> <span class="dv">20</span>,  <span class="co"># Small founding team</span></span>
+<span id="cb136-5"><a href="recipes.html#cb136-5" tabindex="-1"></a>  <span class="at">params =</span> startup_params,</span>
+<span id="cb136-6"><a href="recipes.html#cb136-6" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb136-7"><a href="recipes.html#cb136-7" tabindex="-1"></a>)</span>
+<span id="cb136-8"><a href="recipes.html#cb136-8" tabindex="-1"></a></span>
+<span id="cb136-9"><a href="recipes.html#cb136-9" tabindex="-1"></a><span class="co"># Analyze growth phases</span></span>
+<span id="cb136-10"><a href="recipes.html#cb136-10" tabindex="-1"></a>startup_metrics <span class="ot">&lt;-</span> startup_results<span class="sc">$</span>metrics</span>
+<span id="cb136-11"><a href="recipes.html#cb136-11" tabindex="-1"></a>startup_metrics[, growth_phase <span class="sc">:=</span> <span class="fu">cut</span>(</span>
+<span id="cb136-12"><a href="recipes.html#cb136-12" tabindex="-1"></a>  time_step,</span>
+<span id="cb136-13"><a href="recipes.html#cb136-13" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">26</span>, <span class="dv">78</span>, <span class="dv">130</span>, <span class="dv">156</span>),</span>
+<span id="cb136-14"><a href="recipes.html#cb136-14" tabindex="-1"></a>  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Founding&quot;</span>, <span class="st">&quot;Early Growth&quot;</span>, <span class="st">&quot;Scaling&quot;</span>, <span class="st">&quot;Maturity&quot;</span>),</span>
+<span id="cb136-15"><a href="recipes.html#cb136-15" tabindex="-1"></a>  <span class="at">include.lowest =</span> <span class="cn">TRUE</span></span>
+<span id="cb136-16"><a href="recipes.html#cb136-16" tabindex="-1"></a>)]</span>
+<span id="cb136-17"><a href="recipes.html#cb136-17" tabindex="-1"></a></span>
+<span id="cb136-18"><a href="recipes.html#cb136-18" tabindex="-1"></a><span class="co"># Calculate phase-specific metrics</span></span>
+<span id="cb136-19"><a href="recipes.html#cb136-19" tabindex="-1"></a>phase_summary <span class="ot">&lt;-</span> startup_metrics[, .(</span>
+<span id="cb136-20"><a href="recipes.html#cb136-20" tabindex="-1"></a>  <span class="at">avg_size =</span> <span class="fu">mean</span>(organization_size),</span>
+<span id="cb136-21"><a href="recipes.html#cb136-21" tabindex="-1"></a>  <span class="at">growth_rate =</span> (<span class="fu">last</span>(organization_size) <span class="sc">-</span> <span class="fu">first</span>(organization_size)) <span class="sc">/</span> <span class="fu">first</span>(organization_size),</span>
+<span id="cb136-22"><a href="recipes.html#cb136-22" tabindex="-1"></a>  <span class="at">avg_diversity =</span> <span class="fu">mean</span>(blau_index),</span>
+<span id="cb136-23"><a href="recipes.html#cb136-23" tabindex="-1"></a>  <span class="at">avg_satisfaction =</span> <span class="fu">mean</span>(avg_satisfaction),</span>
+<span id="cb136-24"><a href="recipes.html#cb136-24" tabindex="-1"></a>  <span class="at">culture_drift =</span> <span class="fu">last</span>(avg_conscientiousness) <span class="sc">-</span> <span class="fu">first</span>(avg_conscientiousness)</span>
+<span id="cb136-25"><a href="recipes.html#cb136-25" tabindex="-1"></a>), by <span class="ot">=</span> growth_phase]</span>
+<span id="cb136-26"><a href="recipes.html#cb136-26" tabindex="-1"></a></span>
+<span id="cb136-27"><a href="recipes.html#cb136-27" tabindex="-1"></a><span class="fu">print</span>(phase_summary)</span></code></pre></div>
+</div>
+<div id="visualization-2" class="section level3 hasAnchor" number="8.4.3">
+<h3><span class="header-section-number">8.4.3</span> Visualization<a href="recipes.html#visualization-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="recipes.html#cb137-1" tabindex="-1"></a><span class="co"># Panel 1: Growth trajectory with phases</span></span>
+<span id="cb137-2"><a href="recipes.html#cb137-2" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(startup_metrics, <span class="fu">aes</span>(<span class="at">x =</span> time_step, <span class="at">y =</span> organization_size)) <span class="sc">+</span></span>
+<span id="cb137-3"><a href="recipes.html#cb137-3" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">color =</span> <span class="st">&quot;darkgreen&quot;</span>) <span class="sc">+</span></span>
+<span id="cb137-4"><a href="recipes.html#cb137-4" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(</span>
+<span id="cb137-5"><a href="recipes.html#cb137-5" tabindex="-1"></a>    <span class="at">xmin =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">26</span>, <span class="dv">78</span>, <span class="dv">130</span>),</span>
+<span id="cb137-6"><a href="recipes.html#cb137-6" tabindex="-1"></a>    <span class="at">xmax =</span> <span class="fu">c</span>(<span class="dv">26</span>, <span class="dv">78</span>, <span class="dv">130</span>, <span class="dv">156</span>),</span>
+<span id="cb137-7"><a href="recipes.html#cb137-7" tabindex="-1"></a>    <span class="at">phase =</span> <span class="fu">c</span>(<span class="st">&quot;Founding&quot;</span>, <span class="st">&quot;Early Growth&quot;</span>, <span class="st">&quot;Scaling&quot;</span>, <span class="st">&quot;Maturity&quot;</span>)</span>
+<span id="cb137-8"><a href="recipes.html#cb137-8" tabindex="-1"></a>  ), <span class="fu">aes</span>(<span class="at">xmin =</span> xmin, <span class="at">xmax =</span> xmax, <span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> <span class="cn">Inf</span>, <span class="at">fill =</span> phase),</span>
+<span id="cb137-9"><a href="recipes.html#cb137-9" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb137-10"><a href="recipes.html#cb137-10" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Founding&quot;</span> <span class="ot">=</span> <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;Early Growth&quot;</span> <span class="ot">=</span> <span class="st">&quot;green&quot;</span>,</span>
+<span id="cb137-11"><a href="recipes.html#cb137-11" tabindex="-1"></a>                               <span class="st">&quot;Scaling&quot;</span> <span class="ot">=</span> <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;Maturity&quot;</span> <span class="ot">=</span> <span class="st">&quot;purple&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb137-12"><a href="recipes.html#cb137-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Startup Growth Trajectory&quot;</span>,</span>
+<span id="cb137-13"><a href="recipes.html#cb137-13" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Organization Size&quot;</span>,</span>
+<span id="cb137-14"><a href="recipes.html#cb137-14" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Time Step&quot;</span>,</span>
+<span id="cb137-15"><a href="recipes.html#cb137-15" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Growth Phase&quot;</span>) <span class="sc">+</span></span>
+<span id="cb137-16"><a href="recipes.html#cb137-16" tabindex="-1"></a>  <span class="fu">theme_asa</span>()</span>
+<span id="cb137-17"><a href="recipes.html#cb137-17" tabindex="-1"></a></span>
+<span id="cb137-18"><a href="recipes.html#cb137-18" tabindex="-1"></a><span class="co"># Panel 2: Cultural metrics evolution</span></span>
+<span id="cb137-19"><a href="recipes.html#cb137-19" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(startup_metrics, <span class="fu">aes</span>(<span class="at">x =</span> time_step)) <span class="sc">+</span></span>
+<span id="cb137-20"><a href="recipes.html#cb137-20" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> blau_index, <span class="at">color =</span> <span class="st">&quot;Identity Diversity&quot;</span>), <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb137-21"><a href="recipes.html#cb137-21" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> avg_satisfaction <span class="sc">/</span> <span class="dv">10</span>, <span class="at">color =</span> <span class="st">&quot;Avg Satisfaction (scaled)&quot;</span>), <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb137-22"><a href="recipes.html#cb137-22" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> sd_conscientiousness <span class="sc">*</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">&quot;Personality Variance (scaled)&quot;</span>), <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb137-23"><a href="recipes.html#cb137-23" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Identity Diversity&quot;</span> <span class="ot">=</span> <span class="st">&quot;purple&quot;</span>,</span>
+<span id="cb137-24"><a href="recipes.html#cb137-24" tabindex="-1"></a>                               <span class="st">&quot;Avg Satisfaction (scaled)&quot;</span> <span class="ot">=</span> <span class="st">&quot;green&quot;</span>,</span>
+<span id="cb137-25"><a href="recipes.html#cb137-25" tabindex="-1"></a>                               <span class="st">&quot;Personality Variance (scaled)&quot;</span> <span class="ot">=</span> <span class="st">&quot;orange&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb137-26"><a href="recipes.html#cb137-26" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Cultural Evolution During Growth&quot;</span>,</span>
+<span id="cb137-27"><a href="recipes.html#cb137-27" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Metric Value&quot;</span>,</span>
+<span id="cb137-28"><a href="recipes.html#cb137-28" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Time Step&quot;</span>,</span>
+<span id="cb137-29"><a href="recipes.html#cb137-29" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Metric&quot;</span>) <span class="sc">+</span></span>
+<span id="cb137-30"><a href="recipes.html#cb137-30" tabindex="-1"></a>  <span class="fu">theme_asa</span>()</span>
+<span id="cb137-31"><a href="recipes.html#cb137-31" tabindex="-1"></a></span>
+<span id="cb137-32"><a href="recipes.html#cb137-32" tabindex="-1"></a><span class="co"># Panel 3: New hire integration</span></span>
+<span id="cb137-33"><a href="recipes.html#cb137-33" tabindex="-1"></a>startup_org <span class="ot">&lt;-</span> startup_results<span class="sc">$</span>final_organization</span>
+<span id="cb137-34"><a href="recipes.html#cb137-34" tabindex="-1"></a>recent_hires <span class="ot">&lt;-</span> startup_org[hire_date <span class="sc">&gt;</span> <span class="dv">100</span> <span class="sc">&amp;</span> is_active <span class="sc">==</span> <span class="cn">TRUE</span>]</span>
+<span id="cb137-35"><a href="recipes.html#cb137-35" tabindex="-1"></a>veteran_employees <span class="ot">&lt;-</span> startup_org[hire_date <span class="sc">&lt;</span> <span class="dv">50</span> <span class="sc">&amp;</span> is_active <span class="sc">==</span> <span class="cn">TRUE</span>]</span>
+<span id="cb137-36"><a href="recipes.html#cb137-36" tabindex="-1"></a></span>
+<span id="cb137-37"><a href="recipes.html#cb137-37" tabindex="-1"></a>integration_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb137-38"><a href="recipes.html#cb137-38" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">group =</span> <span class="st">&quot;Veterans&quot;</span>, <span class="at">satisfaction =</span> veteran_employees<span class="sc">$</span>satisfaction,</span>
+<span id="cb137-39"><a href="recipes.html#cb137-39" tabindex="-1"></a>             <span class="at">conscientiousness =</span> veteran_employees<span class="sc">$</span>conscientiousness),</span>
+<span id="cb137-40"><a href="recipes.html#cb137-40" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">group =</span> <span class="st">&quot;Recent Hires&quot;</span>, <span class="at">satisfaction =</span> recent_hires<span class="sc">$</span>satisfaction,</span>
+<span id="cb137-41"><a href="recipes.html#cb137-41" tabindex="-1"></a>             <span class="at">conscientiousness =</span> recent_hires<span class="sc">$</span>conscientiousness)</span>
+<span id="cb137-42"><a href="recipes.html#cb137-42" tabindex="-1"></a>)</span>
+<span id="cb137-43"><a href="recipes.html#cb137-43" tabindex="-1"></a></span>
+<span id="cb137-44"><a href="recipes.html#cb137-44" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(integration_data, <span class="fu">aes</span>(<span class="at">x =</span> conscientiousness, <span class="at">y =</span> satisfaction, <span class="at">color =</span> group)) <span class="sc">+</span></span>
+<span id="cb137-45"><a href="recipes.html#cb137-45" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb137-46"><a href="recipes.html#cb137-46" tabindex="-1"></a>  <span class="fu">stat_ellipse</span>(<span class="at">level =</span> <span class="fl">0.95</span>) <span class="sc">+</span></span>
+<span id="cb137-47"><a href="recipes.html#cb137-47" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Veterans&quot;</span> <span class="ot">=</span> <span class="st">&quot;darkblue&quot;</span>, <span class="st">&quot;Recent Hires&quot;</span> <span class="ot">=</span> <span class="st">&quot;darkorange&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb137-48"><a href="recipes.html#cb137-48" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Cultural Gap: Veterans vs Recent Hires&quot;</span>,</span>
+<span id="cb137-49"><a href="recipes.html#cb137-49" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Conscientiousness&quot;</span>,</span>
+<span id="cb137-50"><a href="recipes.html#cb137-50" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Satisfaction&quot;</span>,</span>
+<span id="cb137-51"><a href="recipes.html#cb137-51" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Employee Group&quot;</span>) <span class="sc">+</span></span>
+<span id="cb137-52"><a href="recipes.html#cb137-52" tabindex="-1"></a>  <span class="fu">theme_asa</span>()</span>
+<span id="cb137-53"><a href="recipes.html#cb137-53" tabindex="-1"></a></span>
+<span id="cb137-54"><a href="recipes.html#cb137-54" tabindex="-1"></a><span class="co"># Panel 4: Phase transition analysis</span></span>
+<span id="cb137-55"><a href="recipes.html#cb137-55" tabindex="-1"></a>transition_points <span class="ot">&lt;-</span> startup_metrics[, .(</span>
+<span id="cb137-56"><a href="recipes.html#cb137-56" tabindex="-1"></a>  <span class="at">size_change =</span> <span class="fu">diff</span>(organization_size),</span>
+<span id="cb137-57"><a href="recipes.html#cb137-57" tabindex="-1"></a>  <span class="at">diversity_change =</span> <span class="fu">diff</span>(blau_index),</span>
+<span id="cb137-58"><a href="recipes.html#cb137-58" tabindex="-1"></a>  <span class="at">satisfaction_change =</span> <span class="fu">diff</span>(avg_satisfaction)</span>
+<span id="cb137-59"><a href="recipes.html#cb137-59" tabindex="-1"></a>), by <span class="ot">=</span> growth_phase]</span>
+<span id="cb137-60"><a href="recipes.html#cb137-60" tabindex="-1"></a></span>
+<span id="cb137-61"><a href="recipes.html#cb137-61" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> transition_points <span class="sc">%&gt;%</span></span>
+<span id="cb137-62"><a href="recipes.html#cb137-62" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">ends_with</span>(<span class="st">&quot;_change&quot;</span>), <span class="at">names_to =</span> <span class="st">&quot;metric&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;change&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb137-63"><a href="recipes.html#cb137-63" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> growth_phase, <span class="at">y =</span> change, <span class="at">fill =</span> metric)) <span class="sc">+</span></span>
+<span id="cb137-64"><a href="recipes.html#cb137-64" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb137-65"><a href="recipes.html#cb137-65" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set2&quot;</span>,</span>
+<span id="cb137-66"><a href="recipes.html#cb137-66" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Diversity Change&quot;</span>, <span class="st">&quot;Satisfaction Change&quot;</span>, <span class="st">&quot;Size Change&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb137-67"><a href="recipes.html#cb137-67" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Volatility by Growth Phase&quot;</span>,</span>
+<span id="cb137-68"><a href="recipes.html#cb137-68" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Growth Phase&quot;</span>,</span>
+<span id="cb137-69"><a href="recipes.html#cb137-69" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Step-to-Step Change&quot;</span>,</span>
+<span id="cb137-70"><a href="recipes.html#cb137-70" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Metric&quot;</span>) <span class="sc">+</span></span>
+<span id="cb137-71"><a href="recipes.html#cb137-71" tabindex="-1"></a>  <span class="fu">theme_asa</span>()</span>
+<span id="cb137-72"><a href="recipes.html#cb137-72" tabindex="-1"></a></span>
+<span id="cb137-73"><a href="recipes.html#cb137-73" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, p3, p4, <span class="at">ncol =</span> <span class="dv">2</span>,</span>
+<span id="cb137-74"><a href="recipes.html#cb137-74" tabindex="-1"></a>             <span class="at">top =</span> <span class="st">&quot;Recipe 3: Rapid Growth Startup Dynamics&quot;</span>)</span></code></pre></div>
+</div>
+<div id="expected-outcomes-and-insights-2" class="section level3 hasAnchor" number="8.4.4">
+<h3><span class="header-section-number">8.4.4</span> Expected Outcomes and Insights<a href="recipes.html#expected-outcomes-and-insights-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Exponential Growth</strong>: 10x size increase possible in 3 years</li>
+<li><strong>Cultural Dilution</strong>: Diversity increases 50-70% during scaling</li>
+<li><strong>Integration Challenges</strong>: Clear clusters between veterans and new hires</li>
+<li><strong>Volatility Increases</strong>: Higher variance in all metrics during scaling phase</li>
+</ol>
+<p><strong>Organizational Insight</strong>: Rapid scaling creates inevitable cultural dilution. Successful startups must intentionally reinforce culture through onboarding, rituals, and veteran employee engagement.</p>
+</div>
+</div>
+<div id="recipe-4-parameter-sensitivity-analysis" class="section level2 hasAnchor" number="8.5">
+<h2><span class="header-section-number">8.5</span> Recipe 4: Parameter Sensitivity Analysis<a href="recipes.html#recipe-4-parameter-sensitivity-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Research Question</strong>: Which parameters most strongly influence organizational outcomes?</p>
+<p><strong>Scenario</strong>: Systematic exploration of parameter space to understand model dynamics.</p>
+<div id="key-parameters-3" class="section level3 hasAnchor" number="8.5.1">
+<h3><span class="header-section-number">8.5.1</span> Key Parameters<a href="recipes.html#key-parameters-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="recipes.html#cb138-1" tabindex="-1"></a><span class="co"># Define parameter grid for sensitivity analysis</span></span>
+<span id="cb138-2"><a href="recipes.html#cb138-2" tabindex="-1"></a>param_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb138-3"><a href="recipes.html#cb138-3" tabindex="-1"></a>  <span class="at">growth_rate =</span> <span class="fu">c</span>(<span class="fl">0.00</span>, <span class="fl">0.01</span>, <span class="fl">0.05</span>),</span>
+<span id="cb138-4"><a href="recipes.html#cb138-4" tabindex="-1"></a>  <span class="at">turnover_threshold =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">15</span>, <span class="sc">-</span><span class="dv">10</span>, <span class="sc">-</span><span class="dv">5</span>),</span>
+<span id="cb138-5"><a href="recipes.html#cb138-5" tabindex="-1"></a>  <span class="at">n_interactions =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>),</span>
+<span id="cb138-6"><a href="recipes.html#cb138-6" tabindex="-1"></a>  <span class="at">homophily_strength =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.9</span>)</span>
+<span id="cb138-7"><a href="recipes.html#cb138-7" tabindex="-1"></a>)</span>
+<span id="cb138-8"><a href="recipes.html#cb138-8" tabindex="-1"></a></span>
+<span id="cb138-9"><a href="recipes.html#cb138-9" tabindex="-1"></a><span class="co"># Show sample of parameter combinations</span></span>
+<span id="cb138-10"><a href="recipes.html#cb138-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Testing&quot;</span>, <span class="fu">nrow</span>(param_grid), <span class="st">&quot;parameter combinations</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb138-11"><a href="recipes.html#cb138-11" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(param_grid, <span class="dv">10</span>))</span></code></pre></div>
+</div>
+<div id="implementation-3" class="section level3 hasAnchor" number="8.5.2">
+<h3><span class="header-section-number">8.5.2</span> Implementation<a href="recipes.html#implementation-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="recipes.html#cb139-1" tabindex="-1"></a><span class="co"># Run sensitivity analysis (subset for demonstration)</span></span>
+<span id="cb139-2"><a href="recipes.html#cb139-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">789</span>)</span>
+<span id="cb139-3"><a href="recipes.html#cb139-3" tabindex="-1"></a>sensitivity_results <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb139-4"><a href="recipes.html#cb139-4" tabindex="-1"></a></span>
+<span id="cb139-5"><a href="recipes.html#cb139-5" tabindex="-1"></a><span class="co"># Run subset of simulations</span></span>
+<span id="cb139-6"><a href="recipes.html#cb139-6" tabindex="-1"></a>sample_indices <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(param_grid), <span class="dv">12</span>)  <span class="co"># Run 12 for demo</span></span>
+<span id="cb139-7"><a href="recipes.html#cb139-7" tabindex="-1"></a></span>
+<span id="cb139-8"><a href="recipes.html#cb139-8" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> sample_indices) {</span>
+<span id="cb139-9"><a href="recipes.html#cb139-9" tabindex="-1"></a>  params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb139-10"><a href="recipes.html#cb139-10" tabindex="-1"></a>    <span class="at">growth_rate =</span> param_grid<span class="sc">$</span>growth_rate[i],</span>
+<span id="cb139-11"><a href="recipes.html#cb139-11" tabindex="-1"></a>    <span class="at">turnover_threshold =</span> param_grid<span class="sc">$</span>turnover_threshold[i],</span>
+<span id="cb139-12"><a href="recipes.html#cb139-12" tabindex="-1"></a>    <span class="at">n_interactions_per_step =</span> param_grid<span class="sc">$</span>n_interactions[i],</span>
+<span id="cb139-13"><a href="recipes.html#cb139-13" tabindex="-1"></a>    <span class="at">homophily_preference =</span> <span class="fu">list</span>(<span class="at">mean =</span> param_grid<span class="sc">$</span>homophily_strength[i], <span class="at">sd =</span> <span class="fl">0.1</span>)</span>
+<span id="cb139-14"><a href="recipes.html#cb139-14" tabindex="-1"></a>  )</span>
+<span id="cb139-15"><a href="recipes.html#cb139-15" tabindex="-1"></a>  </span>
+<span id="cb139-16"><a href="recipes.html#cb139-16" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
+<span id="cb139-17"><a href="recipes.html#cb139-17" tabindex="-1"></a>    <span class="at">n_steps =</span> <span class="dv">104</span>,  <span class="co"># 2 years</span></span>
+<span id="cb139-18"><a href="recipes.html#cb139-18" tabindex="-1"></a>    <span class="at">initial_size =</span> <span class="dv">100</span>,</span>
+<span id="cb139-19"><a href="recipes.html#cb139-19" tabindex="-1"></a>    <span class="at">params =</span> params,</span>
+<span id="cb139-20"><a href="recipes.html#cb139-20" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb139-21"><a href="recipes.html#cb139-21" tabindex="-1"></a>  )</span>
+<span id="cb139-22"><a href="recipes.html#cb139-22" tabindex="-1"></a>  </span>
+<span id="cb139-23"><a href="recipes.html#cb139-23" tabindex="-1"></a>  <span class="co"># Extract summary metrics</span></span>
+<span id="cb139-24"><a href="recipes.html#cb139-24" tabindex="-1"></a>  final_metrics <span class="ot">&lt;-</span> <span class="fu">tail</span>(result<span class="sc">$</span>metrics, <span class="dv">1</span>)</span>
+<span id="cb139-25"><a href="recipes.html#cb139-25" tabindex="-1"></a>  sensitivity_results[[i]] <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb139-26"><a href="recipes.html#cb139-26" tabindex="-1"></a>    param_grid[i,],</span>
+<span id="cb139-27"><a href="recipes.html#cb139-27" tabindex="-1"></a>    <span class="at">final_size =</span> final_metrics<span class="sc">$</span>organization_size,</span>
+<span id="cb139-28"><a href="recipes.html#cb139-28" tabindex="-1"></a>    <span class="at">final_diversity =</span> final_metrics<span class="sc">$</span>blau_index,</span>
+<span id="cb139-29"><a href="recipes.html#cb139-29" tabindex="-1"></a>    <span class="at">final_satisfaction =</span> final_metrics<span class="sc">$</span>avg_satisfaction,</span>
+<span id="cb139-30"><a href="recipes.html#cb139-30" tabindex="-1"></a>    <span class="at">total_turnover =</span> <span class="fu">sum</span>(result<span class="sc">$</span>final_organization<span class="sc">$</span>is_active <span class="sc">==</span> <span class="cn">FALSE</span>)</span>
+<span id="cb139-31"><a href="recipes.html#cb139-31" tabindex="-1"></a>  )</span>
+<span id="cb139-32"><a href="recipes.html#cb139-32" tabindex="-1"></a>}</span>
+<span id="cb139-33"><a href="recipes.html#cb139-33" tabindex="-1"></a></span>
+<span id="cb139-34"><a href="recipes.html#cb139-34" tabindex="-1"></a><span class="co"># Combine results</span></span>
+<span id="cb139-35"><a href="recipes.html#cb139-35" tabindex="-1"></a>sensitivity_df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(sensitivity_results)</span></code></pre></div>
+</div>
+<div id="visualization-3" class="section level3 hasAnchor" number="8.5.3">
+<h3><span class="header-section-number">8.5.3</span> Visualization<a href="recipes.html#visualization-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="recipes.html#cb140-1" tabindex="-1"></a><span class="co"># Panel 1: Growth rate impact</span></span>
+<span id="cb140-2"><a href="recipes.html#cb140-2" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(sensitivity_df, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(growth_rate), <span class="at">y =</span> final_size)) <span class="sc">+</span></span>
+<span id="cb140-3"><a href="recipes.html#cb140-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">factor</span>(turnover_threshold))) <span class="sc">+</span></span>
+<span id="cb140-4"><a href="recipes.html#cb140-4" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;RdYlBu&quot;</span>, <span class="at">name =</span> <span class="st">&quot;Turnover</span><span class="sc">\n</span><span class="st">Threshold&quot;</span>) <span class="sc">+</span></span>
+<span id="cb140-5"><a href="recipes.html#cb140-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Organization Size: Growth vs Turnover&quot;</span>,</span>
+<span id="cb140-6"><a href="recipes.html#cb140-6" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Growth Rate&quot;</span>,</span>
+<span id="cb140-7"><a href="recipes.html#cb140-7" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Final Organization Size&quot;</span>) <span class="sc">+</span></span>
+<span id="cb140-8"><a href="recipes.html#cb140-8" tabindex="-1"></a>  <span class="fu">theme_asa</span>()</span>
+<span id="cb140-9"><a href="recipes.html#cb140-9" tabindex="-1"></a></span>
+<span id="cb140-10"><a href="recipes.html#cb140-10" tabindex="-1"></a><span class="co"># Panel 2: Diversity outcomes</span></span>
+<span id="cb140-11"><a href="recipes.html#cb140-11" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(sensitivity_df, <span class="fu">aes</span>(<span class="at">x =</span> homophily_strength, <span class="at">y =</span> final_diversity)) <span class="sc">+</span></span>
+<span id="cb140-12"><a href="recipes.html#cb140-12" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="fu">factor</span>(n_interactions), <span class="at">size =</span> final_size), <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb140-13"><a href="recipes.html#cb140-13" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb140-14"><a href="recipes.html#cb140-14" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set1&quot;</span>, <span class="at">name =</span> <span class="st">&quot;Interactions</span><span class="sc">\n</span><span class="st">per Step&quot;</span>) <span class="sc">+</span></span>
+<span id="cb140-15"><a href="recipes.html#cb140-15" tabindex="-1"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Final Size&quot;</span>) <span class="sc">+</span></span>
+<span id="cb140-16"><a href="recipes.html#cb140-16" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Diversity: Homophily vs Interactions&quot;</span>,</span>
+<span id="cb140-17"><a href="recipes.html#cb140-17" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Homophily Strength&quot;</span>,</span>
+<span id="cb140-18"><a href="recipes.html#cb140-18" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Final Diversity (Blau&#39;s Index)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb140-19"><a href="recipes.html#cb140-19" tabindex="-1"></a>  <span class="fu">theme_asa</span>()</span>
+<span id="cb140-20"><a href="recipes.html#cb140-20" tabindex="-1"></a></span>
+<span id="cb140-21"><a href="recipes.html#cb140-21" tabindex="-1"></a><span class="co"># Panel 3: Parameter importance (mock random forest importance)</span></span>
+<span id="cb140-22"><a href="recipes.html#cb140-22" tabindex="-1"></a><span class="co"># In practice, would use actual RF or similar</span></span>
+<span id="cb140-23"><a href="recipes.html#cb140-23" tabindex="-1"></a>param_importance <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb140-24"><a href="recipes.html#cb140-24" tabindex="-1"></a>  <span class="at">parameter =</span> <span class="fu">c</span>(<span class="st">&quot;Homophily Strength&quot;</span>, <span class="st">&quot;Turnover Threshold&quot;</span>, </span>
+<span id="cb140-25"><a href="recipes.html#cb140-25" tabindex="-1"></a>                <span class="st">&quot;Growth Rate&quot;</span>, <span class="st">&quot;N Interactions&quot;</span>),</span>
+<span id="cb140-26"><a href="recipes.html#cb140-26" tabindex="-1"></a>  <span class="at">importance =</span> <span class="fu">c</span>(<span class="fl">0.35</span>, <span class="fl">0.30</span>, <span class="fl">0.20</span>, <span class="fl">0.15</span>)</span>
+<span id="cb140-27"><a href="recipes.html#cb140-27" tabindex="-1"></a>)</span>
+<span id="cb140-28"><a href="recipes.html#cb140-28" tabindex="-1"></a></span>
+<span id="cb140-29"><a href="recipes.html#cb140-29" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(param_importance, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(parameter, importance), <span class="at">y =</span> importance)) <span class="sc">+</span></span>
+<span id="cb140-30"><a href="recipes.html#cb140-30" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&quot;darkblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb140-31"><a href="recipes.html#cb140-31" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb140-32"><a href="recipes.html#cb140-32" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Parameter Importance for Diversity Outcome&quot;</span>,</span>
+<span id="cb140-33"><a href="recipes.html#cb140-33" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb140-34"><a href="recipes.html#cb140-34" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Relative Importance&quot;</span>) <span class="sc">+</span></span>
+<span id="cb140-35"><a href="recipes.html#cb140-35" tabindex="-1"></a>  <span class="fu">theme_asa</span>()</span>
+<span id="cb140-36"><a href="recipes.html#cb140-36" tabindex="-1"></a></span>
+<span id="cb140-37"><a href="recipes.html#cb140-37" tabindex="-1"></a><span class="co"># Panel 4: Interaction effects heatmap</span></span>
+<span id="cb140-38"><a href="recipes.html#cb140-38" tabindex="-1"></a>interaction_summary <span class="ot">&lt;-</span> sensitivity_df <span class="sc">%&gt;%</span></span>
+<span id="cb140-39"><a href="recipes.html#cb140-39" tabindex="-1"></a>  <span class="fu">group_by</span>(homophily_strength, turnover_threshold) <span class="sc">%&gt;%</span></span>
+<span id="cb140-40"><a href="recipes.html#cb140-40" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_satisfaction =</span> <span class="fu">mean</span>(final_satisfaction), <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span>)</span>
+<span id="cb140-41"><a href="recipes.html#cb140-41" tabindex="-1"></a></span>
+<span id="cb140-42"><a href="recipes.html#cb140-42" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(interaction_summary, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(homophily_strength), </span>
+<span id="cb140-43"><a href="recipes.html#cb140-43" tabindex="-1"></a>                                      <span class="at">y =</span> <span class="fu">factor</span>(turnover_threshold), </span>
+<span id="cb140-44"><a href="recipes.html#cb140-44" tabindex="-1"></a>                                      <span class="at">fill =</span> avg_satisfaction)) <span class="sc">+</span></span>
+<span id="cb140-45"><a href="recipes.html#cb140-45" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb140-46"><a href="recipes.html#cb140-46" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">&quot;red&quot;</span>, <span class="at">mid =</span> <span class="st">&quot;white&quot;</span>, <span class="at">high =</span> <span class="st">&quot;green&quot;</span>, </span>
+<span id="cb140-47"><a href="recipes.html#cb140-47" tabindex="-1"></a>                       <span class="at">midpoint =</span> <span class="dv">0</span>, <span class="at">name =</span> <span class="st">&quot;Avg</span><span class="sc">\n</span><span class="st">Satisfaction&quot;</span>) <span class="sc">+</span></span>
+<span id="cb140-48"><a href="recipes.html#cb140-48" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Satisfaction: Homophily × Turnover Interaction&quot;</span>,</span>
+<span id="cb140-49"><a href="recipes.html#cb140-49" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Homophily Strength&quot;</span>,</span>
+<span id="cb140-50"><a href="recipes.html#cb140-50" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Turnover Threshold&quot;</span>) <span class="sc">+</span></span>
+<span id="cb140-51"><a href="recipes.html#cb140-51" tabindex="-1"></a>  <span class="fu">theme_asa</span>()</span>
+<span id="cb140-52"><a href="recipes.html#cb140-52" tabindex="-1"></a></span>
+<span id="cb140-53"><a href="recipes.html#cb140-53" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, p3, p4, <span class="at">ncol =</span> <span class="dv">2</span>,</span>
+<span id="cb140-54"><a href="recipes.html#cb140-54" tabindex="-1"></a>             <span class="at">top =</span> <span class="st">&quot;Recipe 4: Parameter Sensitivity Analysis&quot;</span>)</span></code></pre></div>
+</div>
+<div id="expected-outcomes-and-insights-3" class="section level3 hasAnchor" number="8.5.4">
+<h3><span class="header-section-number">8.5.4</span> Expected Outcomes and Insights<a href="recipes.html#expected-outcomes-and-insights-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Growth-Turnover Balance</strong>: High growth can’t compensate for very high turnover</li>
+<li><strong>Homophily Dominates Diversity</strong>: Strongest predictor of final diversity</li>
+<li><strong>Interaction Effects</strong>: Parameters interact in non-linear ways</li>
+<li><strong>Threshold Behaviors</strong>: Some parameters show sudden transitions</li>
+</ol>
+<p><strong>Organizational Insight</strong>: Understanding parameter sensitivity helps identify key leverage points for organizational interventions. Focus on the parameters with highest impact for efficient change.</p>
+</div>
+</div>
+<div id="recipe-5-long-term-organizational-evolution" class="section level2 hasAnchor" number="8.6">
+<h2><span class="header-section-number">8.6</span> Recipe 5: Long-term Organizational Evolution<a href="recipes.html#recipe-5-long-term-organizational-evolution" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Research Question</strong>: What are the long-term equilibrium states of organizations?</p>
+<p><strong>Scenario</strong>: Tracking organizations over extended time periods to identify stable states and cycles.</p>
+<div id="key-parameters-4" class="section level3 hasAnchor" number="8.6.1">
+<h3><span class="header-section-number">8.6.1</span> Key Parameters<a href="recipes.html#key-parameters-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="recipes.html#cb141-1" tabindex="-1"></a>longterm_params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb141-2"><a href="recipes.html#cb141-2" tabindex="-1"></a>  <span class="co"># Moderate, sustainable parameters</span></span>
+<span id="cb141-3"><a href="recipes.html#cb141-3" tabindex="-1"></a>  <span class="at">growth_rate =</span> <span class="fl">0.005</span>,  <span class="co"># 0.5% growth</span></span>
+<span id="cb141-4"><a href="recipes.html#cb141-4" tabindex="-1"></a>  <span class="at">turnover_threshold =</span> <span class="sc">-</span><span class="dv">10</span>,</span>
+<span id="cb141-5"><a href="recipes.html#cb141-5" tabindex="-1"></a>  </span>
+<span id="cb141-6"><a href="recipes.html#cb141-6" tabindex="-1"></a>  <span class="co"># Standard interaction patterns</span></span>
+<span id="cb141-7"><a href="recipes.html#cb141-7" tabindex="-1"></a>  <span class="at">n_interactions_per_step =</span> <span class="dv">10</span>,</span>
+<span id="cb141-8"><a href="recipes.html#cb141-8" tabindex="-1"></a>  <span class="at">interaction_window =</span> <span class="dv">20</span>,</span>
+<span id="cb141-9"><a href="recipes.html#cb141-9" tabindex="-1"></a>  </span>
+<span id="cb141-10"><a href="recipes.html#cb141-10" tabindex="-1"></a>  <span class="co"># Balanced preferences</span></span>
+<span id="cb141-11"><a href="recipes.html#cb141-11" tabindex="-1"></a>  <span class="at">homophily_preference =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fl">0.5</span>, <span class="at">sd =</span> <span class="fl">0.2</span>),</span>
+<span id="cb141-12"><a href="recipes.html#cb141-12" tabindex="-1"></a>  <span class="at">diversity_preference =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fl">0.5</span>, <span class="at">sd =</span> <span class="fl">0.2</span>),</span>
+<span id="cb141-13"><a href="recipes.html#cb141-13" tabindex="-1"></a>  </span>
+<span id="cb141-14"><a href="recipes.html#cb141-14" tabindex="-1"></a>  <span class="co"># Selection on fit</span></span>
+<span id="cb141-15"><a href="recipes.html#cb141-15" tabindex="-1"></a>  <span class="at">selection_criteria =</span> <span class="st">&quot;fit&quot;</span></span>
+<span id="cb141-16"><a href="recipes.html#cb141-16" tabindex="-1"></a>)</span>
+<span id="cb141-17"><a href="recipes.html#cb141-17" tabindex="-1"></a></span>
+<span id="cb141-18"><a href="recipes.html#cb141-18" tabindex="-1"></a><span class="fu">show_params</span>(longterm_params)</span></code></pre></div>
+</div>
+<div id="implementation-4" class="section level3 hasAnchor" number="8.6.2">
+<h3><span class="header-section-number">8.6.2</span> Implementation<a href="recipes.html#implementation-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="recipes.html#cb142-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
+<span id="cb142-2"><a href="recipes.html#cb142-2" tabindex="-1"></a>longterm_results <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
+<span id="cb142-3"><a href="recipes.html#cb142-3" tabindex="-1"></a>  <span class="at">n_steps =</span> <span class="dv">520</span>,  <span class="co"># 10 years</span></span>
+<span id="cb142-4"><a href="recipes.html#cb142-4" tabindex="-1"></a>  <span class="at">initial_size =</span> <span class="dv">100</span>,</span>
+<span id="cb142-5"><a href="recipes.html#cb142-5" tabindex="-1"></a>  <span class="at">params =</span> longterm_params,</span>
+<span id="cb142-6"><a href="recipes.html#cb142-6" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb142-7"><a href="recipes.html#cb142-7" tabindex="-1"></a>)</span>
+<span id="cb142-8"><a href="recipes.html#cb142-8" tabindex="-1"></a></span>
+<span id="cb142-9"><a href="recipes.html#cb142-9" tabindex="-1"></a><span class="co"># Identify equilibrium and cycles</span></span>
+<span id="cb142-10"><a href="recipes.html#cb142-10" tabindex="-1"></a>longterm_metrics <span class="ot">&lt;-</span> longterm_results<span class="sc">$</span>metrics</span>
+<span id="cb142-11"><a href="recipes.html#cb142-11" tabindex="-1"></a></span>
+<span id="cb142-12"><a href="recipes.html#cb142-12" tabindex="-1"></a><span class="co"># Calculate moving averages to identify trends</span></span>
+<span id="cb142-13"><a href="recipes.html#cb142-13" tabindex="-1"></a>window_size <span class="ot">&lt;-</span> <span class="dv">26</span>  <span class="co"># 6 months</span></span>
+<span id="cb142-14"><a href="recipes.html#cb142-14" tabindex="-1"></a>longterm_metrics[, <span class="st">`</span><span class="at">:=</span><span class="st">`</span>(</span>
+<span id="cb142-15"><a href="recipes.html#cb142-15" tabindex="-1"></a>  <span class="at">ma_size =</span> <span class="fu">frollmean</span>(organization_size, window_size, <span class="at">align =</span> <span class="st">&quot;right&quot;</span>),</span>
+<span id="cb142-16"><a href="recipes.html#cb142-16" tabindex="-1"></a>  <span class="at">ma_diversity =</span> <span class="fu">frollmean</span>(blau_index, window_size, <span class="at">align =</span> <span class="st">&quot;right&quot;</span>),</span>
+<span id="cb142-17"><a href="recipes.html#cb142-17" tabindex="-1"></a>  <span class="at">ma_satisfaction =</span> <span class="fu">frollmean</span>(avg_satisfaction, window_size, <span class="at">align =</span> <span class="st">&quot;right&quot;</span>)</span>
+<span id="cb142-18"><a href="recipes.html#cb142-18" tabindex="-1"></a>)]</span>
+<span id="cb142-19"><a href="recipes.html#cb142-19" tabindex="-1"></a></span>
+<span id="cb142-20"><a href="recipes.html#cb142-20" tabindex="-1"></a><span class="co"># Detect cycles using autocorrelation</span></span>
+<span id="cb142-21"><a href="recipes.html#cb142-21" tabindex="-1"></a>acf_diversity <span class="ot">&lt;-</span> <span class="fu">acf</span>(longterm_metrics<span class="sc">$</span>blau_index[<span class="sc">!</span><span class="fu">is.na</span>(longterm_metrics<span class="sc">$</span>blau_index)], </span>
+<span id="cb142-22"><a href="recipes.html#cb142-22" tabindex="-1"></a>                     <span class="at">lag.max =</span> <span class="dv">100</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb142-23"><a href="recipes.html#cb142-23" tabindex="-1"></a>cycle_length <span class="ot">&lt;-</span> <span class="fu">which</span>(acf_diversity<span class="sc">$</span>acf[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">==</span> <span class="fu">max</span>(acf_diversity<span class="sc">$</span>acf[<span class="sc">-</span><span class="dv">1</span>]))[<span class="dv">1</span>]</span>
+<span id="cb142-24"><a href="recipes.html#cb142-24" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Detected cycle length:&quot;</span>, cycle_length, <span class="st">&quot;steps</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</div>
+<div id="visualization-4" class="section level3 hasAnchor" number="8.6.3">
+<h3><span class="header-section-number">8.6.3</span> Visualization<a href="recipes.html#visualization-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="recipes.html#cb143-1" tabindex="-1"></a><span class="co"># Panel 1: Long-term trajectories</span></span>
+<span id="cb143-2"><a href="recipes.html#cb143-2" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(longterm_metrics[<span class="sc">!</span><span class="fu">is.na</span>(ma_size)], <span class="fu">aes</span>(<span class="at">x =</span> time_step)) <span class="sc">+</span></span>
+<span id="cb143-3"><a href="recipes.html#cb143-3" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> organization_size), <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">&quot;gray&quot;</span>) <span class="sc">+</span></span>
+<span id="cb143-4"><a href="recipes.html#cb143-4" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> ma_size), <span class="at">color =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb143-5"><a href="recipes.html#cb143-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Long-term Organization Size&quot;</span>,</span>
+<span id="cb143-6"><a href="recipes.html#cb143-6" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Gray: actual, Blue: 6-month moving average&quot;</span>,</span>
+<span id="cb143-7"><a href="recipes.html#cb143-7" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Organization Size&quot;</span>,</span>
+<span id="cb143-8"><a href="recipes.html#cb143-8" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Time Step&quot;</span>) <span class="sc">+</span></span>
+<span id="cb143-9"><a href="recipes.html#cb143-9" tabindex="-1"></a>  <span class="fu">theme_asa</span>()</span>
+<span id="cb143-10"><a href="recipes.html#cb143-10" tabindex="-1"></a></span>
+<span id="cb143-11"><a href="recipes.html#cb143-11" tabindex="-1"></a><span class="co"># Panel 2: Diversity cycles</span></span>
+<span id="cb143-12"><a href="recipes.html#cb143-12" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(longterm_metrics[<span class="sc">!</span><span class="fu">is.na</span>(ma_diversity)], <span class="fu">aes</span>(<span class="at">x =</span> time_step)) <span class="sc">+</span></span>
+<span id="cb143-13"><a href="recipes.html#cb143-13" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> blau_index), <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">&quot;gray&quot;</span>) <span class="sc">+</span></span>
+<span id="cb143-14"><a href="recipes.html#cb143-14" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> ma_diversity), <span class="at">color =</span> <span class="st">&quot;purple&quot;</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb143-15"><a href="recipes.html#cb143-15" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(longterm_metrics<span class="sc">$</span>blau_index, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb143-16"><a href="recipes.html#cb143-16" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb143-17"><a href="recipes.html#cb143-17" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Diversity Cycles&quot;</span>,</span>
+<span id="cb143-18"><a href="recipes.html#cb143-18" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Red line: long-term average&quot;</span>,</span>
+<span id="cb143-19"><a href="recipes.html#cb143-19" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Blau&#39;s Index&quot;</span>,</span>
+<span id="cb143-20"><a href="recipes.html#cb143-20" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Time Step&quot;</span>) <span class="sc">+</span></span>
+<span id="cb143-21"><a href="recipes.html#cb143-21" tabindex="-1"></a>  <span class="fu">theme_asa</span>()</span>
+<span id="cb143-22"><a href="recipes.html#cb143-22" tabindex="-1"></a></span>
+<span id="cb143-23"><a href="recipes.html#cb143-23" tabindex="-1"></a><span class="co"># Panel 3: Phase space plot</span></span>
+<span id="cb143-24"><a href="recipes.html#cb143-24" tabindex="-1"></a>phase_data <span class="ot">&lt;-</span> longterm_metrics[<span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">nrow</span>(longterm_metrics), <span class="at">by =</span> <span class="dv">4</span>)]  <span class="co"># Sample every month</span></span>
+<span id="cb143-25"><a href="recipes.html#cb143-25" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(phase_data, <span class="fu">aes</span>(<span class="at">x =</span> blau_index, <span class="at">y =</span> avg_satisfaction)) <span class="sc">+</span></span>
+<span id="cb143-26"><a href="recipes.html#cb143-26" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;darkgreen&quot;</span>) <span class="sc">+</span></span>
+<span id="cb143-27"><a href="recipes.html#cb143-27" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> time_step), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb143-28"><a href="recipes.html#cb143-28" tabindex="-1"></a>  <span class="fu">scale_color_gradient</span>(<span class="at">low =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">high =</span> <span class="st">&quot;red&quot;</span>, <span class="at">name =</span> <span class="st">&quot;Time&quot;</span>) <span class="sc">+</span></span>
+<span id="cb143-29"><a href="recipes.html#cb143-29" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Phase Space: Diversity vs Satisfaction&quot;</span>,</span>
+<span id="cb143-30"><a href="recipes.html#cb143-30" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Diversity (Blau&#39;s Index)&quot;</span>,</span>
+<span id="cb143-31"><a href="recipes.html#cb143-31" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Average Satisfaction&quot;</span>) <span class="sc">+</span></span>
+<span id="cb143-32"><a href="recipes.html#cb143-32" tabindex="-1"></a>  <span class="fu">theme_asa</span>()</span>
+<span id="cb143-33"><a href="recipes.html#cb143-33" tabindex="-1"></a></span>
+<span id="cb143-34"><a href="recipes.html#cb143-34" tabindex="-1"></a><span class="co"># Panel 4: Equilibrium analysis</span></span>
+<span id="cb143-35"><a href="recipes.html#cb143-35" tabindex="-1"></a><span class="co"># Calculate stability metrics over time windows</span></span>
+<span id="cb143-36"><a href="recipes.html#cb143-36" tabindex="-1"></a>stability_windows <span class="ot">&lt;-</span> longterm_metrics[, .(</span>
+<span id="cb143-37"><a href="recipes.html#cb143-37" tabindex="-1"></a>  <span class="at">window =</span> <span class="fu">ceiling</span>(time_step <span class="sc">/</span> <span class="dv">52</span>),  <span class="co"># Annual windows</span></span>
+<span id="cb143-38"><a href="recipes.html#cb143-38" tabindex="-1"></a>  <span class="at">size_stability =</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="fu">sd</span>(organization_size) <span class="sc">+</span> <span class="dv">1</span>),</span>
+<span id="cb143-39"><a href="recipes.html#cb143-39" tabindex="-1"></a>  <span class="at">diversity_stability =</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="fu">sd</span>(blau_index) <span class="sc">+</span> <span class="dv">1</span>),</span>
+<span id="cb143-40"><a href="recipes.html#cb143-40" tabindex="-1"></a>  <span class="at">satisfaction_stability =</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="fu">sd</span>(avg_satisfaction) <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb143-41"><a href="recipes.html#cb143-41" tabindex="-1"></a>), by <span class="ot">=</span> <span class="fu">ceiling</span>(time_step <span class="sc">/</span> <span class="dv">52</span>)]</span>
+<span id="cb143-42"><a href="recipes.html#cb143-42" tabindex="-1"></a></span>
+<span id="cb143-43"><a href="recipes.html#cb143-43" tabindex="-1"></a>stability_long <span class="ot">&lt;-</span> stability_windows <span class="sc">%&gt;%</span></span>
+<span id="cb143-44"><a href="recipes.html#cb143-44" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">ends_with</span>(<span class="st">&quot;_stability&quot;</span>), </span>
+<span id="cb143-45"><a href="recipes.html#cb143-45" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;metric&quot;</span>, </span>
+<span id="cb143-46"><a href="recipes.html#cb143-46" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;stability&quot;</span>)</span>
+<span id="cb143-47"><a href="recipes.html#cb143-47" tabindex="-1"></a></span>
+<span id="cb143-48"><a href="recipes.html#cb143-48" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(stability_long, <span class="fu">aes</span>(<span class="at">x =</span> ceiling, <span class="at">y =</span> stability, <span class="at">fill =</span> metric)) <span class="sc">+</span></span>
+<span id="cb143-49"><a href="recipes.html#cb143-49" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
+<span id="cb143-50"><a href="recipes.html#cb143-50" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set3&quot;</span>,</span>
+<span id="cb143-51"><a href="recipes.html#cb143-51" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Diversity&quot;</span>, <span class="st">&quot;Satisfaction&quot;</span>, <span class="st">&quot;Size&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb143-52"><a href="recipes.html#cb143-52" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;System Stability Over Time&quot;</span>,</span>
+<span id="cb143-53"><a href="recipes.html#cb143-53" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Higher values indicate more stable periods&quot;</span>,</span>
+<span id="cb143-54"><a href="recipes.html#cb143-54" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb143-55"><a href="recipes.html#cb143-55" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Stability Index&quot;</span>,</span>
+<span id="cb143-56"><a href="recipes.html#cb143-56" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Metric&quot;</span>) <span class="sc">+</span></span>
+<span id="cb143-57"><a href="recipes.html#cb143-57" tabindex="-1"></a>  <span class="fu">theme_asa</span>()</span>
+<span id="cb143-58"><a href="recipes.html#cb143-58" tabindex="-1"></a></span>
+<span id="cb143-59"><a href="recipes.html#cb143-59" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, p3, p4, <span class="at">ncol =</span> <span class="dv">2</span>,</span>
+<span id="cb143-60"><a href="recipes.html#cb143-60" tabindex="-1"></a>             <span class="at">top =</span> <span class="st">&quot;Recipe 5: Long-term Organizational Evolution&quot;</span>)</span></code></pre></div>
+</div>
+<div id="expected-outcomes-and-insights-4" class="section level3 hasAnchor" number="8.6.4">
+<h3><span class="header-section-number">8.6.4</span> Expected Outcomes and Insights<a href="recipes.html#expected-outcomes-and-insights-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Equilibrium States</strong>: Organizations tend toward stable attractor states</li>
+<li><strong>Diversity Cycles</strong>: Natural oscillations in diversity metrics</li>
+<li><strong>Path Dependence</strong>: Early conditions influence long-term outcomes</li>
+<li><strong>Stability Periods</strong>: Alternating periods of stability and change</li>
+</ol>
+<p><strong>Organizational Insight</strong>: Organizations don’t reach static equilibria but rather dynamic steady states with natural cycles. Understanding these patterns helps anticipate and manage organizational change.</p>
+</div>
+</div>
+<div id="best-practices-from-recipes" class="section level2 hasAnchor" number="8.7">
+<h2><span class="header-section-number">8.7</span> Best Practices from Recipes<a href="recipes.html#best-practices-from-recipes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="parameter-selection-1" class="section level3 hasAnchor" number="8.7.1">
+<h3><span class="header-section-number">8.7.1</span> 1. Parameter Selection<a href="recipes.html#parameter-selection-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Start with default values and adjust gradually</li>
+<li>Consider realistic ranges for your context</li>
+<li>Document parameter choices and rationale</li>
+<li>Test sensitivity to key parameters</li>
+</ul>
+</div>
+<div id="analysis-approach-1" class="section level3 hasAnchor" number="8.7.2">
+<h3><span class="header-section-number">8.7.2</span> 2. Analysis Approach<a href="recipes.html#analysis-approach-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Always visualize time series data</li>
+<li>Compare multiple scenarios</li>
+<li>Calculate summary statistics for key periods</li>
+<li>Look for both trends and cycles</li>
+<li>Consider phase transitions and threshold effects</li>
+</ul>
+</div>
+<div id="validation-2" class="section level3 hasAnchor" number="8.7.3">
+<h3><span class="header-section-number">8.7.3</span> 3. Validation<a href="recipes.html#validation-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Run multiple replications with different seeds</li>
+<li>Check for sensitivity to initial conditions</li>
+<li>Validate against known organizational patterns</li>
+<li>Test extreme parameter values</li>
+<li>Compare with empirical data when available</li>
+</ul>
+</div>
+<div id="interpretation-1" class="section level3 hasAnchor" number="8.7.4">
+<h3><span class="header-section-number">8.7.4</span> 4. Interpretation<a href="recipes.html#interpretation-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Agent-based models show possibilities, not predictions</li>
+<li>Focus on patterns and dynamics rather than exact values</li>
+<li>Consider emergent behaviors not explicitly programmed</li>
+<li>Use results to generate hypotheses for further testing</li>
+<li>Think about real-world interventions suggested by results</li>
+</ul>
+</div>
+</div>
+<div id="code-snippets-for-common-tasks-1" class="section level2 hasAnchor" number="8.8">
+<h2><span class="header-section-number">8.8</span> Code Snippets for Common Tasks<a href="recipes.html#code-snippets-for-common-tasks-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="running-multiple-replications" class="section level3 hasAnchor" number="8.8.1">
+<h3><span class="header-section-number">8.8.1</span> Running Multiple Replications<a href="recipes.html#running-multiple-replications" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="recipes.html#cb144-1" tabindex="-1"></a>run_replications <span class="ot">&lt;-</span> <span class="cf">function</span>(n_reps, base_params, <span class="at">n_steps =</span> <span class="dv">260</span>) {</span>
+<span id="cb144-2"><a href="recipes.html#cb144-2" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb144-3"><a href="recipes.html#cb144-3" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_reps) {</span>
+<span id="cb144-4"><a href="recipes.html#cb144-4" tabindex="-1"></a>    <span class="fu">set.seed</span>(i <span class="sc">*</span> <span class="dv">1000</span>)  <span class="co"># Reproducible seeds</span></span>
+<span id="cb144-5"><a href="recipes.html#cb144-5" tabindex="-1"></a>    results[[i]] <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(</span>
+<span id="cb144-6"><a href="recipes.html#cb144-6" tabindex="-1"></a>      <span class="at">n_steps =</span> n_steps,</span>
+<span id="cb144-7"><a href="recipes.html#cb144-7" tabindex="-1"></a>      <span class="at">initial_size =</span> <span class="dv">100</span>,</span>
+<span id="cb144-8"><a href="recipes.html#cb144-8" tabindex="-1"></a>      <span class="at">params =</span> base_params,</span>
+<span id="cb144-9"><a href="recipes.html#cb144-9" tabindex="-1"></a>      <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb144-10"><a href="recipes.html#cb144-10" tabindex="-1"></a>    )</span>
+<span id="cb144-11"><a href="recipes.html#cb144-11" tabindex="-1"></a>  }</span>
+<span id="cb144-12"><a href="recipes.html#cb144-12" tabindex="-1"></a>  <span class="fu">return</span>(results)</span>
+<span id="cb144-13"><a href="recipes.html#cb144-13" tabindex="-1"></a>}</span>
+<span id="cb144-14"><a href="recipes.html#cb144-14" tabindex="-1"></a></span>
+<span id="cb144-15"><a href="recipes.html#cb144-15" tabindex="-1"></a><span class="co"># Aggregate results across replications</span></span>
+<span id="cb144-16"><a href="recipes.html#cb144-16" tabindex="-1"></a>aggregate_replications <span class="ot">&lt;-</span> <span class="cf">function</span>(rep_results) {</span>
+<span id="cb144-17"><a href="recipes.html#cb144-17" tabindex="-1"></a>  metrics_list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(rep_results, <span class="cf">function</span>(x) {</span>
+<span id="cb144-18"><a href="recipes.html#cb144-18" tabindex="-1"></a>    x<span class="sc">$</span>metrics[, rep <span class="sc">:=</span> <span class="fu">which</span>(<span class="fu">sapply</span>(rep_results, identical, x))]</span>
+<span id="cb144-19"><a href="recipes.html#cb144-19" tabindex="-1"></a>  })</span>
+<span id="cb144-20"><a href="recipes.html#cb144-20" tabindex="-1"></a>  </span>
+<span id="cb144-21"><a href="recipes.html#cb144-21" tabindex="-1"></a>  combined_metrics <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(metrics_list)</span>
+<span id="cb144-22"><a href="recipes.html#cb144-22" tabindex="-1"></a>  </span>
+<span id="cb144-23"><a href="recipes.html#cb144-23" tabindex="-1"></a>  summary_metrics <span class="ot">&lt;-</span> combined_metrics[, .(</span>
+<span id="cb144-24"><a href="recipes.html#cb144-24" tabindex="-1"></a>    <span class="at">avg_size =</span> <span class="fu">mean</span>(organization_size),</span>
+<span id="cb144-25"><a href="recipes.html#cb144-25" tabindex="-1"></a>    <span class="at">sd_size =</span> <span class="fu">sd</span>(organization_size),</span>
+<span id="cb144-26"><a href="recipes.html#cb144-26" tabindex="-1"></a>    <span class="at">avg_diversity =</span> <span class="fu">mean</span>(blau_index),</span>
+<span id="cb144-27"><a href="recipes.html#cb144-27" tabindex="-1"></a>    <span class="at">sd_diversity =</span> <span class="fu">sd</span>(blau_index),</span>
+<span id="cb144-28"><a href="recipes.html#cb144-28" tabindex="-1"></a>    <span class="at">avg_satisfaction =</span> <span class="fu">mean</span>(avg_satisfaction),</span>
+<span id="cb144-29"><a href="recipes.html#cb144-29" tabindex="-1"></a>    <span class="at">sd_satisfaction =</span> <span class="fu">sd</span>(avg_satisfaction)</span>
+<span id="cb144-30"><a href="recipes.html#cb144-30" tabindex="-1"></a>  ), by <span class="ot">=</span> time_step]</span>
+<span id="cb144-31"><a href="recipes.html#cb144-31" tabindex="-1"></a>  </span>
+<span id="cb144-32"><a href="recipes.html#cb144-32" tabindex="-1"></a>  <span class="fu">return</span>(summary_metrics)</span>
+<span id="cb144-33"><a href="recipes.html#cb144-33" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="custom-visualization-functions" class="section level3 hasAnchor" number="8.8.2">
+<h3><span class="header-section-number">8.8.2</span> Custom Visualization Functions<a href="recipes.html#custom-visualization-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="recipes.html#cb145-1" tabindex="-1"></a><span class="co"># Plot with confidence intervals</span></span>
+<span id="cb145-2"><a href="recipes.html#cb145-2" tabindex="-1"></a>plot_with_ci <span class="ot">&lt;-</span> <span class="cf">function</span>(summary_metrics, metric_name, <span class="at">color =</span> <span class="st">&quot;darkblue&quot;</span>) {</span>
+<span id="cb145-3"><a href="recipes.html#cb145-3" tabindex="-1"></a>  avg_col <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;avg_&quot;</span>, metric_name)</span>
+<span id="cb145-4"><a href="recipes.html#cb145-4" tabindex="-1"></a>  sd_col <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;sd_&quot;</span>, metric_name)</span>
+<span id="cb145-5"><a href="recipes.html#cb145-5" tabindex="-1"></a>  </span>
+<span id="cb145-6"><a href="recipes.html#cb145-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(summary_metrics, <span class="fu">aes_string</span>(<span class="at">x =</span> <span class="st">&quot;time_step&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb145-7"><a href="recipes.html#cb145-7" tabindex="-1"></a>    <span class="fu">geom_ribbon</span>(<span class="fu">aes_string</span>(<span class="at">ymin =</span> <span class="fu">paste0</span>(avg_col, <span class="st">&quot; - &quot;</span>, sd_col),</span>
+<span id="cb145-8"><a href="recipes.html#cb145-8" tabindex="-1"></a>                          <span class="at">ymax =</span> <span class="fu">paste0</span>(avg_col, <span class="st">&quot; + &quot;</span>, sd_col)),</span>
+<span id="cb145-9"><a href="recipes.html#cb145-9" tabindex="-1"></a>                <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">fill =</span> color) <span class="sc">+</span></span>
+<span id="cb145-10"><a href="recipes.html#cb145-10" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes_string</span>(<span class="at">y =</span> avg_col), <span class="at">color =</span> color, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb145-11"><a href="recipes.html#cb145-11" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Average&quot;</span>, metric_name, <span class="st">&quot;with Standard Deviation&quot;</span>),</span>
+<span id="cb145-12"><a href="recipes.html#cb145-12" tabindex="-1"></a>         <span class="at">y =</span> metric_name,</span>
+<span id="cb145-13"><a href="recipes.html#cb145-13" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">&quot;Time Step&quot;</span>) <span class="sc">+</span></span>
+<span id="cb145-14"><a href="recipes.html#cb145-14" tabindex="-1"></a>    <span class="fu">theme_asa</span>()</span>
+<span id="cb145-15"><a href="recipes.html#cb145-15" tabindex="-1"></a>}</span>
+<span id="cb145-16"><a href="recipes.html#cb145-16" tabindex="-1"></a></span>
+<span id="cb145-17"><a href="recipes.html#cb145-17" tabindex="-1"></a><span class="co"># Create dashboard of key metrics</span></span>
+<span id="cb145-18"><a href="recipes.html#cb145-18" tabindex="-1"></a>create_dashboard <span class="ot">&lt;-</span> <span class="cf">function</span>(metrics_data, <span class="at">title =</span> <span class="st">&quot;Simulation Dashboard&quot;</span>) {</span>
+<span id="cb145-19"><a href="recipes.html#cb145-19" tabindex="-1"></a>  p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(metrics_data, <span class="fu">aes</span>(<span class="at">x =</span> time_step, <span class="at">y =</span> organization_size)) <span class="sc">+</span></span>
+<span id="cb145-20"><a href="recipes.html#cb145-20" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;darkgreen&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb145-21"><a href="recipes.html#cb145-21" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Organization Size&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Size&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb145-22"><a href="recipes.html#cb145-22" tabindex="-1"></a>    <span class="fu">theme_asa</span>()</span>
+<span id="cb145-23"><a href="recipes.html#cb145-23" tabindex="-1"></a>  </span>
+<span id="cb145-24"><a href="recipes.html#cb145-24" tabindex="-1"></a>  p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(metrics_data, <span class="fu">aes</span>(<span class="at">x =</span> time_step, <span class="at">y =</span> blau_index)) <span class="sc">+</span></span>
+<span id="cb145-25"><a href="recipes.html#cb145-25" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;purple&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb145-26"><a href="recipes.html#cb145-26" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Diversity&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Blau&#39;s Index&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb145-27"><a href="recipes.html#cb145-27" tabindex="-1"></a>    <span class="fu">theme_asa</span>()</span>
+<span id="cb145-28"><a href="recipes.html#cb145-28" tabindex="-1"></a>  </span>
+<span id="cb145-29"><a href="recipes.html#cb145-29" tabindex="-1"></a>  p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(metrics_data, <span class="fu">aes</span>(<span class="at">x =</span> time_step, <span class="at">y =</span> avg_satisfaction)) <span class="sc">+</span></span>
+<span id="cb145-30"><a href="recipes.html#cb145-30" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;darkblue&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb145-31"><a href="recipes.html#cb145-31" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Satisfaction&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Average&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb145-32"><a href="recipes.html#cb145-32" tabindex="-1"></a>    <span class="fu">theme_asa</span>()</span>
+<span id="cb145-33"><a href="recipes.html#cb145-33" tabindex="-1"></a>  </span>
+<span id="cb145-34"><a href="recipes.html#cb145-34" tabindex="-1"></a>  p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(metrics_data, <span class="fu">aes</span>(<span class="at">x =</span> time_step, <span class="at">y =</span> avg_conscientiousness)) <span class="sc">+</span></span>
+<span id="cb145-35"><a href="recipes.html#cb145-35" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;darkorange&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb145-36"><a href="recipes.html#cb145-36" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Conscientiousness&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Average&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb145-37"><a href="recipes.html#cb145-37" tabindex="-1"></a>    <span class="fu">theme_asa</span>()</span>
+<span id="cb145-38"><a href="recipes.html#cb145-38" tabindex="-1"></a>  </span>
+<span id="cb145-39"><a href="recipes.html#cb145-39" tabindex="-1"></a>  <span class="fu">grid.arrange</span>(p1, p2, p3, p4, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">top =</span> title)</span>
+<span id="cb145-40"><a href="recipes.html#cb145-40" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="advanced-analysis-functions" class="section level3 hasAnchor" number="8.8.3">
+<h3><span class="header-section-number">8.8.3</span> Advanced Analysis Functions<a href="recipes.html#advanced-analysis-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="recipes.html#cb146-1" tabindex="-1"></a><span class="co"># Detect organizational phases</span></span>
+<span id="cb146-2"><a href="recipes.html#cb146-2" tabindex="-1"></a>detect_phases <span class="ot">&lt;-</span> <span class="cf">function</span>(metrics_data, <span class="at">window =</span> <span class="dv">26</span>) {</span>
+<span id="cb146-3"><a href="recipes.html#cb146-3" tabindex="-1"></a>  <span class="co"># Calculate rolling statistics</span></span>
+<span id="cb146-4"><a href="recipes.html#cb146-4" tabindex="-1"></a>  metrics_data[, <span class="st">`</span><span class="at">:=</span><span class="st">`</span>(</span>
+<span id="cb146-5"><a href="recipes.html#cb146-5" tabindex="-1"></a>    <span class="at">growth_rate =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="fu">diff</span>(organization_size)) <span class="sc">/</span> organization_size,</span>
+<span id="cb146-6"><a href="recipes.html#cb146-6" tabindex="-1"></a>    <span class="at">diversity_change =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="fu">diff</span>(blau_index)),</span>
+<span id="cb146-7"><a href="recipes.html#cb146-7" tabindex="-1"></a>    <span class="at">satisfaction_change =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="fu">diff</span>(avg_satisfaction))</span>
+<span id="cb146-8"><a href="recipes.html#cb146-8" tabindex="-1"></a>  )]</span>
+<span id="cb146-9"><a href="recipes.html#cb146-9" tabindex="-1"></a>  </span>
+<span id="cb146-10"><a href="recipes.html#cb146-10" tabindex="-1"></a>  <span class="co"># Identify phase transitions</span></span>
+<span id="cb146-11"><a href="recipes.html#cb146-11" tabindex="-1"></a>  metrics_data[, phase <span class="sc">:=</span> <span class="st">&quot;stable&quot;</span>]</span>
+<span id="cb146-12"><a href="recipes.html#cb146-12" tabindex="-1"></a>  metrics_data[<span class="fu">abs</span>(growth_rate) <span class="sc">&gt;</span> <span class="fl">0.05</span>, phase <span class="sc">:=</span> <span class="st">&quot;growth&quot;</span>]</span>
+<span id="cb146-13"><a href="recipes.html#cb146-13" tabindex="-1"></a>  metrics_data[growth_rate <span class="sc">&lt;</span> <span class="sc">-</span><span class="fl">0.02</span>, phase <span class="sc">:=</span> <span class="st">&quot;contraction&quot;</span>] </span>
+<span id="cb146-14"><a href="recipes.html#cb146-14" tabindex="-1"></a>  metrics_data[<span class="fu">abs</span>(diversity_change) <span class="sc">&gt;</span> <span class="fl">0.05</span>, phase <span class="sc">:=</span> <span class="st">&quot;transition&quot;</span>]</span>
+<span id="cb146-15"><a href="recipes.html#cb146-15" tabindex="-1"></a>  </span>
+<span id="cb146-16"><a href="recipes.html#cb146-16" tabindex="-1"></a>  <span class="fu">return</span>(metrics_data)</span>
+<span id="cb146-17"><a href="recipes.html#cb146-17" tabindex="-1"></a>}</span>
+<span id="cb146-18"><a href="recipes.html#cb146-18" tabindex="-1"></a></span>
+<span id="cb146-19"><a href="recipes.html#cb146-19" tabindex="-1"></a><span class="co"># Calculate organizational health index</span></span>
+<span id="cb146-20"><a href="recipes.html#cb146-20" tabindex="-1"></a>calculate_health_index <span class="ot">&lt;-</span> <span class="cf">function</span>(metrics_data) {</span>
+<span id="cb146-21"><a href="recipes.html#cb146-21" tabindex="-1"></a>  metrics_data[, health_index <span class="sc">:=</span> </span>
+<span id="cb146-22"><a href="recipes.html#cb146-22" tabindex="-1"></a>    (organization_size <span class="sc">/</span> <span class="fu">max</span>(organization_size)) <span class="sc">*</span> <span class="fl">0.25</span> <span class="sc">+</span></span>
+<span id="cb146-23"><a href="recipes.html#cb146-23" tabindex="-1"></a>    blau_index <span class="sc">*</span> <span class="fl">0.25</span> <span class="sc">+</span></span>
+<span id="cb146-24"><a href="recipes.html#cb146-24" tabindex="-1"></a>    (avg_satisfaction <span class="sc">/</span> <span class="dv">10</span>) <span class="sc">*</span> <span class="fl">0.25</span> <span class="sc">+</span></span>
+<span id="cb146-25"><a href="recipes.html#cb146-25" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">-</span> sd_satisfaction <span class="sc">/</span> <span class="dv">5</span>) <span class="sc">*</span> <span class="fl">0.25</span></span>
+<span id="cb146-26"><a href="recipes.html#cb146-26" tabindex="-1"></a>  ]</span>
+<span id="cb146-27"><a href="recipes.html#cb146-27" tabindex="-1"></a>  </span>
+<span id="cb146-28"><a href="recipes.html#cb146-28" tabindex="-1"></a>  <span class="fu">return</span>(metrics_data)</span>
+<span id="cb146-29"><a href="recipes.html#cb146-29" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+</div>
+<div id="conclusion" class="section level2 hasAnchor" number="8.9">
+<h2><span class="header-section-number">8.9</span> Conclusion<a href="recipes.html#conclusion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>These recipes provide starting points for exploring organizational dynamics with the ASA ABM v2. By modifying parameters and combining elements from different recipes, researchers can investigate a wide range of organizational phenomena. Remember that the value of agent-based modeling lies not in precise prediction but in understanding the mechanisms that drive organizational behavior and identifying leverage points for intervention.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="examples.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="contributors-guide.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false,
+    "google": false
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": null,
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["asa-abm-v2-documentation.pdf", "asa-abm-v2-documentation.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection",
+    "scroll_highlight": true
+  }
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -23,7 +23,7 @@
 <meta name="author" content="ASA ABM Development Team" />
 
 
-<meta name="date" content="2025-07-09" />
+<meta name="date" content="2025-07-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -261,7 +261,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.10.1" data-path="architecture.html"><a href="architecture.html#unit-test-structure"><i class="fa fa-check"></i><b>3.10.1</b> Unit Test Structure</a></li>
 <li class="chapter" data-level="3.10.2" data-path="architecture.html"><a href="architecture.html#integration-tests"><i class="fa fa-check"></i><b>3.10.2</b> Integration Tests</a></li>
 </ul></li>
-<li class="chapter" data-level="3.11" data-path="architecture.html"><a href="architecture.html#future-architecture-enhancements"><i class="fa fa-check"></i><b>3.11</b> Future Architecture Enhancements</a></li>
+<li class="chapter" data-level="3.11" data-path="architecture.html"><a href="architecture.html#architecture-decision-log"><i class="fa fa-check"></i><b>3.11</b> Architecture Decision Log</a>
+<ul>
+<li class="chapter" data-level="3.11.1" data-path="architecture.html"><a href="architecture.html#adr-001-why-data.table"><i class="fa fa-check"></i><b>3.11.1</b> ADR-001: Why data.table?</a></li>
+<li class="chapter" data-level="3.11.2" data-path="architecture.html"><a href="architecture.html#adr-002-functional-vs-object-oriented-design"><i class="fa fa-check"></i><b>3.11.2</b> ADR-002: Functional vs Object-Oriented Design</a></li>
+<li class="chapter" data-level="3.11.3" data-path="architecture.html"><a href="architecture.html#adr-003-simulation-state-management"><i class="fa fa-check"></i><b>3.11.3</b> ADR-003: Simulation State Management</a></li>
+<li class="chapter" data-level="3.11.4" data-path="architecture.html"><a href="architecture.html#adr-004-vectorization-strategy"><i class="fa fa-check"></i><b>3.11.4</b> ADR-004: Vectorization Strategy</a></li>
+<li class="chapter" data-level="3.11.5" data-path="architecture.html"><a href="architecture.html#adr-005-module-boundaries"><i class="fa fa-check"></i><b>3.11.5</b> ADR-005: Module Boundaries</a></li>
+<li class="chapter" data-level="3.11.6" data-path="architecture.html"><a href="architecture.html#adr-006-metric-calculation-timing"><i class="fa fa-check"></i><b>3.11.6</b> ADR-006: Metric Calculation Timing</a></li>
+<li class="chapter" data-level="3.11.7" data-path="architecture.html"><a href="architecture.html#adr-007-parameter-validation"><i class="fa fa-check"></i><b>3.11.7</b> ADR-007: Parameter Validation</a></li>
+<li class="chapter" data-level="3.11.8" data-path="architecture.html"><a href="architecture.html#adr-008-random-number-generation"><i class="fa fa-check"></i><b>3.11.8</b> ADR-008: Random Number Generation</a></li>
+<li class="chapter" data-level="3.11.9" data-path="architecture.html"><a href="architecture.html#adr-009-identity-categories"><i class="fa fa-check"></i><b>3.11.9</b> ADR-009: Identity Categories</a></li>
+<li class="chapter" data-level="3.11.10" data-path="architecture.html"><a href="architecture.html#adr-010-extension-mechanism"><i class="fa fa-check"></i><b>3.11.10</b> ADR-010: Extension Mechanism</a></li>
+</ul></li>
+<li class="chapter" data-level="3.12" data-path="architecture.html"><a href="architecture.html#design-philosophy-summary"><i class="fa fa-check"></i><b>3.12</b> Design Philosophy Summary</a></li>
+<li class="chapter" data-level="3.13" data-path="architecture.html"><a href="architecture.html#future-architecture-enhancements"><i class="fa fa-check"></i><b>3.13</b> Future Architecture Enhancements</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="user-guide.html"><a href="user-guide.html"><i class="fa fa-check"></i><b>4</b> User Guide</a>
 <ul>
@@ -306,6 +320,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="4.8.1" data-path="user-guide.html"><a href="user-guide.html#common-issues-1"><i class="fa fa-check"></i><b>4.8.1</b> Common Issues</a></li>
 <li class="chapter" data-level="4.8.2" data-path="user-guide.html"><a href="user-guide.html#debugging-tools"><i class="fa fa-check"></i><b>4.8.2</b> Debugging Tools</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="user-guide.html"><a href="user-guide.html#metrics-deep-dive"><i class="fa fa-check"></i><b>4.9</b> Metrics Deep Dive</a>
+<ul>
+<li class="chapter" data-level="4.9.1" data-path="user-guide.html"><a href="user-guide.html#overview-of-metrics"><i class="fa fa-check"></i><b>4.9.1</b> Overview of Metrics</a></li>
+<li class="chapter" data-level="4.9.2" data-path="user-guide.html"><a href="user-guide.html#identity-and-diversity-metrics"><i class="fa fa-check"></i><b>4.9.2</b> Identity and Diversity Metrics</a></li>
+<li class="chapter" data-level="4.9.3" data-path="user-guide.html"><a href="user-guide.html#personality-trait-metrics"><i class="fa fa-check"></i><b>4.9.3</b> Personality Trait Metrics</a></li>
+<li class="chapter" data-level="4.9.4" data-path="user-guide.html"><a href="user-guide.html#satisfaction-metrics"><i class="fa fa-check"></i><b>4.9.4</b> Satisfaction Metrics</a></li>
+<li class="chapter" data-level="4.9.5" data-path="user-guide.html"><a href="user-guide.html#interpreting-metric-interactions"><i class="fa fa-check"></i><b>4.9.5</b> Interpreting Metric Interactions</a></li>
+<li class="chapter" data-level="4.9.6" data-path="user-guide.html"><a href="user-guide.html#advanced-metric-analysis"><i class="fa fa-check"></i><b>4.9.6</b> Advanced Metric Analysis</a></li>
+<li class="chapter" data-level="4.9.7" data-path="user-guide.html"><a href="user-guide.html#visualization-best-practices"><i class="fa fa-check"></i><b>4.9.7</b> Visualization Best Practices</a></li>
+<li class="chapter" data-level="4.9.8" data-path="user-guide.html"><a href="user-guide.html#common-misinterpretations-to-avoid"><i class="fa fa-check"></i><b>4.9.8</b> Common Misinterpretations to Avoid</a></li>
+<li class="chapter" data-level="4.9.9" data-path="user-guide.html"><a href="user-guide.html#using-metrics-for-model-validation"><i class="fa fa-check"></i><b>4.9.9</b> Using Metrics for Model Validation</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="odd-protocol.html"><a href="odd-protocol.html"><i class="fa fa-check"></i><b>5</b> ODD Protocol</a>
@@ -402,6 +428,156 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.5.1" data-path="examples.html"><a href="examples.html#batch-processing"><i class="fa fa-check"></i><b>7.5.1</b> Batch Processing</a></li>
 <li class="chapter" data-level="7.5.2" data-path="examples.html"><a href="examples.html#custom-metrics"><i class="fa fa-check"></i><b>7.5.2</b> Custom Metrics</a></li>
 <li class="chapter" data-level="7.5.3" data-path="examples.html"><a href="examples.html#visualization-helpers"><i class="fa fa-check"></i><b>7.5.3</b> Visualization Helpers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="recipes.html"><a href="recipes.html"><i class="fa fa-check"></i><b>8</b> Model Recipe Book</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="recipes.html"><a href="recipes.html#introduction-the-cookbook-approach"><i class="fa fa-check"></i><b>8.1</b> Introduction: The Cookbook Approach</a></li>
+<li class="chapter" data-level="8.2" data-path="recipes.html"><a href="recipes.html#recipe-1-creating-a-homogeneous-organization"><i class="fa fa-check"></i><b>8.2</b> Recipe 1: Creating a Homogeneous Organization</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="recipes.html"><a href="recipes.html#key-parameters"><i class="fa fa-check"></i><b>8.2.1</b> Key Parameters</a></li>
+<li class="chapter" data-level="8.2.2" data-path="recipes.html"><a href="recipes.html#implementation"><i class="fa fa-check"></i><b>8.2.2</b> Implementation</a></li>
+<li class="chapter" data-level="8.2.3" data-path="recipes.html"><a href="recipes.html#visualization"><i class="fa fa-check"></i><b>8.2.3</b> Visualization</a></li>
+<li class="chapter" data-level="8.2.4" data-path="recipes.html"><a href="recipes.html#expected-outcomes-and-insights"><i class="fa fa-check"></i><b>8.2.4</b> Expected Outcomes and Insights</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="recipes.html"><a href="recipes.html#recipe-2-the-diversity-paradox"><i class="fa fa-check"></i><b>8.3</b> Recipe 2: The Diversity Paradox</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="recipes.html"><a href="recipes.html#key-parameters-1"><i class="fa fa-check"></i><b>8.3.1</b> Key Parameters</a></li>
+<li class="chapter" data-level="8.3.2" data-path="recipes.html"><a href="recipes.html#implementation-1"><i class="fa fa-check"></i><b>8.3.2</b> Implementation</a></li>
+<li class="chapter" data-level="8.3.3" data-path="recipes.html"><a href="recipes.html#visualization-1"><i class="fa fa-check"></i><b>8.3.3</b> Visualization</a></li>
+<li class="chapter" data-level="8.3.4" data-path="recipes.html"><a href="recipes.html#expected-outcomes-and-insights-1"><i class="fa fa-check"></i><b>8.3.4</b> Expected Outcomes and Insights</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="recipes.html"><a href="recipes.html#recipe-3-rapid-growth-startup-dynamics"><i class="fa fa-check"></i><b>8.4</b> Recipe 3: Rapid Growth Startup Dynamics</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="recipes.html"><a href="recipes.html#key-parameters-2"><i class="fa fa-check"></i><b>8.4.1</b> Key Parameters</a></li>
+<li class="chapter" data-level="8.4.2" data-path="recipes.html"><a href="recipes.html#implementation-2"><i class="fa fa-check"></i><b>8.4.2</b> Implementation</a></li>
+<li class="chapter" data-level="8.4.3" data-path="recipes.html"><a href="recipes.html#visualization-2"><i class="fa fa-check"></i><b>8.4.3</b> Visualization</a></li>
+<li class="chapter" data-level="8.4.4" data-path="recipes.html"><a href="recipes.html#expected-outcomes-and-insights-2"><i class="fa fa-check"></i><b>8.4.4</b> Expected Outcomes and Insights</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="recipes.html"><a href="recipes.html#recipe-4-parameter-sensitivity-analysis"><i class="fa fa-check"></i><b>8.5</b> Recipe 4: Parameter Sensitivity Analysis</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="recipes.html"><a href="recipes.html#key-parameters-3"><i class="fa fa-check"></i><b>8.5.1</b> Key Parameters</a></li>
+<li class="chapter" data-level="8.5.2" data-path="recipes.html"><a href="recipes.html#implementation-3"><i class="fa fa-check"></i><b>8.5.2</b> Implementation</a></li>
+<li class="chapter" data-level="8.5.3" data-path="recipes.html"><a href="recipes.html#visualization-3"><i class="fa fa-check"></i><b>8.5.3</b> Visualization</a></li>
+<li class="chapter" data-level="8.5.4" data-path="recipes.html"><a href="recipes.html#expected-outcomes-and-insights-3"><i class="fa fa-check"></i><b>8.5.4</b> Expected Outcomes and Insights</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="recipes.html"><a href="recipes.html#recipe-5-long-term-organizational-evolution"><i class="fa fa-check"></i><b>8.6</b> Recipe 5: Long-term Organizational Evolution</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="recipes.html"><a href="recipes.html#key-parameters-4"><i class="fa fa-check"></i><b>8.6.1</b> Key Parameters</a></li>
+<li class="chapter" data-level="8.6.2" data-path="recipes.html"><a href="recipes.html#implementation-4"><i class="fa fa-check"></i><b>8.6.2</b> Implementation</a></li>
+<li class="chapter" data-level="8.6.3" data-path="recipes.html"><a href="recipes.html#visualization-4"><i class="fa fa-check"></i><b>8.6.3</b> Visualization</a></li>
+<li class="chapter" data-level="8.6.4" data-path="recipes.html"><a href="recipes.html#expected-outcomes-and-insights-4"><i class="fa fa-check"></i><b>8.6.4</b> Expected Outcomes and Insights</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="recipes.html"><a href="recipes.html#best-practices-from-recipes"><i class="fa fa-check"></i><b>8.7</b> Best Practices from Recipes</a>
+<ul>
+<li class="chapter" data-level="8.7.1" data-path="recipes.html"><a href="recipes.html#parameter-selection-1"><i class="fa fa-check"></i><b>8.7.1</b> 1. Parameter Selection</a></li>
+<li class="chapter" data-level="8.7.2" data-path="recipes.html"><a href="recipes.html#analysis-approach-1"><i class="fa fa-check"></i><b>8.7.2</b> 2. Analysis Approach</a></li>
+<li class="chapter" data-level="8.7.3" data-path="recipes.html"><a href="recipes.html#validation-2"><i class="fa fa-check"></i><b>8.7.3</b> 3. Validation</a></li>
+<li class="chapter" data-level="8.7.4" data-path="recipes.html"><a href="recipes.html#interpretation-1"><i class="fa fa-check"></i><b>8.7.4</b> 4. Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="8.8" data-path="recipes.html"><a href="recipes.html#code-snippets-for-common-tasks-1"><i class="fa fa-check"></i><b>8.8</b> Code Snippets for Common Tasks</a>
+<ul>
+<li class="chapter" data-level="8.8.1" data-path="recipes.html"><a href="recipes.html#running-multiple-replications"><i class="fa fa-check"></i><b>8.8.1</b> Running Multiple Replications</a></li>
+<li class="chapter" data-level="8.8.2" data-path="recipes.html"><a href="recipes.html#custom-visualization-functions"><i class="fa fa-check"></i><b>8.8.2</b> Custom Visualization Functions</a></li>
+<li class="chapter" data-level="8.8.3" data-path="recipes.html"><a href="recipes.html#advanced-analysis-functions"><i class="fa fa-check"></i><b>8.8.3</b> Advanced Analysis Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="8.9" data-path="recipes.html"><a href="recipes.html#conclusion"><i class="fa fa-check"></i><b>8.9</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="contributors-guide.html"><a href="contributors-guide.html"><i class="fa fa-check"></i><b>9</b> Contributor’s Walkthrough</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="contributors-guide.html"><a href="contributors-guide.html#getting-started-dev"><i class="fa fa-check"></i><b>9.1</b> Getting Started as a Contributor</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="contributors-guide.html"><a href="contributors-guide.html#setting-up-the-development-environment"><i class="fa fa-check"></i><b>9.1.1</b> Setting up the Development Environment</a></li>
+<li class="chapter" data-level="9.1.2" data-path="contributors-guide.html"><a href="contributors-guide.html#understanding-the-codebase-structure"><i class="fa fa-check"></i><b>9.1.2</b> Understanding the Codebase Structure</a></li>
+<li class="chapter" data-level="9.1.3" data-path="contributors-guide.html"><a href="contributors-guide.html#running-tests-and-examples"><i class="fa fa-check"></i><b>9.1.3</b> Running Tests and Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="contributors-guide.html"><a href="contributors-guide.html#feature-tutorial"><i class="fa fa-check"></i><b>9.2</b> Step-by-Step Feature Tutorial: Adding a New Personality Trait</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="contributors-guide.html"><a href="contributors-guide.html#step-1-update-agent-definition"><i class="fa fa-check"></i><b>9.2.1</b> Step 1: Update Agent Definition</a></li>
+<li class="chapter" data-level="9.2.2" data-path="contributors-guide.html"><a href="contributors-guide.html#step-2-update-organization-initialization"><i class="fa fa-check"></i><b>9.2.2</b> Step 2: Update Organization Initialization</a></li>
+<li class="chapter" data-level="9.2.3" data-path="contributors-guide.html"><a href="contributors-guide.html#step-3-incorporate-into-interactions"><i class="fa fa-check"></i><b>9.2.3</b> Step 3: Incorporate into Interactions</a></li>
+<li class="chapter" data-level="9.2.4" data-path="contributors-guide.html"><a href="contributors-guide.html#step-4-update-selection-criteria"><i class="fa fa-check"></i><b>9.2.4</b> Step 4: Update Selection Criteria</a></li>
+<li class="chapter" data-level="9.2.5" data-path="contributors-guide.html"><a href="contributors-guide.html#step-5-add-performance-impact"><i class="fa fa-check"></i><b>9.2.5</b> Step 5: Add Performance Impact</a></li>
+<li class="chapter" data-level="9.2.6" data-path="contributors-guide.html"><a href="contributors-guide.html#step-6-add-tests"><i class="fa fa-check"></i><b>9.2.6</b> Step 6: Add Tests</a></li>
+<li class="chapter" data-level="9.2.7" data-path="contributors-guide.html"><a href="contributors-guide.html#step-7-update-documentation"><i class="fa fa-check"></i><b>9.2.7</b> Step 7: Update Documentation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="contributors-guide.html"><a href="contributors-guide.html#code-flow"><i class="fa fa-check"></i><b>9.3</b> Code Flow Walkthrough</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="contributors-guide.html"><a href="contributors-guide.html#simulation-step-trace"><i class="fa fa-check"></i><b>9.3.1</b> Simulation Step Trace</a></li>
+<li class="chapter" data-level="9.3.2" data-path="contributors-guide.html"><a href="contributors-guide.html#data-flow-diagram"><i class="fa fa-check"></i><b>9.3.2</b> Data Flow Diagram</a></li>
+<li class="chapter" data-level="9.3.3" data-path="contributors-guide.html"><a href="contributors-guide.html#key-functions-and-responsibilities"><i class="fa fa-check"></i><b>9.3.3</b> Key Functions and Responsibilities</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="contributors-guide.html"><a href="contributors-guide.html#testing-philosophy"><i class="fa fa-check"></i><b>9.4</b> Testing Philosophy</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="contributors-guide.html"><a href="contributors-guide.html#types-of-tests"><i class="fa fa-check"></i><b>9.4.1</b> Types of Tests</a></li>
+<li class="chapter" data-level="9.4.2" data-path="contributors-guide.html"><a href="contributors-guide.html#writing-good-tests"><i class="fa fa-check"></i><b>9.4.2</b> Writing Good Tests</a></li>
+<li class="chapter" data-level="9.4.3" data-path="contributors-guide.html"><a href="contributors-guide.html#test-coverage-expectations"><i class="fa fa-check"></i><b>9.4.3</b> Test Coverage Expectations</a></li>
+<li class="chapter" data-level="9.4.4" data-path="contributors-guide.html"><a href="contributors-guide.html#running-the-test-suite"><i class="fa fa-check"></i><b>9.4.4</b> Running the Test Suite</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="contributors-guide.html"><a href="contributors-guide.html#best-practices"><i class="fa fa-check"></i><b>9.5</b> Development Best Practices</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="contributors-guide.html"><a href="contributors-guide.html#r-coding-standards"><i class="fa fa-check"></i><b>9.5.1</b> R Coding Standards</a></li>
+<li class="chapter" data-level="9.5.2" data-path="contributors-guide.html"><a href="contributors-guide.html#using-data.table-effectively"><i class="fa fa-check"></i><b>9.5.2</b> Using data.table Effectively</a></li>
+<li class="chapter" data-level="9.5.3" data-path="contributors-guide.html"><a href="contributors-guide.html#performance-considerations"><i class="fa fa-check"></i><b>9.5.3</b> Performance Considerations</a></li>
+<li class="chapter" data-level="9.5.4" data-path="contributors-guide.html"><a href="contributors-guide.html#documentation-standards"><i class="fa fa-check"></i><b>9.5.4</b> Documentation Standards</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="contributors-guide.html"><a href="contributors-guide.html#git-workflow"><i class="fa fa-check"></i><b>9.6</b> Git Workflow</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="contributors-guide.html"><a href="contributors-guide.html#branching-strategy"><i class="fa fa-check"></i><b>9.6.1</b> Branching Strategy</a></li>
+<li class="chapter" data-level="9.6.2" data-path="contributors-guide.html"><a href="contributors-guide.html#branch-naming-conventions"><i class="fa fa-check"></i><b>9.6.2</b> Branch Naming Conventions</a></li>
+<li class="chapter" data-level="9.6.3" data-path="contributors-guide.html"><a href="contributors-guide.html#commit-message-conventions"><i class="fa fa-check"></i><b>9.6.3</b> Commit Message Conventions</a></li>
+<li class="chapter" data-level="9.6.4" data-path="contributors-guide.html"><a href="contributors-guide.html#pull-request-process"><i class="fa fa-check"></i><b>9.6.4</b> Pull Request Process</a></li>
+<li class="chapter" data-level="9.6.5" data-path="contributors-guide.html"><a href="contributors-guide.html#code-review-guidelines"><i class="fa fa-check"></i><b>9.6.5</b> Code Review Guidelines</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="contributors-guide.html"><a href="contributors-guide.html#common-tasks"><i class="fa fa-check"></i><b>9.7</b> Common Development Tasks</a>
+<ul>
+<li class="chapter" data-level="9.7.1" data-path="contributors-guide.html"><a href="contributors-guide.html#adding-new-parameters"><i class="fa fa-check"></i><b>9.7.1</b> Adding New Parameters</a></li>
+<li class="chapter" data-level="9.7.2" data-path="contributors-guide.html"><a href="contributors-guide.html#creating-new-metrics"><i class="fa fa-check"></i><b>9.7.2</b> Creating New Metrics</a></li>
+<li class="chapter" data-level="9.7.3" data-path="contributors-guide.html"><a href="contributors-guide.html#implementing-new-selection-strategies"><i class="fa fa-check"></i><b>9.7.3</b> Implementing New Selection Strategies</a></li>
+<li class="chapter" data-level="9.7.4" data-path="contributors-guide.html"><a href="contributors-guide.html#adding-visualization-functions"><i class="fa fa-check"></i><b>9.7.4</b> Adding Visualization Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="9.8" data-path="contributors-guide.html"><a href="contributors-guide.html#debugging-tips"><i class="fa fa-check"></i><b>9.8</b> Debugging Tips</a>
+<ul>
+<li class="chapter" data-level="9.8.1" data-path="contributors-guide.html"><a href="contributors-guide.html#common-errors-and-solutions"><i class="fa fa-check"></i><b>9.8.1</b> Common Errors and Solutions</a></li>
+<li class="chapter" data-level="9.8.2" data-path="contributors-guide.html"><a href="contributors-guide.html#debugging-techniques-for-r"><i class="fa fa-check"></i><b>9.8.2</b> Debugging Techniques for R</a></li>
+<li class="chapter" data-level="9.8.3" data-path="contributors-guide.html"><a href="contributors-guide.html#performance-profiling"><i class="fa fa-check"></i><b>9.8.3</b> Performance Profiling</a></li>
+<li class="chapter" data-level="9.8.4" data-path="contributors-guide.html"><a href="contributors-guide.html#using-verbose-mode-effectively"><i class="fa fa-check"></i><b>9.8.4</b> Using Verbose Mode Effectively</a></li>
+</ul></li>
+<li class="chapter" data-level="9.9" data-path="contributors-guide.html"><a href="contributors-guide.html#summary"><i class="fa fa-check"></i><b>9.9</b> Summary</a></li>
+<li class="chapter" data-level="9.10" data-path="contributors-guide.html"><a href="contributors-guide.html#additional-resources"><i class="fa fa-check"></i><b>9.10</b> Additional Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="quick-ref.html"><a href="quick-ref.html"><i class="fa fa-check"></i><b>10</b> ASA ABM v2 Quick Reference</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="quick-ref.html"><a href="quick-ref.html#quick-start"><i class="fa fa-check"></i><b>10.1</b> Quick Start</a></li>
+<li class="chapter" data-level="10.2" data-path="quick-ref.html"><a href="quick-ref.html#parameter-reference"><i class="fa fa-check"></i><b>10.2</b> Parameter Reference</a></li>
+<li class="chapter" data-level="10.3" data-path="quick-ref.html"><a href="quick-ref.html#key-functions"><i class="fa fa-check"></i><b>10.3</b> Key Functions</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="quick-ref.html"><a href="quick-ref.html#core-functions"><i class="fa fa-check"></i><b>10.3.1</b> Core Functions</a></li>
+<li class="chapter" data-level="10.3.2" data-path="quick-ref.html"><a href="quick-ref.html#analysis-functions"><i class="fa fa-check"></i><b>10.3.2</b> Analysis Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="quick-ref.html"><a href="quick-ref.html#data-structures"><i class="fa fa-check"></i><b>10.4</b> Data Structures</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="quick-ref.html"><a href="quick-ref.html#organization-table"><i class="fa fa-check"></i><b>10.4.1</b> Organization Table</a></li>
+<li class="chapter" data-level="10.4.2" data-path="quick-ref.html"><a href="quick-ref.html#metrics-output"><i class="fa fa-check"></i><b>10.4.2</b> Metrics Output</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="quick-ref.html"><a href="quick-ref.html#common-code-patterns"><i class="fa fa-check"></i><b>10.5</b> Common Code Patterns</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="quick-ref.html"><a href="quick-ref.html#running-multiple-scenarios"><i class="fa fa-check"></i><b>10.5.1</b> Running Multiple Scenarios</a></li>
+<li class="chapter" data-level="10.5.2" data-path="quick-ref.html"><a href="quick-ref.html#batch-analysis"><i class="fa fa-check"></i><b>10.5.2</b> Batch Analysis</a></li>
+<li class="chapter" data-level="10.5.3" data-path="quick-ref.html"><a href="quick-ref.html#custom-metrics-1"><i class="fa fa-check"></i><b>10.5.3</b> Custom Metrics</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="quick-ref.html"><a href="quick-ref.html#visualization-recipes"><i class="fa fa-check"></i><b>10.6</b> Visualization Recipes</a>
+<ul>
+<li class="chapter" data-level="10.6.1" data-path="quick-ref.html"><a href="quick-ref.html#time-series-with-phases"><i class="fa fa-check"></i><b>10.6.1</b> Time Series with Phases</a></li>
+<li class="chapter" data-level="10.6.2" data-path="quick-ref.html"><a href="quick-ref.html#multi-metric-dashboard-1"><i class="fa fa-check"></i><b>10.6.2</b> Multi-Metric Dashboard</a></li>
+<li class="chapter" data-level="10.6.3" data-path="quick-ref.html"><a href="quick-ref.html#distribution-comparison"><i class="fa fa-check"></i><b>10.6.3</b> Distribution Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="quick-ref.html"><a href="quick-ref.html#performance-tips-1"><i class="fa fa-check"></i><b>10.7</b> Performance Tips</a></li>
+<li class="chapter" data-level="10.8" data-path="quick-ref.html"><a href="quick-ref.html#debugging-commands"><i class="fa fa-check"></i><b>10.8</b> Debugging Commands</a>
+<ul>
+<li class="chapter" data-level="10.8.1" data-path="quick-ref.html"><a href="quick-ref.html#basic-debugging"><i class="fa fa-check"></i><b>10.8.1</b> Basic Debugging</a></li>
+<li class="chapter" data-level="10.8.2" data-path="quick-ref.html"><a href="quick-ref.html#data-validation"><i class="fa fa-check"></i><b>10.8.2</b> Data Validation</a></li>
+<li class="chapter" data-level="10.8.3" data-path="quick-ref.html"><a href="quick-ref.html#performance-profiling-1"><i class="fa fa-check"></i><b>10.8.3</b> Performance Profiling</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -728,8 +904,170 @@ create_applicant_pool() → Initial applicant pool</code></pre>
 <span id="cb31-7"><a href="architecture.html#cb31-7" tabindex="-1"></a>})</span></code></pre></div>
 </div>
 </div>
-<div id="future-architecture-enhancements" class="section level2 hasAnchor" number="3.11">
-<h2><span class="header-section-number">3.11</span> Future Architecture Enhancements<a href="architecture.html#future-architecture-enhancements" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="architecture-decision-log" class="section level2 hasAnchor" number="3.11">
+<h2><span class="header-section-number">3.11</span> Architecture Decision Log<a href="architecture.html#architecture-decision-log" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This section documents key architectural decisions, their rationale, and trade-offs considered.</p>
+<div id="adr-001-why-data.table" class="section level3 hasAnchor" number="3.11.1">
+<h3><span class="header-section-number">3.11.1</span> ADR-001: Why data.table?<a href="architecture.html#adr-001-why-data.table" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Decision</strong>: Use data.table as the primary data structure for agents and organizations.</p>
+<p><strong>Context</strong>: R offers several data frame implementations: base data.frame, tibble, and data.table.</p>
+<p><strong>Rationale</strong>:
+- <strong>Performance</strong>: data.table is 10-100x faster for large datasets
+- <strong>Memory efficiency</strong>: Reference semantics avoid copying
+- <strong>Syntax</strong>: Concise syntax for complex operations
+- <strong>Scalability</strong>: Handles millions of agents efficiently</p>
+<p><strong>Trade-offs</strong>:
+- Steeper learning curve than tidyverse
+- Less intuitive for R beginners
+- Non-standard evaluation can be confusing</p>
+<p><strong>Benchmarks</strong>:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="architecture.html#cb32-1" tabindex="-1"></a><span class="co"># Performance comparison (10,000 agents)</span></span>
+<span id="cb32-2"><a href="architecture.html#cb32-2" tabindex="-1"></a><span class="co"># Operation         data.frame   tibble    data.table</span></span>
+<span id="cb32-3"><a href="architecture.html#cb32-3" tabindex="-1"></a><span class="co"># Filter &amp; group    850ms        420ms     12ms</span></span>
+<span id="cb32-4"><a href="architecture.html#cb32-4" tabindex="-1"></a><span class="co"># Join              1200ms       980ms     45ms</span></span>
+<span id="cb32-5"><a href="architecture.html#cb32-5" tabindex="-1"></a><span class="co"># Update by ref     2400ms       2100ms    8ms</span></span></code></pre></div>
+</div>
+<div id="adr-002-functional-vs-object-oriented-design" class="section level3 hasAnchor" number="3.11.2">
+<h3><span class="header-section-number">3.11.2</span> ADR-002: Functional vs Object-Oriented Design<a href="architecture.html#adr-002-functional-vs-object-oriented-design" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Decision</strong>: Use functional programming with immutable data structures (mostly).</p>
+<p><strong>Context</strong>: R supports both functional and OO (S3, S4, R6) paradigms.</p>
+<p><strong>Rationale</strong>:
+- <strong>Simplicity</strong>: Functions are easier to test and reason about
+- <strong>Parallelization</strong>: Pure functions enable future parallel processing
+- <strong>Debugging</strong>: Easier to trace data flow
+- <strong>R idioms</strong>: More aligned with R community practices</p>
+<p><strong>Trade-offs</strong>:
+- No encapsulation of agent state
+- More verbose for complex state management
+- Requires discipline to maintain purity</p>
+<p><strong>Exception</strong>: data.table’s reference semantics for performance-critical updates.</p>
+</div>
+<div id="adr-003-simulation-state-management" class="section level3 hasAnchor" number="3.11.3">
+<h3><span class="header-section-number">3.11.3</span> ADR-003: Simulation State Management<a href="architecture.html#adr-003-simulation-state-management" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Decision</strong>: Pass complete state through functions rather than global variables.</p>
+<p><strong>Context</strong>: Need to track organization, interactions, and metrics across time steps.</p>
+<p><strong>Rationale</strong>:
+- <strong>Testability</strong>: Each function can be tested in isolation
+- <strong>Reproducibility</strong>: No hidden state affects results<br />
+- <strong>Clarity</strong>: Data flow is explicit
+- <strong>Debugging</strong>: Can inspect state at any point</p>
+<p><strong>Implementation</strong>:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="architecture.html#cb33-1" tabindex="-1"></a><span class="co"># State flows through functions</span></span>
+<span id="cb33-2"><a href="architecture.html#cb33-2" tabindex="-1"></a>org <span class="ot">&lt;-</span> <span class="fu">create_organization</span>(<span class="dv">100</span>)</span>
+<span id="cb33-3"><a href="architecture.html#cb33-3" tabindex="-1"></a>org <span class="ot">&lt;-</span> <span class="fu">execute_interactions</span>(org, step)</span>
+<span id="cb33-4"><a href="architecture.html#cb33-4" tabindex="-1"></a>org <span class="ot">&lt;-</span> <span class="fu">execute_turnover</span>(org, threshold)</span>
+<span id="cb33-5"><a href="architecture.html#cb33-5" tabindex="-1"></a><span class="co"># NOT: update_global_org()</span></span></code></pre></div>
+</div>
+<div id="adr-004-vectorization-strategy" class="section level3 hasAnchor" number="3.11.4">
+<h3><span class="header-section-number">3.11.4</span> ADR-004: Vectorization Strategy<a href="architecture.html#adr-004-vectorization-strategy" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Decision</strong>: Vectorize all operations where possible, avoid explicit loops.</p>
+<p><strong>Context</strong>: R loops are slow; vectorized operations leverage C implementations.</p>
+<p><strong>Rationale</strong>:
+- <strong>Performance</strong>: 50-200x speedup for agent operations
+- <strong>Readability</strong>: Express operations on entire populations
+- <strong>R-native</strong>: Leverages R’s strengths</p>
+<p><strong>Example</strong>:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="architecture.html#cb34-1" tabindex="-1"></a><span class="co"># Vectorized (fast)</span></span>
+<span id="cb34-2"><a href="architecture.html#cb34-2" tabindex="-1"></a>org[, satisfaction <span class="sc">:=</span> satisfaction <span class="sc">+</span> <span class="fu">rnorm</span>(.N, <span class="at">mean =</span> valence, <span class="at">sd =</span> <span class="fl">0.1</span>)]</span>
+<span id="cb34-3"><a href="architecture.html#cb34-3" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="architecture.html#cb34-4" tabindex="-1"></a><span class="co"># Loop-based (slow)</span></span>
+<span id="cb34-5"><a href="architecture.html#cb34-5" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(org)) {</span>
+<span id="cb34-6"><a href="architecture.html#cb34-6" tabindex="-1"></a>  org<span class="sc">$</span>satisfaction[i] <span class="ot">&lt;-</span> org<span class="sc">$</span>satisfaction[i] <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, valence[i], <span class="fl">0.1</span>)</span>
+<span id="cb34-7"><a href="architecture.html#cb34-7" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="adr-005-module-boundaries" class="section level3 hasAnchor" number="3.11.5">
+<h3><span class="header-section-number">3.11.5</span> ADR-005: Module Boundaries<a href="architecture.html#adr-005-module-boundaries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Decision</strong>: Separate by domain concepts, not technical layers.</p>
+<p><strong>Context</strong>: Could organize by technical role (data, logic, presentation) or domain.</p>
+<p><strong>Rationale</strong>:
+- <strong>Cohesion</strong>: Related functionality stays together
+- <strong>Understanding</strong>: Matches mental model of simulation
+- <strong>Extension</strong>: Easy to add new organizational concepts</p>
+<p><strong>Structure</strong>:</p>
+<pre><code>core/
+  agent.R         # All agent-related functions
+  organization.R  # All org-related functions
+simulation/
+  hiring.R        # Complete hiring process
+  turnover.R      # Complete turnover process</code></pre>
+</div>
+<div id="adr-006-metric-calculation-timing" class="section level3 hasAnchor" number="3.11.6">
+<h3><span class="header-section-number">3.11.6</span> ADR-006: Metric Calculation Timing<a href="architecture.html#adr-006-metric-calculation-timing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Decision</strong>: Calculate metrics after each time step, not on-demand.</p>
+<p><strong>Context</strong>: Could calculate metrics lazily when needed or eagerly each step.</p>
+<p><strong>Rationale</strong>:
+- <strong>Consistency</strong>: All metrics from same state
+- <strong>Performance</strong>: One pass through data per step
+- <strong>History</strong>: Complete time series available
+- <strong>Memory trade-off</strong>: Stores more data</p>
+</div>
+<div id="adr-007-parameter-validation" class="section level3 hasAnchor" number="3.11.7">
+<h3><span class="header-section-number">3.11.7</span> ADR-007: Parameter Validation<a href="architecture.html#adr-007-parameter-validation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Decision</strong>: Use checkmate for runtime parameter validation.</p>
+<p><strong>Context</strong>: Could use base R checks, custom validation, or external package.</p>
+<p><strong>Rationale</strong>:
+- <strong>Comprehensive</strong>: Rich set of check functions
+- <strong>Performance</strong>: Minimal overhead
+- <strong>Messages</strong>: Clear error messages for users
+- <strong>Consistency</strong>: Standard validation across codebase</p>
+</div>
+<div id="adr-008-random-number-generation" class="section level3 hasAnchor" number="3.11.8">
+<h3><span class="header-section-number">3.11.8</span> ADR-008: Random Number Generation<a href="architecture.html#adr-008-random-number-generation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Decision</strong>: Use R’s built-in RNG with explicit seed management.</p>
+<p><strong>Context</strong>: Reproducibility requires careful RNG handling.</p>
+<p><strong>Rationale</strong>:
+- <strong>Standard</strong>: Works with all R workflows
+- <strong>Reproducible</strong>: set.seed() ensures repeatability
+- <strong>Simple</strong>: No external dependencies</p>
+<p><strong>Best Practice</strong>:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="architecture.html#cb36-1" tabindex="-1"></a><span class="co"># Always set seed at simulation start</span></span>
+<span id="cb36-2"><a href="architecture.html#cb36-2" tabindex="-1"></a><span class="fu">set.seed</span>(params<span class="sc">$</span>seed <span class="sc">%||%</span> <span class="dv">123</span>)</span>
+<span id="cb36-3"><a href="architecture.html#cb36-3" tabindex="-1"></a><span class="co"># Use vectorized random generation</span></span>
+<span id="cb36-4"><a href="architecture.html#cb36-4" tabindex="-1"></a><span class="fu">rnorm</span>(n, mean, sd)  <span class="co"># Not: replicate(n, rnorm(1, mean, sd))</span></span></code></pre></div>
+</div>
+<div id="adr-009-identity-categories" class="section level3 hasAnchor" number="3.11.9">
+<h3><span class="header-section-number">3.11.9</span> ADR-009: Identity Categories<a href="architecture.html#adr-009-identity-categories" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Decision</strong>: Use character vectors for identity categories, not factors.</p>
+<p><strong>Context</strong>: R traditionally used factors for categorical data.</p>
+<p><strong>Rationale</strong>:
+- <strong>Flexibility</strong>: Easy to add new categories
+- <strong>No surprises</strong>: Factors can have unexpected behavior
+- <strong>Performance</strong>: Character operations are fast in data.table
+- <strong>Simplicity</strong>: Fewer type conversions needed</p>
+</div>
+<div id="adr-010-extension-mechanism" class="section level3 hasAnchor" number="3.11.10">
+<h3><span class="header-section-number">3.11.10</span> ADR-010: Extension Mechanism<a href="architecture.html#adr-010-extension-mechanism" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Decision</strong>: Prepare for extensions through function factories and strategy patterns.</p>
+<p><strong>Context</strong>: Need to support custom hiring strategies, metrics, etc.</p>
+<p><strong>Rationale</strong>:
+- <strong>Open/Closed</strong>: Extend without modifying core
+- <strong>User-friendly</strong>: Clear extension points
+- <strong>Type-safe</strong>: Functions validate at runtime</p>
+<p><strong>Example</strong>:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="architecture.html#cb37-1" tabindex="-1"></a>selection_strategies <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb37-2"><a href="architecture.html#cb37-2" tabindex="-1"></a>  <span class="at">conscientiousness =</span> <span class="cf">function</span>(x) <span class="fu">order</span>(<span class="sc">-</span>x<span class="sc">$</span>conscientiousness),</span>
+<span id="cb37-3"><a href="architecture.html#cb37-3" tabindex="-1"></a>  <span class="at">fit =</span> <span class="cf">function</span>(x) <span class="fu">order</span>(<span class="sc">-</span>x<span class="sc">$</span>overall_fit),</span>
+<span id="cb37-4"><a href="architecture.html#cb37-4" tabindex="-1"></a>  <span class="at">custom =</span> <span class="cf">function</span>(x) <span class="fu">user_provided_function</span>(x)</span>
+<span id="cb37-5"><a href="architecture.html#cb37-5" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+</div>
+<div id="design-philosophy-summary" class="section level2 hasAnchor" number="3.12">
+<h2><span class="header-section-number">3.12</span> Design Philosophy Summary<a href="architecture.html#design-philosophy-summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li><strong>Performance First</strong>: Every decision considers large-scale simulations</li>
+<li><strong>Functional Core</strong>: Pure functions with explicit data flow</li>
+<li><strong>Domain-Driven</strong>: Structure mirrors organizational concepts</li>
+<li><strong>Extension Ready</strong>: Clear points for customization</li>
+<li><strong>R-Idiomatic</strong>: Leverages R’s vectorization strengths</li>
+</ol>
+<p>These decisions create a system that is:
+- Fast enough for million-agent simulations
+- Simple enough for research modifications<br />
+- Robust enough for production use
+- Clear enough for educational purposes</p>
+</div>
+<div id="future-architecture-enhancements" class="section level2 hasAnchor" number="3.13">
+<h2><span class="header-section-number">3.13</span> Future Architecture Enhancements<a href="architecture.html#future-architecture-enhancements" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol style="list-style-type: decimal">
 <li><strong>Event System</strong>: Publish-subscribe for simulation events</li>
 <li><strong>Plugin Architecture</strong>: Dynamic module loading</li>

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Theoretical Background | ASA Agent-Based Model v2 Documentation</title>
+  <title>Chapter 10 ASA ABM v2 Quick Reference | ASA Agent-Based Model v2 Documentation</title>
   <meta name="description" content="Comprehensive documentation for the ASA Agent-Based Model v2" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Theoretical Background | ASA Agent-Based Model v2 Documentation" />
+  <meta property="og:title" content="Chapter 10 ASA ABM v2 Quick Reference | ASA Agent-Based Model v2 Documentation" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Comprehensive documentation for the ASA Agent-Based Model v2" />
   <meta name="github-repo" content="noutland/asa-abm-v2" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Theoretical Background | ASA Agent-Based Model v2 Documentation" />
+  <meta name="twitter:title" content="Chapter 10 ASA ABM v2 Quick Reference | ASA Agent-Based Model v2 Documentation" />
   
   <meta name="twitter:description" content="Comprehensive documentation for the ASA Agent-Based Model v2" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="getting-started.html"/>
-<link rel="next" href="architecture.html"/>
+<link rel="prev" href="contributors-guide.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -600,194 +600,373 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="theoretical-background" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Theoretical Background<a href="theoretical-background.html#theoretical-background" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This chapter provides the theoretical foundation for the Attraction-Selection-Attrition (ASA) framework and its implementation in this agent-based model.</p>
-<div id="the-asa-framework" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> The ASA Framework<a href="theoretical-background.html#the-asa-framework" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The Attraction-Selection-Attrition (ASA) framework, developed by Benjamin Schneider (1987), explains how organizations naturally evolve toward homogeneity through three interrelated processes:</p>
-<div id="attraction" class="section level3 hasAnchor" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> Attraction<a href="theoretical-background.html#attraction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Individuals are differentially attracted to organizations based on perceived fit between their personal characteristics and organizational attributes.</p>
-<p><strong>In our model:</strong>
-- Agents calculate attraction based on:
-- Identity similarity (homophily preference)
-- Organizational diversity (diversity preference)
-- Personality alignment</p>
+<div id="quick-ref" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">Chapter 10</span> ASA ABM v2 Quick Reference<a href="quick-ref.html#quick-ref" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="quick-start" class="section level2 hasAnchor" number="10.1">
+<h2><span class="header-section-number">10.1</span> Quick Start<a href="quick-ref.html#quick-start" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="quick-ref.html#cb212-1" tabindex="-1"></a><span class="co"># Load and run simulation</span></span>
+<span id="cb212-2"><a href="quick-ref.html#cb212-2" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;simulation/engine.R&quot;</span>)</span>
+<span id="cb212-3"><a href="quick-ref.html#cb212-3" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(<span class="at">n_steps =</span> <span class="dv">260</span>, <span class="at">initial_size =</span> <span class="dv">100</span>)</span>
+<span id="cb212-4"><a href="quick-ref.html#cb212-4" tabindex="-1"></a></span>
+<span id="cb212-5"><a href="quick-ref.html#cb212-5" tabindex="-1"></a><span class="co"># View results</span></span>
+<span id="cb212-6"><a href="quick-ref.html#cb212-6" tabindex="-1"></a><span class="fu">tail</span>(results<span class="sc">$</span>metrics, <span class="dv">10</span>)         <span class="co"># Recent metrics</span></span>
+<span id="cb212-7"><a href="quick-ref.html#cb212-7" tabindex="-1"></a><span class="fu">summary</span>(results<span class="sc">$</span>final_organization)  <span class="co"># Final state</span></span>
+<span id="cb212-8"><a href="quick-ref.html#cb212-8" tabindex="-1"></a></span>
+<span id="cb212-9"><a href="quick-ref.html#cb212-9" tabindex="-1"></a><span class="co"># Quick visualization</span></span>
+<span id="cb212-10"><a href="quick-ref.html#cb212-10" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb212-11"><a href="quick-ref.html#cb212-11" tabindex="-1"></a><span class="fu">ggplot</span>(results<span class="sc">$</span>metrics, <span class="fu">aes</span>(<span class="at">x =</span> time_step, <span class="at">y =</span> organization_size)) <span class="sc">+</span> </span>
+<span id="cb212-12"><a href="quick-ref.html#cb212-12" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
 </div>
-<div id="selection" class="section level3 hasAnchor" number="2.1.2">
-<h3><span class="header-section-number">2.1.2</span> Selection<a href="theoretical-background.html#selection" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Organizations preferentially select individuals who fit their criteria and culture.</p>
-<p><strong>In our model:</strong>
-- Selection can be based on:
-- Conscientiousness scores
-- Overall fit metrics
-- Random selection (baseline)</p>
-</div>
-<div id="attrition" class="section level3 hasAnchor" number="2.1.3">
-<h3><span class="header-section-number">2.1.3</span> Attrition<a href="theoretical-background.html#attrition" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Individuals who don’t fit well with the organization are more likely to leave.</p>
-<p><strong>In our model:</strong>
-- Turnover occurs through:
-- Satisfaction thresholds
-- Probabilistic turnover based on satisfaction
-- Tenure effects</p>
-</div>
-</div>
-<div id="agent-characteristics" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Agent Characteristics<a href="theoretical-background.html#agent-characteristics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="personality-traits-big-five" class="section level3 hasAnchor" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> Personality Traits (Big Five)<a href="theoretical-background.html#personality-traits-big-five" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Each agent possesses five personality dimensions based on the Five-Factor Model:</p>
-<ol style="list-style-type: decimal">
-<li><strong>Openness</strong>: Creativity, curiosity, and openness to new experiences</li>
-<li><strong>Conscientiousness</strong>: Organization, dependability, and work ethic</li>
-<li><strong>Extraversion</strong>: Sociability, assertiveness, and energy</li>
-<li><strong>Agreeableness</strong>: Cooperation, trust, and helpfulness</li>
-<li><strong>Emotional Stability</strong>: Calmness, resilience, and emotional control</li>
-</ol>
-<p>These traits are normally distributed (mean = 0, sd = 1) in the population.</p>
-</div>
-<div id="identity-categories" class="section level3 hasAnchor" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> Identity Categories<a href="theoretical-background.html#identity-categories" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Agents belong to discrete identity categories (default: A, B, C, D, E) representing:
-- Functional backgrounds
-- Professional identities
-- Cultural groups
-- Or any categorical distinction relevant to the simulation</p>
-</div>
-<div id="preferences" class="section level3 hasAnchor" number="2.2.3">
-<h3><span class="header-section-number">2.2.3</span> Preferences<a href="theoretical-background.html#preferences" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Two key preferences drive agent behavior:</p>
-<ol style="list-style-type: decimal">
-<li><strong>Homophily Preference</strong>: Attraction to similar others</li>
-<li><strong>Diversity Preference</strong>: Attraction to organizational variety</li>
-</ol>
-</div>
-</div>
-<div id="interaction-dynamics" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> Interaction Dynamics<a href="theoretical-background.html#interaction-dynamics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="interaction-valence-calculation" class="section level3 hasAnchor" number="2.3.1">
-<h3><span class="header-section-number">2.3.1</span> Interaction Valence Calculation<a href="theoretical-background.html#interaction-valence-calculation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>When agents interact, the quality (valence) of the interaction is determined by:</p>
-<pre><code>Valence = -|ΔExtraversion| + (Conscientiousnessfocal - Extraversionpartner) 
-          + Agreeablenessfocal + IdentityBonus + ε</code></pre>
-<p>Where:
-- <code>ΔExtraversion</code>: Difference in extraversion (similarity is beneficial)
-- <code>IdentityBonus</code>: Homophily preference if same identity, diversity preference if different
-- <code>ε</code>: Random component scaled by emotional stability</p>
-</div>
-<div id="satisfaction-dynamics" class="section level3 hasAnchor" number="2.3.2">
-<h3><span class="header-section-number">2.3.2</span> Satisfaction Dynamics<a href="theoretical-background.html#satisfaction-dynamics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Agent satisfaction integrates multiple components:</p>
-<pre><code>Satisfaction = BaseAttraction + InteractionHistory + IdentityFit 
-               + DiversityComponent + PersonalityStability</code></pre>
-</div>
-</div>
-<div id="organizational-metrics" class="section level2 hasAnchor" number="2.4">
-<h2><span class="header-section-number">2.4</span> Organizational Metrics<a href="theoretical-background.html#organizational-metrics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="identity-diversity" class="section level3 hasAnchor" number="2.4.1">
-<h3><span class="header-section-number">2.4.1</span> Identity Diversity<a href="theoretical-background.html#identity-diversity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We use Shannon entropy to measure identity diversity:</p>
-<pre><code>H = -Σ(pi × log(pi))</code></pre>
-<p>Where pi is the proportion of identity category i.</p>
-</div>
-<div id="organizational-personality" class="section level3 hasAnchor" number="2.4.2">
-<h3><span class="header-section-number">2.4.2</span> Organizational Personality<a href="theoretical-background.html#organizational-personality" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The organization’s personality profile is characterized by:
-- Mean levels of each Big Five trait
-- Standard deviations indicating personality diversity</p>
-</div>
-</div>
-<div id="temporal-dynamics" class="section level2 hasAnchor" number="2.5">
-<h2><span class="header-section-number">2.5</span> Temporal Dynamics<a href="theoretical-background.html#temporal-dynamics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The model operates in discrete time steps, typically representing:
-- Days, weeks, or months
-- Configurable based on research needs</p>
-<p>Key temporal processes:
-- <strong>Hiring cycles</strong>: Periodic recruitment and selection
-- <strong>Interaction accumulation</strong>: Building relationship history
-- <strong>Tenure effects</strong>: Time-dependent behaviors</p>
-</div>
-<div id="emergent-phenomena" class="section level2 hasAnchor" number="2.6">
-<h2><span class="header-section-number">2.6</span> Emergent Phenomena<a href="theoretical-background.html#emergent-phenomena" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The ASA model produces several emergent patterns:</p>
-<ol style="list-style-type: decimal">
-<li><strong>Homogenization</strong>: Organizations become more similar over time</li>
-<li><strong>Culture crystallization</strong>: Dominant characteristics become reinforced</li>
-<li><strong>Fit spirals</strong>: Good fit → satisfaction → retention → stronger culture</li>
-<li><strong>Diversity cycles</strong>: Tension between homophily and diversity preferences</li>
-</ol>
-</div>
-<div id="model-assumptions" class="section level2 hasAnchor" number="2.7">
-<h2><span class="header-section-number">2.7</span> Model Assumptions<a href="theoretical-background.html#model-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Key assumptions in our implementation:</p>
-<ol style="list-style-type: decimal">
-<li><strong>Perfect information</strong>: Applicants can assess organizational fit</li>
-<li><strong>Stable preferences</strong>: Agent preferences don’t change</li>
-<li><strong>Random interactions</strong>: Agents interact randomly (can be modified)</li>
-<li><strong>Linear satisfaction</strong>: Components combine additively</li>
-</ol>
-</div>
-<div id="extensions-and-variations" class="section level2 hasAnchor" number="2.8">
-<h2><span class="header-section-number">2.8</span> Extensions and Variations<a href="theoretical-background.html#extensions-and-variations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The framework supports several extensions:</p>
-<ol style="list-style-type: decimal">
-<li><strong>Network structures</strong>: Replace random with network-based interactions</li>
-<li><strong>Multiple organizations</strong>: Inter-organizational mobility</li>
-<li><strong>Dynamic environments</strong>: Changing selection criteria</li>
-<li><strong>Team structures</strong>: Nested organizational units</li>
-</ol>
-</div>
-<div id="references-and-further-reading" class="section level2 hasAnchor" number="2.9">
-<h2><span class="header-section-number">2.9</span> References and Further Reading<a href="theoretical-background.html#references-and-further-reading" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>Schneider, B. (1987). The people make the place. <em>Personnel Psychology</em>, 40(3), 437-453.</li>
-<li>Schneider, B., Goldstein, H. W., &amp; Smith, D. B. (1995). The ASA framework: An update. <em>Personnel Psychology</em>, 48(4), 747-773.</li>
-<li>Harrison, D. A., Price, K. H., &amp; Bell, M. P. (1998). Beyond relational demography: Time and the effects of surface-and deep-level diversity on work group cohesion. <em>Academy of Management Journal</em>, 41(1), 96-107.</li>
-</ul>
-</div>
-<div id="mathematical-notation-summary" class="section level2 hasAnchor" number="2.10">
-<h2><span class="header-section-number">2.10</span> Mathematical Notation Summary<a href="theoretical-background.html#mathematical-notation-summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="parameter-reference" class="section level2 hasAnchor" number="10.2">
+<h2><span class="header-section-number">10.2</span> Parameter Reference<a href="quick-ref.html#parameter-reference" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <table>
+<colgroup>
+<col width="20%" />
+<col width="11%" />
+<col width="16%" />
+<col width="26%" />
+<col width="24%" />
+</colgroup>
 <thead>
 <tr class="header">
-<th>Symbol</th>
-<th>Description</th>
+<th align="left">Parameter</th>
+<th align="left">Type</th>
+<th align="left">Default</th>
+<th align="left">Range/Values</th>
+<th align="left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>N</td>
-<td>Organization size</td>
+<td align="left"><code>n_steps</code></td>
+<td align="left">int</td>
+<td align="left">260</td>
+<td align="left">1-∞</td>
+<td align="left">Simulation duration</td>
 </tr>
 <tr class="even">
-<td>I</td>
-<td>Identity categories</td>
+<td align="left"><code>initial_size</code></td>
+<td align="left">int</td>
+<td align="left">100</td>
+<td align="left">1-10000</td>
+<td align="left">Starting employees</td>
 </tr>
 <tr class="odd">
-<td>π</td>
-<td>Personality traits vector</td>
+<td align="left"><code>growth_rate</code></td>
+<td align="left">num</td>
+<td align="left">0.01</td>
+<td align="left">0-1</td>
+<td align="left">Hiring growth per cycle</td>
 </tr>
 <tr class="even">
-<td>σ</td>
-<td>Satisfaction score</td>
+<td align="left"><code>hiring_frequency</code></td>
+<td align="left">int</td>
+<td align="left">12</td>
+<td align="left">1-52</td>
+<td align="left">Steps between hiring</td>
 </tr>
 <tr class="odd">
-<td>τ</td>
-<td>Turnover threshold</td>
+<td align="left"><code>selection_criteria</code></td>
+<td align="left">chr</td>
+<td align="left">“conscientiousness”</td>
+<td align="left">“conscientiousness”, “fit”, “random”</td>
+<td align="left">Hiring strategy</td>
 </tr>
 <tr class="even">
-<td>t</td>
-<td>Time step</td>
+<td align="left"><code>n_interactions_per_step</code></td>
+<td align="left">int</td>
+<td align="left">5</td>
+<td align="left">1-100</td>
+<td align="left">Interactions per agent</td>
 </tr>
 <tr class="odd">
-<td>H</td>
-<td>Diversity index</td>
+<td align="left"><code>interaction_window</code></td>
+<td align="left">int</td>
+<td align="left">10</td>
+<td align="left">1-52</td>
+<td align="left">Memory for interactions</td>
+</tr>
+<tr class="even">
+<td align="left"><code>turnover_threshold</code></td>
+<td align="left">num</td>
+<td align="left">-10</td>
+<td align="left">-20-0</td>
+<td align="left">Satisfaction exit level</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>turnover_type</code></td>
+<td align="left">chr</td>
+<td align="left">“threshold”</td>
+<td align="left">“threshold”, “probabilistic”</td>
+<td align="left">Attrition method</td>
+</tr>
+<tr class="even">
+<td align="left"><code>base_turnover_rate</code></td>
+<td align="left">num</td>
+<td align="left">0.05</td>
+<td align="left">0-1</td>
+<td align="left">Base attrition probability</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>n_new_applicants</code></td>
+<td align="left">int</td>
+<td align="left">50</td>
+<td align="left">1-1000</td>
+<td align="left">Applicants per cycle</td>
+</tr>
+<tr class="even">
+<td align="left"><code>applicant_attraction_threshold</code></td>
+<td align="left">num</td>
+<td align="left">-0.5</td>
+<td align="left">-5-5</td>
+<td align="left">Min attraction to apply</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>max_application_time</code></td>
+<td align="left">int</td>
+<td align="left">12</td>
+<td align="left">1-52</td>
+<td align="left">Applicant pool timeout</td>
+</tr>
+<tr class="even">
+<td align="left"><code>diversity_metric</code></td>
+<td align="left">chr</td>
+<td align="left">“blau”</td>
+<td align="left">“blau”, “shannon”</td>
+<td align="left">Diversity calculation</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>identity_categories</code></td>
+<td align="left">vec</td>
+<td align="left">c(“A”,“B”,“C”,“D”,“E”)</td>
+<td align="left">Any</td>
+<td align="left">Identity types</td>
 </tr>
 </tbody>
 </table>
+</div>
+<div id="key-functions" class="section level2 hasAnchor" number="10.3">
+<h2><span class="header-section-number">10.3</span> Key Functions<a href="quick-ref.html#key-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="core-functions" class="section level3 hasAnchor" number="10.3.1">
+<h3><span class="header-section-number">10.3.1</span> Core Functions<a href="quick-ref.html#core-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="quick-ref.html#cb213-1" tabindex="-1"></a><span class="co"># Organization Management</span></span>
+<span id="cb213-2"><a href="quick-ref.html#cb213-2" tabindex="-1"></a><span class="fu">create_organization</span>(n_agents, identity_categories)</span>
+<span id="cb213-3"><a href="quick-ref.html#cb213-3" tabindex="-1"></a><span class="fu">get_organization_size</span>(org)</span>
+<span id="cb213-4"><a href="quick-ref.html#cb213-4" tabindex="-1"></a><span class="fu">get_active_employees</span>(org)</span>
+<span id="cb213-5"><a href="quick-ref.html#cb213-5" tabindex="-1"></a><span class="fu">calculate_blau_index</span>(categories)</span>
+<span id="cb213-6"><a href="quick-ref.html#cb213-6" tabindex="-1"></a><span class="fu">calculate_shannon_diversity</span>(categories)</span>
+<span id="cb213-7"><a href="quick-ref.html#cb213-7" tabindex="-1"></a></span>
+<span id="cb213-8"><a href="quick-ref.html#cb213-8" tabindex="-1"></a><span class="co"># Agent Creation</span></span>
+<span id="cb213-9"><a href="quick-ref.html#cb213-9" tabindex="-1"></a><span class="fu">create_applicant_pool</span>(n_applicants, identity_categories)</span>
+<span id="cb213-10"><a href="quick-ref.html#cb213-10" tabindex="-1"></a><span class="fu">calculate_attraction</span>(agents, org_diversity, diversity_metric)</span>
+<span id="cb213-11"><a href="quick-ref.html#cb213-11" tabindex="-1"></a><span class="fu">create_agent</span>(identity_category)</span>
+<span id="cb213-12"><a href="quick-ref.html#cb213-12" tabindex="-1"></a></span>
+<span id="cb213-13"><a href="quick-ref.html#cb213-13" tabindex="-1"></a><span class="co"># Simulation Engine</span></span>
+<span id="cb213-14"><a href="quick-ref.html#cb213-14" tabindex="-1"></a><span class="fu">run_asa_simulation</span>(n_steps, initial_size, params, verbose)</span>
+<span id="cb213-15"><a href="quick-ref.html#cb213-15" tabindex="-1"></a><span class="fu">execute_interactions_vectorized</span>(org, interactions, step, n_interactions)</span>
+<span id="cb213-16"><a href="quick-ref.html#cb213-16" tabindex="-1"></a><span class="fu">update_satisfaction_vectorized</span>(org, interactions, window, diversity_metric)</span>
+<span id="cb213-17"><a href="quick-ref.html#cb213-17" tabindex="-1"></a><span class="fu">execute_turnover</span>(org, threshold, current_time)</span>
+<span id="cb213-18"><a href="quick-ref.html#cb213-18" tabindex="-1"></a><span class="fu">execute_hiring</span>(org, applicant_pool, selection_criteria, n_positions)</span></code></pre></div>
+</div>
+<div id="analysis-functions" class="section level3 hasAnchor" number="10.3.2">
+<h3><span class="header-section-number">10.3.2</span> Analysis Functions<a href="quick-ref.html#analysis-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="quick-ref.html#cb214-1" tabindex="-1"></a><span class="co"># Metrics</span></span>
+<span id="cb214-2"><a href="quick-ref.html#cb214-2" tabindex="-1"></a><span class="fu">calculate_personality_averages</span>(org)</span>
+<span id="cb214-3"><a href="quick-ref.html#cb214-3" tabindex="-1"></a><span class="fu">calculate_step_metrics</span>(org, step)</span>
+<span id="cb214-4"><a href="quick-ref.html#cb214-4" tabindex="-1"></a><span class="fu">get_interaction_summary</span>(interactions)</span>
+<span id="cb214-5"><a href="quick-ref.html#cb214-5" tabindex="-1"></a></span>
+<span id="cb214-6"><a href="quick-ref.html#cb214-6" tabindex="-1"></a><span class="co"># Utilities</span></span>
+<span id="cb214-7"><a href="quick-ref.html#cb214-7" tabindex="-1"></a><span class="fu">age_applicant_pool</span>(pool, max_age)</span>
+<span id="cb214-8"><a href="quick-ref.html#cb214-8" tabindex="-1"></a><span class="fu">recruit_applicants</span>(pool, n_new)</span>
+<span id="cb214-9"><a href="quick-ref.html#cb214-9" tabindex="-1"></a><span class="fu">applicants_to_employees</span>(applicants, hire_date)</span></code></pre></div>
+</div>
+</div>
+<div id="data-structures" class="section level2 hasAnchor" number="10.4">
+<h2><span class="header-section-number">10.4</span> Data Structures<a href="quick-ref.html#data-structures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="organization-table" class="section level3 hasAnchor" number="10.4.1">
+<h3><span class="header-section-number">10.4.1</span> Organization Table<a href="quick-ref.html#organization-table" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="quick-ref.html#cb215-1" tabindex="-1"></a>org <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
+<span id="cb215-2"><a href="quick-ref.html#cb215-2" tabindex="-1"></a>  agent_id            <span class="co"># chr: Unique ID &quot;agent_XXX&quot;</span></span>
+<span id="cb215-3"><a href="quick-ref.html#cb215-3" tabindex="-1"></a>  identity_category   <span class="co"># chr: &quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, or &quot;E&quot;</span></span>
+<span id="cb215-4"><a href="quick-ref.html#cb215-4" tabindex="-1"></a>  openness           <span class="co"># num: 0-1 (Big Five trait)</span></span>
+<span id="cb215-5"><a href="quick-ref.html#cb215-5" tabindex="-1"></a>  conscientiousness  <span class="co"># num: 0-1 (Big Five trait)</span></span>
+<span id="cb215-6"><a href="quick-ref.html#cb215-6" tabindex="-1"></a>  extraversion       <span class="co"># num: 0-1 (Big Five trait)</span></span>
+<span id="cb215-7"><a href="quick-ref.html#cb215-7" tabindex="-1"></a>  agreeableness      <span class="co"># num: 0-1 (Big Five trait)</span></span>
+<span id="cb215-8"><a href="quick-ref.html#cb215-8" tabindex="-1"></a>  emotional_stability <span class="co"># num: 0-1 (Big Five trait)</span></span>
+<span id="cb215-9"><a href="quick-ref.html#cb215-9" tabindex="-1"></a>  homophily_preference  <span class="co"># num: 0-1 (similarity preference)</span></span>
+<span id="cb215-10"><a href="quick-ref.html#cb215-10" tabindex="-1"></a>  diversity_preference  <span class="co"># num: 0-1 (diversity preference)</span></span>
+<span id="cb215-11"><a href="quick-ref.html#cb215-11" tabindex="-1"></a>  attraction         <span class="co"># num: -∞-∞ (to organization)</span></span>
+<span id="cb215-12"><a href="quick-ref.html#cb215-12" tabindex="-1"></a>  satisfaction       <span class="co"># num: -∞-∞ (current satisfaction)</span></span>
+<span id="cb215-13"><a href="quick-ref.html#cb215-13" tabindex="-1"></a>  tenure             <span class="co"># int: Steps in organization</span></span>
+<span id="cb215-14"><a href="quick-ref.html#cb215-14" tabindex="-1"></a>  hire_date          <span class="co"># int: Step when hired</span></span>
+<span id="cb215-15"><a href="quick-ref.html#cb215-15" tabindex="-1"></a>  is_active          <span class="co"># lgl: TRUE if employed</span></span>
+<span id="cb215-16"><a href="quick-ref.html#cb215-16" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div id="metrics-output" class="section level3 hasAnchor" number="10.4.2">
+<h3><span class="header-section-number">10.4.2</span> Metrics Output<a href="quick-ref.html#metrics-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="quick-ref.html#cb216-1" tabindex="-1"></a>metrics <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
+<span id="cb216-2"><a href="quick-ref.html#cb216-2" tabindex="-1"></a>  time_step           <span class="co"># int: Simulation step</span></span>
+<span id="cb216-3"><a href="quick-ref.html#cb216-3" tabindex="-1"></a>  organization_size   <span class="co"># int: Active employees</span></span>
+<span id="cb216-4"><a href="quick-ref.html#cb216-4" tabindex="-1"></a>  prop_A <span class="sc">-</span> prop_E    <span class="co"># num: Identity proportions</span></span>
+<span id="cb216-5"><a href="quick-ref.html#cb216-5" tabindex="-1"></a>  shannon_diversity  <span class="co"># num: Shannon entropy</span></span>
+<span id="cb216-6"><a href="quick-ref.html#cb216-6" tabindex="-1"></a>  blau_index         <span class="co"># num: Blau&#39;s index</span></span>
+<span id="cb216-7"><a href="quick-ref.html#cb216-7" tabindex="-1"></a>  avg_satisfaction   <span class="co"># num: Mean satisfaction</span></span>
+<span id="cb216-8"><a href="quick-ref.html#cb216-8" tabindex="-1"></a>  sd_satisfaction    <span class="co"># num: SD satisfaction</span></span>
+<span id="cb216-9"><a href="quick-ref.html#cb216-9" tabindex="-1"></a>  avg_openness       <span class="co"># num: Mean trait value</span></span>
+<span id="cb216-10"><a href="quick-ref.html#cb216-10" tabindex="-1"></a>  sd_openness        <span class="co"># num: SD trait value</span></span>
+<span id="cb216-11"><a href="quick-ref.html#cb216-11" tabindex="-1"></a>  <span class="co"># ... other personality traits</span></span>
+<span id="cb216-12"><a href="quick-ref.html#cb216-12" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+</div>
+<div id="common-code-patterns" class="section level2 hasAnchor" number="10.5">
+<h2><span class="header-section-number">10.5</span> Common Code Patterns<a href="quick-ref.html#common-code-patterns" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="running-multiple-scenarios" class="section level3 hasAnchor" number="10.5.1">
+<h3><span class="header-section-number">10.5.1</span> Running Multiple Scenarios<a href="quick-ref.html#running-multiple-scenarios" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="quick-ref.html#cb217-1" tabindex="-1"></a>scenarios <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb217-2"><a href="quick-ref.html#cb217-2" tabindex="-1"></a>  <span class="at">high_growth =</span> <span class="fu">list</span>(<span class="at">growth_rate =</span> <span class="fl">0.1</span>),</span>
+<span id="cb217-3"><a href="quick-ref.html#cb217-3" tabindex="-1"></a>  <span class="at">high_turnover =</span> <span class="fu">list</span>(<span class="at">turnover_threshold =</span> <span class="sc">-</span><span class="dv">5</span>),</span>
+<span id="cb217-4"><a href="quick-ref.html#cb217-4" tabindex="-1"></a>  <span class="at">diverse_hiring =</span> <span class="fu">list</span>(<span class="at">selection_criteria =</span> <span class="st">&quot;random&quot;</span>)</span>
+<span id="cb217-5"><a href="quick-ref.html#cb217-5" tabindex="-1"></a>)</span>
+<span id="cb217-6"><a href="quick-ref.html#cb217-6" tabindex="-1"></a></span>
+<span id="cb217-7"><a href="quick-ref.html#cb217-7" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">names</span>(scenarios), <span class="cf">function</span>(name) {</span>
+<span id="cb217-8"><a href="quick-ref.html#cb217-8" tabindex="-1"></a>  <span class="fu">run_asa_simulation</span>(<span class="at">params =</span> scenarios[[name]])</span>
+<span id="cb217-9"><a href="quick-ref.html#cb217-9" tabindex="-1"></a>})</span></code></pre></div>
+</div>
+<div id="batch-analysis" class="section level3 hasAnchor" number="10.5.2">
+<h3><span class="header-section-number">10.5.2</span> Batch Analysis<a href="quick-ref.html#batch-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="quick-ref.html#cb218-1" tabindex="-1"></a><span class="co"># Extract final metrics</span></span>
+<span id="cb218-2"><a href="quick-ref.html#cb218-2" tabindex="-1"></a>final_metrics <span class="ot">&lt;-</span> <span class="fu">lapply</span>(results, <span class="cf">function</span>(r) {</span>
+<span id="cb218-3"><a href="quick-ref.html#cb218-3" tabindex="-1"></a>  <span class="fu">tail</span>(r<span class="sc">$</span>metrics, <span class="dv">1</span>)</span>
+<span id="cb218-4"><a href="quick-ref.html#cb218-4" tabindex="-1"></a>})</span>
+<span id="cb218-5"><a href="quick-ref.html#cb218-5" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(final_metrics, <span class="at">idcol =</span> <span class="st">&quot;scenario&quot;</span>)</span>
+<span id="cb218-6"><a href="quick-ref.html#cb218-6" tabindex="-1"></a></span>
+<span id="cb218-7"><a href="quick-ref.html#cb218-7" tabindex="-1"></a><span class="co"># Time series comparison</span></span>
+<span id="cb218-8"><a href="quick-ref.html#cb218-8" tabindex="-1"></a>all_metrics <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">seq_along</span>(results), <span class="cf">function</span>(i) {</span>
+<span id="cb218-9"><a href="quick-ref.html#cb218-9" tabindex="-1"></a>  results[[i]]<span class="sc">$</span>metrics[, scenario <span class="sc">:=</span> <span class="fu">names</span>(scenarios)[i]]</span>
+<span id="cb218-10"><a href="quick-ref.html#cb218-10" tabindex="-1"></a>})</span>
+<span id="cb218-11"><a href="quick-ref.html#cb218-11" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(all_metrics)</span></code></pre></div>
+</div>
+<div id="custom-metrics-1" class="section level3 hasAnchor" number="10.5.3">
+<h3><span class="header-section-number">10.5.3</span> Custom Metrics<a href="quick-ref.html#custom-metrics-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="quick-ref.html#cb219-1" tabindex="-1"></a><span class="co"># Add to organization</span></span>
+<span id="cb219-2"><a href="quick-ref.html#cb219-2" tabindex="-1"></a>org[, network_centrality <span class="sc">:=</span> degree_centrality <span class="sc">/</span> (.N <span class="sc">-</span> <span class="dv">1</span>)]</span>
+<span id="cb219-3"><a href="quick-ref.html#cb219-3" tabindex="-1"></a>org[, cultural_distance <span class="sc">:=</span> <span class="fu">abs</span>(conscientiousness <span class="sc">-</span> <span class="fu">mean</span>(conscientiousness))]</span>
+<span id="cb219-4"><a href="quick-ref.html#cb219-4" tabindex="-1"></a></span>
+<span id="cb219-5"><a href="quick-ref.html#cb219-5" tabindex="-1"></a><span class="co"># Calculate in simulation</span></span>
+<span id="cb219-6"><a href="quick-ref.html#cb219-6" tabindex="-1"></a>custom_metric <span class="ot">&lt;-</span> org[is_active <span class="sc">==</span> <span class="cn">TRUE</span>, </span>
+<span id="cb219-7"><a href="quick-ref.html#cb219-7" tabindex="-1"></a>                    .(<span class="at">cultural_variance =</span> <span class="fu">var</span>(conscientiousness),</span>
+<span id="cb219-8"><a href="quick-ref.html#cb219-8" tabindex="-1"></a>                      <span class="at">satisfaction_gini =</span> ineq<span class="sc">::</span><span class="fu">Gini</span>(satisfaction))]</span></code></pre></div>
+</div>
+</div>
+<div id="visualization-recipes" class="section level2 hasAnchor" number="10.6">
+<h2><span class="header-section-number">10.6</span> Visualization Recipes<a href="quick-ref.html#visualization-recipes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="time-series-with-phases" class="section level3 hasAnchor" number="10.6.1">
+<h3><span class="header-section-number">10.6.1</span> Time Series with Phases<a href="quick-ref.html#time-series-with-phases" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="quick-ref.html#cb220-1" tabindex="-1"></a><span class="fu">ggplot</span>(metrics, <span class="fu">aes</span>(<span class="at">x =</span> time_step)) <span class="sc">+</span></span>
+<span id="cb220-2"><a href="quick-ref.html#cb220-2" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> organization_size), <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb220-3"><a href="quick-ref.html#cb220-3" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">150</span>), </span>
+<span id="cb220-4"><a href="quick-ref.html#cb220-4" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb220-5"><a href="quick-ref.html#cb220-5" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;rect&quot;</span>, <span class="at">xmin =</span> <span class="dv">0</span>, <span class="at">xmax =</span> <span class="dv">50</span>, </span>
+<span id="cb220-6"><a href="quick-ref.html#cb220-6" tabindex="-1"></a>           <span class="at">ymin =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">ymax =</span> <span class="cn">Inf</span>, </span>
+<span id="cb220-7"><a href="quick-ref.html#cb220-7" tabindex="-1"></a>           <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb220-8"><a href="quick-ref.html#cb220-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Organizational Growth&quot;</span>, </span>
+<span id="cb220-9"><a href="quick-ref.html#cb220-9" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Size&quot;</span>) <span class="sc">+</span></span>
+<span id="cb220-10"><a href="quick-ref.html#cb220-10" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+</div>
+<div id="multi-metric-dashboard-1" class="section level3 hasAnchor" number="10.6.2">
+<h3><span class="header-section-number">10.6.2</span> Multi-Metric Dashboard<a href="quick-ref.html#multi-metric-dashboard-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="quick-ref.html#cb221-1" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb221-2"><a href="quick-ref.html#cb221-2" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(metrics, <span class="fu">aes</span>(time_step, organization_size)) <span class="sc">+</span> </span>
+<span id="cb221-3"><a href="quick-ref.html#cb221-3" tabindex="-1"></a>      <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb221-4"><a href="quick-ref.html#cb221-4" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(metrics, <span class="fu">aes</span>(time_step, blau_index)) <span class="sc">+</span> </span>
+<span id="cb221-5"><a href="quick-ref.html#cb221-5" tabindex="-1"></a>      <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb221-6"><a href="quick-ref.html#cb221-6" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(metrics, <span class="fu">aes</span>(time_step, avg_satisfaction)) <span class="sc">+</span> </span>
+<span id="cb221-7"><a href="quick-ref.html#cb221-7" tabindex="-1"></a>      <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;green&quot;</span>)</span>
+<span id="cb221-8"><a href="quick-ref.html#cb221-8" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(metrics, <span class="fu">aes</span>(time_step, avg_conscientiousness)) <span class="sc">+</span> </span>
+<span id="cb221-9"><a href="quick-ref.html#cb221-9" tabindex="-1"></a>      <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;purple&quot;</span>)</span>
+<span id="cb221-10"><a href="quick-ref.html#cb221-10" tabindex="-1"></a></span>
+<span id="cb221-11"><a href="quick-ref.html#cb221-11" tabindex="-1"></a>(p1 <span class="sc">+</span> p2) <span class="sc">/</span> (p3 <span class="sc">+</span> p4) <span class="sc">+</span> </span>
+<span id="cb221-12"><a href="quick-ref.html#cb221-12" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(<span class="at">title =</span> <span class="st">&quot;Simulation Dashboard&quot;</span>)</span></code></pre></div>
+</div>
+<div id="distribution-comparison" class="section level3 hasAnchor" number="10.6.3">
+<h3><span class="header-section-number">10.6.3</span> Distribution Comparison<a href="quick-ref.html#distribution-comparison" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="quick-ref.html#cb222-1" tabindex="-1"></a><span class="co"># Compare initial vs final</span></span>
+<span id="cb222-2"><a href="quick-ref.html#cb222-2" tabindex="-1"></a><span class="fu">bind_rows</span>(</span>
+<span id="cb222-3"><a href="quick-ref.html#cb222-3" tabindex="-1"></a>  org[hire_date <span class="sc">&lt;=</span> <span class="dv">10</span>, .(<span class="at">phase =</span> <span class="st">&quot;Initial&quot;</span>, satisfaction)],</span>
+<span id="cb222-4"><a href="quick-ref.html#cb222-4" tabindex="-1"></a>  org[is_active <span class="sc">==</span> <span class="cn">TRUE</span>, .(<span class="at">phase =</span> <span class="st">&quot;Final&quot;</span>, satisfaction)]</span>
+<span id="cb222-5"><a href="quick-ref.html#cb222-5" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb222-6"><a href="quick-ref.html#cb222-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> satisfaction, <span class="at">fill =</span> phase)) <span class="sc">+</span></span>
+<span id="cb222-7"><a href="quick-ref.html#cb222-7" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb222-8"><a href="quick-ref.html#cb222-8" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Initial&quot;</span> <span class="ot">=</span> <span class="st">&quot;blue&quot;</span>, </span>
+<span id="cb222-9"><a href="quick-ref.html#cb222-9" tabindex="-1"></a>                              <span class="st">&quot;Final&quot;</span> <span class="ot">=</span> <span class="st">&quot;red&quot;</span>))</span></code></pre></div>
+</div>
+</div>
+<div id="performance-tips-1" class="section level2 hasAnchor" number="10.7">
+<h2><span class="header-section-number">10.7</span> Performance Tips<a href="quick-ref.html#performance-tips-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><strong>Vectorize Everything</strong>: Use data.table operations, not loops</li>
+<li><strong>Pre-allocate Memory</strong>: <code>vector("list", n_steps)</code> for results</li>
+<li><strong>Selective Updates</strong>: Use <code>:=</code> for in-place modifications</li>
+<li><strong>Index Key Columns</strong>: <code>setkey(org, agent_id)</code> for fast lookups</li>
+<li><strong>Avoid Copying</strong>: Pass by reference when possible</li>
+<li><strong>Profile Code</strong>: Use <code>system.time()</code> and <code>profvis::profvis()</code></li>
+<li><strong>Batch Operations</strong>: Group similar calculations</li>
+<li><strong>Limit Snapshots</strong>: Store only necessary time points</li>
+</ul>
+</div>
+<div id="debugging-commands" class="section level2 hasAnchor" number="10.8">
+<h2><span class="header-section-number">10.8</span> Debugging Commands<a href="quick-ref.html#debugging-commands" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="basic-debugging" class="section level3 hasAnchor" number="10.8.1">
+<h3><span class="header-section-number">10.8.1</span> Basic Debugging<a href="quick-ref.html#basic-debugging" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="quick-ref.html#cb223-1" tabindex="-1"></a><span class="co"># Check data structure</span></span>
+<span id="cb223-2"><a href="quick-ref.html#cb223-2" tabindex="-1"></a><span class="fu">str</span>(org)</span>
+<span id="cb223-3"><a href="quick-ref.html#cb223-3" tabindex="-1"></a><span class="fu">summary</span>(org[is_active <span class="sc">==</span> <span class="cn">TRUE</span>])</span>
+<span id="cb223-4"><a href="quick-ref.html#cb223-4" tabindex="-1"></a><span class="fu">table</span>(org<span class="sc">$</span>identity_category)</span>
+<span id="cb223-5"><a href="quick-ref.html#cb223-5" tabindex="-1"></a></span>
+<span id="cb223-6"><a href="quick-ref.html#cb223-6" tabindex="-1"></a><span class="co"># Trace execution</span></span>
+<span id="cb223-7"><a href="quick-ref.html#cb223-7" tabindex="-1"></a><span class="fu">debug</span>(run_asa_simulation)</span>
+<span id="cb223-8"><a href="quick-ref.html#cb223-8" tabindex="-1"></a><span class="fu">browser</span>()  <span class="co"># Set breakpoint</span></span>
+<span id="cb223-9"><a href="quick-ref.html#cb223-9" tabindex="-1"></a><span class="fu">trace</span>(execute_hiring, <span class="at">tracer =</span> browser)</span>
+<span id="cb223-10"><a href="quick-ref.html#cb223-10" tabindex="-1"></a></span>
+<span id="cb223-11"><a href="quick-ref.html#cb223-11" tabindex="-1"></a><span class="co"># Verbose output</span></span>
+<span id="cb223-12"><a href="quick-ref.html#cb223-12" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(<span class="at">verbose =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+<div id="data-validation" class="section level3 hasAnchor" number="10.8.2">
+<h3><span class="header-section-number">10.8.2</span> Data Validation<a href="quick-ref.html#data-validation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="quick-ref.html#cb224-1" tabindex="-1"></a><span class="co"># Check for NAs</span></span>
+<span id="cb224-2"><a href="quick-ref.html#cb224-2" tabindex="-1"></a>org[, <span class="fu">lapply</span>(.SD, <span class="cf">function</span>(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x)))]</span>
+<span id="cb224-3"><a href="quick-ref.html#cb224-3" tabindex="-1"></a></span>
+<span id="cb224-4"><a href="quick-ref.html#cb224-4" tabindex="-1"></a><span class="co"># Verify constraints</span></span>
+<span id="cb224-5"><a href="quick-ref.html#cb224-5" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">all</span>(org<span class="sc">$</span>satisfaction <span class="sc">&gt;</span> <span class="sc">-</span><span class="dv">100</span>))</span>
+<span id="cb224-6"><a href="quick-ref.html#cb224-6" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">all</span>(org<span class="sc">$</span>tenure <span class="sc">&gt;=</span> <span class="dv">0</span>))</span>
+<span id="cb224-7"><a href="quick-ref.html#cb224-7" tabindex="-1"></a></span>
+<span id="cb224-8"><a href="quick-ref.html#cb224-8" tabindex="-1"></a><span class="co"># Test single step</span></span>
+<span id="cb224-9"><a href="quick-ref.html#cb224-9" tabindex="-1"></a>test_org <span class="ot">&lt;-</span> org[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]  <span class="co"># Small subset</span></span>
+<span id="cb224-10"><a href="quick-ref.html#cb224-10" tabindex="-1"></a>test_result <span class="ot">&lt;-</span> <span class="fu">execute_interactions_vectorized</span>(</span>
+<span id="cb224-11"><a href="quick-ref.html#cb224-11" tabindex="-1"></a>  test_org, interactions, <span class="at">step =</span> <span class="dv">1</span>, <span class="at">n_interactions =</span> <span class="dv">2</span></span>
+<span id="cb224-12"><a href="quick-ref.html#cb224-12" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div id="performance-profiling-1" class="section level3 hasAnchor" number="10.8.3">
+<h3><span class="header-section-number">10.8.3</span> Performance Profiling<a href="quick-ref.html#performance-profiling-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="quick-ref.html#cb225-1" tabindex="-1"></a><span class="co"># Time specific operations</span></span>
+<span id="cb225-2"><a href="quick-ref.html#cb225-2" tabindex="-1"></a><span class="fu">system.time</span>({</span>
+<span id="cb225-3"><a href="quick-ref.html#cb225-3" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb225-4"><a href="quick-ref.html#cb225-4" tabindex="-1"></a>    <span class="fu">calculate_blau_index</span>(org<span class="sc">$</span>identity_category)</span>
+<span id="cb225-5"><a href="quick-ref.html#cb225-5" tabindex="-1"></a>  }</span>
+<span id="cb225-6"><a href="quick-ref.html#cb225-6" tabindex="-1"></a>})</span>
+<span id="cb225-7"><a href="quick-ref.html#cb225-7" tabindex="-1"></a></span>
+<span id="cb225-8"><a href="quick-ref.html#cb225-8" tabindex="-1"></a><span class="co"># Memory usage</span></span>
+<span id="cb225-9"><a href="quick-ref.html#cb225-9" tabindex="-1"></a>pryr<span class="sc">::</span><span class="fu">object_size</span>(org)</span>
+<span id="cb225-10"><a href="quick-ref.html#cb225-10" tabindex="-1"></a><span class="fu">gc</span>()  <span class="co"># Garbage collection</span></span>
+<span id="cb225-11"><a href="quick-ref.html#cb225-11" tabindex="-1"></a></span>
+<span id="cb225-12"><a href="quick-ref.html#cb225-12" tabindex="-1"></a><span class="co"># Full profiling</span></span>
+<span id="cb225-13"><a href="quick-ref.html#cb225-13" tabindex="-1"></a>profvis<span class="sc">::</span><span class="fu">profvis</span>({</span>
+<span id="cb225-14"><a href="quick-ref.html#cb225-14" tabindex="-1"></a>  <span class="fu">run_asa_simulation</span>(<span class="at">n_steps =</span> <span class="dv">50</span>)</span>
+<span id="cb225-15"><a href="quick-ref.html#cb225-15" tabindex="-1"></a>})</span></code></pre></div>
+<hr />
+<p><em>ASA ABM v2 - Agent-Based Model for Attraction-Selection-Attrition</em></p>
 
+</div>
 </div>
 </div>
             </section>
@@ -795,8 +974,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="getting-started.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="architecture.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="contributors-guide.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
