@@ -632,7 +632,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb77-4"><a href="api-reference.html#cb77-4" tabindex="-1"></a><span class="co"># Create with custom identities</span></span>
 <span id="cb77-5"><a href="api-reference.html#cb77-5" tabindex="-1"></a>org <span class="ot">&lt;-</span> <span class="fu">create_organization</span>(</span>
 <span id="cb77-6"><a href="api-reference.html#cb77-6" tabindex="-1"></a>  <span class="at">n_agents =</span> <span class="dv">250</span>,</span>
-<span id="cb77-7"><a href="api-reference.html#cb77-7" tabindex="-1"></a>  <span class="at">identity_categories =</span> <span class="fu">c</span>(<span class="st">&quot;Tech&quot;</span>, <span class="st">&quot;Sales&quot;</span>, <span class="st">&quot;Ops&quot;</span>)</span>
+<span id="cb77-7"><a href="api-reference.html#cb77-7" tabindex="-1"></a>  <span class="at">identity_categories =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
 <span id="cb77-8"><a href="api-reference.html#cb77-8" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div id="calculate_identity_diversity" class="section level4 hasAnchor" number="6.1.1.2">
@@ -754,7 +754,7 @@ Returns named vector with proportions for each category (A-E)</p>
 <span id="cb89-4"><a href="api-reference.html#cb89-4" tabindex="-1"></a><span class="co"># Large pool with custom categories</span></span>
 <span id="cb89-5"><a href="api-reference.html#cb89-5" tabindex="-1"></a>applicants <span class="ot">&lt;-</span> <span class="fu">create_applicant_pool</span>(</span>
 <span id="cb89-6"><a href="api-reference.html#cb89-6" tabindex="-1"></a>  <span class="at">n_applicants =</span> <span class="dv">200</span>,</span>
-<span id="cb89-7"><a href="api-reference.html#cb89-7" tabindex="-1"></a>  <span class="at">identity_categories =</span> <span class="fu">c</span>(<span class="st">&quot;Eng&quot;</span>, <span class="st">&quot;Prod&quot;</span>, <span class="st">&quot;Sales&quot;</span>)</span>
+<span id="cb89-7"><a href="api-reference.html#cb89-7" tabindex="-1"></a>  <span class="at">identity_categories =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
 <span id="cb89-8"><a href="api-reference.html#cb89-8" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div id="calculate_applicant_attraction" class="section level4 hasAnchor" number="6.1.2.2">
