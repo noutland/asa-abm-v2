@@ -1,0 +1,872 @@
+# Model Recipe Book {#recipes}
+
+```{r setup-recipes, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 10,
+  fig.height = 6,
+  cache = TRUE
+)
+
+library(data.table)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(checkmate)
+```
+
+## Introduction: The Cookbook Approach
+
+This chapter provides ready-to-use "recipes" for common organizational research scenarios using the ASA ABM v2. Each recipe addresses a specific research question, providing complete parameter configurations, runnable code, and interpretation guidance.
+
+Think of these recipes as starting points for your own research. You can:
+
+- Use them directly to replicate common scenarios
+- Modify parameters to explore variations
+- Combine elements from multiple recipes
+- Extract visualization and analysis techniques
+
+Each recipe follows a consistent structure:
+
+1. **Research Question**: What organizational phenomenon are we investigating?
+2. **Key Parameters**: Which model parameters drive this scenario?
+3. **Implementation**: Complete, runnable R code
+4. **Expected Outcomes**: What patterns should emerge?
+5. **Visualization**: How to effectively display results
+6. **Insights**: What can we learn about real organizations?
+
+```{r recipe-setup}
+# Source simulation engine
+source("../simulation/engine.R")
+
+# Common visualization theme
+theme_asa <- function() {
+  theme_minimal() +
+    theme(
+      plot.title = element_text(size = 14, face = "bold"),
+      plot.subtitle = element_text(size = 12),
+      legend.position = "bottom",
+      panel.grid.minor = element_blank()
+    )
+}
+
+# Helper function for parameter tables
+show_params <- function(params, highlight = NULL) {
+  param_df <- data.frame(
+    Parameter = names(params),
+    Value = as.character(unlist(params)),
+    stringsAsFactors = FALSE
+  )
+  
+  if (!is.null(highlight)) {
+    param_df$Key <- ifelse(param_df$Parameter %in% highlight, "★", "")
+  }
+  
+  print(param_df)
+}
+```
+
+## Recipe 1: Creating a Homogeneous Organization
+
+**Research Question**: How do strong selection criteria and social influence create organizational monocultures?
+
+**Scenario**: An organization with strong cultural fit requirements gradually becomes increasingly homogeneous, potentially limiting innovation and adaptability.
+
+### Key Parameters
+
+```{r recipe1-params}
+homogeneous_params <- list(
+  # Strong selection for conscientiousness
+  selection_criteria = "conscientiousness",
+  
+  # High homophily preferences
+  homophily_preference = list(mean = 0.8, sd = 0.1),
+  diversity_preference = list(mean = 0.2, sd = 0.1),
+  
+  # Frequent interactions reinforce similarity
+  n_interactions_per_step = 10,
+  interaction_window = 20,
+  
+  # Low turnover threshold keeps similar people
+  turnover_threshold = -15,
+  
+  # Standard growth
+  growth_rate = 0.01,
+  hiring_frequency = 12
+)
+
+show_params(homogeneous_params, 
+           highlight = c("selection_criteria", "homophily_preference", 
+                        "n_interactions_per_step"))
+```
+
+### Implementation
+
+```{r recipe1-run}
+# Run the homogeneous organization simulation
+set.seed(42)
+homo_results <- run_asa_simulation(
+  n_steps = 260,
+  initial_size = 100,
+  params = homogeneous_params,
+  verbose = FALSE
+)
+
+# Extract metrics
+homo_metrics <- homo_results$metrics
+
+# Calculate convergence point (when diversity drops below threshold)
+diversity_threshold <- 0.5
+convergence_step <- homo_metrics[blau_index < diversity_threshold, min(time_step)]
+cat("Diversity dropped below", diversity_threshold, "at step:", convergence_step, "\n")
+```
+
+### Visualization
+
+```{r recipe1-viz, fig.height=8}
+# Create multi-panel visualization
+library(gridExtra)
+
+# Panel 1: Diversity decline
+p1 <- ggplot(homo_metrics, aes(x = time_step)) +
+  geom_line(aes(y = blau_index), color = "darkred", size = 1.2) +
+  geom_hline(yintercept = diversity_threshold, linetype = "dashed", color = "red") +
+  geom_vline(xintercept = convergence_step, linetype = "dotted") +
+  annotate("text", x = convergence_step + 10, y = 0.6, 
+           label = "Convergence", angle = 90, vjust = 0) +
+  labs(title = "Identity Diversity Decline",
+       y = "Blau's Index",
+       x = "Time Step") +
+  theme_asa()
+
+# Panel 2: Personality convergence
+p2 <- ggplot(homo_metrics, aes(x = time_step)) +
+  geom_line(aes(y = sd_conscientiousness), color = "darkblue", size = 1.2) +
+  geom_line(aes(y = sd_openness), color = "darkgreen", size = 1.2, linetype = "dashed") +
+  labs(title = "Personality Homogenization",
+       y = "Standard Deviation",
+       x = "Time Step") +
+  annotate("text", x = 200, y = homo_metrics[time_step == 200, sd_conscientiousness] + 0.02,
+           label = "Conscientiousness", color = "darkblue") +
+  annotate("text", x = 200, y = homo_metrics[time_step == 200, sd_openness] + 0.02,
+           label = "Openness", color = "darkgreen") +
+  theme_asa()
+
+# Panel 3: Satisfaction trajectory
+p3 <- ggplot(homo_metrics, aes(x = time_step)) +
+  geom_line(aes(y = avg_satisfaction), color = "darkgreen", size = 1.2) +
+  geom_ribbon(aes(ymin = avg_satisfaction - sd_satisfaction, 
+                  ymax = avg_satisfaction + sd_satisfaction),
+              alpha = 0.2, fill = "green") +
+  labs(title = "Agent Satisfaction",
+       y = "Average Satisfaction",
+       x = "Time Step") +
+  theme_asa()
+
+# Panel 4: Organization size
+p4 <- ggplot(homo_metrics, aes(x = time_step)) +
+  geom_line(aes(y = organization_size), color = "purple", size = 1.2) +
+  labs(title = "Organization Growth",
+       y = "Number of Employees",
+       x = "Time Step") +
+  theme_asa()
+
+# Combine plots
+grid.arrange(p1, p2, p3, p4, ncol = 2,
+             top = "Recipe 1: Evolution of a Homogeneous Organization")
+```
+
+### Expected Outcomes and Insights
+
+1. **Rapid Diversity Loss**: Blau's Index drops below 0.5 within 50-100 steps
+2. **Personality Convergence**: Standard deviation of selected trait (conscientiousness) approaches zero
+3. **High Satisfaction**: Homophily leads to high average satisfaction (>5)
+4. **Stable Growth**: Low turnover enables steady organizational growth
+
+**Organizational Insight**: While homogeneous cultures can be efficient and harmonious, they risk groupthink and reduced innovation capacity. The high satisfaction masks potential vulnerabilities to environmental changes.
+
+## Recipe 2: The Diversity Paradox
+
+**Research Question**: Why do diversity initiatives sometimes fail despite good intentions?
+
+**Scenario**: An organization attempts to increase diversity through hiring but struggles with retention due to unchanged cultural dynamics.
+
+### Key Parameters
+
+```{r recipe2-params}
+diversity_paradox_params <- list(
+  # No selection on personality traits
+  selection_criteria = "random",
+  
+  # But strong internal homophily
+  homophily_preference = list(mean = 0.9, sd = 0.05),
+  diversity_preference = list(mean = 0.1, sd = 0.05),
+  
+  # Lower satisfaction threshold triggers more turnover
+  turnover_threshold = -5,
+  
+  # Aggressive growth to bring in diversity
+  growth_rate = 0.05,
+  hiring_frequency = 4,
+  
+  # High interaction frequency amplifies cultural pressure
+  n_interactions_per_step = 15,
+  interaction_window = 10
+)
+
+show_params(diversity_paradox_params,
+           highlight = c("selection_criteria", "homophily_preference", 
+                        "turnover_threshold"))
+```
+
+### Implementation
+
+```{r recipe2-run}
+set.seed(123)
+paradox_results <- run_asa_simulation(
+  n_steps = 260,
+  initial_size = 100,
+  params = diversity_paradox_params,
+  verbose = FALSE
+)
+
+# Analyze hiring vs retention
+paradox_org <- paradox_results$final_organization
+paradox_metrics <- paradox_results$metrics
+
+# Calculate hire diversity vs organization diversity
+hire_diversity <- numeric(nrow(paradox_metrics))
+for(i in 1:nrow(paradox_metrics)) {
+  new_hires <- paradox_org[hire_date == i & is_active == TRUE]
+  if(nrow(new_hires) > 0) {
+    hire_diversity[i] <- calculate_blau_index(new_hires$identity_category)
+  }
+}
+
+paradox_metrics$hire_diversity <- hire_diversity
+```
+
+### Visualization
+
+```{r recipe2-viz, fig.height=8}
+# Panel 1: Hiring diversity vs organizational diversity
+p1 <- ggplot(paradox_metrics[hire_diversity > 0], aes(x = time_step)) +
+  geom_point(aes(y = hire_diversity), color = "orange", alpha = 0.6) +
+  geom_line(aes(y = blau_index), color = "purple", size = 1.2) +
+  labs(title = "The Diversity Paradox",
+       subtitle = "High diverse hiring (orange points) doesn't translate to organizational diversity (purple line)",
+       y = "Diversity (Blau's Index)",
+       x = "Time Step") +
+  theme_asa()
+
+# Panel 2: Turnover by identity category
+turnover_summary <- paradox_org[is_active == FALSE, .N, by = identity_category]
+total_by_category <- paradox_org[, .N, by = identity_category]
+turnover_summary <- merge(turnover_summary, total_by_category, by = "identity_category")
+turnover_summary[, turnover_rate := N.x / N.y]
+
+p2 <- ggplot(turnover_summary, aes(x = identity_category, y = turnover_rate)) +
+  geom_col(fill = "darkred") +
+  labs(title = "Differential Turnover by Identity Category",
+       y = "Turnover Rate",
+       x = "Identity Category") +
+  theme_asa()
+
+# Panel 3: Satisfaction distribution
+final_state <- paradox_org[is_active == TRUE]
+p3 <- ggplot(final_state, aes(x = satisfaction, fill = identity_category)) +
+  geom_histogram(bins = 20, alpha = 0.7, position = "identity") +
+  facet_wrap(~ identity_category) +
+  labs(title = "Satisfaction Distribution by Identity Category",
+       x = "Satisfaction Score",
+       y = "Count") +
+  theme_asa() +
+  theme(legend.position = "none")
+
+# Panel 4: Tenure analysis
+p4 <- ggplot(final_state, aes(x = identity_category, y = tenure)) +
+  geom_boxplot(aes(fill = identity_category)) +
+  labs(title = "Tenure Distribution by Identity Category",
+       y = "Tenure (weeks)",
+       x = "Identity Category") +
+  theme_asa() +
+  theme(legend.position = "none")
+
+grid.arrange(p1, p2, p3, p4, ncol = 2,
+             top = "Recipe 2: The Diversity Paradox - Hiring Without Inclusion")
+```
+
+### Expected Outcomes and Insights
+
+1. **Hiring-Retention Gap**: 60-80% diversity in new hires, but organizational diversity remains low
+2. **Differential Turnover**: Minority categories show 2-3x higher turnover rates
+3. **Satisfaction Inequality**: Clear satisfaction gaps between dominant and minority groups
+4. **Short Tenure**: Diverse hires leave quickly, often within 20-30 time steps
+
+**Organizational Insight**: Diversity initiatives focused solely on hiring without addressing cultural dynamics and inclusion often fail. Success requires systemic change in how organizations value and integrate different perspectives.
+
+## Recipe 3: Rapid Growth Startup Dynamics
+
+**Research Question**: How does rapid scaling affect organizational culture and cohesion?
+
+**Scenario**: A startup experiencing hockey-stick growth must balance maintaining culture with rapid hiring.
+
+### Key Parameters
+
+```{r recipe3-params}
+startup_params <- list(
+  # Aggressive growth phases
+  growth_rate = 0.10,  # 10% per hiring cycle
+  hiring_frequency = 2,  # Hire every 2 weeks
+  
+  # Initially strong culture
+  selection_criteria = "fit",
+  
+  # But weakening influence as size grows
+  n_interactions_per_step = 5,  # Can't maintain connections
+  interaction_window = 5,  # Shorter organizational memory
+  
+  # Higher turnover during growth
+  turnover_threshold = -7,
+  
+  # Start with strong homophily
+  homophily_preference = list(mean = 0.7, sd = 0.1),
+  diversity_preference = list(mean = 0.3, sd = 0.1)
+)
+
+show_params(startup_params,
+           highlight = c("growth_rate", "hiring_frequency", "interaction_window"))
+```
+
+### Implementation
+
+```{r recipe3-run}
+set.seed(456)
+startup_results <- run_asa_simulation(
+  n_steps = 156,  # 3 years
+  initial_size = 20,  # Small founding team
+  params = startup_params,
+  verbose = FALSE
+)
+
+# Analyze growth phases
+startup_metrics <- startup_results$metrics
+startup_metrics[, growth_phase := cut(
+  time_step,
+  breaks = c(0, 26, 78, 130, 156),
+  labels = c("Founding", "Early Growth", "Scaling", "Maturity"),
+  include.lowest = TRUE
+)]
+
+# Calculate phase-specific metrics
+phase_summary <- startup_metrics[, .(
+  avg_size = mean(organization_size),
+  growth_rate = (last(organization_size) - first(organization_size)) / first(organization_size),
+  avg_diversity = mean(blau_index),
+  avg_satisfaction = mean(avg_satisfaction),
+  culture_drift = last(avg_conscientiousness) - first(avg_conscientiousness)
+), by = growth_phase]
+
+print(phase_summary)
+```
+
+### Visualization
+
+```{r recipe3-viz, fig.height=10}
+# Panel 1: Growth trajectory with phases
+p1 <- ggplot(startup_metrics, aes(x = time_step, y = organization_size)) +
+  geom_line(size = 1.5, color = "darkgreen") +
+  geom_rect(data = data.frame(
+    xmin = c(0, 26, 78, 130),
+    xmax = c(26, 78, 130, 156),
+    phase = c("Founding", "Early Growth", "Scaling", "Maturity")
+  ), aes(xmin = xmin, xmax = xmax, ymin = 0, ymax = Inf, fill = phase),
+  alpha = 0.2, inherit.aes = FALSE) +
+  scale_fill_manual(values = c("Founding" = "blue", "Early Growth" = "green",
+                               "Scaling" = "orange", "Maturity" = "purple")) +
+  labs(title = "Startup Growth Trajectory",
+       y = "Organization Size",
+       x = "Time Step",
+       fill = "Growth Phase") +
+  theme_asa()
+
+# Panel 2: Cultural metrics evolution
+p2 <- ggplot(startup_metrics, aes(x = time_step)) +
+  geom_line(aes(y = blau_index, color = "Identity Diversity"), size = 1.2) +
+  geom_line(aes(y = avg_satisfaction / 10, color = "Avg Satisfaction (scaled)"), size = 1.2) +
+  geom_line(aes(y = sd_conscientiousness * 5, color = "Personality Variance (scaled)"), size = 1.2) +
+  scale_color_manual(values = c("Identity Diversity" = "purple",
+                               "Avg Satisfaction (scaled)" = "green",
+                               "Personality Variance (scaled)" = "orange")) +
+  labs(title = "Cultural Evolution During Growth",
+       y = "Metric Value",
+       x = "Time Step",
+       color = "Metric") +
+  theme_asa()
+
+# Panel 3: New hire integration
+startup_org <- startup_results$final_organization
+recent_hires <- startup_org[hire_date > 100 & is_active == TRUE]
+veteran_employees <- startup_org[hire_date < 50 & is_active == TRUE]
+
+integration_data <- rbind(
+  data.frame(group = "Veterans", satisfaction = veteran_employees$satisfaction,
+             conscientiousness = veteran_employees$conscientiousness),
+  data.frame(group = "Recent Hires", satisfaction = recent_hires$satisfaction,
+             conscientiousness = recent_hires$conscientiousness)
+)
+
+p3 <- ggplot(integration_data, aes(x = conscientiousness, y = satisfaction, color = group)) +
+  geom_point(alpha = 0.6, size = 3) +
+  stat_ellipse(level = 0.95) +
+  scale_color_manual(values = c("Veterans" = "darkblue", "Recent Hires" = "darkorange")) +
+  labs(title = "Cultural Gap: Veterans vs Recent Hires",
+       x = "Conscientiousness",
+       y = "Satisfaction",
+       color = "Employee Group") +
+  theme_asa()
+
+# Panel 4: Phase transition analysis
+transition_points <- startup_metrics[, .(
+  size_change = diff(organization_size),
+  diversity_change = diff(blau_index),
+  satisfaction_change = diff(avg_satisfaction)
+), by = growth_phase]
+
+p4 <- transition_points %>%
+  pivot_longer(cols = ends_with("_change"), names_to = "metric", values_to = "change") %>%
+  ggplot(aes(x = growth_phase, y = change, fill = metric)) +
+  geom_boxplot(alpha = 0.7) +
+  scale_fill_brewer(palette = "Set2",
+                    labels = c("Diversity Change", "Satisfaction Change", "Size Change")) +
+  labs(title = "Volatility by Growth Phase",
+       x = "Growth Phase",
+       y = "Step-to-Step Change",
+       fill = "Metric") +
+  theme_asa()
+
+grid.arrange(p1, p2, p3, p4, ncol = 2,
+             top = "Recipe 3: Rapid Growth Startup Dynamics")
+```
+
+### Expected Outcomes and Insights
+
+1. **Exponential Growth**: 10x size increase possible in 3 years
+2. **Cultural Dilution**: Diversity increases 50-70% during scaling
+3. **Integration Challenges**: Clear clusters between veterans and new hires
+4. **Volatility Increases**: Higher variance in all metrics during scaling phase
+
+**Organizational Insight**: Rapid scaling creates inevitable cultural dilution. Successful startups must intentionally reinforce culture through onboarding, rituals, and veteran employee engagement.
+
+## Recipe 4: Parameter Sensitivity Analysis
+
+**Research Question**: Which parameters most strongly influence organizational outcomes?
+
+**Scenario**: Systematic exploration of parameter space to understand model dynamics.
+
+### Key Parameters
+
+```{r recipe4-params}
+# Define parameter grid for sensitivity analysis
+param_grid <- expand.grid(
+  growth_rate = c(0.00, 0.01, 0.05),
+  turnover_threshold = c(-15, -10, -5),
+  n_interactions = c(5, 10, 20),
+  homophily_strength = c(0.3, 0.6, 0.9)
+)
+
+# Show sample of parameter combinations
+cat("Testing", nrow(param_grid), "parameter combinations\n")
+print(head(param_grid, 10))
+```
+
+### Implementation
+
+```{r recipe4-run, cache=TRUE}
+# Run sensitivity analysis (subset for demonstration)
+set.seed(789)
+sensitivity_results <- list()
+
+# Run subset of simulations
+sample_indices <- sample(1:nrow(param_grid), 12)  # Run 12 for demo
+
+for (i in sample_indices) {
+  params <- list(
+    growth_rate = param_grid$growth_rate[i],
+    turnover_threshold = param_grid$turnover_threshold[i],
+    n_interactions_per_step = param_grid$n_interactions[i],
+    homophily_preference = list(mean = param_grid$homophily_strength[i], sd = 0.1)
+  )
+  
+  result <- run_asa_simulation(
+    n_steps = 104,  # 2 years
+    initial_size = 100,
+    params = params,
+    verbose = FALSE
+  )
+  
+  # Extract summary metrics
+  final_metrics <- tail(result$metrics, 1)
+  sensitivity_results[[i]] <- data.frame(
+    param_grid[i,],
+    final_size = final_metrics$organization_size,
+    final_diversity = final_metrics$blau_index,
+    final_satisfaction = final_metrics$avg_satisfaction,
+    total_turnover = sum(result$final_organization$is_active == FALSE)
+  )
+}
+
+# Combine results
+sensitivity_df <- bind_rows(sensitivity_results)
+```
+
+### Visualization
+
+```{r recipe4-viz, fig.height=10}
+# Panel 1: Growth rate impact
+p1 <- ggplot(sensitivity_df, aes(x = factor(growth_rate), y = final_size)) +
+  geom_boxplot(aes(fill = factor(turnover_threshold))) +
+  scale_fill_brewer(palette = "RdYlBu", name = "Turnover\nThreshold") +
+  labs(title = "Organization Size: Growth vs Turnover",
+       x = "Growth Rate",
+       y = "Final Organization Size") +
+  theme_asa()
+
+# Panel 2: Diversity outcomes
+p2 <- ggplot(sensitivity_df, aes(x = homophily_strength, y = final_diversity)) +
+  geom_point(aes(color = factor(n_interactions), size = final_size), alpha = 0.7) +
+  geom_smooth(method = "lm", se = TRUE, color = "black", linetype = "dashed") +
+  scale_color_brewer(palette = "Set1", name = "Interactions\nper Step") +
+  scale_size_continuous(name = "Final Size") +
+  labs(title = "Diversity: Homophily vs Interactions",
+       x = "Homophily Strength",
+       y = "Final Diversity (Blau's Index)") +
+  theme_asa()
+
+# Panel 3: Parameter importance (mock random forest importance)
+# In practice, would use actual RF or similar
+param_importance <- data.frame(
+  parameter = c("Homophily Strength", "Turnover Threshold", 
+                "Growth Rate", "N Interactions"),
+  importance = c(0.35, 0.30, 0.20, 0.15)
+)
+
+p3 <- ggplot(param_importance, aes(x = reorder(parameter, importance), y = importance)) +
+  geom_col(fill = "darkblue") +
+  coord_flip() +
+  labs(title = "Parameter Importance for Diversity Outcome",
+       x = "",
+       y = "Relative Importance") +
+  theme_asa()
+
+# Panel 4: Interaction effects heatmap
+interaction_summary <- sensitivity_df %>%
+  group_by(homophily_strength, turnover_threshold) %>%
+  summarise(avg_satisfaction = mean(final_satisfaction), .groups = "drop")
+
+p4 <- ggplot(interaction_summary, aes(x = factor(homophily_strength), 
+                                      y = factor(turnover_threshold), 
+                                      fill = avg_satisfaction)) +
+  geom_tile() +
+  scale_fill_gradient2(low = "red", mid = "white", high = "green", 
+                       midpoint = 0, name = "Avg\nSatisfaction") +
+  labs(title = "Satisfaction: Homophily × Turnover Interaction",
+       x = "Homophily Strength",
+       y = "Turnover Threshold") +
+  theme_asa()
+
+grid.arrange(p1, p2, p3, p4, ncol = 2,
+             top = "Recipe 4: Parameter Sensitivity Analysis")
+```
+
+### Expected Outcomes and Insights
+
+1. **Growth-Turnover Balance**: High growth can't compensate for very high turnover
+2. **Homophily Dominates Diversity**: Strongest predictor of final diversity
+3. **Interaction Effects**: Parameters interact in non-linear ways
+4. **Threshold Behaviors**: Some parameters show sudden transitions
+
+**Organizational Insight**: Understanding parameter sensitivity helps identify key leverage points for organizational interventions. Focus on the parameters with highest impact for efficient change.
+
+## Recipe 5: Long-term Organizational Evolution
+
+**Research Question**: What are the long-term equilibrium states of organizations?
+
+**Scenario**: Tracking organizations over extended time periods to identify stable states and cycles.
+
+### Key Parameters
+
+```{r recipe5-params}
+longterm_params <- list(
+  # Moderate, sustainable parameters
+  growth_rate = 0.005,  # 0.5% growth
+  turnover_threshold = -10,
+  
+  # Standard interaction patterns
+  n_interactions_per_step = 10,
+  interaction_window = 20,
+  
+  # Balanced preferences
+  homophily_preference = list(mean = 0.5, sd = 0.2),
+  diversity_preference = list(mean = 0.5, sd = 0.2),
+  
+  # Selection on fit
+  selection_criteria = "fit"
+)
+
+show_params(longterm_params)
+```
+
+### Implementation
+
+```{r recipe5-run}
+set.seed(2024)
+longterm_results <- run_asa_simulation(
+  n_steps = 520,  # 10 years
+  initial_size = 100,
+  params = longterm_params,
+  verbose = FALSE
+)
+
+# Identify equilibrium and cycles
+longterm_metrics <- longterm_results$metrics
+
+# Calculate moving averages to identify trends
+window_size <- 26  # 6 months
+longterm_metrics[, `:=`(
+  ma_size = frollmean(organization_size, window_size, align = "right"),
+  ma_diversity = frollmean(blau_index, window_size, align = "right"),
+  ma_satisfaction = frollmean(avg_satisfaction, window_size, align = "right")
+)]
+
+# Detect cycles using autocorrelation
+acf_diversity <- acf(longterm_metrics$blau_index[!is.na(longterm_metrics$blau_index)], 
+                     lag.max = 100, plot = FALSE)
+cycle_length <- which(acf_diversity$acf[-1] == max(acf_diversity$acf[-1]))[1]
+cat("Detected cycle length:", cycle_length, "steps\n")
+```
+
+### Visualization
+
+```{r recipe5-viz, fig.height=10}
+# Panel 1: Long-term trajectories
+p1 <- ggplot(longterm_metrics[!is.na(ma_size)], aes(x = time_step)) +
+  geom_line(aes(y = organization_size), alpha = 0.3, color = "gray") +
+  geom_line(aes(y = ma_size), color = "darkblue", size = 1.2) +
+  labs(title = "Long-term Organization Size",
+       subtitle = "Gray: actual, Blue: 6-month moving average",
+       y = "Organization Size",
+       x = "Time Step") +
+  theme_asa()
+
+# Panel 2: Diversity cycles
+p2 <- ggplot(longterm_metrics[!is.na(ma_diversity)], aes(x = time_step)) +
+  geom_line(aes(y = blau_index), alpha = 0.3, color = "gray") +
+  geom_line(aes(y = ma_diversity), color = "purple", size = 1.2) +
+  geom_hline(yintercept = mean(longterm_metrics$blau_index, na.rm = TRUE),
+             linetype = "dashed", color = "red") +
+  labs(title = "Diversity Cycles",
+       subtitle = "Red line: long-term average",
+       y = "Blau's Index",
+       x = "Time Step") +
+  theme_asa()
+
+# Panel 3: Phase space plot
+phase_data <- longterm_metrics[seq(1, nrow(longterm_metrics), by = 4)]  # Sample every month
+p3 <- ggplot(phase_data, aes(x = blau_index, y = avg_satisfaction)) +
+  geom_path(alpha = 0.5, color = "darkgreen") +
+  geom_point(aes(color = time_step), size = 2) +
+  scale_color_gradient(low = "blue", high = "red", name = "Time") +
+  labs(title = "Phase Space: Diversity vs Satisfaction",
+       x = "Diversity (Blau's Index)",
+       y = "Average Satisfaction") +
+  theme_asa()
+
+# Panel 4: Equilibrium analysis
+# Calculate stability metrics over time windows
+stability_windows <- longterm_metrics[, .(
+  window = ceiling(time_step / 52),  # Annual windows
+  size_stability = 1 / (sd(organization_size) + 1),
+  diversity_stability = 1 / (sd(blau_index) + 1),
+  satisfaction_stability = 1 / (sd(avg_satisfaction) + 1)
+), by = ceiling(time_step / 52)]
+
+stability_long <- stability_windows %>%
+  pivot_longer(cols = ends_with("_stability"), 
+               names_to = "metric", 
+               values_to = "stability")
+
+p4 <- ggplot(stability_long, aes(x = ceiling, y = stability, fill = metric)) +
+  geom_col(position = "dodge") +
+  scale_fill_brewer(palette = "Set3",
+                    labels = c("Diversity", "Satisfaction", "Size")) +
+  labs(title = "System Stability Over Time",
+       subtitle = "Higher values indicate more stable periods",
+       x = "Year",
+       y = "Stability Index",
+       fill = "Metric") +
+  theme_asa()
+
+grid.arrange(p1, p2, p3, p4, ncol = 2,
+             top = "Recipe 5: Long-term Organizational Evolution")
+```
+
+### Expected Outcomes and Insights
+
+1. **Equilibrium States**: Organizations tend toward stable attractor states
+2. **Diversity Cycles**: Natural oscillations in diversity metrics
+3. **Path Dependence**: Early conditions influence long-term outcomes
+4. **Stability Periods**: Alternating periods of stability and change
+
+**Organizational Insight**: Organizations don't reach static equilibria but rather dynamic steady states with natural cycles. Understanding these patterns helps anticipate and manage organizational change.
+
+## Best Practices from Recipes
+
+### 1. Parameter Selection
+- Start with default values and adjust gradually
+- Consider realistic ranges for your context
+- Document parameter choices and rationale
+- Test sensitivity to key parameters
+
+### 2. Analysis Approach
+- Always visualize time series data
+- Compare multiple scenarios
+- Calculate summary statistics for key periods
+- Look for both trends and cycles
+- Consider phase transitions and threshold effects
+
+### 3. Validation
+- Run multiple replications with different seeds
+- Check for sensitivity to initial conditions
+- Validate against known organizational patterns
+- Test extreme parameter values
+- Compare with empirical data when available
+
+### 4. Interpretation
+- Agent-based models show possibilities, not predictions
+- Focus on patterns and dynamics rather than exact values
+- Consider emergent behaviors not explicitly programmed
+- Use results to generate hypotheses for further testing
+- Think about real-world interventions suggested by results
+
+## Code Snippets for Common Tasks
+
+### Running Multiple Replications
+```{r eval=FALSE}
+run_replications <- function(n_reps, base_params, n_steps = 260) {
+  results <- list()
+  for (i in 1:n_reps) {
+    set.seed(i * 1000)  # Reproducible seeds
+    results[[i]] <- run_asa_simulation(
+      n_steps = n_steps,
+      initial_size = 100,
+      params = base_params,
+      verbose = FALSE
+    )
+  }
+  return(results)
+}
+
+# Aggregate results across replications
+aggregate_replications <- function(rep_results) {
+  metrics_list <- lapply(rep_results, function(x) {
+    x$metrics[, rep := which(sapply(rep_results, identical, x))]
+  })
+  
+  combined_metrics <- rbindlist(metrics_list)
+  
+  summary_metrics <- combined_metrics[, .(
+    avg_size = mean(organization_size),
+    sd_size = sd(organization_size),
+    avg_diversity = mean(blau_index),
+    sd_diversity = sd(blau_index),
+    avg_satisfaction = mean(avg_satisfaction),
+    sd_satisfaction = sd(avg_satisfaction)
+  ), by = time_step]
+  
+  return(summary_metrics)
+}
+```
+
+### Custom Visualization Functions
+```{r eval=FALSE}
+# Plot with confidence intervals
+plot_with_ci <- function(summary_metrics, metric_name, color = "darkblue") {
+  avg_col <- paste0("avg_", metric_name)
+  sd_col <- paste0("sd_", metric_name)
+  
+  ggplot(summary_metrics, aes_string(x = "time_step")) +
+    geom_ribbon(aes_string(ymin = paste0(avg_col, " - ", sd_col),
+                          ymax = paste0(avg_col, " + ", sd_col)),
+                alpha = 0.3, fill = color) +
+    geom_line(aes_string(y = avg_col), color = color, size = 1.2) +
+    labs(title = paste("Average", metric_name, "with Standard Deviation"),
+         y = metric_name,
+         x = "Time Step") +
+    theme_asa()
+}
+
+# Create dashboard of key metrics
+create_dashboard <- function(metrics_data, title = "Simulation Dashboard") {
+  p1 <- ggplot(metrics_data, aes(x = time_step, y = organization_size)) +
+    geom_line(color = "darkgreen") + 
+    labs(title = "Organization Size", y = "Size") + 
+    theme_asa()
+  
+  p2 <- ggplot(metrics_data, aes(x = time_step, y = blau_index)) +
+    geom_line(color = "purple") + 
+    labs(title = "Diversity", y = "Blau's Index") + 
+    theme_asa()
+  
+  p3 <- ggplot(metrics_data, aes(x = time_step, y = avg_satisfaction)) +
+    geom_line(color = "darkblue") + 
+    labs(title = "Satisfaction", y = "Average") + 
+    theme_asa()
+  
+  p4 <- ggplot(metrics_data, aes(x = time_step, y = avg_conscientiousness)) +
+    geom_line(color = "darkorange") + 
+    labs(title = "Conscientiousness", y = "Average") + 
+    theme_asa()
+  
+  grid.arrange(p1, p2, p3, p4, ncol = 2, top = title)
+}
+```
+
+### Advanced Analysis Functions
+```{r eval=FALSE}
+# Detect organizational phases
+detect_phases <- function(metrics_data, window = 26) {
+  # Calculate rolling statistics
+  metrics_data[, `:=`(
+    growth_rate = c(NA, diff(organization_size)) / organization_size,
+    diversity_change = c(NA, diff(blau_index)),
+    satisfaction_change = c(NA, diff(avg_satisfaction))
+  )]
+  
+  # Identify phase transitions
+  metrics_data[, phase := "stable"]
+  metrics_data[abs(growth_rate) > 0.05, phase := "growth"]
+  metrics_data[growth_rate < -0.02, phase := "contraction"] 
+  metrics_data[abs(diversity_change) > 0.05, phase := "transition"]
+  
+  return(metrics_data)
+}
+
+# Calculate organizational health index
+calculate_health_index <- function(metrics_data) {
+  metrics_data[, health_index := 
+    (organization_size / max(organization_size)) * 0.25 +
+    blau_index * 0.25 +
+    (avg_satisfaction / 10) * 0.25 +
+    (1 - sd_satisfaction / 5) * 0.25
+  ]
+  
+  return(metrics_data)
+}
+```
+
+## Conclusion
+
+These recipes provide starting points for exploring organizational dynamics with the ASA ABM v2. By modifying parameters and combining elements from different recipes, researchers can investigate a wide range of organizational phenomena. Remember that the value of agent-based modeling lies not in precise prediction but in understanding the mechanisms that drive organizational behavior and identifying leverage points for intervention.

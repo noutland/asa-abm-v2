@@ -58,12 +58,14 @@ This documentation is organized into the following sections:
 
 1. **Getting Started**: Installation and quick start guide
 2. **Theoretical Background**: Understanding the ASA framework
-3. **Architecture Overview**: System design and components
-4. **User Guide**: Running simulations and configuring parameters
-5. **API Reference**: Detailed function documentation
-6. **Examples**: Practical simulation scenarios
-7. **Developer Guide**: Extending the framework
-8. **Appendices**: Additional resources and references
+3. **Architecture Overview**: System design and components with architecture decision log
+4. **User Guide**: Running simulations, configuring parameters, and deep metrics analysis
+5. **ODD Protocol**: Formal model specification following the ODD standard
+6. **API Reference**: Detailed function documentation
+7. **Examples**: Practical simulation scenarios and case studies
+8. **Model Recipe Book**: Ready-to-use configurations for common research questions
+9. **Contributor's Guide**: Step-by-step walkthrough for developers and contributors
+10. **Quick Reference**: Concise parameter and function reference card
 
 ## Quick Example
 

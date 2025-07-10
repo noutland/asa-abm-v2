@@ -1,0 +1,276 @@
+# ASA ABM v2 Quick Reference {#quick-ref}
+
+```{r setup-quickref, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  eval = FALSE,
+  comment = ""
+)
+```
+
+## Quick Start
+
+```r
+# Load and run simulation
+source("simulation/engine.R")
+results <- run_asa_simulation(n_steps = 260, initial_size = 100)
+
+# View results
+tail(results$metrics, 10)         # Recent metrics
+summary(results$final_organization)  # Final state
+
+# Quick visualization
+library(ggplot2)
+ggplot(results$metrics, aes(x = time_step, y = organization_size)) + 
+  geom_line()
+```
+
+## Parameter Reference
+
+| Parameter | Type | Default | Range/Values | Description |
+|:----------|:-----|:--------|:-------------|:------------|
+| `n_steps` | int | 260 | 1-∞ | Simulation duration |
+| `initial_size` | int | 100 | 1-10000 | Starting employees |
+| `growth_rate` | num | 0.01 | 0-1 | Hiring growth per cycle |
+| `hiring_frequency` | int | 12 | 1-52 | Steps between hiring |
+| `selection_criteria` | chr | "conscientiousness" | "conscientiousness", "fit", "random" | Hiring strategy |
+| `n_interactions_per_step` | int | 5 | 1-100 | Interactions per agent |
+| `interaction_window` | int | 10 | 1-52 | Memory for interactions |
+| `turnover_threshold` | num | -10 | -20-0 | Satisfaction exit level |
+| `turnover_type` | chr | "threshold" | "threshold", "probabilistic" | Attrition method |
+| `base_turnover_rate` | num | 0.05 | 0-1 | Base attrition probability |
+| `n_new_applicants` | int | 50 | 1-1000 | Applicants per cycle |
+| `applicant_attraction_threshold` | num | -0.5 | -5-5 | Min attraction to apply |
+| `max_application_time` | int | 12 | 1-52 | Applicant pool timeout |
+| `diversity_metric` | chr | "blau" | "blau", "shannon" | Diversity calculation |
+| `identity_categories` | vec | c("A","B","C","D","E") | Any | Identity types |
+
+## Key Functions
+
+### Core Functions
+```r
+# Organization Management
+create_organization(n_agents, identity_categories)
+get_organization_size(org)
+get_active_employees(org)
+calculate_blau_index(categories)
+calculate_shannon_diversity(categories)
+
+# Agent Creation
+create_applicant_pool(n_applicants, identity_categories)
+calculate_attraction(agents, org_diversity, diversity_metric)
+create_agent(identity_category)
+
+# Simulation Engine
+run_asa_simulation(n_steps, initial_size, params, verbose)
+execute_interactions_vectorized(org, interactions, step, n_interactions)
+update_satisfaction_vectorized(org, interactions, window, diversity_metric)
+execute_turnover(org, threshold, current_time)
+execute_hiring(org, applicant_pool, selection_criteria, n_positions)
+```
+
+### Analysis Functions
+```r
+# Metrics
+calculate_personality_averages(org)
+calculate_step_metrics(org, step)
+get_interaction_summary(interactions)
+
+# Utilities
+age_applicant_pool(pool, max_age)
+recruit_applicants(pool, n_new)
+applicants_to_employees(applicants, hire_date)
+```
+
+## Data Structures
+
+### Organization Table
+```r
+org <- data.table(
+  agent_id            # chr: Unique ID "agent_XXX"
+  identity_category   # chr: "A", "B", "C", "D", or "E"
+  openness           # num: 0-1 (Big Five trait)
+  conscientiousness  # num: 0-1 (Big Five trait)
+  extraversion       # num: 0-1 (Big Five trait)
+  agreeableness      # num: 0-1 (Big Five trait)
+  emotional_stability # num: 0-1 (Big Five trait)
+  homophily_preference  # num: 0-1 (similarity preference)
+  diversity_preference  # num: 0-1 (diversity preference)
+  attraction         # num: -∞-∞ (to organization)
+  satisfaction       # num: -∞-∞ (current satisfaction)
+  tenure             # int: Steps in organization
+  hire_date          # int: Step when hired
+  is_active          # lgl: TRUE if employed
+)
+```
+
+### Metrics Output
+```r
+metrics <- data.table(
+  time_step           # int: Simulation step
+  organization_size   # int: Active employees
+  prop_A - prop_E    # num: Identity proportions
+  shannon_diversity  # num: Shannon entropy
+  blau_index         # num: Blau's index
+  avg_satisfaction   # num: Mean satisfaction
+  sd_satisfaction    # num: SD satisfaction
+  avg_openness       # num: Mean trait value
+  sd_openness        # num: SD trait value
+  # ... other personality traits
+)
+```
+
+## Common Code Patterns
+
+### Running Multiple Scenarios
+```r
+scenarios <- list(
+  high_growth = list(growth_rate = 0.1),
+  high_turnover = list(turnover_threshold = -5),
+  diverse_hiring = list(selection_criteria = "random")
+)
+
+results <- lapply(names(scenarios), function(name) {
+  run_asa_simulation(params = scenarios[[name]])
+})
+```
+
+### Batch Analysis
+```r
+# Extract final metrics
+final_metrics <- lapply(results, function(r) {
+  tail(r$metrics, 1)
+})
+comparison <- rbindlist(final_metrics, idcol = "scenario")
+
+# Time series comparison
+all_metrics <- lapply(seq_along(results), function(i) {
+  results[[i]]$metrics[, scenario := names(scenarios)[i]]
+})
+combined <- rbindlist(all_metrics)
+```
+
+### Custom Metrics
+```r
+# Add to organization
+org[, network_centrality := degree_centrality / (.N - 1)]
+org[, cultural_distance := abs(conscientiousness - mean(conscientiousness))]
+
+# Calculate in simulation
+custom_metric <- org[is_active == TRUE, 
+                    .(cultural_variance = var(conscientiousness),
+                      satisfaction_gini = ineq::Gini(satisfaction))]
+```
+
+## Visualization Recipes
+
+### Time Series with Phases
+```r
+ggplot(metrics, aes(x = time_step)) +
+  geom_line(aes(y = organization_size), size = 1.2) +
+  geom_vline(xintercept = c(50, 100, 150), 
+             linetype = "dashed", alpha = 0.5) +
+  annotate("rect", xmin = 0, xmax = 50, 
+           ymin = -Inf, ymax = Inf, 
+           alpha = 0.1, fill = "blue") +
+  labs(title = "Organizational Growth", 
+       x = "Time", y = "Size") +
+  theme_minimal()
+```
+
+### Multi-Metric Dashboard
+```r
+library(patchwork)
+p1 <- ggplot(metrics, aes(time_step, organization_size)) + 
+      geom_line(color = "blue")
+p2 <- ggplot(metrics, aes(time_step, blau_index)) + 
+      geom_line(color = "red")
+p3 <- ggplot(metrics, aes(time_step, avg_satisfaction)) + 
+      geom_line(color = "green")
+p4 <- ggplot(metrics, aes(time_step, avg_conscientiousness)) + 
+      geom_line(color = "purple")
+
+(p1 + p2) / (p3 + p4) + 
+  plot_annotation(title = "Simulation Dashboard")
+```
+
+### Distribution Comparison
+```r
+# Compare initial vs final
+bind_rows(
+  org[hire_date <= 10, .(phase = "Initial", satisfaction)],
+  org[is_active == TRUE, .(phase = "Final", satisfaction)]
+) %>%
+  ggplot(aes(x = satisfaction, fill = phase)) +
+  geom_density(alpha = 0.6) +
+  scale_fill_manual(values = c("Initial" = "blue", 
+                              "Final" = "red"))
+```
+
+## Performance Tips
+
+- **Vectorize Everything**: Use data.table operations, not loops
+- **Pre-allocate Memory**: `vector("list", n_steps)` for results
+- **Selective Updates**: Use `:=` for in-place modifications
+- **Index Key Columns**: `setkey(org, agent_id)` for fast lookups
+- **Avoid Copying**: Pass by reference when possible
+- **Profile Code**: Use `system.time()` and `profvis::profvis()`
+- **Batch Operations**: Group similar calculations
+- **Limit Snapshots**: Store only necessary time points
+
+## Debugging Commands
+
+### Basic Debugging
+```r
+# Check data structure
+str(org)
+summary(org[is_active == TRUE])
+table(org$identity_category)
+
+# Trace execution
+debug(run_asa_simulation)
+browser()  # Set breakpoint
+trace(execute_hiring, tracer = browser)
+
+# Verbose output
+results <- run_asa_simulation(verbose = TRUE)
+```
+
+### Data Validation
+```r
+# Check for NAs
+org[, lapply(.SD, function(x) sum(is.na(x)))]
+
+# Verify constraints
+stopifnot(all(org$satisfaction > -100))
+stopifnot(all(org$tenure >= 0))
+
+# Test single step
+test_org <- org[1:10]  # Small subset
+test_result <- execute_interactions_vectorized(
+  test_org, interactions, step = 1, n_interactions = 2
+)
+```
+
+### Performance Profiling
+```r
+# Time specific operations
+system.time({
+  for(i in 1:100) {
+    calculate_blau_index(org$identity_category)
+  }
+})
+
+# Memory usage
+pryr::object_size(org)
+gc()  # Garbage collection
+
+# Full profiling
+profvis::profvis({
+  run_asa_simulation(n_steps = 50)
+})
+```
+
+---
+
+*ASA ABM v2 - Agent-Based Model for Attraction-Selection-Attrition*

@@ -12,5 +12,8 @@ rmd_files: [
   "04-user-guide.Rmd",
   "05-ODD-protocol.Rmd",
   "06-api-reference.Rmd",
-  "07-examples.Rmd"
+  "07-examples.Rmd",
+  "08-recipes.Rmd",
+  "09-contributors-guide.Rmd",
+  "quick-reference.Rmd"
 ]

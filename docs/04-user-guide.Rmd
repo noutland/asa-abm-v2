@@ -365,3 +365,217 @@ debug_results <- run_asa_simulation(
 time_10 <- results$organization_snapshots[[1]]
 summary(time_10)
 ```
+
+## Metrics Deep Dive
+
+Understanding the metrics output is crucial for interpreting simulation results. This section provides detailed explanations of each metric, their calculations, and what they reveal about organizational dynamics.
+
+### Overview of Metrics
+
+The simulation tracks over 20 metrics at each time step, grouped into several categories:
+
+1. **Organizational Composition**: Size and identity distribution
+2. **Diversity Indices**: Multiple measures of heterogeneity
+3. **Personality Distributions**: Big Five trait statistics
+4. **Satisfaction Metrics**: Employee well-being indicators
+
+### Identity and Diversity Metrics
+
+#### Blau's Index (Default)
+```r
+# Formula: 1 - Σ(p_i^2)
+# Where p_i is the proportion of category i
+```
+
+- **Range**: 0 (homogeneous) to 0.8 (maximum diversity with 5 categories)
+- **Interpretation**: Probability two randomly selected employees differ in identity
+- **Why it matters**: Standard I-O psychology metric for categorical diversity
+- **Example**: 0.75 indicates high diversity; 0.25 indicates one dominant group
+
+#### Shannon Entropy
+```r
+# Formula: -Σ(p_i * log(p_i))
+# Where p_i is the proportion of category i
+```
+
+- **Range**: 0 (homogeneous) to log(5) ≈ 1.61 (equal distribution)
+- **Interpretation**: Information-theoretic measure of uncertainty
+- **Why it matters**: More sensitive to rare categories than Blau's
+- **Example**: 1.5 indicates near-equal distribution; 0.5 indicates strong dominance
+
+#### Category Proportions (prop_A through prop_E)
+- **Range**: 0 to 1 for each category
+- **Interpretation**: Fraction of employees in each identity category
+- **Why it matters**: Direct view of organizational composition
+- **Patterns to watch**: 
+  - Gradual drift toward homogeneity
+  - Sudden shifts after mass turnover
+  - Equilibrium distributions
+
+### Personality Trait Metrics
+
+For each Big Five trait, the simulation tracks:
+
+#### Average Values (avg_openness, etc.)
+- **Range**: 0 to 1
+- **Interpretation**: Mean trait level in the organization
+- **Organizational implications**:
+  - **Openness**: Innovation potential, change readiness
+  - **Conscientiousness**: Reliability, performance orientation
+  - **Extraversion**: Communication patterns, collaboration
+  - **Agreeableness**: Conflict levels, team cohesion
+  - **Emotional Stability**: Stress resistance, turnover risk
+
+#### Standard Deviations (sd_openness, etc.)
+- **Range**: 0 to ~0.5 (theoretical max)
+- **Interpretation**: Trait heterogeneity in the organization
+- **Why it matters**: 
+  - Low SD indicates cultural convergence
+  - High SD suggests diverse perspectives
+  - Zero SD means complete homogenization
+
+### Satisfaction Metrics
+
+#### Average Satisfaction (avg_satisfaction)
+- **Range**: Typically -20 to +20
+- **Interpretation**: Overall employee well-being
+- **Key thresholds**:
+  - Above 0: Generally positive environment
+  - Below -5: Risk of increased turnover
+  - Below -10: Crisis level (default turnover threshold)
+
+#### Satisfaction Standard Deviation (sd_satisfaction)
+- **Range**: 0 to ~10
+- **Interpretation**: Variation in employee experiences
+- **Warning signs**:
+  - High SD with low average: Polarized organization
+  - Increasing SD: Growing disparities
+  - Very low SD: Possible groupthink
+
+### Interpreting Metric Interactions
+
+#### The Diversity-Satisfaction Paradox
+```r
+# Common pattern
+plot(results$metrics$blau_index, results$metrics$avg_satisfaction)
+```
+- High diversity often correlates with lower initial satisfaction
+- Homophily preferences drive this relationship
+- Long-term benefits may offset short-term costs
+
+#### Personality Convergence Cascade
+```r
+# Track convergence
+convergence_rate <- diff(results$metrics$sd_conscientiousness)
+```
+- Selection on one trait affects all traits
+- Convergence accelerates over time
+- Can lead to organizational blindspots
+
+#### Turnover Spirals
+```r
+# Identify spiral onset
+turnover_indicator <- results$metrics$organization_size < 
+                     lag(results$metrics$organization_size)
+```
+- Low satisfaction → turnover → lower diversity → lower satisfaction
+- Critical to catch early
+- Intervention points: hiring strategy, satisfaction boost
+
+### Advanced Metric Analysis
+
+#### Creating Composite Indices
+```r
+# Organizational Health Index
+results$metrics[, health_index := 
+  0.3 * (avg_satisfaction + 10) / 20 +  # Normalized satisfaction
+  0.3 * blau_index +                      # Diversity
+  0.2 * (organization_size / initial_size) +  # Growth
+  0.2 * (1 - sd_satisfaction / 10)       # Cohesion
+]
+```
+
+#### Detecting Phase Transitions
+```r
+# Find inflection points
+library(changepoint)
+cpt_diversity <- cpt.mean(results$metrics$blau_index)
+plot(cpt_diversity)
+```
+
+#### Metric Stability Analysis
+```r
+# Rolling window stability
+window <- 26  # Half year
+results$metrics[, `:=`(
+  diversity_stability = frollapply(blau_index, window, sd),
+  satisfaction_stability = frollapply(avg_satisfaction, window, sd)
+)]
+```
+
+### Visualization Best Practices
+
+#### Multi-Metric Dashboard
+```r
+library(ggplot2)
+library(patchwork)
+
+# Standardize metrics for comparison
+results$metrics[, `:=`(
+  std_diversity = scale(blau_index),
+  std_satisfaction = scale(avg_satisfaction),
+  std_size = scale(organization_size)
+)]
+
+# Create aligned time series
+p_combined <- ggplot(results$metrics, aes(x = time_step)) +
+  geom_line(aes(y = std_diversity, color = "Diversity")) +
+  geom_line(aes(y = std_satisfaction, color = "Satisfaction")) +
+  geom_line(aes(y = std_size, color = "Size")) +
+  scale_color_manual(values = c("Diversity" = "purple", 
+                               "Satisfaction" = "green",
+                               "Size" = "blue")) +
+  labs(title = "Standardized Organizational Metrics",
+       y = "Standardized Value (z-score)",
+       color = "Metric") +
+  theme_minimal()
+```
+
+#### Phase Space Visualization
+```r
+# 3D phase space
+library(plotly)
+plot_ly(results$metrics, 
+        x = ~blau_index, 
+        y = ~avg_satisfaction, 
+        z = ~organization_size,
+        type = "scatter3d",
+        mode = "lines+markers",
+        color = ~time_step,
+        colors = "Viridis")
+```
+
+### Common Misinterpretations to Avoid
+
+1. **Correlation ≠ Causation**: High diversity causing low satisfaction may be mediated by homophily preferences
+2. **Snapshot Bias**: Single time points miss dynamics - always examine trajectories
+3. **Scale Sensitivity**: Raw values less meaningful than trends and relative changes
+4. **Metric Gaming**: Optimizing one metric often degrades others
+5. **Initial Condition Dependence**: Early randomness can have lasting effects
+
+### Using Metrics for Model Validation
+
+Compare simulation metrics to empirical data:
+
+```r
+# Example validation checks
+empirical_turnover_rate <- 0.15  # Annual
+simulated_annual_turnover <- mean(diff(results$metrics$organization_size[seq(1, 260, 52)]) < 0)
+
+empirical_diversity <- 0.65  # Blau's index from survey
+simulated_diversity_range <- range(results$metrics$blau_index)
+
+# Check if empirical values fall within simulated ranges
+validation_passed <- empirical_diversity >= simulated_diversity_range[1] & 
+                    empirical_diversity <= simulated_diversity_range[2]
+```
