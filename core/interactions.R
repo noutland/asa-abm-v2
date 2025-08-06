@@ -138,11 +138,11 @@ update_satisfaction_vectorized <- function(org, interactions, window_size = 10, 
   # Merge and calculate total satisfaction
   org <- merge(org, interaction_satisfaction, 
                by.x = "agent_id", by.y = "focal_agent", 
-               all.x = TRUE)
+               all.x = TRUE, allow.cartesian = TRUE)
   org[is.na(interaction_component), interaction_component := 0]
   
   org <- merge(org, id_props[, .(identity_category, prop)],
-               by = "identity_category", all.x = TRUE)
+               by = "identity_category", all.x = TRUE, allow.cartesian = TRUE)
   org[is.na(prop), prop := 0]
   
   # Update satisfaction

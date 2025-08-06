@@ -45,3 +45,6 @@ NAMESPACE
 src/*.o
 src/*.so
 src/*.dll
+
+# Local testing tracker (not for version control)
+code_testing_tracker.md
