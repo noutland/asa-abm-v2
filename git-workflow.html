@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 11 ASA ABM v2 Quick Reference | ASA Agent-Based Model v2 Documentation</title>
+  <title>Chapter 10 Git Workflow for R Developers | ASA Agent-Based Model v2 Documentation</title>
   <meta name="description" content="Comprehensive documentation for the ASA Agent-Based Model v2" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 11 ASA ABM v2 Quick Reference | ASA Agent-Based Model v2 Documentation" />
+  <meta property="og:title" content="Chapter 10 Git Workflow for R Developers | ASA Agent-Based Model v2 Documentation" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Comprehensive documentation for the ASA Agent-Based Model v2" />
   <meta name="github-repo" content="noutland/asa-abm-v2" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 11 ASA ABM v2 Quick Reference | ASA Agent-Based Model v2 Documentation" />
+  <meta name="twitter:title" content="Chapter 10 Git Workflow for R Developers | ASA Agent-Based Model v2 Documentation" />
   
   <meta name="twitter:description" content="Comprehensive documentation for the ASA Agent-Based Model v2" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="git-workflow.html"/>
-
+<link rel="prev" href="contributors-guide.html"/>
+<link rel="next" href="quick-ref.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -657,373 +657,544 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="quick-ref" class="section level1 hasAnchor" number="11">
-<h1><span class="header-section-number">Chapter 11</span> ASA ABM v2 Quick Reference<a href="quick-ref.html#quick-ref" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="quick-start" class="section level2 hasAnchor" number="11.1">
-<h2><span class="header-section-number">11.1</span> Quick Start<a href="quick-ref.html#quick-start" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="quick-ref.html#cb212-1" tabindex="-1"></a><span class="co"># Load and run simulation</span></span>
-<span id="cb212-2"><a href="quick-ref.html#cb212-2" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;simulation/engine.R&quot;</span>)</span>
-<span id="cb212-3"><a href="quick-ref.html#cb212-3" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(<span class="at">n_steps =</span> <span class="dv">260</span>, <span class="at">initial_size =</span> <span class="dv">100</span>)</span>
-<span id="cb212-4"><a href="quick-ref.html#cb212-4" tabindex="-1"></a></span>
-<span id="cb212-5"><a href="quick-ref.html#cb212-5" tabindex="-1"></a><span class="co"># View results</span></span>
-<span id="cb212-6"><a href="quick-ref.html#cb212-6" tabindex="-1"></a><span class="fu">tail</span>(results<span class="sc">$</span>metrics, <span class="dv">10</span>)         <span class="co"># Recent metrics</span></span>
-<span id="cb212-7"><a href="quick-ref.html#cb212-7" tabindex="-1"></a><span class="fu">summary</span>(results<span class="sc">$</span>final_organization)  <span class="co"># Final state</span></span>
-<span id="cb212-8"><a href="quick-ref.html#cb212-8" tabindex="-1"></a></span>
-<span id="cb212-9"><a href="quick-ref.html#cb212-9" tabindex="-1"></a><span class="co"># Quick visualization</span></span>
-<span id="cb212-10"><a href="quick-ref.html#cb212-10" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb212-11"><a href="quick-ref.html#cb212-11" tabindex="-1"></a><span class="fu">ggplot</span>(results<span class="sc">$</span>metrics, <span class="fu">aes</span>(<span class="at">x =</span> time_step, <span class="at">y =</span> organization_size)) <span class="sc">+</span> </span>
-<span id="cb212-12"><a href="quick-ref.html#cb212-12" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
+<div id="git-workflow" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">Chapter 10</span> Git Workflow for R Developers<a href="contributors-guide.html#git-workflow" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This chapter provides a comprehensive guide for R developers who are new to Git and will be using GitHub Desktop to contribute to the ASA ABM project. We’ve designed this workflow to be simple, safe, and effective for collaborative development.</p>
+<div id="git-getting-started" class="section level2 hasAnchor" number="10.1">
+<h2><span class="header-section-number">10.1</span> Getting Started with GitHub Desktop<a href="git-workflow.html#git-getting-started" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="prerequisites" class="section level3 hasAnchor" number="10.1.1">
+<h3><span class="header-section-number">10.1.1</span> Prerequisites<a href="git-workflow.html#prerequisites" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Before you begin, ensure you have:</p>
+<ol style="list-style-type: decimal">
+<li><strong>GitHub Desktop</strong> installed (<a href="https://desktop.github.com/">download here</a>)</li>
+<li><strong>R and RStudio</strong> installed</li>
+<li>A <strong>GitHub account</strong> (<a href="https://github.com/join">sign up here</a>)</li>
+</ol>
 </div>
-<div id="parameter-reference" class="section level2 hasAnchor" number="11.2">
-<h2><span class="header-section-number">11.2</span> Parameter Reference<a href="quick-ref.html#parameter-reference" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="first-time-setup" class="section level3 hasAnchor" number="10.1.2">
+<h3><span class="header-section-number">10.1.2</span> First-Time Setup<a href="git-workflow.html#first-time-setup" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Follow these steps to set up your development environment:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Open GitHub Desktop</strong></li>
+<li><strong>Sign in</strong> with your GitHub account (File → Options → Accounts)</li>
+<li><strong>Clone the repository</strong>:
+<ul>
+<li>Click “Clone a Repository from the Internet…”</li>
+<li>Search for <code>noutland/asa-abm-v2</code></li>
+<li>Choose where to save it locally (e.g., <code>~/Documents/R-Projects/</code>)</li>
+<li>Click “Clone”</li>
+</ul></li>
+</ol>
+<p>Once cloned, you’ll have a local copy of the entire project that you can work with.</p>
+</div>
+</div>
+<div id="git-daily-workflow" class="section level2 hasAnchor" number="10.2">
+<h2><span class="header-section-number">10.2</span> Daily Workflow<a href="git-workflow.html#git-daily-workflow" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Here’s the workflow you’ll follow for every contribution:</p>
+<div id="step-1-start-fresh" class="section level3 hasAnchor" number="10.2.1">
+<h3><span class="header-section-number">10.2.1</span> Step 1: Start Fresh<a href="git-workflow.html#step-1-start-fresh" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Always start by syncing your local repository:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Open GitHub Desktop</li>
+<li>Ensure you’re on the <code>main</code> branch (check “Current Branch” dropdown)</li>
+<li>Click <strong>“Fetch origin”</strong> button</li>
+<li>If updates are available, click <strong>“Pull origin”</strong></li>
+</ol>
+<p>This ensures you’re working with the latest code.</p>
+</div>
+<div id="step-2-create-a-feature-branch" class="section level3 hasAnchor" number="10.2.2">
+<h3><span class="header-section-number">10.2.2</span> Step 2: Create a Feature Branch<a href="git-workflow.html#step-2-create-a-feature-branch" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>For each new piece of work, create a new branch:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Click on <strong>“Current Branch”</strong> → <strong>“New Branch”</strong></li>
+<li>Name your branch using one of these prefixes:
+<ul>
+<li><code>feature/</code> - for new features (e.g., <code>feature/add-blau-index</code>)</li>
+<li><code>fix/</code> - for bug fixes (e.g., <code>fix/identity-calculation</code>)</li>
+<li><code>docs/</code> - for documentation (e.g., <code>docs/update-readme</code>)</li>
+<li><code>refactor/</code> - for code improvements (e.g., <code>refactor/simplify-hiring</code>)</li>
+</ul></li>
+<li>Click <strong>“Create Branch”</strong></li>
+</ol>
+</div>
+<div id="step-3-make-your-changes" class="section level3 hasAnchor" number="10.2.3">
+<h3><span class="header-section-number">10.2.3</span> Step 3: Make Your Changes<a href="git-workflow.html#step-3-make-your-changes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Open RStudio</strong> and navigate to the project</li>
+<li><strong>Make your changes</strong> to the R files</li>
+<li><strong>Test your changes frequently</strong>:</li>
+</ol>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="git-workflow.html#cb203-1" tabindex="-1"></a><span class="co"># After making changes, always test</span></span>
+<span id="cb203-2"><a href="git-workflow.html#cb203-2" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;run_simulation.R&quot;</span>)</span>
+<span id="cb203-3"><a href="git-workflow.html#cb203-3" tabindex="-1"></a></span>
+<span id="cb203-4"><a href="git-workflow.html#cb203-4" tabindex="-1"></a><span class="co"># If you modified specific functions, test them</span></span>
+<span id="cb203-5"><a href="git-workflow.html#cb203-5" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;tests/test_agent.R&quot;</span>)  <span class="co"># or relevant test file</span></span></code></pre></div>
+</div>
+<div id="step-4-commit-your-changes" class="section level3 hasAnchor" number="10.2.4">
+<h3><span class="header-section-number">10.2.4</span> Step 4: Commit Your Changes<a href="git-workflow.html#step-4-commit-your-changes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Return to GitHub Desktop</strong></li>
+<li><strong>Review your changes</strong> in the left panel</li>
+<li><strong>Stage files</strong> (they’re selected by default)</li>
+<li><strong>Write a commit message</strong>:
+<ul>
+<li>Summary (50 chars max): Brief description</li>
+<li>Description (optional): Explain why, not what</li>
+</ul></li>
+<li>Click <strong>“Commit to [branch-name]”</strong></li>
+</ol>
+<div id="good-commit-messages" class="section level4 hasAnchor" number="10.2.4.1">
+<h4><span class="header-section-number">10.2.4.1</span> Good Commit Messages<a href="git-workflow.html#good-commit-messages" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>✅ Add Blau index calculation to diversity metrics
+✅ Fix off-by-one error in turnover calculation
+✅ Update documentation for identity categories
+✅ Refactor hiring process for better performance</code></pre>
+</div>
+<div id="poor-commit-messages" class="section level4 hasAnchor" number="10.2.4.2">
+<h4><span class="header-section-number">10.2.4.2</span> Poor Commit Messages<a href="git-workflow.html#poor-commit-messages" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>❌ Updated files
+❌ Fixed stuff
+❌ WIP
+❌ Changes</code></pre>
+</div>
+</div>
+<div id="step-5-push-to-github" class="section level3 hasAnchor" number="10.2.5">
+<h3><span class="header-section-number">10.2.5</span> Step 5: Push to GitHub<a href="git-workflow.html#step-5-push-to-github" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>After committing:
+- Click <strong>“Push origin”</strong> to upload your branch to GitHub
+- First push will publish the branch
+- Subsequent pushes update the remote branch</p>
+</div>
+<div id="step-6-create-a-pull-request" class="section level3 hasAnchor" number="10.2.6">
+<h3><span class="header-section-number">10.2.6</span> Step 6: Create a Pull Request<a href="git-workflow.html#step-6-create-a-pull-request" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Click <strong>“Create Pull Request”</strong> in GitHub Desktop</li>
+<li>You’ll be taken to GitHub.com</li>
+<li><strong>Fill out the pull request template</strong> (see Section <a href="git-workflow.html#pr-template">10.4</a>)</li>
+<li><strong>Request review</strong> from team members</li>
+<li>Click <strong>“Create pull request”</strong></li>
+</ol>
+</div>
+<div id="step-7-address-feedback" class="section level3 hasAnchor" number="10.2.7">
+<h3><span class="header-section-number">10.2.7</span> Step 7: Address Feedback<a href="git-workflow.html#step-7-address-feedback" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Read all review comments</strong> carefully</li>
+<li><strong>Make requested changes</strong> in your local branch</li>
+<li><strong>Commit and push</strong> the changes</li>
+<li><strong>Reply to comments</strong> when done</li>
+<li><strong>Re-request review</strong> if needed</li>
+</ol>
+</div>
+<div id="step-8-merge" class="section level3 hasAnchor" number="10.2.8">
+<h3><span class="header-section-number">10.2.8</span> Step 8: Merge<a href="git-workflow.html#step-8-merge" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>After approval:
+1. The maintainer will <strong>merge your PR</strong>
+2. You can <strong>delete your branch</strong> after merging
+3. <strong>Switch back to main</strong> and pull the latest changes</p>
+</div>
+</div>
+<div id="git-branches" class="section level2 hasAnchor" number="10.3">
+<h2><span class="header-section-number">10.3</span> Branch Management<a href="git-workflow.html#git-branches" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="branch-naming-conventions" class="section level3 hasAnchor" number="10.3.1">
+<h3><span class="header-section-number">10.3.1</span> Branch Naming Conventions<a href="git-workflow.html#branch-naming-conventions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Use descriptive branch names with appropriate prefixes:</p>
 <table>
-<colgroup>
-<col width="20%" />
-<col width="11%" />
-<col width="16%" />
-<col width="26%" />
-<col width="24%" />
-</colgroup>
 <thead>
 <tr class="header">
-<th align="left">Parameter</th>
-<th align="left">Type</th>
-<th align="left">Default</th>
-<th align="left">Range/Values</th>
-<th align="left">Description</th>
+<th>Prefix</th>
+<th>Use Case</th>
+<th>Example</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>n_steps</code></td>
-<td align="left">int</td>
-<td align="left">260</td>
-<td align="left">1-∞</td>
-<td align="left">Simulation duration</td>
+<td><code>feature/</code></td>
+<td>New functionality</td>
+<td><code>feature/add-network-analysis</code></td>
 </tr>
 <tr class="even">
-<td align="left"><code>initial_size</code></td>
-<td align="left">int</td>
-<td align="left">100</td>
-<td align="left">1-10000</td>
-<td align="left">Starting employees</td>
+<td><code>fix/</code></td>
+<td>Bug fixes</td>
+<td><code>fix/hiring-calculation-error</code></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>growth_rate</code></td>
-<td align="left">num</td>
-<td align="left">0.01</td>
-<td align="left">0-1</td>
-<td align="left">Hiring growth per cycle</td>
+<td><code>docs/</code></td>
+<td>Documentation only</td>
+<td><code>docs/update-api-reference</code></td>
 </tr>
 <tr class="even">
-<td align="left"><code>hiring_frequency</code></td>
-<td align="left">int</td>
-<td align="left">12</td>
-<td align="left">1-52</td>
-<td align="left">Steps between hiring</td>
+<td><code>refactor/</code></td>
+<td>Code improvement</td>
+<td><code>refactor/optimize-interactions</code></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>selection_criteria</code></td>
-<td align="left">chr</td>
-<td align="left">“conscientiousness”</td>
-<td align="left">“conscientiousness”, “fit”, “random”</td>
-<td align="left">Hiring strategy</td>
-</tr>
-<tr class="even">
-<td align="left"><code>n_interactions_per_step</code></td>
-<td align="left">int</td>
-<td align="left">5</td>
-<td align="left">1-100</td>
-<td align="left">Interactions per agent</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>interaction_window</code></td>
-<td align="left">int</td>
-<td align="left">10</td>
-<td align="left">1-52</td>
-<td align="left">Memory for interactions</td>
-</tr>
-<tr class="even">
-<td align="left"><code>turnover_threshold</code></td>
-<td align="left">num</td>
-<td align="left">-10</td>
-<td align="left">-20-0</td>
-<td align="left">Satisfaction exit level</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>turnover_type</code></td>
-<td align="left">chr</td>
-<td align="left">“threshold”</td>
-<td align="left">“threshold”, “probabilistic”</td>
-<td align="left">Attrition method</td>
-</tr>
-<tr class="even">
-<td align="left"><code>base_turnover_rate</code></td>
-<td align="left">num</td>
-<td align="left">0.05</td>
-<td align="left">0-1</td>
-<td align="left">Base attrition probability</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>n_new_applicants</code></td>
-<td align="left">int</td>
-<td align="left">50</td>
-<td align="left">1-1000</td>
-<td align="left">Applicants per cycle</td>
-</tr>
-<tr class="even">
-<td align="left"><code>applicant_attraction_threshold</code></td>
-<td align="left">num</td>
-<td align="left">-0.5</td>
-<td align="left">-5-5</td>
-<td align="left">Min attraction to apply</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>max_application_time</code></td>
-<td align="left">int</td>
-<td align="left">12</td>
-<td align="left">1-52</td>
-<td align="left">Applicant pool timeout</td>
-</tr>
-<tr class="even">
-<td align="left"><code>diversity_metric</code></td>
-<td align="left">chr</td>
-<td align="left">“blau”</td>
-<td align="left">“blau”, “shannon”</td>
-<td align="left">Diversity calculation</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>identity_categories</code></td>
-<td align="left">vec</td>
-<td align="left">c(“A”,“B”,“C”,“D”,“E”)</td>
-<td align="left">Any</td>
-<td align="left">Identity types</td>
+<td><code>test/</code></td>
+<td>Adding tests</td>
+<td><code>test/organization-functions</code></td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="key-functions" class="section level2 hasAnchor" number="11.3">
-<h2><span class="header-section-number">11.3</span> Key Functions<a href="quick-ref.html#key-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="core-functions" class="section level3 hasAnchor" number="11.3.1">
-<h3><span class="header-section-number">11.3.1</span> Core Functions<a href="quick-ref.html#core-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="quick-ref.html#cb213-1" tabindex="-1"></a><span class="co"># Organization Management</span></span>
-<span id="cb213-2"><a href="quick-ref.html#cb213-2" tabindex="-1"></a><span class="fu">create_organization</span>(n_agents, identity_categories)</span>
-<span id="cb213-3"><a href="quick-ref.html#cb213-3" tabindex="-1"></a><span class="fu">get_organization_size</span>(org)</span>
-<span id="cb213-4"><a href="quick-ref.html#cb213-4" tabindex="-1"></a><span class="fu">get_active_employees</span>(org)</span>
-<span id="cb213-5"><a href="quick-ref.html#cb213-5" tabindex="-1"></a><span class="fu">calculate_blau_index</span>(categories)</span>
-<span id="cb213-6"><a href="quick-ref.html#cb213-6" tabindex="-1"></a><span class="fu">calculate_shannon_diversity</span>(categories)</span>
-<span id="cb213-7"><a href="quick-ref.html#cb213-7" tabindex="-1"></a></span>
-<span id="cb213-8"><a href="quick-ref.html#cb213-8" tabindex="-1"></a><span class="co"># Agent Creation</span></span>
-<span id="cb213-9"><a href="quick-ref.html#cb213-9" tabindex="-1"></a><span class="fu">create_applicant_pool</span>(n_applicants, identity_categories)</span>
-<span id="cb213-10"><a href="quick-ref.html#cb213-10" tabindex="-1"></a><span class="fu">calculate_attraction</span>(agents, org_diversity, diversity_metric)</span>
-<span id="cb213-11"><a href="quick-ref.html#cb213-11" tabindex="-1"></a><span class="fu">create_agent</span>(identity_category)</span>
-<span id="cb213-12"><a href="quick-ref.html#cb213-12" tabindex="-1"></a></span>
-<span id="cb213-13"><a href="quick-ref.html#cb213-13" tabindex="-1"></a><span class="co"># Simulation Engine</span></span>
-<span id="cb213-14"><a href="quick-ref.html#cb213-14" tabindex="-1"></a><span class="fu">run_asa_simulation</span>(n_steps, initial_size, params, verbose)</span>
-<span id="cb213-15"><a href="quick-ref.html#cb213-15" tabindex="-1"></a><span class="fu">execute_interactions_vectorized</span>(org, interactions, step, n_interactions)</span>
-<span id="cb213-16"><a href="quick-ref.html#cb213-16" tabindex="-1"></a><span class="fu">update_satisfaction_vectorized</span>(org, interactions, window, diversity_metric)</span>
-<span id="cb213-17"><a href="quick-ref.html#cb213-17" tabindex="-1"></a><span class="fu">execute_turnover</span>(org, threshold, current_time)</span>
-<span id="cb213-18"><a href="quick-ref.html#cb213-18" tabindex="-1"></a><span class="fu">execute_hiring</span>(org, applicant_pool, selection_criteria, n_positions)</span></code></pre></div>
+<div id="working-with-branches" class="section level3 hasAnchor" number="10.3.2">
+<h3><span class="header-section-number">10.3.2</span> Working with Branches<a href="git-workflow.html#working-with-branches" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="creating-a-branch" class="section level4 hasAnchor" number="10.3.2.1">
+<h4><span class="header-section-number">10.3.2.1</span> Creating a Branch<a href="git-workflow.html#creating-a-branch" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Always branch from an up-to-date <code>main</code>:
+1. Switch to main branch
+2. Pull latest changes
+3. Create your new branch</p>
 </div>
-<div id="analysis-functions" class="section level3 hasAnchor" number="11.3.2">
-<h3><span class="header-section-number">11.3.2</span> Analysis Functions<a href="quick-ref.html#analysis-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="quick-ref.html#cb214-1" tabindex="-1"></a><span class="co"># Metrics</span></span>
-<span id="cb214-2"><a href="quick-ref.html#cb214-2" tabindex="-1"></a><span class="fu">calculate_personality_averages</span>(org)</span>
-<span id="cb214-3"><a href="quick-ref.html#cb214-3" tabindex="-1"></a><span class="fu">calculate_step_metrics</span>(org, step)</span>
-<span id="cb214-4"><a href="quick-ref.html#cb214-4" tabindex="-1"></a><span class="fu">get_interaction_summary</span>(interactions)</span>
-<span id="cb214-5"><a href="quick-ref.html#cb214-5" tabindex="-1"></a></span>
-<span id="cb214-6"><a href="quick-ref.html#cb214-6" tabindex="-1"></a><span class="co"># Utilities</span></span>
-<span id="cb214-7"><a href="quick-ref.html#cb214-7" tabindex="-1"></a><span class="fu">age_applicant_pool</span>(pool, max_age)</span>
-<span id="cb214-8"><a href="quick-ref.html#cb214-8" tabindex="-1"></a><span class="fu">recruit_applicants</span>(pool, n_new)</span>
-<span id="cb214-9"><a href="quick-ref.html#cb214-9" tabindex="-1"></a><span class="fu">applicants_to_employees</span>(applicants, hire_date)</span></code></pre></div>
+<div id="switching-between-branches" class="section level4 hasAnchor" number="10.3.2.2">
+<h4><span class="header-section-number">10.3.2.2</span> Switching Between Branches<a href="git-workflow.html#switching-between-branches" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li><strong>Commit or stash</strong> current changes first</li>
+<li>Click <strong>“Current Branch”</strong></li>
+<li>Select the branch you want</li>
+</ol>
+</div>
+<div id="updating-your-branch" class="section level4 hasAnchor" number="10.3.2.3">
+<h4><span class="header-section-number">10.3.2.3</span> Updating Your Branch<a href="git-workflow.html#updating-your-branch" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To get latest changes from main:
+1. Commit your current changes
+2. Click <strong>Branch</strong> → <strong>“Update from main”</strong>
+3. Resolve any conflicts if they occur</p>
 </div>
 </div>
-<div id="data-structures" class="section level2 hasAnchor" number="11.4">
-<h2><span class="header-section-number">11.4</span> Data Structures<a href="quick-ref.html#data-structures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="organization-table" class="section level3 hasAnchor" number="11.4.1">
-<h3><span class="header-section-number">11.4.1</span> Organization Table<a href="quick-ref.html#organization-table" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="quick-ref.html#cb215-1" tabindex="-1"></a>org <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
-<span id="cb215-2"><a href="quick-ref.html#cb215-2" tabindex="-1"></a>  agent_id            <span class="co"># chr: Unique ID &quot;agent_XXX&quot;</span></span>
-<span id="cb215-3"><a href="quick-ref.html#cb215-3" tabindex="-1"></a>  identity_category   <span class="co"># chr: &quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, or &quot;E&quot;</span></span>
-<span id="cb215-4"><a href="quick-ref.html#cb215-4" tabindex="-1"></a>  openness           <span class="co"># num: 0-1 (Big Five trait)</span></span>
-<span id="cb215-5"><a href="quick-ref.html#cb215-5" tabindex="-1"></a>  conscientiousness  <span class="co"># num: 0-1 (Big Five trait)</span></span>
-<span id="cb215-6"><a href="quick-ref.html#cb215-6" tabindex="-1"></a>  extraversion       <span class="co"># num: 0-1 (Big Five trait)</span></span>
-<span id="cb215-7"><a href="quick-ref.html#cb215-7" tabindex="-1"></a>  agreeableness      <span class="co"># num: 0-1 (Big Five trait)</span></span>
-<span id="cb215-8"><a href="quick-ref.html#cb215-8" tabindex="-1"></a>  emotional_stability <span class="co"># num: 0-1 (Big Five trait)</span></span>
-<span id="cb215-9"><a href="quick-ref.html#cb215-9" tabindex="-1"></a>  homophily_preference  <span class="co"># num: 0-1 (similarity preference)</span></span>
-<span id="cb215-10"><a href="quick-ref.html#cb215-10" tabindex="-1"></a>  diversity_preference  <span class="co"># num: 0-1 (diversity preference)</span></span>
-<span id="cb215-11"><a href="quick-ref.html#cb215-11" tabindex="-1"></a>  attraction         <span class="co"># num: -∞-∞ (to organization)</span></span>
-<span id="cb215-12"><a href="quick-ref.html#cb215-12" tabindex="-1"></a>  satisfaction       <span class="co"># num: -∞-∞ (current satisfaction)</span></span>
-<span id="cb215-13"><a href="quick-ref.html#cb215-13" tabindex="-1"></a>  tenure             <span class="co"># int: Steps in organization</span></span>
-<span id="cb215-14"><a href="quick-ref.html#cb215-14" tabindex="-1"></a>  hire_date          <span class="co"># int: Step when hired</span></span>
-<span id="cb215-15"><a href="quick-ref.html#cb215-15" tabindex="-1"></a>  is_active          <span class="co"># lgl: TRUE if employed</span></span>
-<span id="cb215-16"><a href="quick-ref.html#cb215-16" tabindex="-1"></a>)</span></code></pre></div>
 </div>
-<div id="metrics-output" class="section level3 hasAnchor" number="11.4.2">
-<h3><span class="header-section-number">11.4.2</span> Metrics Output<a href="quick-ref.html#metrics-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="quick-ref.html#cb216-1" tabindex="-1"></a>metrics <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
-<span id="cb216-2"><a href="quick-ref.html#cb216-2" tabindex="-1"></a>  time_step           <span class="co"># int: Simulation step</span></span>
-<span id="cb216-3"><a href="quick-ref.html#cb216-3" tabindex="-1"></a>  organization_size   <span class="co"># int: Active employees</span></span>
-<span id="cb216-4"><a href="quick-ref.html#cb216-4" tabindex="-1"></a>  prop_A <span class="sc">-</span> prop_E    <span class="co"># num: Identity proportions</span></span>
-<span id="cb216-5"><a href="quick-ref.html#cb216-5" tabindex="-1"></a>  shannon_diversity  <span class="co"># num: Shannon entropy</span></span>
-<span id="cb216-6"><a href="quick-ref.html#cb216-6" tabindex="-1"></a>  blau_index         <span class="co"># num: Blau&#39;s index</span></span>
-<span id="cb216-7"><a href="quick-ref.html#cb216-7" tabindex="-1"></a>  avg_satisfaction   <span class="co"># num: Mean satisfaction</span></span>
-<span id="cb216-8"><a href="quick-ref.html#cb216-8" tabindex="-1"></a>  sd_satisfaction    <span class="co"># num: SD satisfaction</span></span>
-<span id="cb216-9"><a href="quick-ref.html#cb216-9" tabindex="-1"></a>  avg_openness       <span class="co"># num: Mean trait value</span></span>
-<span id="cb216-10"><a href="quick-ref.html#cb216-10" tabindex="-1"></a>  sd_openness        <span class="co"># num: SD trait value</span></span>
-<span id="cb216-11"><a href="quick-ref.html#cb216-11" tabindex="-1"></a>  <span class="co"># ... other personality traits</span></span>
-<span id="cb216-12"><a href="quick-ref.html#cb216-12" tabindex="-1"></a>)</span></code></pre></div>
+<div id="pr-template" class="section level2 hasAnchor" number="10.4">
+<h2><span class="header-section-number">10.4</span> Pull Request Guidelines<a href="git-workflow.html#pr-template" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="pull-request-template" class="section level3 hasAnchor" number="10.4.1">
+<h3><span class="header-section-number">10.4.1</span> Pull Request Template<a href="git-workflow.html#pull-request-template" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When you create a PR, you’ll see this template:</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb206-1"><a href="git-workflow.html#cb206-1" tabindex="-1"></a><span class="fu">## Description</span></span>
+<span id="cb206-2"><a href="git-workflow.html#cb206-2" tabindex="-1"></a><span class="co">&lt;!-- Provide a brief description of the changes in this PR --&gt;</span></span>
+<span id="cb206-3"><a href="git-workflow.html#cb206-3" tabindex="-1"></a></span>
+<span id="cb206-4"><a href="git-workflow.html#cb206-4" tabindex="-1"></a><span class="fu">## Type of Change</span></span>
+<span id="cb206-5"><a href="git-workflow.html#cb206-5" tabindex="-1"></a><span class="co">&lt;!-- Mark the relevant option with an &quot;x&quot; --&gt;</span></span>
+<span id="cb206-6"><a href="git-workflow.html#cb206-6" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> 🐛 Bug fix (non-breaking change that fixes an issue)</span>
+<span id="cb206-7"><a href="git-workflow.html#cb206-7" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> ✨ New feature (non-breaking change that adds functionality)</span>
+<span id="cb206-8"><a href="git-workflow.html#cb206-8" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> 💥 Breaking change (would cause existing functionality to not work)</span>
+<span id="cb206-9"><a href="git-workflow.html#cb206-9" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> 📚 Documentation update</span>
+<span id="cb206-10"><a href="git-workflow.html#cb206-10" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> 🔧 Refactoring (no functional changes)</span>
+<span id="cb206-11"><a href="git-workflow.html#cb206-11" tabindex="-1"></a></span>
+<span id="cb206-12"><a href="git-workflow.html#cb206-12" tabindex="-1"></a><span class="fu">## Testing</span></span>
+<span id="cb206-13"><a href="git-workflow.html#cb206-13" tabindex="-1"></a><span class="co">&lt;!-- Describe how you tested your changes --&gt;</span></span>
+<span id="cb206-14"><a href="git-workflow.html#cb206-14" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> I have run <span class="in">`source(&quot;run_simulation.R&quot;)`</span> without errors</span>
+<span id="cb206-15"><a href="git-workflow.html#cb206-15" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> I have tested the specific functions I modified</span>
+<span id="cb206-16"><a href="git-workflow.html#cb206-16" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> I have added tests for new functionality (if applicable)</span>
+<span id="cb206-17"><a href="git-workflow.html#cb206-17" tabindex="-1"></a></span>
+<span id="cb206-18"><a href="git-workflow.html#cb206-18" tabindex="-1"></a><span class="fu">## R Code Checklist</span></span>
+<span id="cb206-19"><a href="git-workflow.html#cb206-19" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> My code follows the project&#39;s coding standards</span>
+<span id="cb206-20"><a href="git-workflow.html#cb206-20" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> I have added roxygen2 documentation for new functions</span>
+<span id="cb206-21"><a href="git-workflow.html#cb206-21" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> I have used relative paths (no absolute paths)</span>
+<span id="cb206-22"><a href="git-workflow.html#cb206-22" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> I have used meaningful variable names</span>
+<span id="cb206-23"><a href="git-workflow.html#cb206-23" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> I have commented complex logic</span></code></pre></div>
 </div>
-</div>
-<div id="common-code-patterns" class="section level2 hasAnchor" number="11.5">
-<h2><span class="header-section-number">11.5</span> Common Code Patterns<a href="quick-ref.html#common-code-patterns" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="running-multiple-scenarios" class="section level3 hasAnchor" number="11.5.1">
-<h3><span class="header-section-number">11.5.1</span> Running Multiple Scenarios<a href="quick-ref.html#running-multiple-scenarios" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="quick-ref.html#cb217-1" tabindex="-1"></a>scenarios <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb217-2"><a href="quick-ref.html#cb217-2" tabindex="-1"></a>  <span class="at">high_growth =</span> <span class="fu">list</span>(<span class="at">growth_rate =</span> <span class="fl">0.1</span>),</span>
-<span id="cb217-3"><a href="quick-ref.html#cb217-3" tabindex="-1"></a>  <span class="at">high_turnover =</span> <span class="fu">list</span>(<span class="at">turnover_threshold =</span> <span class="sc">-</span><span class="dv">5</span>),</span>
-<span id="cb217-4"><a href="quick-ref.html#cb217-4" tabindex="-1"></a>  <span class="at">diverse_hiring =</span> <span class="fu">list</span>(<span class="at">selection_criteria =</span> <span class="st">&quot;random&quot;</span>)</span>
-<span id="cb217-5"><a href="quick-ref.html#cb217-5" tabindex="-1"></a>)</span>
-<span id="cb217-6"><a href="quick-ref.html#cb217-6" tabindex="-1"></a></span>
-<span id="cb217-7"><a href="quick-ref.html#cb217-7" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">names</span>(scenarios), <span class="cf">function</span>(name) {</span>
-<span id="cb217-8"><a href="quick-ref.html#cb217-8" tabindex="-1"></a>  <span class="fu">run_asa_simulation</span>(<span class="at">params =</span> scenarios[[name]])</span>
-<span id="cb217-9"><a href="quick-ref.html#cb217-9" tabindex="-1"></a>})</span></code></pre></div>
-</div>
-<div id="batch-analysis" class="section level3 hasAnchor" number="11.5.2">
-<h3><span class="header-section-number">11.5.2</span> Batch Analysis<a href="quick-ref.html#batch-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="quick-ref.html#cb218-1" tabindex="-1"></a><span class="co"># Extract final metrics</span></span>
-<span id="cb218-2"><a href="quick-ref.html#cb218-2" tabindex="-1"></a>final_metrics <span class="ot">&lt;-</span> <span class="fu">lapply</span>(results, <span class="cf">function</span>(r) {</span>
-<span id="cb218-3"><a href="quick-ref.html#cb218-3" tabindex="-1"></a>  <span class="fu">tail</span>(r<span class="sc">$</span>metrics, <span class="dv">1</span>)</span>
-<span id="cb218-4"><a href="quick-ref.html#cb218-4" tabindex="-1"></a>})</span>
-<span id="cb218-5"><a href="quick-ref.html#cb218-5" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(final_metrics, <span class="at">idcol =</span> <span class="st">&quot;scenario&quot;</span>)</span>
-<span id="cb218-6"><a href="quick-ref.html#cb218-6" tabindex="-1"></a></span>
-<span id="cb218-7"><a href="quick-ref.html#cb218-7" tabindex="-1"></a><span class="co"># Time series comparison</span></span>
-<span id="cb218-8"><a href="quick-ref.html#cb218-8" tabindex="-1"></a>all_metrics <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">seq_along</span>(results), <span class="cf">function</span>(i) {</span>
-<span id="cb218-9"><a href="quick-ref.html#cb218-9" tabindex="-1"></a>  results[[i]]<span class="sc">$</span>metrics[, scenario <span class="sc">:=</span> <span class="fu">names</span>(scenarios)[i]]</span>
-<span id="cb218-10"><a href="quick-ref.html#cb218-10" tabindex="-1"></a>})</span>
-<span id="cb218-11"><a href="quick-ref.html#cb218-11" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(all_metrics)</span></code></pre></div>
-</div>
-<div id="custom-metrics-1" class="section level3 hasAnchor" number="11.5.3">
-<h3><span class="header-section-number">11.5.3</span> Custom Metrics<a href="quick-ref.html#custom-metrics-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="quick-ref.html#cb219-1" tabindex="-1"></a><span class="co"># Add to organization</span></span>
-<span id="cb219-2"><a href="quick-ref.html#cb219-2" tabindex="-1"></a>org[, network_centrality <span class="sc">:=</span> degree_centrality <span class="sc">/</span> (.N <span class="sc">-</span> <span class="dv">1</span>)]</span>
-<span id="cb219-3"><a href="quick-ref.html#cb219-3" tabindex="-1"></a>org[, cultural_distance <span class="sc">:=</span> <span class="fu">abs</span>(conscientiousness <span class="sc">-</span> <span class="fu">mean</span>(conscientiousness))]</span>
-<span id="cb219-4"><a href="quick-ref.html#cb219-4" tabindex="-1"></a></span>
-<span id="cb219-5"><a href="quick-ref.html#cb219-5" tabindex="-1"></a><span class="co"># Calculate in simulation</span></span>
-<span id="cb219-6"><a href="quick-ref.html#cb219-6" tabindex="-1"></a>custom_metric <span class="ot">&lt;-</span> org[is_active <span class="sc">==</span> <span class="cn">TRUE</span>, </span>
-<span id="cb219-7"><a href="quick-ref.html#cb219-7" tabindex="-1"></a>                    .(<span class="at">cultural_variance =</span> <span class="fu">var</span>(conscientiousness),</span>
-<span id="cb219-8"><a href="quick-ref.html#cb219-8" tabindex="-1"></a>                      <span class="at">satisfaction_gini =</span> ineq<span class="sc">::</span><span class="fu">Gini</span>(satisfaction))]</span></code></pre></div>
+<div id="pr-best-practices" class="section level3 hasAnchor" number="10.4.2">
+<h3><span class="header-section-number">10.4.2</span> PR Best Practices<a href="git-workflow.html#pr-best-practices" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Keep PRs focused</strong> - One feature or fix per PR</li>
+<li><strong>Write clear descriptions</strong> - Explain what and why</li>
+<li><strong>Link related issues</strong> - Use “Fixes #123” in description</li>
+<li><strong>Add screenshots</strong> - For visual changes</li>
+<li><strong>Be responsive</strong> - Address feedback promptly</li>
+</ol>
 </div>
 </div>
-<div id="visualization-recipes" class="section level2 hasAnchor" number="11.6">
-<h2><span class="header-section-number">11.6</span> Visualization Recipes<a href="quick-ref.html#visualization-recipes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="time-series-with-phases" class="section level3 hasAnchor" number="11.6.1">
-<h3><span class="header-section-number">11.6.1</span> Time Series with Phases<a href="quick-ref.html#time-series-with-phases" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="quick-ref.html#cb220-1" tabindex="-1"></a><span class="fu">ggplot</span>(metrics, <span class="fu">aes</span>(<span class="at">x =</span> time_step)) <span class="sc">+</span></span>
-<span id="cb220-2"><a href="quick-ref.html#cb220-2" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> organization_size), <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
-<span id="cb220-3"><a href="quick-ref.html#cb220-3" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">150</span>), </span>
-<span id="cb220-4"><a href="quick-ref.html#cb220-4" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb220-5"><a href="quick-ref.html#cb220-5" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;rect&quot;</span>, <span class="at">xmin =</span> <span class="dv">0</span>, <span class="at">xmax =</span> <span class="dv">50</span>, </span>
-<span id="cb220-6"><a href="quick-ref.html#cb220-6" tabindex="-1"></a>           <span class="at">ymin =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">ymax =</span> <span class="cn">Inf</span>, </span>
-<span id="cb220-7"><a href="quick-ref.html#cb220-7" tabindex="-1"></a>           <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
-<span id="cb220-8"><a href="quick-ref.html#cb220-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Organizational Growth&quot;</span>, </span>
-<span id="cb220-9"><a href="quick-ref.html#cb220-9" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Size&quot;</span>) <span class="sc">+</span></span>
-<span id="cb220-10"><a href="quick-ref.html#cb220-10" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div id="git-troubleshooting" class="section level2 hasAnchor" number="10.5">
+<h2><span class="header-section-number">10.5</span> Handling Common Issues<a href="git-workflow.html#git-troubleshooting" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="i-committed-to-the-wrong-branch" class="section level3 hasAnchor" number="10.5.1">
+<h3><span class="header-section-number">10.5.1</span> “I committed to the wrong branch!”<a href="git-workflow.html#i-committed-to-the-wrong-branch" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>If you haven’t pushed yet:</strong>
+1. In GitHub Desktop → <strong>History</strong> tab
+2. Right-click the commit → <strong>“Undo Commit”</strong>
+3. Switch to the correct branch
+4. Commit again</p>
+<p><strong>If you’ve already pushed:</strong>
+1. Create a new branch from current state
+2. Push the new branch
+3. Create PR from new branch
+4. Ask for help to clean up the wrong branch</p>
 </div>
-<div id="multi-metric-dashboard-1" class="section level3 hasAnchor" number="11.6.2">
-<h3><span class="header-section-number">11.6.2</span> Multi-Metric Dashboard<a href="quick-ref.html#multi-metric-dashboard-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="quick-ref.html#cb221-1" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb221-2"><a href="quick-ref.html#cb221-2" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(metrics, <span class="fu">aes</span>(time_step, organization_size)) <span class="sc">+</span> </span>
-<span id="cb221-3"><a href="quick-ref.html#cb221-3" tabindex="-1"></a>      <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb221-4"><a href="quick-ref.html#cb221-4" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(metrics, <span class="fu">aes</span>(time_step, blau_index)) <span class="sc">+</span> </span>
-<span id="cb221-5"><a href="quick-ref.html#cb221-5" tabindex="-1"></a>      <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb221-6"><a href="quick-ref.html#cb221-6" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(metrics, <span class="fu">aes</span>(time_step, avg_satisfaction)) <span class="sc">+</span> </span>
-<span id="cb221-7"><a href="quick-ref.html#cb221-7" tabindex="-1"></a>      <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;green&quot;</span>)</span>
-<span id="cb221-8"><a href="quick-ref.html#cb221-8" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(metrics, <span class="fu">aes</span>(time_step, avg_conscientiousness)) <span class="sc">+</span> </span>
-<span id="cb221-9"><a href="quick-ref.html#cb221-9" tabindex="-1"></a>      <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;purple&quot;</span>)</span>
-<span id="cb221-10"><a href="quick-ref.html#cb221-10" tabindex="-1"></a></span>
-<span id="cb221-11"><a href="quick-ref.html#cb221-11" tabindex="-1"></a>(p1 <span class="sc">+</span> p2) <span class="sc">/</span> (p3 <span class="sc">+</span> p4) <span class="sc">+</span> </span>
-<span id="cb221-12"><a href="quick-ref.html#cb221-12" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(<span class="at">title =</span> <span class="st">&quot;Simulation Dashboard&quot;</span>)</span></code></pre></div>
+<div id="i-have-merge-conflicts" class="section level3 hasAnchor" number="10.5.2">
+<h3><span class="header-section-number">10.5.2</span> “I have merge conflicts!”<a href="git-workflow.html#i-have-merge-conflicts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When GitHub Desktop shows conflicts:</p>
+<ol style="list-style-type: decimal">
+<li>Click <strong>“Open in Visual Studio Code”</strong> (or your editor)</li>
+<li>Look for conflict markers:</li>
+</ol>
+<pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+your changes
+=======
+their changes
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; main</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Edit to keep the correct code</li>
+<li>Remove all conflict markers</li>
+<li>Save the file</li>
+<li>In GitHub Desktop, commit the resolution</li>
+</ol>
 </div>
-<div id="distribution-comparison" class="section level3 hasAnchor" number="11.6.3">
-<h3><span class="header-section-number">11.6.3</span> Distribution Comparison<a href="quick-ref.html#distribution-comparison" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="quick-ref.html#cb222-1" tabindex="-1"></a><span class="co"># Compare initial vs final</span></span>
-<span id="cb222-2"><a href="quick-ref.html#cb222-2" tabindex="-1"></a><span class="fu">bind_rows</span>(</span>
-<span id="cb222-3"><a href="quick-ref.html#cb222-3" tabindex="-1"></a>  org[hire_date <span class="sc">&lt;=</span> <span class="dv">10</span>, .(<span class="at">phase =</span> <span class="st">&quot;Initial&quot;</span>, satisfaction)],</span>
-<span id="cb222-4"><a href="quick-ref.html#cb222-4" tabindex="-1"></a>  org[is_active <span class="sc">==</span> <span class="cn">TRUE</span>, .(<span class="at">phase =</span> <span class="st">&quot;Final&quot;</span>, satisfaction)]</span>
-<span id="cb222-5"><a href="quick-ref.html#cb222-5" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb222-6"><a href="quick-ref.html#cb222-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> satisfaction, <span class="at">fill =</span> phase)) <span class="sc">+</span></span>
-<span id="cb222-7"><a href="quick-ref.html#cb222-7" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb222-8"><a href="quick-ref.html#cb222-8" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Initial&quot;</span> <span class="ot">=</span> <span class="st">&quot;blue&quot;</span>, </span>
-<span id="cb222-9"><a href="quick-ref.html#cb222-9" tabindex="-1"></a>                              <span class="st">&quot;Final&quot;</span> <span class="ot">=</span> <span class="st">&quot;red&quot;</span>))</span></code></pre></div>
+<div id="i-need-to-temporarily-save-my-work" class="section level3 hasAnchor" number="10.5.3">
+<h3><span class="header-section-number">10.5.3</span> “I need to temporarily save my work”<a href="git-workflow.html#i-need-to-temporarily-save-my-work" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Use the stash feature:
+1. <strong>Repository</strong> → <strong>“Stash Changes”</strong>
+2. Switch branches or pull updates
+3. <strong>Repository</strong> → <strong>“Apply Stash”</strong></p>
+</div>
+<div id="i-want-to-undo-my-last-commit" class="section level3 hasAnchor" number="10.5.4">
+<h3><span class="header-section-number">10.5.4</span> “I want to undo my last commit”<a href="git-workflow.html#i-want-to-undo-my-last-commit" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In GitHub Desktop:
+- <strong>History</strong> → Right-click commit → <strong>“Undo Commit”</strong></p>
+</div>
+<div id="my-pr-has-conflicts-with-main" class="section level3 hasAnchor" number="10.5.5">
+<h3><span class="header-section-number">10.5.5</span> “My PR has conflicts with main”<a href="git-workflow.html#my-pr-has-conflicts-with-main" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Update your local main branch</li>
+<li>Switch to your feature branch<br />
+</li>
+<li>Update from main (Branch → “Update from main”)</li>
+<li>Resolve conflicts locally</li>
+<li>Push the resolved branch</li>
+</ol>
 </div>
 </div>
-<div id="performance-tips-1" class="section level2 hasAnchor" number="11.7">
-<h2><span class="header-section-number">11.7</span> Performance Tips<a href="quick-ref.html#performance-tips-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="git-r-standards" class="section level2 hasAnchor" number="10.6">
+<h2><span class="header-section-number">10.6</span> R Coding Standards<a href="git-workflow.html#git-r-standards" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When contributing R code, follow these standards:</p>
+<div id="documentation" class="section level3 hasAnchor" number="10.6.1">
+<h3><span class="header-section-number">10.6.1</span> Documentation<a href="git-workflow.html#documentation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Use roxygen2 format for all exported functions:</p>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="git-workflow.html#cb208-1" tabindex="-1"></a><span class="co">#&#39; Calculate identity diversity using Shannon entropy</span></span>
+<span id="cb208-2"><a href="git-workflow.html#cb208-2" tabindex="-1"></a><span class="co">#&#39; </span></span>
+<span id="cb208-3"><a href="git-workflow.html#cb208-3" tabindex="-1"></a><span class="co">#&#39; @param org Organization data.table containing agents</span></span>
+<span id="cb208-4"><a href="git-workflow.html#cb208-4" tabindex="-1"></a><span class="co">#&#39; @param method Character string specifying method (&quot;shannon&quot; or &quot;blau&quot;)</span></span>
+<span id="cb208-5"><a href="git-workflow.html#cb208-5" tabindex="-1"></a><span class="co">#&#39; @return Numeric diversity score between 0 and 1</span></span>
+<span id="cb208-6"><a href="git-workflow.html#cb208-6" tabindex="-1"></a><span class="co">#&#39; @examples</span></span>
+<span id="cb208-7"><a href="git-workflow.html#cb208-7" tabindex="-1"></a><span class="co">#&#39; org &lt;- create_organization(n_agents = 100)</span></span>
+<span id="cb208-8"><a href="git-workflow.html#cb208-8" tabindex="-1"></a><span class="co">#&#39; diversity &lt;- calculate_identity_diversity(org, method = &quot;shannon&quot;)</span></span>
+<span id="cb208-9"><a href="git-workflow.html#cb208-9" tabindex="-1"></a><span class="co">#&#39; @export</span></span>
+<span id="cb208-10"><a href="git-workflow.html#cb208-10" tabindex="-1"></a>calculate_identity_diversity <span class="ot">&lt;-</span> <span class="cf">function</span>(org, <span class="at">method =</span> <span class="st">&quot;shannon&quot;</span>) {</span>
+<span id="cb208-11"><a href="git-workflow.html#cb208-11" tabindex="-1"></a>  <span class="co"># Implementation here</span></span>
+<span id="cb208-12"><a href="git-workflow.html#cb208-12" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="naming-conventions" class="section level3 hasAnchor" number="10.6.2">
+<h3><span class="header-section-number">10.6.2</span> Naming Conventions<a href="git-workflow.html#naming-conventions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><strong>Vectorize Everything</strong>: Use data.table operations, not loops</li>
-<li><strong>Pre-allocate Memory</strong>: <code>vector("list", n_steps)</code> for results</li>
-<li><strong>Selective Updates</strong>: Use <code>:=</code> for in-place modifications</li>
-<li><strong>Index Key Columns</strong>: <code>setkey(org, agent_id)</code> for fast lookups</li>
-<li><strong>Avoid Copying</strong>: Pass by reference when possible</li>
-<li><strong>Profile Code</strong>: Use <code>system.time()</code> and <code>profvis::profvis()</code></li>
-<li><strong>Batch Operations</strong>: Group similar calculations</li>
-<li><strong>Limit Snapshots</strong>: Store only necessary time points</li>
+<li><strong>Functions</strong>: <code>snake_case</code> verbs (e.g., <code>calculate_attraction</code>, <code>update_satisfaction</code>)</li>
+<li><strong>Variables</strong>: <code>snake_case</code> nouns (e.g., <code>identity_category</code>, <code>mean_tenure</code>)</li>
+<li><strong>Constants</strong>: <code>UPPER_SNAKE_CASE</code> (e.g., <code>MAX_ITERATIONS</code>, <code>DEFAULT_SIZE</code>)</li>
 </ul>
 </div>
-<div id="debugging-commands" class="section level2 hasAnchor" number="11.8">
-<h2><span class="header-section-number">11.8</span> Debugging Commands<a href="quick-ref.html#debugging-commands" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="basic-debugging" class="section level3 hasAnchor" number="11.8.1">
-<h3><span class="header-section-number">11.8.1</span> Basic Debugging<a href="quick-ref.html#basic-debugging" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="quick-ref.html#cb223-1" tabindex="-1"></a><span class="co"># Check data structure</span></span>
-<span id="cb223-2"><a href="quick-ref.html#cb223-2" tabindex="-1"></a><span class="fu">str</span>(org)</span>
-<span id="cb223-3"><a href="quick-ref.html#cb223-3" tabindex="-1"></a><span class="fu">summary</span>(org[is_active <span class="sc">==</span> <span class="cn">TRUE</span>])</span>
-<span id="cb223-4"><a href="quick-ref.html#cb223-4" tabindex="-1"></a><span class="fu">table</span>(org<span class="sc">$</span>identity_category)</span>
-<span id="cb223-5"><a href="quick-ref.html#cb223-5" tabindex="-1"></a></span>
-<span id="cb223-6"><a href="quick-ref.html#cb223-6" tabindex="-1"></a><span class="co"># Trace execution</span></span>
-<span id="cb223-7"><a href="quick-ref.html#cb223-7" tabindex="-1"></a><span class="fu">debug</span>(run_asa_simulation)</span>
-<span id="cb223-8"><a href="quick-ref.html#cb223-8" tabindex="-1"></a><span class="fu">browser</span>()  <span class="co"># Set breakpoint</span></span>
-<span id="cb223-9"><a href="quick-ref.html#cb223-9" tabindex="-1"></a><span class="fu">trace</span>(execute_hiring, <span class="at">tracer =</span> browser)</span>
-<span id="cb223-10"><a href="quick-ref.html#cb223-10" tabindex="-1"></a></span>
-<span id="cb223-11"><a href="quick-ref.html#cb223-11" tabindex="-1"></a><span class="co"># Verbose output</span></span>
-<span id="cb223-12"><a href="quick-ref.html#cb223-12" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">run_asa_simulation</span>(<span class="at">verbose =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div id="best-practices-1" class="section level3 hasAnchor" number="10.6.3">
+<h3><span class="header-section-number">10.6.3</span> Best Practices<a href="git-workflow.html#best-practices-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Use <code>&lt;-</code> for assignment</strong>, not <code>=</code></li>
+</ol>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="git-workflow.html#cb209-1" tabindex="-1"></a><span class="co"># Good</span></span>
+<span id="cb209-2"><a href="git-workflow.html#cb209-2" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">calculate_metric</span>(data)</span>
+<span id="cb209-3"><a href="git-workflow.html#cb209-3" tabindex="-1"></a></span>
+<span id="cb209-4"><a href="git-workflow.html#cb209-4" tabindex="-1"></a><span class="co"># Avoid  </span></span>
+<span id="cb209-5"><a href="git-workflow.html#cb209-5" tabindex="-1"></a>result <span class="ot">=</span> <span class="fu">calculate_metric</span>(data)</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Comment your code</strong> to explain “why,” not “what”</li>
+</ol>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="git-workflow.html#cb210-1" tabindex="-1"></a><span class="co"># Good: Explains reasoning</span></span>
+<span id="cb210-2"><a href="git-workflow.html#cb210-2" tabindex="-1"></a><span class="co"># Use exponential decay to model diminishing satisfaction over time</span></span>
+<span id="cb210-3"><a href="git-workflow.html#cb210-3" tabindex="-1"></a>satisfaction <span class="ot">&lt;-</span> satisfaction <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>decay_rate <span class="sc">*</span> time)</span>
+<span id="cb210-4"><a href="git-workflow.html#cb210-4" tabindex="-1"></a></span>
+<span id="cb210-5"><a href="git-workflow.html#cb210-5" tabindex="-1"></a><span class="co"># Avoid: States the obvious</span></span>
+<span id="cb210-6"><a href="git-workflow.html#cb210-6" tabindex="-1"></a><span class="co"># Multiply satisfaction by exponential</span></span>
+<span id="cb210-7"><a href="git-workflow.html#cb210-7" tabindex="-1"></a>satisfaction <span class="ot">&lt;-</span> satisfaction <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>decay_rate <span class="sc">*</span> time)</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Keep functions focused</strong> on a single task</li>
+<li><strong>Use meaningful variable names</strong></li>
+<li><strong>Avoid absolute paths</strong> - always use relative paths</li>
+</ol>
 </div>
-<div id="data-validation" class="section level3 hasAnchor" number="11.8.2">
-<h3><span class="header-section-number">11.8.2</span> Data Validation<a href="quick-ref.html#data-validation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="quick-ref.html#cb224-1" tabindex="-1"></a><span class="co"># Check for NAs</span></span>
-<span id="cb224-2"><a href="quick-ref.html#cb224-2" tabindex="-1"></a>org[, <span class="fu">lapply</span>(.SD, <span class="cf">function</span>(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x)))]</span>
-<span id="cb224-3"><a href="quick-ref.html#cb224-3" tabindex="-1"></a></span>
-<span id="cb224-4"><a href="quick-ref.html#cb224-4" tabindex="-1"></a><span class="co"># Verify constraints</span></span>
-<span id="cb224-5"><a href="quick-ref.html#cb224-5" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">all</span>(org<span class="sc">$</span>satisfaction <span class="sc">&gt;</span> <span class="sc">-</span><span class="dv">100</span>))</span>
-<span id="cb224-6"><a href="quick-ref.html#cb224-6" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">all</span>(org<span class="sc">$</span>tenure <span class="sc">&gt;=</span> <span class="dv">0</span>))</span>
-<span id="cb224-7"><a href="quick-ref.html#cb224-7" tabindex="-1"></a></span>
-<span id="cb224-8"><a href="quick-ref.html#cb224-8" tabindex="-1"></a><span class="co"># Test single step</span></span>
-<span id="cb224-9"><a href="quick-ref.html#cb224-9" tabindex="-1"></a>test_org <span class="ot">&lt;-</span> org[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]  <span class="co"># Small subset</span></span>
-<span id="cb224-10"><a href="quick-ref.html#cb224-10" tabindex="-1"></a>test_result <span class="ot">&lt;-</span> <span class="fu">execute_interactions_vectorized</span>(</span>
-<span id="cb224-11"><a href="quick-ref.html#cb224-11" tabindex="-1"></a>  test_org, interactions, <span class="at">step =</span> <span class="dv">1</span>, <span class="at">n_interactions =</span> <span class="dv">2</span></span>
-<span id="cb224-12"><a href="quick-ref.html#cb224-12" tabindex="-1"></a>)</span></code></pre></div>
 </div>
-<div id="performance-profiling-1" class="section level3 hasAnchor" number="11.8.3">
-<h3><span class="header-section-number">11.8.3</span> Performance Profiling<a href="quick-ref.html#performance-profiling-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="quick-ref.html#cb225-1" tabindex="-1"></a><span class="co"># Time specific operations</span></span>
-<span id="cb225-2"><a href="quick-ref.html#cb225-2" tabindex="-1"></a><span class="fu">system.time</span>({</span>
-<span id="cb225-3"><a href="quick-ref.html#cb225-3" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
-<span id="cb225-4"><a href="quick-ref.html#cb225-4" tabindex="-1"></a>    <span class="fu">calculate_blau_index</span>(org<span class="sc">$</span>identity_category)</span>
-<span id="cb225-5"><a href="quick-ref.html#cb225-5" tabindex="-1"></a>  }</span>
-<span id="cb225-6"><a href="quick-ref.html#cb225-6" tabindex="-1"></a>})</span>
-<span id="cb225-7"><a href="quick-ref.html#cb225-7" tabindex="-1"></a></span>
-<span id="cb225-8"><a href="quick-ref.html#cb225-8" tabindex="-1"></a><span class="co"># Memory usage</span></span>
-<span id="cb225-9"><a href="quick-ref.html#cb225-9" tabindex="-1"></a>pryr<span class="sc">::</span><span class="fu">object_size</span>(org)</span>
-<span id="cb225-10"><a href="quick-ref.html#cb225-10" tabindex="-1"></a><span class="fu">gc</span>()  <span class="co"># Garbage collection</span></span>
-<span id="cb225-11"><a href="quick-ref.html#cb225-11" tabindex="-1"></a></span>
-<span id="cb225-12"><a href="quick-ref.html#cb225-12" tabindex="-1"></a><span class="co"># Full profiling</span></span>
-<span id="cb225-13"><a href="quick-ref.html#cb225-13" tabindex="-1"></a>profvis<span class="sc">::</span><span class="fu">profvis</span>({</span>
-<span id="cb225-14"><a href="quick-ref.html#cb225-14" tabindex="-1"></a>  <span class="fu">run_asa_simulation</span>(<span class="at">n_steps =</span> <span class="dv">50</span>)</span>
-<span id="cb225-15"><a href="quick-ref.html#cb225-15" tabindex="-1"></a>})</span></code></pre></div>
-<hr />
-<p><em>ASA ABM v2 - Agent-Based Model for Attraction-Selection-Attrition</em></p>
+<div id="git-quick-ref" class="section level2 hasAnchor" number="10.7">
+<h2><span class="header-section-number">10.7</span> Quick Reference Card<a href="git-workflow.html#git-quick-ref" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="essential-github-desktop-operations" class="section level3 hasAnchor" number="10.7.1">
+<h3><span class="header-section-number">10.7.1</span> Essential GitHub Desktop Operations<a href="git-workflow.html#essential-github-desktop-operations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<colgroup>
+<col width="22%" />
+<col width="40%" />
+<col width="37%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Action</th>
+<th>How to Do It</th>
+<th>When to Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Update from remote</strong></td>
+<td>Click “Fetch origin” → “Pull origin”</td>
+<td>Start of each day</td>
+</tr>
+<tr class="even">
+<td><strong>Create branch</strong></td>
+<td>Current Branch → New Branch</td>
+<td>Starting new work</td>
+</tr>
+<tr class="odd">
+<td><strong>Switch branch</strong></td>
+<td>Current Branch → Select branch</td>
+<td>Moving between tasks</td>
+</tr>
+<tr class="even">
+<td><strong>Commit changes</strong></td>
+<td>Write message → Commit to [branch]</td>
+<td>After logical changes</td>
+</tr>
+<tr class="odd">
+<td><strong>Push changes</strong></td>
+<td>Click “Push origin”</td>
+<td>After committing</td>
+</tr>
+<tr class="even">
+<td><strong>Create PR</strong></td>
+<td>Click “Create Pull Request”</td>
+<td>Ready for review</td>
+</tr>
+<tr class="odd">
+<td><strong>Stash changes</strong></td>
+<td>Repository → Stash Changes</td>
+<td>Need to switch tasks</td>
+</tr>
+<tr class="even">
+<td><strong>View history</strong></td>
+<td>History tab</td>
+<td>Review past commits</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="keyboard-shortcuts" class="section level3 hasAnchor" number="10.7.2">
+<h3><span class="header-section-number">10.7.2</span> Keyboard Shortcuts<a href="git-workflow.html#keyboard-shortcuts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>Cmd/Ctrl + Shift + A</strong>: Open in editor</li>
+<li><strong>Cmd/Ctrl + Shift + G</strong>: Open on GitHub</li>
+<li><strong>Cmd/Ctrl + Shift + P</strong>: Push</li>
+<li><strong>Cmd/Ctrl + Shift + F</strong>: Fetch</li>
+</ul>
+</div>
+<div id="before-every-commit" class="section level3 hasAnchor" number="10.7.3">
+<h3><span class="header-section-number">10.7.3</span> Before Every Commit<a href="git-workflow.html#before-every-commit" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="git-workflow.html#cb211-1" tabindex="-1"></a><span class="co"># 1. Test your specific changes</span></span>
+<span id="cb211-2"><a href="git-workflow.html#cb211-2" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;core/your_modified_file.R&quot;</span>)</span>
+<span id="cb211-3"><a href="git-workflow.html#cb211-3" tabindex="-1"></a></span>
+<span id="cb211-4"><a href="git-workflow.html#cb211-4" tabindex="-1"></a><span class="co"># 2. Run full simulation</span></span>
+<span id="cb211-5"><a href="git-workflow.html#cb211-5" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;run_simulation.R&quot;</span>)</span>
+<span id="cb211-6"><a href="git-workflow.html#cb211-6" tabindex="-1"></a></span>
+<span id="cb211-7"><a href="git-workflow.html#cb211-7" tabindex="-1"></a><span class="co"># 3. Check for errors/warnings</span></span>
+<span id="cb211-8"><a href="git-workflow.html#cb211-8" tabindex="-1"></a><span class="co"># Fix any issues before committing!</span></span></code></pre></div>
+</div>
+<div id="pr-checklist" class="section level3 hasAnchor" number="10.7.4">
+<h3><span class="header-section-number">10.7.4</span> PR Checklist<a href="git-workflow.html#pr-checklist" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Before creating a Pull Request:
+- [ ] Code runs without errors
+- [ ] Commit messages are clear
+- [ ] Branch is up-to-date with main
+- [ ] No absolute file paths
+- [ ] Functions have documentation
+- [ ] Tests pass (if applicable)</p>
+</div>
+</div>
+<div id="git-advanced" class="section level2 hasAnchor" number="10.8">
+<h2><span class="header-section-number">10.8</span> Advanced Git Scenarios<a href="git-workflow.html#git-advanced" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="working-on-multiple-features" class="section level3 hasAnchor" number="10.8.1">
+<h3><span class="header-section-number">10.8.1</span> Working on Multiple Features<a href="git-workflow.html#working-on-multiple-features" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If you need to work on multiple features simultaneously:</p>
+<ol style="list-style-type: decimal">
+<li>Create separate branches for each feature</li>
+<li>Switch between branches using GitHub Desktop</li>
+<li>Don’t mix unrelated changes in one branch</li>
+<li>Use descriptive branch names to avoid confusion</li>
+</ol>
+</div>
+<div id="collaborative-feature-development" class="section level3 hasAnchor" number="10.8.2">
+<h3><span class="header-section-number">10.8.2</span> Collaborative Feature Development<a href="git-workflow.html#collaborative-feature-development" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When multiple people work on the same feature:</p>
+<ol style="list-style-type: decimal">
+<li>Create a shared feature branch</li>
+<li>Communicate about who’s working on what files</li>
+<li>Pull frequently to get others’ changes</li>
+<li>Consider pair programming for complex changes</li>
+</ol>
+</div>
+<div id="keeping-a-clean-history" class="section level3 hasAnchor" number="10.8.3">
+<h3><span class="header-section-number">10.8.3</span> Keeping a Clean History<a href="git-workflow.html#keeping-a-clean-history" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For a cleaner project history:</p>
+<ol style="list-style-type: decimal">
+<li>Make small, logical commits</li>
+<li>Don’t commit broken code</li>
+<li>Squash related commits before merging (maintainer will handle)</li>
+<li>Write meaningful commit messages</li>
+</ol>
+</div>
+<div id="reviewing-others-prs" class="section level3 hasAnchor" number="10.8.4">
+<h3><span class="header-section-number">10.8.4</span> Reviewing Others’ PRs<a href="git-workflow.html#reviewing-others-prs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To review a colleague’s PR locally:</p>
+<ol style="list-style-type: decimal">
+<li>In GitHub Desktop, go to <strong>File</strong> → <strong>Clone Repository</strong></li>
+<li>Switch to <strong>URL</strong> tab</li>
+<li>Enter the PR’s repository URL</li>
+<li>After cloning, checkout their branch</li>
+<li>Test their changes locally</li>
+<li>Provide feedback on GitHub.com</li>
+</ol>
+</div>
+</div>
+<div id="git-help" class="section level2 hasAnchor" number="10.9">
+<h2><span class="header-section-number">10.9</span> Getting Help<a href="git-workflow.html#git-help" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="when-to-ask-for-help" class="section level3 hasAnchor" number="10.9.1">
+<h3><span class="header-section-number">10.9.1</span> When to Ask for Help<a href="git-workflow.html#when-to-ask-for-help" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Don’t hesitate to ask for help if:
+- You’re unsure about the Git workflow
+- Your code works locally but fails in the PR
+- You receive feedback you don’t understand<br />
+- You accidentally did something wrong in Git
+- You encounter an error you can’t resolve</p>
+</div>
+<div id="where-to-get-help" class="section level3 hasAnchor" number="10.9.2">
+<h3><span class="header-section-number">10.9.2</span> Where to Get Help<a href="git-workflow.html#where-to-get-help" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>PR Comments</strong>: Ask questions directly in your pull request</li>
+<li><strong>GitHub Issues</strong>: Create an issue for broader discussions</li>
+<li><strong>Team Communication</strong>: Use Slack/Teams/Email for quick questions</li>
+<li><strong>Documentation</strong>: Refer to this guide and project documentation</li>
+</ol>
+</div>
+<div id="helpful-resources" class="section level3 hasAnchor" number="10.9.3">
+<h3><span class="header-section-number">10.9.3</span> Helpful Resources<a href="git-workflow.html#helpful-resources" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><a href="https://docs.github.com/en/desktop">GitHub Desktop Documentation</a></li>
+<li><a href="https://guides.github.com/">GitHub Guides</a></li>
+<li><a href="http://adv-r.had.co.nz/Style.html">R Style Guide</a></li>
+<li><a href="https://adv-r.hadley.nz/">Advanced R</a></li>
+<li><a href="https://r-pkgs.org/">R Packages</a></li>
+</ul>
+</div>
+</div>
+<div id="summary-1" class="section level2 hasAnchor" number="10.10">
+<h2><span class="header-section-number">10.10</span> Summary<a href="git-workflow.html#summary-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This Git workflow is designed to help R developers contribute effectively while learning Git gradually. Key points to remember:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Always sync before starting work</strong> - Pull the latest changes</li>
+<li><strong>Use feature branches</strong> - Never work directly on main</li>
+<li><strong>Commit frequently</strong> - Small, logical commits are better</li>
+<li><strong>Test before pushing</strong> - Ensure your code works</li>
+<li><strong>Communicate clearly</strong> - Good commit messages and PR descriptions</li>
+<li><strong>Ask for help</strong> - Everyone was new to Git once</li>
+</ol>
+<p>Remember: Git is a powerful tool, but it takes time to master. Focus on the basic workflow first, and you’ll naturally learn more advanced features as needed. The most important thing is to contribute and learn from the experience!</p>
+<p>Happy contributing! 🎉</p>
 
-</div>
 </div>
 </div>
             </section>
@@ -1031,8 +1202,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="git-workflow.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="contributors-guide.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="quick-ref.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
