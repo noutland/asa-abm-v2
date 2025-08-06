@@ -15,5 +15,6 @@ rmd_files: [
   "07-examples.Rmd",
   "08-recipes.Rmd",
   "09-contributors-guide.Rmd",
+  "10-git-workflow-guide.Rmd",
   "quick-reference.Rmd"
 ]

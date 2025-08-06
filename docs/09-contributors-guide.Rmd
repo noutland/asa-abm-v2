@@ -701,146 +701,17 @@ covr::report(covr::package_coverage())
    #    accumulated through interactions
    ```
 
-## Git Workflow {#git-workflow}
+## Git Workflow
 
-### Branching Strategy
+For detailed instructions on using Git and GitHub Desktop for this project, please see Chapter \@ref(git-workflow). The guide covers:
 
-We use Git Flow:
+- Setting up GitHub Desktop
+- Creating and managing branches  
+- Making commits and pull requests
+- Handling merge conflicts
+- Best practices for R developers
 
-```
-main
-  └── develop
-        ├── feature/add-risk-tolerance
-        ├── feature/improve-performance
-        ├── bugfix/hiring-calculation
-        └── hotfix/critical-error
-```
-
-### Branch Naming Conventions
-
-- **Features**: `feature/descriptive-name`
-- **Bugfixes**: `bugfix/issue-description`
-- **Hotfixes**: `hotfix/critical-issue`
-- **Releases**: `release/version-number`
-
-### Commit Message Conventions
-
-Follow the conventional commits format:
-
-```
-type(scope): subject
-
-body
-
-footer
-```
-
-Examples:
-```bash
-feat(hiring): add risk-based selection criteria
-
-- Implement risk_tolerance attribute for agents
-- Add selection strategy based on risk preference
-- Update tests for new functionality
-
-Closes #123
-
-fix(turnover): correct satisfaction threshold calculation
-
-The previous implementation used >= instead of >, causing
-employees with exactly threshold satisfaction to leave.
-
-perf(interactions): optimize interaction sampling
-
-- Replace nested loops with vectorized operations
-- Add index on interaction history
-- Reduces step time by ~40% for large organizations
-
-docs(api): update hiring function documentation
-
-- Add examples for new selection criteria
-- Clarify parameter descriptions
-- Fix typos in return value docs
-```
-
-### Pull Request Process
-
-1. **Create feature branch**:
-   ```bash
-   git checkout develop
-   git pull origin develop
-   git checkout -b feature/your-feature-name
-   ```
-
-2. **Make changes and commit**:
-   ```bash
-   git add -A
-   git commit -m "feat(module): description"
-   ```
-
-3. **Keep branch updated**:
-   ```bash
-   git checkout develop
-   git pull origin develop
-   git checkout feature/your-feature-name
-   git rebase develop
-   ```
-
-4. **Push and create PR**:
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-
-5. **PR description template**:
-   ```markdown
-   ## Description
-   Brief description of changes
-   
-   ## Type of Change
-   - [ ] Bug fix
-   - [ ] New feature
-   - [ ] Breaking change
-   - [ ] Documentation update
-   
-   ## Testing
-   - [ ] Unit tests pass
-   - [ ] Integration tests pass
-   - [ ] Manual testing completed
-   
-   ## Checklist
-   - [ ] Code follows style guidelines
-   - [ ] Self-review completed
-   - [ ] Comments added for complex sections
-   - [ ] Documentation updated
-   - [ ] No warnings in R CMD check
-   ```
-
-### Code Review Guidelines
-
-**For Reviewers**:
-
-1. Check for:
-   - Correctness of implementation
-   - Test coverage
-   - Performance implications
-   - Documentation completeness
-   - Code style consistency
-
-2. Provide constructive feedback:
-   ```markdown
-   # Good feedback
-   "Consider using data.table's `.SDcols` here for better performance 
-   when selecting columns. Example: `DT[, .SD, .SDcols = patterns("^metric_")]`"
-   
-   # Avoid
-   "This is inefficient"
-   ```
-
-**For Authors**:
-
-1. Respond to all comments
-2. Mark resolved conversations
-3. Request re-review after changes
+If you're new to Git or prefer using GitHub Desktop over the command line, that chapter provides a complete, user-friendly workflow designed specifically for R developers contributing to this project.
 
 ## Common Development Tasks {#common-tasks}
 

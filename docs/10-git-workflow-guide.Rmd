@@ -1,0 +1,439 @@
+# Git Workflow for R Developers {#git-workflow}
+
+This chapter provides a comprehensive guide for R developers who are new to Git and will be using GitHub Desktop to contribute to the ASA ABM project. We've designed this workflow to be simple, safe, and effective for collaborative development.
+
+## Getting Started with GitHub Desktop {#git-getting-started}
+
+### Prerequisites
+
+Before you begin, ensure you have:
+
+1. **GitHub Desktop** installed ([download here](https://desktop.github.com/))
+2. **R and RStudio** installed
+3. A **GitHub account** ([sign up here](https://github.com/join))
+
+### First-Time Setup
+
+Follow these steps to set up your development environment:
+
+1. **Open GitHub Desktop**
+2. **Sign in** with your GitHub account (File → Options → Accounts)
+3. **Clone the repository**:
+   - Click "Clone a Repository from the Internet..."
+   - Search for `noutland/asa-abm-v2`
+   - Choose where to save it locally (e.g., `~/Documents/R-Projects/`)
+   - Click "Clone"
+
+Once cloned, you'll have a local copy of the entire project that you can work with.
+
+## Daily Workflow {#git-daily-workflow}
+
+Here's the workflow you'll follow for every contribution:
+
+```{r git-workflow-diagram, echo=FALSE, fig.cap="Daily Git workflow for contributors", out.width="100%"}
+# This would contain a workflow diagram if needed
+# knitr::include_graphics("images/git-workflow.png")
+```
+
+### Step 1: Start Fresh
+
+**Always start by syncing your local repository:**
+
+1. Open GitHub Desktop
+2. Ensure you're on the `main` branch (check "Current Branch" dropdown)
+3. Click **"Fetch origin"** button
+4. If updates are available, click **"Pull origin"**
+
+This ensures you're working with the latest code.
+
+### Step 2: Create a Feature Branch
+
+**For each new piece of work, create a new branch:**
+
+1. Click on **"Current Branch"** → **"New Branch"**
+2. Name your branch using one of these prefixes:
+   - `feature/` - for new features (e.g., `feature/add-blau-index`)
+   - `fix/` - for bug fixes (e.g., `fix/identity-calculation`)
+   - `docs/` - for documentation (e.g., `docs/update-readme`)
+   - `refactor/` - for code improvements (e.g., `refactor/simplify-hiring`)
+3. Click **"Create Branch"**
+
+### Step 3: Make Your Changes
+
+1. **Open RStudio** and navigate to the project
+2. **Make your changes** to the R files
+3. **Test your changes frequently**:
+
+```r
+# After making changes, always test
+source("run_simulation.R")
+
+# If you modified specific functions, test them
+source("tests/test_agent.R")  # or relevant test file
+```
+
+### Step 4: Commit Your Changes
+
+1. **Return to GitHub Desktop**
+2. **Review your changes** in the left panel
+3. **Stage files** (they're selected by default)
+4. **Write a commit message**:
+   - Summary (50 chars max): Brief description
+   - Description (optional): Explain why, not what
+5. Click **"Commit to [branch-name]"**
+
+#### Good Commit Messages
+
+```
+✅ Add Blau index calculation to diversity metrics
+✅ Fix off-by-one error in turnover calculation
+✅ Update documentation for identity categories
+✅ Refactor hiring process for better performance
+```
+
+#### Poor Commit Messages
+
+```
+❌ Updated files
+❌ Fixed stuff
+❌ WIP
+❌ Changes
+```
+
+### Step 5: Push to GitHub
+
+After committing:
+- Click **"Push origin"** to upload your branch to GitHub
+- First push will publish the branch
+- Subsequent pushes update the remote branch
+
+### Step 6: Create a Pull Request
+
+1. Click **"Create Pull Request"** in GitHub Desktop
+2. You'll be taken to GitHub.com
+3. **Fill out the pull request template** (see Section \@ref(pr-template))
+4. **Request review** from team members
+5. Click **"Create pull request"**
+
+### Step 7: Address Feedback
+
+1. **Read all review comments** carefully
+2. **Make requested changes** in your local branch
+3. **Commit and push** the changes
+4. **Reply to comments** when done
+5. **Re-request review** if needed
+
+### Step 8: Merge
+
+After approval:
+1. The maintainer will **merge your PR**
+2. You can **delete your branch** after merging
+3. **Switch back to main** and pull the latest changes
+
+## Branch Management {#git-branches}
+
+### Branch Naming Conventions
+
+Use descriptive branch names with appropriate prefixes:
+
+| Prefix | Use Case | Example |
+|--------|----------|---------|
+| `feature/` | New functionality | `feature/add-network-analysis` |
+| `fix/` | Bug fixes | `fix/hiring-calculation-error` |
+| `docs/` | Documentation only | `docs/update-api-reference` |
+| `refactor/` | Code improvement | `refactor/optimize-interactions` |
+| `test/` | Adding tests | `test/organization-functions` |
+
+### Working with Branches
+
+#### Creating a Branch
+Always branch from an up-to-date `main`:
+1. Switch to main branch
+2. Pull latest changes
+3. Create your new branch
+
+#### Switching Between Branches
+1. **Commit or stash** current changes first
+2. Click **"Current Branch"**
+3. Select the branch you want
+
+#### Updating Your Branch
+To get latest changes from main:
+1. Commit your current changes
+2. Click **Branch** → **"Update from main"**
+3. Resolve any conflicts if they occur
+
+## Pull Request Guidelines {#pr-template}
+
+### Pull Request Template
+
+When you create a PR, you'll see this template:
+
+```markdown
+## Description
+<!-- Provide a brief description of the changes in this PR -->
+
+## Type of Change
+<!-- Mark the relevant option with an "x" -->
+- [ ] 🐛 Bug fix (non-breaking change that fixes an issue)
+- [ ] ✨ New feature (non-breaking change that adds functionality)
+- [ ] 💥 Breaking change (would cause existing functionality to not work)
+- [ ] 📚 Documentation update
+- [ ] 🔧 Refactoring (no functional changes)
+
+## Testing
+<!-- Describe how you tested your changes -->
+- [ ] I have run `source("run_simulation.R")` without errors
+- [ ] I have tested the specific functions I modified
+- [ ] I have added tests for new functionality (if applicable)
+
+## R Code Checklist
+- [ ] My code follows the project's coding standards
+- [ ] I have added roxygen2 documentation for new functions
+- [ ] I have used relative paths (no absolute paths)
+- [ ] I have used meaningful variable names
+- [ ] I have commented complex logic
+```
+
+### PR Best Practices
+
+1. **Keep PRs focused** - One feature or fix per PR
+2. **Write clear descriptions** - Explain what and why
+3. **Link related issues** - Use "Fixes #123" in description
+4. **Add screenshots** - For visual changes
+5. **Be responsive** - Address feedback promptly
+
+## Handling Common Issues {#git-troubleshooting}
+
+### "I committed to the wrong branch!"
+
+**If you haven't pushed yet:**
+1. In GitHub Desktop → **History** tab
+2. Right-click the commit → **"Undo Commit"**
+3. Switch to the correct branch
+4. Commit again
+
+**If you've already pushed:**
+1. Create a new branch from current state
+2. Push the new branch
+3. Create PR from new branch
+4. Ask for help to clean up the wrong branch
+
+### "I have merge conflicts!"
+
+When GitHub Desktop shows conflicts:
+
+1. Click **"Open in Visual Studio Code"** (or your editor)
+2. Look for conflict markers:
+```
+<<<<<<< HEAD
+your changes
+=======
+their changes
+>>>>>>> main
+```
+3. Edit to keep the correct code
+4. Remove all conflict markers
+5. Save the file
+6. In GitHub Desktop, commit the resolution
+
+### "I need to temporarily save my work"
+
+Use the stash feature:
+1. **Repository** → **"Stash Changes"**
+2. Switch branches or pull updates
+3. **Repository** → **"Apply Stash"**
+
+### "I want to undo my last commit"
+
+In GitHub Desktop:
+- **History** → Right-click commit → **"Undo Commit"**
+
+### "My PR has conflicts with main"
+
+1. Update your local main branch
+2. Switch to your feature branch  
+3. Update from main (Branch → "Update from main")
+4. Resolve conflicts locally
+5. Push the resolved branch
+
+## R Coding Standards {#git-r-standards}
+
+When contributing R code, follow these standards:
+
+### Documentation
+
+Use roxygen2 format for all exported functions:
+
+```r
+#' Calculate identity diversity using Shannon entropy
+#' 
+#' @param org Organization data.table containing agents
+#' @param method Character string specifying method ("shannon" or "blau")
+#' @return Numeric diversity score between 0 and 1
+#' @examples
+#' org <- create_organization(n_agents = 100)
+#' diversity <- calculate_identity_diversity(org, method = "shannon")
+#' @export
+calculate_identity_diversity <- function(org, method = "shannon") {
+  # Implementation here
+}
+```
+
+### Naming Conventions
+
+- **Functions**: `snake_case` verbs (e.g., `calculate_attraction`, `update_satisfaction`)
+- **Variables**: `snake_case` nouns (e.g., `identity_category`, `mean_tenure`)
+- **Constants**: `UPPER_SNAKE_CASE` (e.g., `MAX_ITERATIONS`, `DEFAULT_SIZE`)
+
+### Best Practices
+
+1. **Use `<-` for assignment**, not `=`
+```r
+# Good
+result <- calculate_metric(data)
+
+# Avoid  
+result = calculate_metric(data)
+```
+
+2. **Comment your code** to explain "why," not "what"
+```r
+# Good: Explains reasoning
+# Use exponential decay to model diminishing satisfaction over time
+satisfaction <- satisfaction * exp(-decay_rate * time)
+
+# Avoid: States the obvious
+# Multiply satisfaction by exponential
+satisfaction <- satisfaction * exp(-decay_rate * time)
+```
+
+3. **Keep functions focused** on a single task
+4. **Use meaningful variable names**
+5. **Avoid absolute paths** - always use relative paths
+
+## Quick Reference Card {#git-quick-ref}
+
+### Essential GitHub Desktop Operations
+
+| Action | How to Do It | When to Use |
+|--------|--------------|-------------|
+| **Update from remote** | Click "Fetch origin" → "Pull origin" | Start of each day |
+| **Create branch** | Current Branch → New Branch | Starting new work |
+| **Switch branch** | Current Branch → Select branch | Moving between tasks |
+| **Commit changes** | Write message → Commit to [branch] | After logical changes |
+| **Push changes** | Click "Push origin" | After committing |
+| **Create PR** | Click "Create Pull Request" | Ready for review |
+| **Stash changes** | Repository → Stash Changes | Need to switch tasks |
+| **View history** | History tab | Review past commits |
+
+### Keyboard Shortcuts
+
+- **Cmd/Ctrl + Shift + A**: Open in editor
+- **Cmd/Ctrl + Shift + G**: Open on GitHub
+- **Cmd/Ctrl + Shift + P**: Push
+- **Cmd/Ctrl + Shift + F**: Fetch
+
+### Before Every Commit
+
+```r
+# 1. Test your specific changes
+source("core/your_modified_file.R")
+
+# 2. Run full simulation
+source("run_simulation.R")
+
+# 3. Check for errors/warnings
+# Fix any issues before committing!
+```
+
+### PR Checklist
+
+Before creating a Pull Request:
+- [ ] Code runs without errors
+- [ ] Commit messages are clear
+- [ ] Branch is up-to-date with main
+- [ ] No absolute file paths
+- [ ] Functions have documentation
+- [ ] Tests pass (if applicable)
+
+## Advanced Git Scenarios {#git-advanced}
+
+### Working on Multiple Features
+
+If you need to work on multiple features simultaneously:
+
+1. Create separate branches for each feature
+2. Switch between branches using GitHub Desktop
+3. Don't mix unrelated changes in one branch
+4. Use descriptive branch names to avoid confusion
+
+### Collaborative Feature Development
+
+When multiple people work on the same feature:
+
+1. Create a shared feature branch
+2. Communicate about who's working on what files
+3. Pull frequently to get others' changes
+4. Consider pair programming for complex changes
+
+### Keeping a Clean History
+
+For a cleaner project history:
+
+1. Make small, logical commits
+2. Don't commit broken code
+3. Squash related commits before merging (maintainer will handle)
+4. Write meaningful commit messages
+
+### Reviewing Others' PRs
+
+To review a colleague's PR locally:
+
+1. In GitHub Desktop, go to **File** → **Clone Repository**
+2. Switch to **URL** tab
+3. Enter the PR's repository URL
+4. After cloning, checkout their branch
+5. Test their changes locally
+6. Provide feedback on GitHub.com
+
+## Getting Help {#git-help}
+
+### When to Ask for Help
+
+Don't hesitate to ask for help if:
+- You're unsure about the Git workflow
+- Your code works locally but fails in the PR
+- You receive feedback you don't understand  
+- You accidentally did something wrong in Git
+- You encounter an error you can't resolve
+
+### Where to Get Help
+
+1. **PR Comments**: Ask questions directly in your pull request
+2. **GitHub Issues**: Create an issue for broader discussions
+3. **Team Communication**: Use Slack/Teams/Email for quick questions
+4. **Documentation**: Refer to this guide and project documentation
+
+### Helpful Resources
+
+- [GitHub Desktop Documentation](https://docs.github.com/en/desktop)
+- [GitHub Guides](https://guides.github.com/)
+- [R Style Guide](http://adv-r.had.co.nz/Style.html)
+- [Advanced R](https://adv-r.hadley.nz/)
+- [R Packages](https://r-pkgs.org/)
+
+## Summary
+
+This Git workflow is designed to help R developers contribute effectively while learning Git gradually. Key points to remember:
+
+1. **Always sync before starting work** - Pull the latest changes
+2. **Use feature branches** - Never work directly on main
+3. **Commit frequently** - Small, logical commits are better
+4. **Test before pushing** - Ensure your code works
+5. **Communicate clearly** - Good commit messages and PR descriptions
+6. **Ask for help** - Everyone was new to Git once
+
+Remember: Git is a powerful tool, but it takes time to master. Focus on the basic workflow first, and you'll naturally learn more advanced features as needed. The most important thing is to contribute and learn from the experience!
+
+Happy contributing! 🎉

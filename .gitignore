@@ -1,1 +1,47 @@
+# OS specific files
 .DS_Store
+Thumbs.db
+
+# R specific
+.Rhistory
+.RData
+.Rproj.user
+*.Rproj
+.Rprofile
+
+# RStudio files
+*.Rproj.user/
+.Rbuildignore
+
+# Output files
+*.html
+*.pdf
+*.log
+*.tex
+*.aux
+*.out
+*.toc
+
+# Temporary files
+*~
+*.swp
+*.bak
+
+# Data files (uncomment if you have large data files)
+# data/*.csv
+# data/*.rds
+# data/*.RData
+
+# Results and figures (uncomment if needed)
+# results/
+# figures/*.png
+# figures/*.pdf
+
+# Package documentation
+man/*.Rd
+NAMESPACE
+
+# Compiled files
+src/*.o
+src/*.so
+src/*.dll
