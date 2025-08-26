@@ -8,10 +8,15 @@ library(checkmate)
 #' 
 #' @param n_agents Number of agents to create
 #' @param identity_categories Vector of possible identity categories
+#' @param dept_names Vector of departments 
+#' @param target_ratios Vector of target ratios 
 #' @return data.table representing the organization
 #' @export
 create_organization <- function(n_agents = 100, 
-                              identity_categories = c("A", "B", "C", "D", "E")) {
+                              identity_categories = c("A", "B", "C", "D", "E"),
+                              dept_option = FALSE,
+                              dept_names = c("alpha", "beta", "gamma", "delta", "epsilon", "zeta"), 
+                              target_ratios = c(0.3, 0.1, 0.2, 0.15, 0.05, 0.2)) {
   
   # Validate inputs
   assert_count(n_agents, positive = TRUE)
@@ -24,6 +29,14 @@ create_organization <- function(n_agents = 100,
   org <- data.table(
     agent_id = agent_ids,
     identity_category = sample(identity_categories, n_agents, replace = TRUE),
+    
+    # If dept_option is TRUE, departments assigned based on target_ratios
+    if (isTRUE(dept_option)) {
+      assert_character(dept_names, min.len = 1) # validate input 
+      assert_true(length(dept_names) == length(target_ratios)) # same number of departments as target ratios 
+      assert_true(abs(sum(target_ratios)-1) < 1e-9) # ratios add up to 100% with tolerance 
+      department = sample(dept_names, n_agents, replace = TRUE, prob = target_ratios)
+    }
     
     # Big Five personality traits (standardized)
     openness = rnorm(n_agents, mean = 0, sd = 1),
