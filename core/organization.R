@@ -36,6 +36,9 @@ create_organization <- function(n_agents = 100,
       assert_true(length(dept_names) == length(target_ratios)) # same number of departments as target ratios 
       assert_true(abs(sum(target_ratios)-1) < 1e-9) # ratios add up to 100% with tolerance 
       department = sample(dept_names, n_agents, replace = TRUE, prob = target_ratios)
+    } else { # clear department information to allow for departments later to be added 
+      dept_names = NULL 
+      target_ratios = NULL
     }
     
     # Big Five personality traits (standardized)

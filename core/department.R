@@ -4,15 +4,18 @@
 library(data.table) 
 library(checkmate)
 
-#' Create department with elements 
+#' Create NEW department with elements 
 #' 
-#' @param dept_names Name of the department 
-#' @param target_ratio Target ratio of agents for each department 
+#' @param new_dept_name Name of the department 
+#' @param new_target_ratio Target ratio of agents for each department 
 # #' @param budget Budget for the department 
 #' @return data.table representing department 
 #' @export 
-create_dept <- function(dept_names = c("alpha", "beta", "gamma", "delta", "epsilon", "zeta"), # default parameters 
-                        target_ratios = c(0.3, 0.1, 0.2, 0.15, 0.05, 0.2)) { 
+create_dept <- function(new_dept_name = NULL, 
+                        new_target_ratio = NULL) { 
+  if (new_dept_name.is.NULL || new_target_ratio.is.NULL) { 
+    message("Please provide new department name and its target ratio")
+  }
   # validate parameters 
   assert_character(dept_names, min.len = 1) # at least one department 
   assert_true(length(dept_names) == length(target_ratios)) # same number of departments as target ratios 
