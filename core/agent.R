@@ -31,11 +31,29 @@ create_applicant_pool <- function(n_applicants = 50,
     identity_category = sample(identity_categories, n_applicants, replace = TRUE),
     
     # Big Five personality traits
-    openness = rnorm(n_applicants, mean = 0, sd = 1),
-    conscientiousness = rnorm(n_applicants, mean = 0, sd = 1),
-    extraversion = rnorm(n_applicants, mean = 0, sd = 1),
-    agreeableness = rnorm(n_applicants, mean = 0, sd = 1),
-    emotional_stability = rnorm(n_applicants, mean = 0, sd = 1),
+    traits <- c("O", "C", "E", "A", "ES"),
+    
+    # mean of traits (centered at zero) 
+    mean <- c(0,0,0,0,0),
+    
+    # matrix of values based on meta analysis of big 5 (table 2 van der Linden 2010 paper)
+    # corrected correlations (ρ) and Neuroticism inversed for Emotional Stability 
+    Sigma <- matrix(c(
+      1.00, 0.20, 0.43, 0.21, 0.17, 
+      0.20, 1.00, 0.29, 0.43, 0.43, 
+      0.43, 0.29, 1.00, 0.26, 0.36, 
+      0.21, 0.43, 0.26, 1.00, 0.36, 
+      0.17, 0.43, 0.36, 0.36, 1.00
+    ), nrow = 5, byrow = TRUE, dimnames = list(traits, traits)),
+    
+    df <- as.data.frame(mvnorm(n = n_applicants, mu = mu, Sigma = Sigma)), 
+    colnames(df) <- traits,
+    
+    openness <- df$O,
+    conscientiousness <- df$C,
+    extraversion <- df$E,
+    agreeableness <- df$A,
+    emotional_stability <- df$ES,
     
     # Preferences
     diversity_preference = rnorm(n_applicants, mean = 0, sd = 1),
