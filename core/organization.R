@@ -15,8 +15,8 @@ library(checkmate)
 create_organization <- function(n_agents = 100, 
                               identity_categories = c("A", "B", "C", "D", "E"),
                               dept_option = FALSE,
-                              dept_names = c("alpha", "beta", "gamma", "delta", "epsilon", "zeta"), 
-                              target_ratios = c(0.3, 0.1, 0.2, 0.15, 0.05, 0.2)) {
+                              o_dept_names = c("alpha", "beta", "gamma", "delta", "epsilon", "zeta"), 
+                              o_target_ratios = c(0.3, 0.1, 0.2, 0.15, 0.05, 0.2)) {
   
   # Validate inputs
   assert_count(n_agents, positive = TRUE)
@@ -25,21 +25,20 @@ create_organization <- function(n_agents = 100,
   # Generate unique agent IDs
   agent_ids <- sprintf("agent_%05d", seq_len(n_agents))
   
+  # Create Department Structure 
+  if(dept_option) { create_dept(o_dept_names, o_target_ratios) }
+  
   # Initialize the organization data.table
   org <- data.table(
     agent_id = agent_ids,
     identity_category = sample(identity_categories, n_agents, replace = TRUE),
     
-    # If dept_option is TRUE, departments assigned based on target_ratios
-    if (isTRUE(dept_option)) {
-      assert_character(dept_names, min.len = 1) # validate input 
-      assert_true(length(dept_names) == length(target_ratios)) # same number of departments as target ratios 
-      assert_true(abs(sum(target_ratios)-1) < 1e-9) # ratios add up to 100% with tolerance 
-      department = sample(dept_names, n_agents, replace = TRUE, prob = target_ratios)
-    } else { # clear department information, if user wants to add their own departments 
-      dept_names = NULL 
-      target_ratios = NULL
-    },
+    # Assign Departments 
+     if(dept_option) { 
+       agent_dept = sample(o_dept_names, n_agents, replace = TRUE, prob = o_target_ratios)
+     } else { 
+       agent_dept = NULL # creates column if user wants to use departments later
+     },
     
     # Big Five personality traits
     traits <- c("O", "C", "E", "A", "ES"),

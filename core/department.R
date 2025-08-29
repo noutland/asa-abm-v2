@@ -4,27 +4,38 @@
 library(data.table) 
 library(checkmate)
 
-#' Create NEW department with elements 
+dept_name = NULL 
+
+#' Create department and structure
+#' Allows for user to create new departments and update the data.table 
 #' 
-#' @param new_dept_name Name of the department 
-#' @param new_target_ratio Target ratio of agents for each department 
-# #' @param budget Budget for the department 
+#' @param dept_names Name of the department 
+#' @param target_ratios Target ratio of agents for each department 
 #' @return data.table representing department 
 #' @export 
-create_dept <- function(new_dept_name = NULL, 
-                        new_target_ratio = NULL) { 
-  if (new_dept_name.is.NULL || new_target_ratio.is.NULL) { 
-    message("Please provide new department name and its target ratio")
-  }
-  # validate parameters 
-  assert_character(dept_names, min.len = 1) # at least one department 
-  assert_true(length(dept_names) == length(target_ratios)) # same number of departments as target ratios 
-  assert_true(abs(sum(target_ratios)-1) < 1e-9) # ratios add up to 100% with tolerance 
+create_dept <- function(dept_names = NULL, 
+                        target_ratios = NULL) { 
   
+  # Validate Parameters 
+  assert_not_null(dept_names)
+  assert_character(dept_names, min.len = 1)
+  assert_true(abs(sum(target_ratios)-1) < 1e-9)
+  
+  # Update Department Names 
+  dept_name <<- c(dept_name, dept_names)
+  assert_true(length(dept_names) == length(target_ratios))
+
   # Generate unique department IDs
-  dept_ids <- sprintf("dept_%05d", seq_len(length(dept_names)))
+  dept_ids <- sprintf("dept_%05d", seq_along(dept_name))
   
-  departments <- data.table
+  # Create Department Structure
+  departments <- data.table(
+    dept_ids,  
+    dept_name,
+    target_ratios
+  )
   
+
+  return(departments)
   }
 
