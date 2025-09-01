@@ -1,6 +1,8 @@
 # department.R - Core department structure and methods 
 # Part of asa-abm model 
 
+source("organization.R")
+
 library(data.table) 
 library(checkmate)
 
@@ -15,7 +17,6 @@ dept_name = NULL
 #' @export 
 create_dept <- function(dept_names = NULL, 
                         target_ratios = NULL) { 
-  
   # Validate Parameters 
   assert_not_null(dept_names)
   assert_character(dept_names, min.len = 1)
@@ -34,8 +35,31 @@ create_dept <- function(dept_names = NULL,
     dept_name,
     target_ratios
   )
-  
-
   return(departments)
+}
+
+
+#' Allocate employees to departments  
+#' 
+#' @param org Organization of employees 
+#' @return data.table representing department 
+#' @export
+allocate_dept <- function(org, target_ratios) { 
+  assert_data_table(org)
+  
+  allocate_choices <- c("Need-Based", "Fixed-Ratio")
+  
+  
+  
+  selected <- menu(choices = allocate_choices, title = "Allocate employees to departments via:")
+
+  if (selected == 1) { 
+    
+  } else if (selected == 2) { 
+    
   }
+  
+  
+}
+
 
