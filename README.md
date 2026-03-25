@@ -30,27 +30,13 @@ asa_abm_v2/
 
 ## Key Features
 
-- High-performance data.table implementation
-- Modular architecture for easy extension
-- Support for multiple identity categories (A-E)
+- data.table backend
+- Modular architecture 
+- Support for multiple identity categories 
 - Big Five personality traits
 - Homophily and diversity preferences
 - Dynamic hiring and turnover
-- **Configurable diversity metrics**: Blau's Index (default) or Shannon entropy
-- **I-O psychology best practices**: Implements standard diversity indices
-- **Comprehensive output metrics**: Including category proportions and dual diversity measures
-
-## Recent Updates (2025)
-
-### Bug Fixes
-- Fixed conscientiousness comparison bug in interaction valence calculation
-- Improved emotional stability variance using exponential decay function
-
-### New Features
-- Implemented Blau's Index as the primary diversity metric (I-O psychology standard)
-- Made diversity metrics configurable (`diversity_metric` parameter)
-- Added category proportions to output metrics (prop_A through prop_E)
-- Both Shannon entropy and Blau's Index calculated in every simulation
+- **Configurable diversity metrics**: Blau's Index (default)
 
 ### Usage Example
 
